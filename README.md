@@ -59,8 +59,8 @@ Skrip npm telah ditambahkan ke dalam repositori, yang memperkenankan Anda dari G
 
 
 ```bash
-git clone git@github.com:AlexxNB/svelte3-translation-ru.git svelte-translation
-cd svelte-translation
+git clone git@github.com:Svelte-ID/svelte3-translation-id.git terjemahan-svelte
+cd terjemahan-svelte
 
 # 1. Instalasi semua paket wajib
 npm install
