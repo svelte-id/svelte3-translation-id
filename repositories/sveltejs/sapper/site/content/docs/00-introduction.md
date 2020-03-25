@@ -19,31 +19,31 @@ Membuat aplikasi yang sesuai dengan tren modern terbaik, seperti pemisahan kode,
 
 Untuk memahami panduan ini, mengetahui Svelte tidak diperlukan, tetapi diinginkan. Svelte adalah kerangka kerja yang mengkompilasi komponen Anda menjadi JavaScript vanilla yang sangat dioptimalkan. Baca [artikel blog pengantar](https://svelte.dev/blog/svelte-3-rethinking-reactivity) dan [tutorial](https://svelte.dev/tutorial), untuk mempelajari lebih lanjut tentangnya.
 
-### Откуда такое название?
+### Dari mana nama itu berasal?
 
-В армии есть солдаты, которые занимаются разминированием — *сапёры*. В американской армии тоже есть *sappers*, но их сфера деятельности намного шире — кроме разминирования, они ещё в боевых условиях строят мосты, ремонтируют дороги  и проводят сносы.
+Ada tentara di tentara yang terlibat dalam pembersihan ranjau - * sappers *. Tentara Amerika juga memiliki * penyadap *, tetapi bidang kegiatan mereka jauh lebih luas - selain izin ranjau, mereka juga membangun jembatan dalam kondisi pertempuran, memperbaiki jalan dan melakukan pembongkaran.
 
-Для веб-разработчиков ставки, как правило, ниже, чем для военных инженеров. Но у нас тоже есть враги с которыми мы должны бороться: недостаточно мощные устройства, медленные сетевые подключения и общая сложность проектирования интерфейсов. Sapper (скоращение от <b>S</b>velte <b>app</b> mak<b>er</b>) — это ваш мужественный и исполнительный солдат.
+Untuk pengembang web, tarifnya biasanya lebih rendah daripada insinyur militer. Tetapi kita juga memiliki musuh yang harus kita lawan: perangkat yang kurang kuat, koneksi jaringan lambat, dan keseluruhan kompleksitas desain antarmuka. Sapper (kependekan dari <b> S </b> velte <b> aplikasi </b> mak <b> er </b>) adalah prajuritmu yang pemberani dan ulung.
 
-### Сравнение с Next.js
+### Perbandingan dengan Next.js
 
-[Next.js](https://github.com/zeit/next.js) — это фреймворк для React от [Zeit](https://zeit.co) и он является источником вдохновения для Sapper. Однако между ними есть несколько заметных отличий:
+[Next.js](https://github.com/zeit/next.js) — ini adalah kerangka kerja untuk React oleh [Zeit](https://zeit.co) dan dia adalah sumber inspirasi bagi Sapper. Namun, ada beberapa perbedaan mencolok di antaranya:
 
-* Sapper работает на Svelte, а не на React, поэтому он быстрее и приложения получаются меньше по размеру
-* Вместо маски маршрута мы используем описание параметров маршрута в именах файлов (см. Раздел [Маршруты](docs#Marshruty) ниже)
-* *Серверные* маршруты создаются точно так же, как и маршруты обычных *страниц* в директории `src/routes`. Например, это позволяет очень просто добавить точку входа для JSON API, такую же как есть на этой странице (попробуйте —  [/docs.json](/docs.json))
-* Ссылки — это обычные элементы `<a>`, а не специальные компоненты вроде `<Link>`. Это означает, например, что [эта ссылка](/), прекрасно работает с маршрутизатором, даже не смотря на то, что она изначально располагается в импортированном документе с markdown разметкой.
+* Sapper bekerja untuk Svelte, bukan pada React, jadi lebih cepat dan aplikasinya lebih kecil
+* Alih-alih topeng rute, kami menggunakan deskripsi parameter rute dalam nama file (lihat bagian [Rute] (docs # Marshruty) di bawah)
+* * Rute server * dibuat dengan cara yang sama seperti rute * halaman * biasa dalam direktori `src / routes`. Misalnya, ini membuatnya sangat mudah untuk menambahkan entri poin untuk API JSON, sama seperti pada halaman ini (coba - [/ doc.json 022 (/ doc.json))
+* Tautan adalah elemen `<a>` biasa, bukan komponen khusus seperti `<Link>`. Ini berarti, misalnya, bahwa [tautan ini] (/) berfungsi baik dengan router, meskipun awalnya terletak di dokumen yang diimpor dengan markup markup.
 
 ### Начало работы
 
-Самый простой способ начать создавать приложение Sapper — скопировать к себе на компьютер репеозиторий шаблона [sapper-template](https://github.com/sveltejs/sapper-template) при помощи утилиты [degit](https://github.com/Rich-Harris/degit):
+Cara termudah untuk mulai membuat aplikasi Sapper adalah menyalin repositori templat ke komputer Anda [sapper-template](https://github.com/sveltejs/sapper-template) menggunakan utilitas [degit](https://github.com/Rich-Harris/degit):
 
 ```bash
 npx degit "sveltejs/sapper-template#rollup" my-app
-# или: npx degit "sveltejs/sapper-template#webpack" my-app
+# atau: npx degit "sveltejs/sapper-template#webpack" my-app
 cd my-app
 npm install
 npm run dev
 ```
 
-Это создаст новый проект в каталоге `my-app`, установит его зависимости и запустит сервер на [localhost:3000](http://localhost:3000). Попробуйте поредактировать файлы, чтобы увидеть, насколько всё просто работает — быть может вам вообще не понадобиться читать оставшуюся часть этого руководства!
+Ini akan membuat proyek baru di direktori `my-app`, menginstal dependensinya, dan memulai server di [localhost: 3000] (http: // localhost: 3000). Cobalah mengedit file untuk melihat betapa sederhananya semuanya - Anda bahkan mungkin tidak perlu membaca sisa panduan ini!
