@@ -4,59 +4,59 @@
         "strings": [
             {
                 "o": "The next small thing in web development",
-                "t": "Следующий тренд в web-разработке"
+                "t": "Hal kecil berikutnya dalam pengembangan web"
             },
             {
                 "o": "Powered by Svelte",
-                "t": "Работает на Svelte"
+                "t": "Ditenagai oleh Svelte"
             },
             {
                 "o": "Sapper is an application framework powered by Svelte — build bigger apps with a smaller footprint",
-                "t": "Sapper — это фреймворк для создания web-приложений, основанный на Svelte. Разрабатывайте приложения любой сложности без совершенно лишнего шаблонного кода"
+                "t": "Sapper adalah kerangka kerja aplikasi yang ditenagai oleh Svelte — buat aplikasi yang lebih besar dengan tapak memori yang lebih kecil "
             },
             {
                 "o": "Best of both worlds",
-                "t": "Из двух миров"
+                "t": "Terbaik dari dua dunia"
             },
             {
                 "o": "All the SEO and progressive enhancement of a server-rendered app, with the slick navigation of an SPA",
-                "t": "Все преимущества SEO и прогрессивного улучшения при рендеринге на стороне сервера вместе с удобной навигацией SPA-приложений"
+                "t": "Semua SEO dan peningkatan progresif aplikasi yang diberikan oleh server, dengan navigasi apik dari SPA"
             },
             {
                 "o": "Build fast",
-                "t": "Быстрый результат"
+                "t": "Bangun dengan cepat"
             },
             {
                 "o": "Hit the ground running with advanced routing, server-side rendering, code-splitting, offline support and more",
-                "t": "Молниеносная разработка приложений с расширенной маршрутизацией, рендерингом на стороне сервера, разделением кода, поддержкой Offline-режима и многим другим"
+                "t": "Mulai berjalan dengan rute lanjutan, rendering sisi server, pemecahan kode, dukungan offline, dan lainnya"
             },
             {
                 "o": ">learn more<",
-                "t": ">узнать больше<"
+                "t": ">pelajari lagi<"
             },
             {
                 "o": "Sapper is a framework for building web applications of all sizes, with a beautiful development experience and flexible filesystem-based routing.",
-                "t": "Sapper - это фреймворк для создания web-приложений любых размеров, предлагающий прекрасный опыт разработки и гибкую маршрутизацию на основе файловой системы."
+                "t": "Sapper adalah framework untuk membangun aplikasi web segala ukuran dengan pengalaman pengembangan yang indah dan rute berbasis filesystem yang fleksibel."
             },
             {
                 "o": "Unlike single-page apps, Sapper doesn't compromise on SEO, progressive enhancement or the initial load experience — but unlike traditional server-rendered apps, navigation is instantaneous for that app-like feel.",
-                "t": "В отличие от одностраничных приложений, Sapper не жертвует SEO, прогрессивным улучшением или скоростью начальной загрузки, но в отличие от традиционных приложений, которые рендерятся на сервере, навигация по старницам происходит мгновенно как в типичном SPA-приложении."
+                "t": "Tidak seperti aplikasi satu halaman, Sapper tidak mengorbankan SEO, peningkatan progresif, atau kecepatan boot, tetapi tidak seperti aplikasi tradisional yang diberikan pada server, navigasi melalui halaman lama terjadi secara instan, seperti dalam aplikasi SPA biasa."
             },
             {
                 "o": "Read the introductory blog post",
-                "t": "Прочтите вводную статью в блоге"
+                "t": "Baca artikel blog pengantar"
             },
             {
                 "o": " to learn more.",
-                "t": ", чтобы узнать больше."
+                "t": " untuk belajar lebih lanjut."
             },
             {
                 "o": ">Learn Sapper<",
-                "t": ">Изучить Sapper<"
+                "t": ">Pelajari Sapper<"
             },
             {
                 "o": "# for",
-                "t": "# для"
+                "t": "# untuk"
             }
         ]
     },
@@ -65,15 +65,15 @@
         "strings": [
             {
                 "o": "<Nav {segment}",
-                "t": "<Nav home=\"Главная\" home_title=\"Домашняя страница\" {segment}"
+                "t": "<Nav home=\"Home\" home_title=\"Beranda\" {segment}"
             },
             {
                 "o": ">Docs<",
-                "t": ">Документация<"
+                "t": ">Dokumentasi<"
             },
             {
                 "o": "\"https://svelte.dev\"",
-                "t": "\"https://ru.svelte.dev\""
+                "t": "\"https://id.svelte.dev\""
             }
         ]
     },
@@ -82,11 +82,11 @@
         "strings": [
             {
                 "o": "Docs • Sapper",
-                "t": "Документация • Sapper"
+                "t": "Dokumentasi • Sapper"
             },
             {
                 "o": "<Docs {sections} project=\"sapper\"/>",
-                "t": "<Docs owner=\"AlexxNB\" project=\"svelte3-translation-ru\" path=\"/repositories/sveltejs/sapper/site/content\" edit_title=\"редактировать эту главу\" {sections}/>"
+                "t": "<Docs owner=\"Svelte-ID\" project=\"svelte3-translation-id\" path=\"/repositories/sveltejs/sapper/site/content\" edit_title=\"edit bab ini\" {sections}/>"
             }
         ]
     },
@@ -95,11 +95,11 @@
         "strings": [
             {
                 "o": "Migration • Sapper",
-                "t": "Руководство по миграции • Sapper"
+                "t": "Migrasi • Sapper"
             },
             {
                 "o": "<Docs {sections} project=\"sapper\"",
-                "t": "<Docs owner=\"AlexxNB\" project=\"svelte3-translation-ru\" path=\"/repositories/sveltejs/sapper/site/content\" edit_title=\"редактировать эту главу\" {sections}"
+                "t": "<Docs owner=\"Svelte-ID\" project=\"svelte3-translation-id\" path=\"/repositories/sveltejs/sapper/site/content\" edit_title=\"редактировать эту главу\" {sections}"
             }
         ]
     },
@@ -108,27 +108,27 @@
         "strings": [
             {
                 "o": "Yikes!",
-                "t": "Бдыщь!"
+                "t": "Yaaah!"
             },
             {
                 "o": "Please try reloading the page.",
-                "t": "Попробуйте перезагрузить страницу"
+                "t": "Sila coba memuat kembali halaman."
             },
             {
                 "o": "It looks like you're offline",
-                "t": "Похоже, что нет соединения с сетью"
+                "t": "Tampaknya kamu di luar jaringan"
             },
             {
                 "o": "Reload the page once you've found the internet",
-                "t": "Перезагрузите страницу, когда у вас появится интернет"
+                "t": "Muat kembali halaman saat tersambung internet"
             },
             {
                 "o": "Encountered a {status} error",
-                "t": "Обнаружена ошибка №{status}"
+                "t": "Berhadapan dengan kesalahan {status}"
             },
             {
                 "o": "If the error persists, please drop by <a href=\"chat\">Discord chatroom</a> and let us know, or raise an issue on <a href=\"https://github.com/sveltejs/svelte\">GitHub</a>. Thanks!",
-                "t": "Если ошибка не исчезнет, сообщите об этом в <a href=\"https://t.me/sveltejs\">Telegram канал русского сообщества</a>. Спасибо!"
+                "t": "Jika kesalahan berlanjut mohon hubungi <a href=\"https://t.me/svelte_id\">Group Telegram Svelte Indonesia</a>. Terima kasih!"
             }
         ]
     }
