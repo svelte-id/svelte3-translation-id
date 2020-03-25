@@ -93,7 +93,7 @@ Daftar isi: [0-9](#0-9) [A](#a) [B](#b) [C](#c) [D](#d) [E](#e) [F](#f) [G](#g) 
 *route*,*routing* — rute
 
 ## s
-*scoped styles* — gaya tercakup
+*scoped styles* — lingkup style
 
 *server route* — rute server
 
