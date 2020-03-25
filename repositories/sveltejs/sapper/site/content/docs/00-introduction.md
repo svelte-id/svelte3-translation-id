@@ -1,23 +1,23 @@
 ---
-title: Введение
+title: Pendahuluan
 ---
 
-###  Важное замечание
+###  Pemberitahuan penting
 
-> Sapper ещё в ранней стадии разработки, и некоторые вещи могут поменяться, когда мы дойдём до релиза 1.0. Этот документ всё ещё дорабатывается. Если у вас появятся вопросы, обратитесь за помощью в русскоязычный [Telegram-канал](https://t.me/sveltejs).
+> Sapper masih pada tahap awal pengembangan, dan beberapa hal mungkin berubah sebelum kita bisa merilis 1.0. Dokumen ini masih dalam penyelesaian. Jika Anda memiliki pertanyaan, hubungi [saluran Telegram] berbahasa Indonesia untuk mendapatkan bantuan(https://t.me/svelte_id_).
 >
-> Прочтите [руководство по миграции](migrating) для помощи при обновлении с более старых версий.
+> Baca [Panduan Migrasi](migrating) untuk membantu memutakhirkan dari versi yang lebih lama.
 
-### Что такое Sapper?
+### Apa itu Sapper?
 
-Sapper — это фреймворк для создания невероятно производительных web-приложений. Прямо сейчас вы смотрите на одно из них! Вот два наших основных принципа:
+Sapper — adalah kerangka kerja pembuat aplikasi web yang sangat produktif. Kamu sedang melihatnya sekarang! Inilah dua prinsip utama kami.:
 
-* Каждая страница вашего приложения является компонентом [Svelte](https://svelte.dev)
-* Вы создаёте новые страницы путём добавления компонентов директорию `src/routes` вашего проекта. Они будут рендериться на сервере, так что время загрузки приложения для пользователем будет максимально быстрым, а уже затем клиентское приложение возьмёт на себя бразды правления.
+* Setiap halaman aplikasi Anda adalah komponen [Svelte](https://svelte.dev)
+* Anda membuat halaman baru dengan menambahkan komponen ke direktori `src / route` proyek Anda. Mereka akan di-_render_ di server, sehingga waktu pemuatan aplikasi pengguna akan secepat mungkin, dan hanya kemudian aplikasi klien akan mengambil alih kendali.
 
-Создание приложения, соответствующего лучшим современным трендам, вроде разделения кода, поддержки автономного режима, гидратации — чрезвычайно сложная задача. Sapper делает все эти скучные вещи за вас, чтобы вы могли сконцентрироваться только на творческой части.
+Membuat aplikasi yang sesuai dengan tren modern terbaik, seperti pemisahan kode, dukungan untuk mode offline, hidrasi adalah tugas yang sangat sulit. Sapper melakukan semua hal membosankan ini untuk Anda sehingga Anda dapat berkonsentrasi hanya pada bagian kreatif.
 
-Чтобы понять это руководство, знать Svelte не обязательно, но желательно. Svelte — это фреймворк, который компилирует ваши компоненты в высокооптимизированный ванильный JavaScript. Прочитайте [вводную статью в блоге](https://svelte.dev/blog/svelte-3-rethinking-reactivity) и [учебник](https://svelte.dev/tutorial), чтобы узнать о нём побольше.
+Untuk memahami panduan ini, mengetahui Svelte tidak diperlukan, tetapi diinginkan. Svelte adalah kerangka kerja yang mengkompilasi komponen Anda menjadi JavaScript vanilla yang sangat dioptimalkan. Baca [artikel blog pengantar](https://svelte.dev/blog/svelte-3-rethinking-reactivity) dan [tutorial](https://svelte.dev/tutorial), untuk mempelajari lebih lanjut tentangnya.
 
 ### Откуда такое название?
 
