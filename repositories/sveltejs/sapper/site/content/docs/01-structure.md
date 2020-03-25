@@ -1,16 +1,16 @@
 ---
-title: Структура приложения
+title: Struktur Aplikasi
 ---
 
-Это просто раздел для любознательных.  Мы рекомендуем вам сначала поиграть с шаблоном проекта и вернуться сюда, когда прочувствуете как все вещи взаимосвязаны друг с другом.
+Ini hanya bagian untuk yang penasaran. Kami menyarankan Anda bermain dulu dengan templat proyek dan kembali ke sini ketika Anda memahami keterkaitan banyak hal.
 
-Если вы загляните в внутрь шаблона [sapper-template](https://github.com/sveltejs/sapper-template), вы увидите несколько файлов, которые Sapper ожидает там найти:
+Jika Anda melihat ke dalam templat [sapper-template](https://github.com/sveltejs/sapper-template), Anda akan melihat beberapa file yang diharapkan Sapper ada di sana:
 
 ```bash
 ├ package.json
 ├ src
 │ ├ routes
-│ │ ├ # тут ваши маршруты
+│ │ ├ # ini adalah rute Anda
 │ │ ├ _error.svelte
 │ │ └ index.svelte
 │ ├ client.js
@@ -18,34 +18,34 @@ title: Структура приложения
 │ ├ service-worker.js
 │ └ template.html
 ├ static
-│ ├ # тут ваши картинки и прочая статика
+│ ├ # gambar dan berkas statik lainnya
 └ rollup.config.js / webpack.config.js
 ```
 
-При первом запуске Sapper создаст дополнительный каталог `__sapper__`, содержащий сгенерированные файлы.
+Ketika Anda pertama kali memulai, Sapper akan membuat direktori tambahan `__sapper__` yang berisi file-file yang dihasilkan.
 
-Вы заметите несколько дополнительных файлов и каталог `cypress`, которые относятся к процессу [тестирования](docs#Testirovanie) — но в данный момент нам не нужно заострять на этом внимания.
+Anda akan melihat beberapa file tambahan dan direktori `cypress`, yang terkait dengan proses [pengujian] (docs # testing) - tetapi saat ini kita tidak perlu fokus ke sini.
 
-> Вы можете *создать* эти файлы с нуля, но гораздо проще использовать готовый шаблон. См. раздел [Начало работы](docs#Nachalo_raboty) для получения инструкций о том, как легко развернуть шаблон на своём компьютере.
+> Anda dapat * membuat * file-file ini dari awal, tetapi jauh lebih mudah untuk menggunakan templat yang sudah jadi. Lihat [Memulai] (docs # Nachalo_raboty) untuk instruksi tentang cara mudah menggunakan templat ke komputer Anda.
 
 ### package.json
 
-Файл package.json содержит зависимости вашего приложения и определяет ряд скриптов:
+Package.json Anda berisi dependensi aplikasi Anda dan mendefinisikan sejumlah skrip::
 
-* `npm run dev` — запустить приложение в режиме разработки и следить за изменениями в исходных файлах
-* `npm run build` — собрать приложение для продакшена
-* `npm run export` — сгенерировать статическую версию приложениия, если это возможно (см. [Экспортирование](docs#Eksportirovanie))
-* `npm start` — запустить приложение для продакшена, если оно уже было собрано до этого
-* `npm test` — запустить тесты (см. [Тестирование](docs#Testirovanie))
+* `npm run dev` — jalankan aplikasi dalam mode pengembangan dan pantau perubahan pada file sumber
+* `npm run build` — membangun aplikasi _production_
+* `npm run export` — buat versi statis aplikasi, jika memungkinkan (lihat [Ekspor](docs#Exporting))
+* `npm start` — memulai aplikasi dalam mode produksi setelah Anda membangunnya
+* `npm test` — jalankan tes (lihat [Pengujian] (docs # Testing))
 
 ### src
 
-Тут содержатся три *точки входа* вашего приложения — `src/client.js`, `src/server.js` и (необязательно) `src/service-worker.js` — вместе с файлом `src/template.html`.
+Ada tiga entry point aplikasi Anda — `src/client.js`, `src/server.js` dan (opsional) `src/service-worker.js` — serta file `src/template.html`.
 
 
 #### src/client.js
 
-Здесь *обязательно* нужно импортировать и вызвать функцию `start` из сгенерированного модуля `@sapper/app`:
+Di sini * diperlukan * Anda perlu mengimpor dan memanggil fungsi `start` dari modul yang dihasilkan `@sapper/app`:
 
 ```js
 import * as sapper from '@sapper/app';
@@ -55,57 +55,56 @@ sapper.start({
 });
 ```
 
-Для большинства случаев это весь код модуля, но вы можете дополнительно написать здесь любой код под ваши нужды. Смотрите раздел [API клиента](docs#API_klienta) для получения дополнительной информации о функциях, которые вы можете импортировать.
-
+Untuk sebagian besar kasus, ini semua adalah kode modul, tetapi Anda dapat menulis di sini kode apa saja untuk kebutuhan Anda. Lihat bagian [API Klien](docs#client_API) untuk informasi lebih lanjut tentang fungsi yang dapat Anda impor.
 
 #### src/server.js
 
-Это обычное Express приложение (можно взять [Polka](https://github.com/lukeed/polka) или ещё какой-либо сервер), с тремя обязательными требованиями:
+Ini adalah aplikasi Express reguler (Anda dapat menggunakan [Polka] (https://github.com/lukeed/polka) atau beberapa server lain), dengan tiga persyaratan wajib:
 
-* оно должно сервить содержимое папки `static`, используя, например, [sirv](https://github.com/lukeed/sirv)
-* оно должен вызвать `app.use(sapper.middleware())` в том месте, где `sapper` импортируется из `@sapper/server`
-* оно должно 'висеть' на порту, указанном в `process.env.PORT`
+* ia harus menyajikan isi folder `static`, menggunakan, misalnya, [sirv] (https://github.com/lukeed/sirv)
+* itu harus memanggil `app.use (sapper.middleware ())` di tempat di mana `sapper` diimpor dari` @ sapper / server`
+* seharusnya 'hang' pada port yang ditentukan dalam `process.env.PORT`
 
-В остальном, вы можете написать сервер так, как вам нравится.
+Selebihnya, Anda dapat menulis server sesuka Anda.
 
 
 #### src/service-worker.js
 
-Сервис-воркеры действуют как прокси-серверы, которые дают вам детальный контроль над тем, как реагировать на сетевые запросы. Например, когда браузер запрашивает `/козлики.jpg`, сервис-воркер может вернуть файл, который он уже ранее закешировал, или он может передать запрос на сервер, или он может даже ответить чем-то совершенно другим, например, картинкой оленей.
+Pekerja layanan bertindak sebagai proksi yang memberi Anda kontrol terperinci tentang cara menanggapi permintaan jaringan. Misalnya, ketika browser meminta `/ goats.jpg`, pekerja layanan dapat mengembalikan file yang sebelumnya telah di-cache, atau ia dapat mentransfer permintaan ke server, atau ia bahkan dapat merespons dengan sesuatu yang sama sekali berbeda, misalnya, gambar rusa.
 
-Помимо прочего, они позволяют создавать приложения, работающие в автономном режиме.
+Di antaranya, mereka memungkinkan Anda membuat aplikasi yang bekerja offline.
 
-Поскольку каждому приложению требуется особое поведение сервис-воркеров (одним надо всё отдавать из кэша, другим кеш нужен только при отсутствии подключения), Sapper никак не ограничивает поведение сервис-воркеров. Вы сами пишете его логику в `service-worker.js`. Вы можете импортировать любой из следующих объектов из `@sapper/service-worker`:
+Karena setiap aplikasi memerlukan perilaku khusus pekerja layanan (satu perlu memberikan segalanya dari cache, sementara yang lain membutuhkan cache hanya jika tidak ada koneksi), Sapper tidak membatasi perilaku pekerja layanan dengan cara apa pun. Anda sendiri yang menulis logikanya di `service-worker.js`. Anda dapat mengimpor objek berikut dari `@ sapper / pekerja layanan`:
 
-* `files` — массив файлов, найденных в директории `static`
-* `shell` — JavaScript код для клиента, сгенерированный сборщиком(Rollup или webpack)
-* `routes` — массив объектов `{ pattern: RegExp }`, которые вы можете использовать, чтобы определить относится ли к Sapper запрошенная страница
-* `timestamp` — время, когда был создан сервис-воркер(полезно для создания уникальных имён кэшей)
+* `files` - larik file yang ditemukan di direktori` static`
+* `shell` - kode JavaScript untuk klien yang dihasilkan oleh kolektor (Rollup atau webpack)
+* `routes` - larik obyek {{: lRPEx}}` yang dapat Anda gunakan untuk menentukan apakah halaman yang diminta terkait dengan Sapper
+* `timestamp` - waktu ketika pekerja layanan dibuat (berguna untuk membuat nama cache yang unik)
 
 
 #### src/template.html
 
-Этот файл является шаблоном для ответов с сервера. В процессе сборки Sapper будет внедрять контент, заменяющий следующие метки:
+File ini adalah templat untuk tanggapan dari server. Selama proses pembuatan, Sapper akan mengimplementasikan konten yang menggantikan label berikut:
 
-* `%sapper.base%` — элемент `<base>` (см. [Базовые URL](docs#Bazovye_URL))
-* `%sapper.styles%` — необходимый CSS для запрашиваемой страницы
-* `%sapper.head%` — HTML представление специфичного для данной страницы содержимого элемента `<head>`, вроде элемента `<title>`
-* `%sapper.html%` — HTML представление содержимого отрендеренной страницы
-* `%sapper.scripts%` — элементы `<script>` для клиентской части приложения
-
-
-### src/routes
-
-Это основа вашего приложения — страницы и маршруты сервера. Подробнее вы узнаете в разделе [Маршруты](docs#Marshruty).
+* `%sapper.base%` — elemen `<base>` (lihat [Base URLs](docs#Bazovye_URL))
+* `%sapper.styles%` — diperlukan CSS untuk halaman yang diminta
+* `%sapper.head%` — Representasi HTML dari konten elemen `<head>`, misalnya elemen `<title>`
+* `%sapper.html%` — HTML presentasi konten halaman yang diberikan
+* `%sapper.scripts%` — elemen `<script>` untuk bagian klien dari aplikasi
 
 
-### static
+### src / routes
 
-Это место для размещения любых файлов, которые использует ваше приложение — шрифты, изображения и так далее. Например, `static/favicon.png` будет доступна как `/favicon.png`.
+Ini adalah dasar dari aplikasi Anda - halaman server dan rute. Anda akan belajar lebih banyak di bagian [Rute] (docs # Marshruty).
 
-Sapper не будет сервить эти файлы. Обычно для этого используют [sirv](https://github.com/lukeed/sirv) или [serve-static](https://github.com/expressjs/serve-static). Но он будет сканировать содержимое папки `static`, чтобы вы могли легко сгенерировать манифест кэша для поддержки автономной работы(см. [service-worker.js](docs#templates-service-worker-js)).
+
+### statis
+
+Ini adalah tempat untuk meletakkan file yang digunakan aplikasi Anda - font, gambar, dan sebagainya. Sebagai contoh, `static / favicon.png` akan tersedia sebagai` / favicon.png`.
+
+Sapper tidak akan menyajikan file-file ini. Biasanya Anda akan menggunakan [sirv](https://github.com/lukeed/sirv) atau [serve-static](https://github.com/expressjs/serve-static). Tetapi itu akan memindai isi folder `static` sehingga Anda dapat dengan mudah menghasilkan manifes cache untuk mendukung  luar jaringan (lihat [service-worker.js](docs#templates-service-worker-js)).
 
 
 ### rollup.config.js / webpack.config.js
 
-Sapper может использовать [Rollup](https://rollupjs.org/) или [webpack](https://webpack.js.org/) для сборки вашего приложения. Скорее всего, вам не понадобится менять их конфигурацию, но при необходимости, вы, конечно, можете, например, добавить новый плагин.
+Sapper dapat menggunakan [Rollup](https://rollupjs.org/) atau [webpack](https://webpack.js.org/) untuk membangun aplikasi Anda. Kemungkinan besar, Anda tidak perlu mengubah konfigurasi mereka, tetapi jika perlu, tentu saja, Anda dapat, misalnya, menambahkan plug-in baru.

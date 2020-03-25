@@ -12,12 +12,12 @@ title: Pendahuluan
 
 Sapper — adalah kerangka kerja pembuat aplikasi web yang sangat produktif. Kamu sedang melihatnya sekarang! Inilah dua prinsip utama kami.:
 
-* Setiap halaman aplikasi Anda adalah komponen [Svelte](https://svelte.dev)
-* Anda membuat halaman baru dengan menambahkan komponen ke direktori `src / route` proyek Anda. Mereka akan di-_render_ di server, sehingga waktu pemuatan aplikasi pengguna akan secepat mungkin, dan hanya kemudian aplikasi klien akan mengambil alih kendali.
+* Setiap halaman aplikasimu adalah sebuah komponen [Svelte](https://svelte.dev)
+* Kamu membuat halaman baru dengan menambahkan komponen ke direktori `src / route` proyek Anda. Komponen-komponen itu akan di-_render_ di server, sehingga waktu pemuatan aplikasi pengguna akan sangat cepat untuk selanjutnya kendali akan diambil alih oleh klien.
 
-Membuat aplikasi yang sesuai dengan tren modern terbaik, seperti pemisahan kode, dukungan untuk mode offline, hidrasi adalah tugas yang sangat sulit. Sapper melakukan semua hal membosankan ini untuk Anda sehingga Anda dapat berkonsentrasi hanya pada bagian kreatif.
+Membuat aplikasi yang sesuai dengan semua tren modern terbaik, seperti pemisahan kode, dukungan untuk mode offline, hidrasi adalah tugas yang sangat sulit. Sapper melakukan semua hal membosankan ini untuk Anda sehingga Anda dapat berkonsentrasi hanya pada bagian kreatif.
 
-Untuk memahami panduan ini, mengetahui Svelte tidak diperlukan, tetapi diinginkan. Svelte adalah kerangka kerja yang mengkompilasi komponen Anda menjadi JavaScript vanilla yang sangat dioptimalkan. Baca [artikel blog pengantar](https://svelte.dev/blog/svelte-3-rethinking-reactivity) dan [tutorial](https://svelte.dev/tutorial), untuk mempelajari lebih lanjut tentangnya.
+Anda tidak perlu tahu Svelte untuk memahami sisa panduan ini, tetapi itu akan membantu. Singkatnya, ini adalah kerangka kerja UI yang mengkompilasi komponen Anda ke JavaScript vanilla yang sangat optimal. Baca [artikel blog pengantar](https://svelte.dev/blog/svelte-3-rethinking-reactivity) dan [tutorial](https://svelte.dev/tutorial), untuk mempelajari lebih lanjut tentangnya.
 
 ### Dari mana nama itu berasal?
 
@@ -27,14 +27,14 @@ Untuk pengembang web, tarifnya biasanya lebih rendah daripada insinyur militer. 
 
 ### Perbandingan dengan Next.js
 
-[Next.js](https://github.com/zeit/next.js) — ini adalah kerangka kerja untuk React oleh [Zeit](https://zeit.co) dan dia adalah sumber inspirasi bagi Sapper. Namun, ada beberapa perbedaan mencolok di antaranya:
+[Next.js](https://github.com/zeit/next.js) — kerangka kerja untuk React oleh [Zeit](https://zeit.co) adalah sumber inspirasi bagi Sapper. Namun, ada beberapa perbedaan mencolok di antaranya:
 
-* Sapper bekerja untuk Svelte, bukan pada React, jadi lebih cepat dan aplikasinya lebih kecil
-* Alih-alih topeng rute, kami menggunakan deskripsi parameter rute dalam nama file (lihat bagian [Rute] (docs # Marshruty) di bawah)
-* * Rute server * dibuat dengan cara yang sama seperti rute * halaman * biasa dalam direktori `src / routes`. Misalnya, ini membuatnya sangat mudah untuk menambahkan entri poin untuk API JSON, sama seperti pada halaman ini (coba - [/ doc.json 022 (/ doc.json))
+* Sapper bekerja pada Svelte, bukan pada React, jadi lebih cepat dan aplikasinya lebih kecil
+* Alih-alih _masking_ rute, kami menggunakan parameter rute dalam nama file (lihat bagian [Rute] (docs/routing) di bawah)
+* Rute server * dibuat dengan cara yang sama seperti rute * halaman * biasa dalam direktori `src / routes`. Misalnya, ini membuatnya sangat mudah untuk menambahkan entri poin untuk API JSON, sama seperti pada halaman ini (coba - [/ doc.json 022 (/ doc.json))
 * Tautan adalah elemen `<a>` biasa, bukan komponen khusus seperti `<Link>`. Ini berarti, misalnya, bahwa [tautan ini] (/) berfungsi baik dengan router, meskipun awalnya terletak di dokumen yang diimpor dengan markup markup.
 
-### Начало работы
+### Ayo Mulai
 
 Cara termudah untuk mulai membuat aplikasi Sapper adalah menyalin repositori templat ke komputer Anda [sapper-template](https://github.com/sveltejs/sapper-template) menggunakan utilitas [degit](https://github.com/Rich-Harris/degit):
 

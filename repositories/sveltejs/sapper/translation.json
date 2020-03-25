@@ -20,7 +20,7 @@
             },
             {
                 "o": "All the SEO and progressive enhancement of a server-rendered app, with the slick navigation of an SPA",
-                "t": "Semua SEO dan peningkatan progresif aplikasi yang diberikan oleh server, dengan navigasi apik dari SPA"
+                "t": "Semua SEO dan peningkatan progresif aplikasi yang di-render di server, dengan navigasi apik dari SPA"
             },
             {
                 "o": "Build fast",
@@ -40,7 +40,7 @@
             },
             {
                 "o": "Unlike single-page apps, Sapper doesn't compromise on SEO, progressive enhancement or the initial load experience — but unlike traditional server-rendered apps, navigation is instantaneous for that app-like feel.",
-                "t": "Tidak seperti aplikasi satu halaman, Sapper tidak mengorbankan SEO, peningkatan progresif, atau kecepatan boot, tetapi tidak seperti aplikasi tradisional yang diberikan pada server, navigasi melalui halaman lama terjadi secara instan, seperti dalam aplikasi SPA biasa."
+                "t": "Tidak seperti aplikasi satu halaman, Sapper tidak mengorbankan SEO, peningkatan progresif, atau kecepatan boot, tetapi tidak seperti aplikasi tradisional yang di-render pada server, navigasi melalui halaman lama terjadi secara instan, seperti dalam aplikasi SPA biasa."
             },
             {
                 "o": "Read the introductory blog post",
