@@ -3,11 +3,11 @@
 > Saat ini, belum diketahui bagaimana bentuk implementasi penerjemahan sumber daya resmi Svelte akan diimplementasikan, oleh sebab itu nantinya perubahan dalam struktur dan pendekatan repositori ini sangatlah mungkin akan terjadi di kemudian hari.
  
 
-## Hasil Penerjemahan
-Situs resmi berbahasa Rusia berikut ini telah diluncurkan:
-- [ru.svelte.dev](https://ru.svelte.dev)
-- [ru.sapper.svelte.dev](https://ru.sapper.svelte.dev)
-- [ru.svelte-native.technology](https://ru.svelte-native.technology)
+## Rencana Hasil Penerjemahan
+Situs resmi berbahasa Indonesia berikut ini akan diluncurkan apabila projek penerjemahan ini selesai:
+- [id.svelte.dev](https://id.svelte.dev)
+- [id.sapper.svelte.dev](https://id.sapper.svelte.dev)
+- [id.svelte-native.technology](https://id.svelte-native.technology)
 
 > Rencananya situs versi Indonesia akan dikumpulkan dan di-_deploy_ secara otomatis setelah semua _commit_ ke dalam repositori ini dinyatakan lengkap.
 
