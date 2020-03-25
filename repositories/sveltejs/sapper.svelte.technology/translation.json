@@ -8,35 +8,35 @@
             },
             {
                 "o": "Military-grade progressive web apps, powered by Svelte",
-                "t": "Web-приложения высшего класса на базе Svelte"
+                "t": "Aplikasi web progresif tingkat militer, ditenagai oleh Svelte"
             },
             {
                 "o": "Beautiful development experience, inspired by Next.js",
-                "t": "Прекрасный опыт разработки, вдохновлённый Next.js"
+                "t": "Pengalaman pengembangan yang indah, terinspirasi oleh Next.js"
             },
             {
                 "o": "Declarative routing, hot-module replacement, scoped styles",
-                "t": "Декларативные маршруты, горячая замена модулей, изолированые стили"
+                "t": "Rute deklaratif, <i>hot-module replacement</i>, lingkup style"
             },
             {
                 "o": "Ridiculous performance",
-                "t": "Невероятная производительность"
+                "t": "Performa luar biasa"
             },
             {
                 "o": "Svelte compiles your components down to tiny, blazing fast JavaScript modules",
-                "t": "Svelte компилирует компоненты в сверхбыстрые крошечные модули JavaScript"
+                "t": "Svelte mengkompilasi komponen menjadi modul kecil JavaScript yang sangat cepat"
             },
             {
                 "o": "Modern best practices baked in",
-                "t": "Современные тренды из коробки"
+                "t": "Praktik terbaik modern teracik jadi satu"
             },
             {
                 "o": "Code-splitting, server-side rendering, offline support",
-                "t": "Разделение кода, отрисовка на сервере, поддержка работы в offline"
+                "t": "Pemisahan kode, rendering di server, dukungan luar jaringan"
             },
             {
                 "o": "Learn Sapper",
-                "t": "Узнать больше"
+                "t": "Pelajari Sapper"
             }
         ]
     },
@@ -45,19 +45,19 @@
         "strings": [
             {
                 "o": ">Guide<",
-                "t": ">Руководство<"
+                "t": ">Panduan<"
             },
             {
                 "o": ">Chat<",
-                "t": ">Чат<"
+                "t": ">Obrolan<"
             },
             {
                 "o": "https://svelte.technology",
-                "t": "https://ru.svelte.dev"
+                "t": "https://id.svelte.dev"
             },
             {
                 "o": "'Close' : 'Menu'",
-                "t": "'Закрыть' : 'Меню'"
+                "t": "'Tutup' : 'Меnu'"
             }
         ]
     },
@@ -66,7 +66,7 @@
         "strings": [
             {
                 "o": "Site has been updated — tap to reload",
-                "t": "Сайт только что был обновлен — кликните сюда для перезагрузки"
+                "t": "Situs telah diperbaharui, sentuh untuk memuat kembali"
             }
         ]
     },
@@ -75,11 +75,11 @@
         "strings": [
             {
                 "o": "edit this section",
-                "t": "редактировать раздел"
+                "t": "edit bagian ini"
             },
             {
                 "o": "sveltejs/sapper.svelte.technology/edit/master/content/guide/",
-                "t": "AlexxNB/svelte3-translation-ru/tree/master/repositories/sveltejs/sapper.svelte.technology/content/guide/"
+                "t": "Svelte-ID/svelte3-translation-id/tree/master/repositories/sveltejs/sapper.svelte.technology/content/guide/"
             }
         ]
     }
