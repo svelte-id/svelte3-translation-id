@@ -1,21 +1,22 @@
 ---
-title: Упреждающая загрузка
+title: Prefetching
 ---
 
-Для обеспечения быстрого времени запуска приложения, Sapper использует разделение кода, чтобы разбить ваше приложение на небольшие части.
+Sapper menggunakan pemisahan kode untuk memecah aplikasi Anda menjadi potongan-potongan kecil (satu per rute), memastikan waktu _startup_ yang cepat.
 
-Для *динамических* маршрутов, вроде нашего примера `src/routes/blog/[slug].svelte`, этого бывает недостаточно. Чтобы отобразить сообщение в блоге, нам нужно получить для него данные, и мы не сможем этого сделать, пока не узнаем значение для `slug`. В худшем случае, это приведёт к задержке отображения страницы, так как браузер будет ожидать получения запрошенных данных от сервера.
+Untuk *rute dinamis*, seperti contoh `src/route/blog/[slug].svelte` kami, itu tidak cukup. Untuk merender posting blog, kita perlu mengambil data untuk itu, dan kita tidak bisa melakukan itu sampai kita tahu apa `slug` itu. Dalam kasus terburuk, itu dapat menyebabkan kelambatan saat browser menunggu data kembali dari server.
 
-### rel=prefetch
 
-Мы можем свести задержку к минимуму, *предварительно запросив* нужные данные. Добавление атрибута `rel=prefetch` в ссылку...
+### rel = prefetch
+
+Kita dapat melakukan mitigasi dengan *menjemput* (_prefetch_) data. Menambahkan atribut `rel=prefetch` ke tautan ...
 
 ```html
-<a rel=prefetch href='blog/what-is-sapper'>Что такое Sapper?</a>
+<a rel=prefetch href='blog/what-is-sapper'> Apa itu Sapper? </a>
 ```
 
-...заставит Sapper запустить `preload` функцию потенциально следующей страницы, как только пользователь наведёт курсор мыши на ссылку (на десктопе) или тапнет по ней (на мобильном устройстве), вместо того, чтобы ожидать события `click`, которое приведёт к переходу на эту страницу. Как правило, это даст нам дополнительные пару сотен миллисекунд, что как раз является разницей между быстрым UI, и тем который ощущается как тормозной.
+... akan menyebabkan Sapper menjalankan fungsi `preload` halaman begitu pengguna melayang di atas tautan (pada desktop) atau menyentuhnya (di seluler), alih-alih menunggu _event_ `klik` untuk memicu navigasi. Biasanya, ini memberi kita beberapa ratus milidetik tambahan, yang merupakan perbedaan antara antarmuka pengguna yang terasa lamban, dan yang terasa tajam.
 
-> `rel=prefetch` это идиома Sapper, а не стандартный атрибут для элементов `<a>`
+> `rel=prefetch` adalah idiom Sapper, bukan atribut standar untuk elemen `<a>`
 
-<!-- TODO add a function to prefetch programmatically -->
+<! - TODO menambahkan fungsi untuk membuat prefetch secara terprogram ->
