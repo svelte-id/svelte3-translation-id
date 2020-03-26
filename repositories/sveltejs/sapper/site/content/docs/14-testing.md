@@ -1,14 +1,14 @@
 ---
-title: Тестирование
+title: Testing
 ---
 
-Вы можете использовать любые фреймворки и библиотеки для тестирования по своему вкусу. В [sapper-template](https://github.com/sveltejs/sapper-template) по умолчанию используется [Cypress](https://cypress.io).
+Kamu dapat menggunakan _framework_ pengujian dan pustaka yang kamu suka. Bawaan (_default_) pada [templat-sapper](https://github.com/sveltejs/sapper-template) adalah [Cypress](https://cypress.io).
 
 
-### Запуск тестов
+### Running the tests
 
 ```bash
 npm test
 ```
 
-Будет запущен сервер и открыт Cypress. Вы можете (и должны!) добавлять свои собственные тесты в `cypress/integration/spec.js`. Для получения дополнительной информации обратитесь к [документации](https://docs.cypress.io/guides/overview/why-cypress.html).
+Ini akan memulai server dan menjalankan Cypress. Kamu dapat (dan seharusnya!) menambahkan test kamu sendiri di `cypress/integration/spec.js` — bacalah [dokumentasi](https://docs.cypress.io/guides/overview/why-cypress.html) untuk informasi lebih lanjut.
