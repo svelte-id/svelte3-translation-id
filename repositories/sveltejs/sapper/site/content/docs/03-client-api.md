@@ -1,18 +1,18 @@
 ---
-title: API клиента
+title: API klien
 ---
 
-Модуль `@sapper/app`, который генерирует Sapper на основе вашего струкутры приложения, содержит функции для управления Sapper из кода и реагирования на события.
+Modul `@ sapper / app`, yang menghasilkan Sapper berdasarkan pada struktur aplikasi Anda, berisi fungsi untuk mengendalikan Sapper secara programatis dan menanggapi _event_(peristiwa).
 
 
 
-### start({ target })
+### start ({target})
 
-* `target` — елемент, в который будут отрисовываться страницы
+* `target` - elemen di mana halaman akan di-render
 
-Настраивает маршрутизатор и запускает приложение — отлавливает клики по элементам `<a>`, взаимодействует с `history API`, отображает и обновляет компоненты Svelte.
+Mengkonfigurasi router dan meluncurkan aplikasi - menangkap klik pada elemen `<a>`, berinteraksi dengan API `history`, menampilkan dan memperbarui komponen Svelte.
 
-Возвращает объект `Promise`, который выполняется, когда загруженная страница закончит 'гидратацию'.
+Mengembalikan objek `Promise`, yang dieksekusi ketika halaman yang dimuat telah selesai 'hidrasi'.
 
 
 ```js
@@ -21,7 +21,7 @@ import * as sapper from '@sapper/app';
 sapper.start({
 	target: document.querySelector('#sapper')
 }).then(() => {
-	console.log('клиентское приложение запустилось');
+	console.log('client-side app telah berlangsung');
 });
 ```
 

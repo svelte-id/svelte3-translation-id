@@ -129,7 +129,7 @@ Ada tiga aturan sederhana untuk memberi nama file yang menentukan rute Anda:
 
 ### Halaman kesalahan
 
-Selain halaman reguler, ada halaman 'khusus' yang Sapper harapkan untuk ditemukan keberadaannya - `src/route/_error.svelte`. Ini akan ditampilkan ketika kesalahan terjadi saat merender halaman.
+Tambahan lagi selain halaman reguler, ada halaman 'khusus' yang Sapper harapkan untuk ditemukan keberadaannya - `src/route/_error.svelte`. Ini akan ditampilkan ketika kesalahan terjadi saat merender halaman.
 
 Objek `error` tersedia untuk templat bersama dengan kode `status` HTTP.
 
