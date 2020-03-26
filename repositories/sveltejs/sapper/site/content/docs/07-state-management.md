@@ -1,10 +1,10 @@
 ---
-title: Хранилища
+title: Store
 ---
 
-Значения `page` и `session`, передаваемые в функции `preload`, а так же `preloading`, доступны компонентам как [хранилища](https://ru.svelte.dev/tutorial/writable-stores).
+Nilai `page` dan` session` yang diteruskan ke fungsi `preload` tersedia untuk komponen sebagai [store] (https://svelte.dev/tutorial/writable-stores), bersama dengan` preloading`.
 
-Получение ссылок на хранилища внутри компонента выглядит следующим образом:
+Di dalam komponen, dapatkan referensi ke toko-toko seperti:
 
 ```html
 <script>
@@ -13,18 +13,18 @@ title: Хранилища
 </script>
 ```
 
-* `preloading` булевое значение только для чтения, показывающее идет ли еще процесс загрузки после перехода
-* `page` содержит объект `{host, path, params, query}`, только для чтения. Аналогичен объекту, передаваемому функции `preload`.
-* `session` содержит любые данные сессии, которые были оставлены на сервере. Это [доступное для записи хранилище](https://ru.svelte.dev/tutorial/writable-stores), то есть вы можете обновить его новыми данными (например, после входа пользователя в систему), затем приложение будет перерисовано.
+* `preloading` berisi nilai boolean yang hanya bisa dibaca, menunjukkan apakah suatu navigasi sedang menunggu atau tidak
+* `page` berisi objek` {host, path, params, query} `readonly, identik dengan yang dilewatkan ke fungsi` preload`
+* `session` berisi data apa pun yang diunggah di server. Ini adalah [penyimpanan yang dapat ditulis] (https://svelte.dev/tutorial/writable-stores), artinya Anda dapat memperbaruinya dengan data baru (misalnya, setelah pengguna masuk) dan aplikasi Anda akan di-refresh.
 
 
-### Обновление данных сессии
+### _Seeding_ Data sesi
 
-На сервере можно заполнить данными `session`, передав соответствующий параметр в `sapper.middleware`:
+Di server, Anda dapat mengisi `session` dengan mengirimkan opsi ke` sapper.middleware`:
 
 ```js
 // src/server.js
-express() // или Polka, или похожий фреймворк
+express() // atau Polka, atau framework lain yang serupa
 	.use(
 		serve('static'),
 		authenticationMiddleware(),
@@ -37,4 +37,4 @@ express() // или Polka, или похожий фреймворк
 	.listen(process.env.PORT);
 ```
 
-> Данные сессии должны быть сериализуемыми(используется [devalue](https://github.com/Rich-Harris/devalue)) — никаких функций или пользовательских классов, только встроенные в JavaScript типы данных
+> Data sesi harus dapat diserialisasi (menggunakan [devaluasi] (https://github.com/Rich-Harris/devalue)) - tidak ada fungsi atau kelas khusus, hanya tipe data JavaScript bawaan

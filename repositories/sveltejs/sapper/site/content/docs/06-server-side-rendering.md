@@ -1,20 +1,20 @@
 ---
-title: Ренедринг на стороне сервера (SSR)
+title: rendering sisi server
 ---
 
-По умолчанию, Sapper рендерит сначала серверную часть (SSR), а затем заново монтирует любые динамические элементы на стороне клиента. Svelte отлично [поддерживает SSR](https://ru.svelte.dev/docs#API_komponenta_na_servere). Среди достоинств рендеринга на сервере — лучшая производительность и более качественная индексация сайта поисковыми системами, но вместе с тем есть и некоторые сложности.
+Sapper, secara default, menjadikan sisi server terlebih dahulu (SSR), dan kemudian memasang kembali elemen dinamis apa pun pada klien. Svelte menyediakan [dukungan luar biasa untuk ini] (https://svelte.dev/docs#Server-side_component_API). Ini memiliki manfaat dalam kinerja dan pengindeksan mesin pencari, antara lain, tetapi hadir dengan kerumitannya sendiri.
 
-### Создание компонента совместимого с SSR
+### Membuat komponen SSR kompatibel
 
-Sapper хорошо работает с большинством сторонних библиотек, с которыми вы можете столкнуться. Однако иногда сторонняя библиотека поставляется собранной с прицелом на работу сразу с несколькими различными загрузчиками модулей. Иногда такой подход создаёт зависимость от объекта `window`, например, может проверяться на существование свойство `window.global`.
+Sapper bekerja dengan baik dengan sebagian besar perpustakaan pihak ketiga yang mungkin Anda temui. Namun, kadang-kadang, pustaka pihak ketiga dibundel dengan cara yang memungkinkannya bekerja dengan beberapa pemuat modul yang berbeda. Terkadang, kode ini menciptakan ketergantungan pada `window`, seperti memeriksa keberadaan` window.global` mungkin dilakukan.
 
-Поскольку в серверной среде, такой как Sapper, нет `window`, действие простого импорта такого модуля может привести к сбою импорта и завершить работу сервера Sapper с ошибкой:
+Karena tidak ada `window` di lingkungan sisi server seperti Sapper, tindakan hanya mengimpor modul tersebut dapat menyebabkan impor gagal, dan menghentikan server Sapper dengan kesalahan seperti:
 
 ```bash
 ReferenceError: window is not defined
 ```
 
-Чтобы избежать таких ошибок, используйте динамический импорт для вашего компонента из функции `onMount`, который вызывается только на стороне клиента. В этом случае, код импорта никогда не будет вызван на сервере:
+Cara untuk mengatasi ini adalah dengan menggunakan impor dinamis untuk komponen Anda, dari dalam fungsi `onMount` (yang hanya dipanggil pada klien), sehingga kode impor Anda tidak pernah dipanggil di server.
 
 ```html
 <script>

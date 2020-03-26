@@ -1,69 +1,69 @@
 ---
-title: Макеты
+title: Tata Letak
 ---
 
-До сих пор мы рассматривали страницы как полностью автономные компоненты — при переходе между страницами существующий компонент уничтожался, а новый занимал его место.
+Sejauh ini, kami telah memperlakukan halaman sebagai komponen yang sepenuhnya berdiri sendiri - setelah navigasi, komponen yang ada akan dihancurkan, dan yang baru akan menggantikannya.
 
-Но во многих приложениях есть элементы, которые должны быть видны на *каждой* странице, такие как навигация или подвал. Вместо того, чтобы повторять их на каждой странице, мы можем использовать компоненты *макета*.
+Tetapi di banyak aplikasi, ada elemen yang harus terlihat di * setiap * halaman, seperti navigasi tingkat atas atau catatan kaki. Alih-alih mengulanginya di setiap halaman, kita dapat menggunakan komponen * layout *.
 
-Чтобы создать компонент макета, который будет применяться к каждой странице приложения, создайте файл с именем `src/routes/_layout.svelte`. По умолчанию компонент макета (такой же будет использовать Sapper, если не будет этого файла) выглядит следующим образом...
-
+Untuk membuat komponen tata letak yang berlaku untuk setiap halaman, buat file bernama `src / routes / _layout.svelte`. Komponen tata letak default (yang digunakan Sapper jika Anda tidak membawa sendiri) terlihat seperti ini ...
 
 ```html
 <slot></slot>
 ```
 
-...но мы можем добавить любую разметку, стили и поведение, которые мы хотим. Например, давайте добавим панель навигациии:
+... tetapi kita dapat menambahkan markup, gaya, dan perilaku apa pun yang kita inginkan. Misalnya, mari kita tambahkan bilah nav:
 
 ```html
 <!-- src/routes/_layout.svelte -->
 <nav>
-	<a href=".">Главная</a>
-	<a href="about">О сайте</a>
-	<a href="settings">Настройки</a>
+	<a href=".">Home</a>
+	<a href="about">About</a>
+	<a href="settings">Settings</a>
 </nav>
 
 <slot></slot>
 ```
 
-Если мы создадим страницы для `/`, `/about` и `/settings`...
+Jika kita membuat halaman untuk `/`, `/ tentang` dan` / pengaturan` ...
 
 ```html
 <!-- src/routes/index.svelte -->
-<h1>Главная</h1>
+<h1>Home</h1>
 ```
 
 ```html
 <!-- src/routes/about.svelte -->
-<h1>О сайте</h1>
+<h1>About</h1>
 ```
 
 ```html
 <!-- src/routes/settings.svelte -->
-<h1>Настройки</h1>
+<h1>Settings</h1>
 ```
-...навигация всегда будет видна, и переход между тремя страницами приведёт только к замене содержимого элемента `<h1>`.
+
+... nav akan selalu terlihat, dan mengklik di antara tiga halaman hanya akan menghasilkan `<h1>` diganti.
 
 
-### Вложенные маршруты
+### Rute bersarang
 
-Предположим, что у нас не просто одна страница `/settings`, а есть и вложенные страницы, вроде `/settings/profile` и `/settings/notifications` с общим подменю (для реального примера см. [github.com/settings](https://github.com/settings)).
+Misalkan kita tidak hanya memiliki satu halaman `/ settings`, tetapi sebaliknya memiliki halaman bersarang seperti` / settings / profil` dan `/ settings / notifications` dengan submenu bersama (untuk contoh kehidupan nyata, lihat [github. com / settings] (https://github.com/settings)).
 
-Мы можем создать макет, который применяется только к страницам, расположенным ниже `/settings` (при этом останется и корневой макет с навигацией):
+Kita dapat membuat tata letak yang hanya berlaku untuk halaman di bawah `/ settings` (sambil mewarisi tata letak root dengan nav tingkat atas):
 
 ```html
 <!-- src/routes/settings/_layout.svelte -->
-<h1>Настройки</h1>
+<h1>Settings</h1>
 
 <div class="submenu">
-	<a href="settings/profile">Профиль</a>
-	<a href="settings/notifications">Уведомления</a>
+	<a href="settings/profile">Profile</a>
+	<a href="settings/notifications">Notifications</a>
 </div>
 
 <slot></slot>
 ```
 
-Компонентам макета передаётся свойство `segment`, которое может быть полезно, например, для стилизации:
+Komponen tata letak menerima properti `segment` yang berguna untuk hal-hal seperti styling:
 
 ```diff
 +<script>
@@ -71,16 +71,16 @@ title: Макеты
 +</script>
 +
 <div class="submenu">
--	<a href="settings/profile">Профиль</a>
--	<a href="settings/notifications">Уведомления</a>
+-	<a href="settings/profile">Profile</a>
+-	<a href="settings/notifications">Notifications</a>
 +	<a
 +		class:selected={segment === "profile"}
 +		href="settings/profile"
-+	>Профиль</a>
++	>Profile</a>
 +
 +	<a
 +		class:selected={segment === "notifications"}
 +		href="settings/notifications"
-+	>Уведомления</a>
++	>Notifikasi</a>
 </div>
 ```

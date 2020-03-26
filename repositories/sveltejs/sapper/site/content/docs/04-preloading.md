@@ -1,8 +1,8 @@
 ---
-title: Предзагрузка
+title: Preloading
 ---
 
-Как мы видели в разделе [Маршруты](docs#Marshruty), компоненты страниц верхнего уровня могут иметь функцию `preload`, которая будет загружать некоторые данные, от которых зависит страница. Она похожа на `getInitialProps` в Next.js или `asyncData` в Nuxt.js.
+Seperti yang terlihat di bagian [routing] (docs # Routing), komponen halaman dapat memiliki fungsi `preload` opsional yang akan memuat beberapa data yang tergantung pada halaman tersebut. Ini mirip dengan `getInitialProps` di Next.js atau` asyncData` di Nuxt.js.
 
 ```html
 <script context="module">
@@ -15,47 +15,61 @@ title: Предзагрузка
 		return { article };
 	}
 </script>
+
+<script>
+	export let article;
+</script>
+
+<h1>{article.title}</h1>
+
 ```
 
-Она помещается в блоке `<script context="module">`, потому что он не является частью экземпляров компонентов; вместо этого он выполняется *до* создания компонента, что позволяет избежать морганий компонента во время выборки данных. Подробнее в [Учебнике](https://ru.svelte.dev/tutorial/module-exports)
+Ia hidup dalam skrip `context =" module "` - lihat [tutorial] (https://svelte.dev/tutorial/module-exports) - karena ini bukan bagian dari instance komponen itu sendiri; alih-alih, ini berjalan * sebelum * komponen dibuat, memungkinkan Anda menghindari berkedip saat data diambil.
 
-### Аргументы
+### Argumen
 
-В функцию `preload` передаётся два аргумента — `page` и `session`.
+Fungsi `preload` menerima dua argumen -` halaman` dan `sesi`.
 
-`page` является объектом `{ host, path, params, query }`, где `host` и `path`— это соответственно часть хоста и путь из URL, `params` выводится из URL и имени файла маршрута, а `query` является объектом значений из строки запроса..
+`page` adalah` {host, path, params, query} `objek di mana` host` adalah host URL, `path` adalah pathname-nya,` params` berasal dari `path` dan nama file rute, dan` query `adalah objek nilai dalam string kueri.
 
-Для примера рассмотрим знакомую страницу `src/routes/blog/[slug].svelte`. Предположим, к ней обратились по а URL-адресу вида `/blog/some-post?foo=bar&baz`, тогда мы получим следующие данные:
+Jadi jika contoh di atas adalah `src / route / blog / [slug] .svelte` dan URL-nya adalah` / blog / some-post? Foo = bar & baz`, yang berikut ini benar:
 
-* `page.path === '/blog/some-post'`
+* `page.path === '/ blog / some-post'`
 * `page.params.slug === 'some-post'`
 * `page.query.foo === 'bar'`
 * `page.query.baz === true`
 
-`session` генерируется на сервере путём передачи параметра `session` в `sapper.middleware` (TODO это требует дополнительной документации. Возможно будет раздел API сервера?)
+`session` dihasilkan di server dengan opsi` session` yang diteruskan ke `sapper.middleware`. Sebagai contoh:
+
+```js
+sapper.middleware({
+	session: (req, res) => ({
+		user: req.user
+	})
+})
+```
 
 
-### Возвращаемое значение
+### Nilai pengembalian
 
-Если вы вернёте промис из `preload`, страница не будет отображаться, пока промис не исполнится. Но вы также можете вернуть и простой объект.
+Jika Anda mengembalikan Janji dari `preload`, halaman akan menunda render hingga janji terselesaikan. Anda juga dapat mengembalikan objek polos. Dalam kedua kasus, nilai-nilai dalam objek akan diteruskan ke komponen sebagai alat peraga.
 
-Когда Sapper ренедерит страницу на сервере, он пытается сериализовать полученное значение (используя [devalue](https://github.com/Rich-Harris/devalue)) и помещает его на страницу, поэтому клиентской части нет необходимости повторно вызывать `preload` при инициализации. Сериализация выдаст ошибку, если значение включает функции или пользовательские классы (но можно использовать циклические и повторяющиеся ссылки, а также встроенные модули, типа `Date`,`Map`, `Set` и `RegExp`).
+Ketika Sapper merender halaman pada server, ia akan mencoba membuat serialisasi nilai yang diselesaikan (menggunakan [devaluasi] (https://github.com/Rich-Harris/devalue)) dan memasukkannya pada halaman, sehingga klien tidak 'Juga perlu memanggil `preload` saat inisialisasi. Serialisasi akan gagal jika nilainya mencakup fungsi atau kelas khusus (referensi siklus dan berulang baik-baik saja, seperti built-in seperti `Date`,` Map`, `Set` dan` RegExp`).
 
+### Konteks
 
-### Контекст
+Di dalam `preload`, Anda memiliki akses ke tiga metode:
 
-Внутри функции `preload` у вас есть доступ к трём методам ...
-
-* `this.fetch(url, options)`
-* `this.error(statusCode, error)`
-* `this.redirect(statusCode, location)`
+* `this.fetch (url, options)`
+* `this.error (statusCode, error)`
+* `this.redirect (statusCode, location)`
 
 
 #### this.fetch
 
-В браузерах вы можете использовать `fetch` для выполнения AJAX запросов, например, для получения данных с ваших серверных маршрутов. На сервере это несколько сложнее — вы можете делать HTTP-запросы, но нужно прописать origin, и у вас нет доступа к файлам cookie. Это означает, что невозможно запрашивать данные, основанные на сеансе пользователя, например, требующих входа в систему.
+Di browser, Anda dapat menggunakan `fetch` untuk membuat permintaan AJAX, untuk mendapatkan data dari rute server Anda (antara lain). Di server ini sedikit rumit - Anda dapat membuat permintaan HTTP, tetapi Anda harus menentukan asal, dan Anda tidak memiliki akses ke cookie. Ini berarti bahwa tidak mungkin untuk meminta data berdasarkan sesi pengguna, seperti data yang mengharuskan Anda untuk masuk.
 
-Чтобы исправить это, Sapper предлагает функцию `this.fetch`, которая работает одинаково как на сервере, так и на клиенте:
+Untuk memperbaikinya, Sapper menyediakan `this.fetch`, yang berfungsi di server maupun di klien:
 
 ```html
 <script context="module">
@@ -69,12 +83,12 @@ title: Предзагрузка
 </script>
 ```
 
-Обратите внимание, что вам нужно будет использовать какую-либо прослойку для управления сессиями  в вашем `app/server.js`, чтобы обрабатывать сеансы пользователей или делать что-либо, связанное с аутентификацией. Например [express-session](https://github.com/expressjs/session).
+Perhatikan bahwa Anda perlu menggunakan middleware sesi seperti [sesi ekspres] (https://github.com/expressjs/session) di `app / server.js` Anda untuk mempertahankan sesi pengguna atau melakukan apa pun yang melibatkan otentikasi.
 
 
 #### this.error
 
-Если пользователь перейдёт на `/blog/some-invalid-slug`, хотелось бы ему показать страницу с ошибкой '404 — страница не найдена'. И мы можем сделать это с помощью `this.error`:
+Jika pengguna menavigasi ke `/ blog / some-invalid-slug`, kami ingin membuat halaman 404 Tidak Ditemukan. Kita bisa melakukannya dengan `this.error`:
 
 ```html
 <script context="module">
@@ -88,17 +102,17 @@ title: Предзагрузка
 			return { article };
 		}
 
-		this.error(404, 'Страница не найдена');
+		this.error(404, 'Not found');
 	}
 </script>
 ```
 
-Аналогичным образом обрабатываются и другие коды ошибок, с которыми вы можете столкнуться.
+Hal yang sama berlaku untuk kode kesalahan lain yang mungkin Anda temui.
 
 
 #### this.redirect
 
-Вы можете прервать отрисовку и перенаправить пользователя в другое место с помощью `this.redirect`:
+Anda dapat membatalkan render dan mengarahkan ke lokasi lain dengan `this.redirect`:
 
 ```html
 <script context="module">
