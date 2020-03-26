@@ -1,17 +1,17 @@
 ---
-title: Базовые URL
+title: Basis URL 
 ---
 
-Обычно точка входа в приложение Sapper находится в `/`. Но в некоторых случаях вашему приложению требуется быть доступным по другому базовому пути — например, если Sapper контролирует только часть вашего домена, или у вас несколько приложений Sapper, которые живут рядом друг с другом.
+Biasanya, root dari aplikasi Sapper Anda disajikan di `/`. Tetapi dalam beberapa kasus, aplikasi Anda mungkin perlu dilayani dari jalur basis yang berbeda - misalnya, jika Sapper hanya mengontrol bagian dari domain Anda, atau jika Anda memiliki beberapa aplikasi Sapper yang hidup berdampingan.
 
-Это можно сделать таким образом:
+Ini bisa dilakukan seperti berikut ini:
 
 ```js
 // app/server.js
 
-express() // или Polka, или иной фреймворк
+express() // atau Polka, atau framework serupa
 	.use(
-		'/my-base-path', // <!-- добавьте эту строку
+		'/my-base-path', // <!-- tambahkan baris ini
 		compression({ threshold: 0 }),
 		serve('static'),
 		sapper.middleware()
@@ -19,9 +19,9 @@ express() // или Polka, или иной фреймворк
 	.listen(process.env.PORT);
 ```
 
-Sapper правильно настроит маршруты как на стороне сервера, так и на стороне клиента для работы с указанным базовым путём.
+Sapper akan mendeteksi jalur dasar dan mengkonfigurasi router sisi-server dan sisi-klien yang sesuai.
 
-Если вы [экспортируете](docs#Eksportirovanie) своё приложение, то нужно указать по какому пути искать корень сайта:
+Jika Anda [mengekspor](docs#Pengeksporan) aplikasi Anda, Anda harus memberi tahu dari mana posisi mulai bergerak:
 
 ```bash
 sapper export --basepath my-base-path
