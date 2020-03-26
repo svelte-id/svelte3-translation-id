@@ -1,32 +1,32 @@
 ---
-title: Экспортирование
+title: Pengeksporan
 ---
 
-Есть немалая часть сайтов, которые по сути своей *статичны*, то есть им для работы не нужен сервер Express. Вместо этого они могут распространяться в виде статических файлов, что позволяет развёртывать их практически на любом хостинге (вроде [Netlify](https://www.netlify.com/) или [GitHub Pages](https://pages.github.com/)). Статические сайты, как правило, дешевле в эксплуатации и имеют непрeвзойдённую производительность.
+Banyak situs secara efektif * statis *, artinya mereka tidak benar-benar membutuhkan server Express yang mendukung mereka. Sebagai gantinya, mereka dapat di-host dan disajikan sebagai file statis, yang memungkinkan mereka untuk digunakan ke lebih banyak lingkungan hosting (seperti [Netlify] (https://www.netlify.com/) atau [Halaman GitHub] (https: // pages.github.com/)). Situs statis umumnya lebih murah untuk beroperasi dan memiliki karakteristik kinerja yang lebih baik.
 
-Sapper позволяет вам *экспортировать* сайт в статические файлы с помощью одной простой команды `sapper export`. Кстати, вы прямо сейчас смотрите на экспортированный сайт!
+Sapper memungkinkan Anda untuk *mengekspor* situs statis dengan perintah tunggal  `sapper export` tanpa-konfigurasi. Bahkan, sekarang kamu sedang melihat situs hasil ekspor!
 
-При этом термин *статический* не означает, что приложение перестанет быть *интерактивным* — ваши компоненты Svelte будут работают точно так же, как и обычно, и такие вещи, как маршрутизация на клиенте и упреждающая загрузка, тоже никуда не денутся.
+Statis tidak berarti non-interaktif - komponen Svelte Anda bekerja persis seperti biasanya, dan kamu masih bisa mendapatkan semua manfaat dari perutean dan penjemputan (_prefetching_) sisi klien.
 
 
 ### sapper export
 
-В директории вашего проекта Sapper выполните следующую команду:
+Di dalam proyek Sapper Anda, coba ini:
 
 ```bash
-# npx позволяет использовать локально установленные зависимости
+# npx memungkinkan Anda untuk menggunakan dependensi yang diinstal secara lokal
 npx sapper export
 ```
 
-Будет создана директория `__sapper__/export` с готовой сборкой вашего сайта. Вы можете сразу запустить его таким образом:
+Ini akan membuat folder `__sapper __ / export` dengan pembuatan situs Anda yang siap-produksi. Anda dapat meluncurkannya seperti ini:
 
 ```bash
 npx serve __sapper__/export
 ```
 
-Перейдите в браузере на адрес [localhost:5000](http://localhost:5000) и убедитесь, что ваш сайт работает корректно.
+Arahkan ke [localhost: 5000] (http: // localhost: 5000) (atau port apa pun yang dipilih `serve`), dan verifikasi bahwa situs Anda berfungsi seperti yang diharapkan.
 
-Вы также можете добавить скрипт в свой файл `package.json`...
+Anda juga dapat menambahkan skrip ke package.json Anda ...
 
 ```js
 {
@@ -37,27 +37,27 @@ npx serve __sapper__/export
 }
 ```
 
-...что позволит экспортировать ваше приложение командой `npm run export`.
+... memungkinkan Anda untuk `npm run export` aplikasi Anda.
 
 
-### Как это работает
+### Cara Kerja Ekspor
 
-Когда вы запускаете `sapper export`, Sapper сначала создаёт рабочую версию вашего приложения, как происходит при запуске `sapper build`, и копирует содержимое вашей папки `static` в место назначения. Затем он запускает сервер и 'заходит' на главную страницу получившегося сайта. Оттуда он следует по всем найденным ссылкам из элементов `<a>` и сохраняет любые данные, предоставляемые приложением.
+Ketika Anda menjalankan `sapper export`, Sapper pertama membangun versi produksi aplikasi Anda, seolah-olah Anda telah menjalankan `sapper build`, dan menyalin isi folder `static` Anda ke tujuan. Sapper kemudian memulai server, dan menavigasi ke root aplikasi Anda. Dari sana, ia mengikuti elemen `<a>` yang ditemukannya, dan menangkap data apa pun yang dilayani oleh aplikasi.
 
-По этой причине любые страницы, которые необходимы в экспортированом сайте, должны быть доступны с помощью элементов `<a>`или добавлены при помощи ключа `--entry` для команды `sapper export`. Кроме того, любые серверные или иные нестраничные маршруты должны запрашиваться в `preload`, а *не* в `onMount` или ещё где-либо.
-
-
-### Когда экспортировать не нужно
-
-Основное правило таково: чтобы приложение могло быть экспортировано, любые два пользователя, попадающие на одну и ту же страницу вашего приложения, должны получать одинаковое содержимое с сервера. Другими словами, любое приложение, которое включает в себя пользовательские сессии или аутентификацию, *не* может быть правильно экспортировано командой `sapper export`.
-
-Обратите внимание, что вы всё ещё можете экспортировать приложения с динамическими маршрутами, как в нашем примере `src/routes/blog/[slug].html`. Команда `sapper export` будет обрабатывать `this.fetch` запросы внутри функций `preload`, поэтому данные, поступающие из `src/routes/blog/[slug].json.js` тоже будут сохранены.
+Karena itu, setiap halaman yang ingin Anda sertakan dalam situs yang diekspor harus dapat dijangkau oleh `<a>` elemen atau ditambahkan ke opsi `--entry` dari perintah `sapper export`. Selain itu, setiap rute non-halaman harus diminta di `preload`, *bukan* di `onMount` atau di tempat lain.
 
 
-### Конфликты маршрутов
+### Kapan Saatnya untuk Tidak Mengekspor
 
-Поскольку `sapper export` создаёт отражение всех маршрутов в виде файлового дерева, то невозможно иметь два *серверных маршрута*, где возникает ситуация, что директория и файл в одном и том же месте будут иметь одинаковое имя. Например, `src/routes/foo/index.js` и `src/routes/foo/bar.js` будут пытаться создать файлы `export/foo` и `export/foo/bar`, что приведёт к ошибке.
+Aturan dasarnya adalah ini: agar aplikasi dapat diekspor, dua pengguna mana pun yang meng-_hit_ halaman yang sama dari aplikasi Anda harus mendapatkan konten yang sama dari server. Dengan kata lain, aplikasi apa pun yang melibatkan sesi pengguna atau otentikasi *bukan* kandidat untuk `sapper export`.
 
-Решение состоит в том, чтобы переименовать один из маршрутов и избежать подобного конфликта — например так: `src/routes/foo-bar.js`. Не забудьте, что при этом придётся подправить код приложения в том месте, где он берёт данные `/foo/bar`, указав новый маршрут `/foo-bar`.
+Perhatikan bahwa Anda masih dapat mengekspor aplikasi dengan rute dinamis, seperti contoh `src/route/blog/[slug].svelte` kami dari sebelumnya. `sapper export` akan mencegat permintaan `fetch` yang dibuat di dalam `preload`, sehingga data yang disajikan dari `src/route/blog/[slug].json.js` juga akan ter-_capture_.
 
-Для *маршрутов страниц* этой проблемы не возникает, поскольку мы создаём файл `export/foo/index.html` вместо `export/foo`.
+
+### Konflik rute
+
+Karena `sapper export` menulis ke sistem file, tidak mungkin memiliki dua rute server direktori dan file sekaligus dengan nama yang sama. Sebagai contoh, `src/route/foo/index.js` dan` src/route/foo/bar.js` akan mencoba membuat `export/foo` dan `export/foo/bar`, yang tidak mungkin.
+
+Solusinya adalah mengubah nama salah satu rute untuk menghindari konflik - misalnya, `src/route/foo-bar.js`. (Perhatikan bahwa Anda juga perlu memperbarui kode apa pun yang mengambil data dari `/foo/bar` ke referensi`/foo-bar` sebagai gantinya.)
+
+Untuk *halaman*, kami mengatasi masalah ini dengan menulis `export/foo/index.html` alih-alih` export/foo`.

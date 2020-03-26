@@ -1,5 +1,5 @@
 ---
-title: Membangun
+title: Pembangunan
 ---
 
 Sampai sekarang kami telah menggunakan `sapper` untuk membangun aplikasi kami dan menjalankan server pengembangan. Tetapi ketika menyangkut produksi, kami ingin membuat hasil mandiri yang teroptimalkan.
