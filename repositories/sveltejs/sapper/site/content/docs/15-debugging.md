@@ -1,19 +1,19 @@
 ---
-title: Отладка
+title: Debugging
 ---
 
-Заниматься отладкой серверного кода особенно просто при помощи [ndb](https://github.com/GoogleChromeLabs/ndb). Установите его глобально ...
+Men-debug kode server Anda sangat mudah dengan [ndb] (https://github.com/GoogleChromeLabs/ndb). Instal secara global ...
 
 ```bash
 npm install -g ndb
 ```
 
-...потом запустите приложение Sapper:
+...kemudian jalankan Sapper:
 
 ```bash
 ndb npm run dev
 ```
 
-> Предполагается, что скрипт `npm run dev` запускает `sapper dev`. Вы также можете запустить Sapper через [npx](https://blog.npmjs.org/post/162869356040/introduction-npx-an-npm-package-runner) таким образом — `ndb npx sapper dev`.
+> Dengan asumsi bahwa `npm run dev` menjalankan `sapper dev`. Kamu juga bisa menjalankan Sapper melalui [npx](https://blog.npmjs.org/post/162869356040/introducing-npx-an-npm-package-runner), seperti pada `ndb npx sapper dev`.
 
-Обратите внимание, что в терминале может не быть никакого вывода, пока запускается ndb.
+Perhatikan bahwa kamu mungkin tidak melihat adanya output terminal selama beberapa detik ketika ndb sedang mulai berjalan.
