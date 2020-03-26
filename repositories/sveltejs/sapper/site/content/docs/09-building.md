@@ -1,14 +1,14 @@
 ---
-title: Сборка
+title: Membangun
 ---
 
-До сих пор мы использовали `sapper dev` для сборки нашего приложения и запуска сервера для разработки. Но когда дело доходит до продакшена, нам нужна автономная оптимизированная сборка.
+Sampai sekarang kami telah menggunakan `sapper` untuk membangun aplikasi kami dan menjalankan server pengembangan. Tetapi ketika menyangkut produksi, kami ingin membuat hasil mandiri yang teroptimalkan.
 
-### sapper build
+### hasil _build_ sapper
 
-Эта команда упаковывает ваше приложение в директорию `__sapper__/build`. (Вы можете указать любую папку, а также изменить некоторые другие параметры — для получения дополнительной информации выполните `sapper build --help`.)
+Perintah ini mengemas aplikasi Anda ke dalam direktori `__sapper __/build`. (Anda dapat mengubahnya ke direktori khusus, serta mengendalikan berbagai opsi lain - lakukan `build sapper --help` untuk informasi lebih lanjut.)
 
-На выходе мы получаем Node приложение, которое вы можете запустить из корня проекта командой:
+Output-nya adalah aplikasi Node yang dapat Anda jalankan dari _root_ proyek:
 
 ```bash
 node __sapper__/build
