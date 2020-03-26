@@ -7,7 +7,7 @@ Sapper menggunakan pemisahan kode untuk memecah aplikasi Anda menjadi potongan-p
 Untuk *rute dinamis*, seperti contoh `src/route/blog/[slug].svelte` kami, itu tidak cukup. Untuk merender posting blog, kita perlu mengambil data untuk itu, dan kita tidak bisa melakukan itu sampai kita tahu apa `slug` itu. Dalam kasus terburuk, itu dapat menyebabkan kelambatan saat browser menunggu data kembali dari server.
 
 
-### rel = prefetch
+### rel=prefetch
 
 Kita dapat melakukan mitigasi dengan *menjemput* (_prefetch_) data. Menambahkan atribut `rel=prefetch` ke tautan ...
 
