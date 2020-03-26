@@ -1,15 +1,14 @@
 ---
-title: Безопасность
+title: Keamanan
 ---
 
-По умолчанию Sapper не добавляет в приложение никаких http-заголовков, касающихся безопасности, но вы можете добавить их самостоятельно, используя прослойку, например [Helmet][].
+Secara bawaan (_default_), Sapper tidak menambahkan _security header_ pada aplikasi Anda, tapi kamu bisa menambahkan sendiri menggunakan _middleware_ seperti [Helmet][].
 
+### _Content Security Policy_ (CSP)/ Kebijakan Keamanan Konten
 
-### Политики защиты контента(CSP)
+Sapper men-generate  `<script>` _inline_, yang bisa gagal tereksekusi apabila header [Content Security Policy (CSP)](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP)  tidak mengizinkan eksekusi sembarang _script_`	(`unsafe-inline`).
 
-Sapper генерирует встроенные в страницу элементы `<script>`, которые могут не выполняться, если заголовки [Политики защиты контента/Content Security Policy (CSP)](https://developer.mozilla.org/ru/docs/Web/HTTP/CSP) запрещают выполнение таких скриптов (`unsafe-inline`).
-
-Чтобы обойти это, Sapper может встроить [nonce](https://www.troyhunt.com/locking-down-your-website-scripts-with-csp-hashes-nonces-and-report-uri/), который может быть сконфигурирован для генерации нужных CSP заголовков. Вот пример использования [Express][] и [Helmet][]:
+Untuk mengatasi hal ini, Sapper dapat meng-_inject_ [nonce](https://www.troyhunt.com/locking-down-your-website-scripts-with-csp-hashes-nonces-and-report-uri/) yang dapat dikonfigurasi dengan _middleware_ untuk mengeluarkan _header CSP_ yang tepat. Berikut ini adalah contoh menggunakan [Express][] dan [Helmet][]:
 
 ```js
 // server.js
@@ -33,8 +32,8 @@ app.use(helmet({
 app.use(sapper.middleware());
 ```
 
-
-Использование `res.locals.nonce` подобным образом предусмотрено [документацией Helmet по CSP](https://helmetjs.github.io/docs/csp/#generating-nonces).
+Menggunakan `res.locals.nonce` dengan cara demikian menuturi konvensi yang diatur oleh 
+[Dokumentasi CSP Helmet](https://helmetjs.github.io/docs/csp/#generating-nonces).
 
 [Express]: https://expressjs.com/
 [Helmet]: https://helmetjs.github.io/
