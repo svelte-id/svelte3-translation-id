@@ -10,7 +10,7 @@ title: Pendahuluan
 
 ### Apa itu Sapper?
 
-Sapper — adalah kerangka kerja pembuat aplikasi web yang sangat produktif. Kamu sedang melihatnya sekarang! Inilah dua prinsip utama kami.:
+Sapper — adalah kerangka kerja pembuat aplikasi web yang sangat produktif. Kamu sedang melihatnya sekarang! Inilah dua prinsip utama kami:
 
 * Setiap halaman aplikasimu adalah sebuah komponen [Svelte](https://svelte.dev)
 * Kamu membuat halaman baru dengan menambahkan komponen ke direktori `src / route` proyek Anda. Komponen-komponen itu akan di-_render_ di server, sehingga waktu pemuatan aplikasi pengguna akan sangat cepat untuk selanjutnya kendali akan diambil alih oleh klien.
@@ -21,7 +21,7 @@ Anda tidak perlu tahu Svelte untuk memahami sisa panduan ini, tetapi itu akan me
 
 ### Dari mana nama itu berasal?
 
-Ada tentara di tentara yang terlibat dalam pembersihan ranjau - * sappers *. Tentara Amerika juga memiliki * penyadap *, tetapi bidang kegiatan mereka jauh lebih luas - selain izin ranjau, mereka juga membangun jembatan dalam kondisi pertempuran, memperbaiki jalan dan melakukan pembongkaran.
+Ada tentara di tentara yang terlibat dalam pembersihan ranjau - *sappers*. Tentara Amerika juga memiliki *penyadap*, tetapi bidang kegiatan mereka jauh lebih luas - selain izin ranjau, mereka juga membangun jembatan dalam kondisi pertempuran, memperbaiki jalan dan melakukan pembongkaran.
 
 Untuk pengembang web, tarifnya biasanya lebih rendah daripada insinyur militer. Tetapi kita juga memiliki musuh yang harus kita lawan: perangkat yang kurang kuat, koneksi jaringan lambat, dan keseluruhan kompleksitas desain antarmuka. Sapper (kependekan dari <b> S </b> velte <b> aplikasi </b> mak <b> er </b>) adalah prajuritmu yang pemberani dan ulung.
 
@@ -31,7 +31,7 @@ Untuk pengembang web, tarifnya biasanya lebih rendah daripada insinyur militer. 
 
 * Sapper bekerja pada Svelte, bukan pada React, jadi lebih cepat dan aplikasinya lebih kecil
 * Alih-alih _masking_ rute, kami menggunakan parameter rute dalam nama file (lihat bagian [Rute] (docs/routing) di bawah)
-* Rute server * dibuat dengan cara yang sama seperti rute * halaman * biasa dalam direktori `src / routes`. Misalnya, ini membuatnya sangat mudah untuk menambahkan entri poin untuk API JSON, sama seperti pada halaman ini (coba - [/ doc.json 022 (/ doc.json))
+* Rute server * dibuat dengan cara yang sama seperti rute * halaman * biasa dalam direktori `src/routes`. Misalnya, ini membuatnya sangat mudah untuk menambahkan entri poin untuk API JSON, sama seperti pada halaman ini (coba - [/ doc.json 022 (/ doc.json))
 * Tautan adalah elemen `<a>` biasa, bukan komponen khusus seperti `<Link>`. Ini berarti, misalnya, bahwa [tautan ini] (/) berfungsi baik dengan router, meskipun awalnya terletak di dokumen yang diimpor dengan markup markup.
 
 ### Ayo Mulai

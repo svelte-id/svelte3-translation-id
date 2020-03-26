@@ -2,7 +2,7 @@
 title: API klien
 ---
 
-Modul `@ sapper / app`, yang menghasilkan Sapper berdasarkan pada struktur aplikasi Anda, berisi fungsi untuk mengendalikan Sapper secara programatis dan menanggapi _event_(peristiwa).
+Modul `@ sapper/app`, yang menghasilkan Sapper berdasarkan pada struktur aplikasi Anda, berisi fungsi untuk mengendalikan Sapper secara programatis dan menanggapi _event_ (peristiwa).
 
 
 
@@ -28,25 +28,37 @@ sapper.start({
 
 ### goto(href, options?)
 
-* `href` — страница, на которую надо перейти
-* `options` — может включать свойство `replaceState`, которое определяет, использовать ли `history.pushState` (по умолчанию) или `history.replaceState`. Не обязательно.
+* `href` - halaman yang akan dituju* `options` - dapat menyertakan properti` replaceState`, yang menentukan apakah akan menggunakan `history.pushState` (default) atau` history.replaceState`. Tidak wajibSecara terprogram menavigasi ke `href` yang diberikan. Jika tujuannya adalah rute Sapper, Sapper akan menangani navigasi, jika tidak halaman akan dimuat ulang dengan `href` yang baru. Dengan kata lain, perilaku tersebut seolah-olah pengguna mengklik tautan dengan `href` ini.
 
-Перемещает по заданному в `href` маршруту. Если пунктом назначения является маршрут Sapper, то Sapper перехватит и отработает перемещение, в ином случае страница будет просто перезагружена с новым `href`. Иначе говоря, это ничем не отличается от поведения, когда пользователь просто кликает по ссылке с таким-же `href` атрибутом.
+Mengembalikan `Promise` yang diselesaikan saat navigasi selesai. Ini dapat digunakan untuk melakukan tindakan setelah navigasi selesai, seperti memperbarui basis data, menyimpan, dll.
 
-Возвращает объект `Promise`, который разрешается, когда перемещение будет завершено.
+```js
+import { goto } from '@sapper/app';
+
+const navigateAndSave = async () => {
+	await goto('/');
+	saveItem();
+}
+
+const saveItem = () => {
+	// lakukan sesuatu pada database
+}
+```
 
 ### prefetch(href)
 
-* `href` — страница для упреждающей загрузки
+* `href` - halaman untuk prefetch
 
-Выполняет упреждающую загрузку указанной страницы, что означает: а) обеспечение полной загрузки кода для страницы и б) вызов метода `preload` страницы с соответствующими параметрами. Это поведение, аналогично случаю, когда пользователь тапает или в проводит курсором над элементом `<a>` с установленным атрибутом [rel=prefetch](docs#Uprezhdayushhaya_zagruzka).
+Secara terprogram mengambil halaman sebelumnya, yang berarti 
+a) memastikan bahwa kode untuk halaman dimuat, dan 
+b) memanggil metode `preload` halaman dengan opsi yang sesuai. Ini adalah perilaku yang sama yang dipicu oleh Sapper ketika pengguna mengetuk atau menggerakkan mouse di atas elemen `<a>` dengan [rel=prefetch](docs#Prefetching).
 
-Возвращает объект `Promise`, который разрешается, когда упреждающая загрузка будет завершена.
+Mengembalikan `Promise` yang diselesaikan saat _prefetch_ selesai.
 
 ### prefetchRoutes(routes?)
 
-* `routes` —  массив строк, маршрутов для упреждающей загрузки. Не обязательно.
+* `route` - array string opsional yang merepresntasikan rute yang akan di-_prefetch_.
 
-Выполняет упреждающую загрузку кода для маршрутов, которые ещё не были загружены до этого. Обычно вызывается после завершения `sapper.start()`, чтобы ускорить последующую навигацию (это реализует букву 'L' в [PRPL шаблоне](https://developers.google.com/web/fundamentals/performance/prpl-pattern/)).  Вы можете указать маршруты по любому подходящему пути, например, `/about` (для  `src/routes/about.svelte`) или `/blog/*` (для `src/routes/blog/[slug].svelte`). В отличие от `prefetch`, это не вызовет функцию `preload` для каждой из загружаемых страниц.  Вызов функции без аргументов приведёт к тому, что будут загружены все маршруты.
+Secara programatis melakukan _prefetch_ (penjemputan) kode untuk rute yang belum diambil. Biasanya kamu dapat memanggilnya setelah metode `sapper.start()` tuntas, untuk mempercepat navigasi selanjutnya (inilah kepanjangan akronim 'L' pada [pola PRPL](https://developers.google.com/web/fundamentals/performance/prpl-pattern/)). Mengabaikan argumen akan mengakibatkan semua rute diambil, atau kamu bisa menujuk rute dengan menggunakan nama path yang _matching_ dengan misalnya `/about` (yang _match_ dengan `src/routes/about.svelte`) atau `/blog/*` (yang _match_ `src/routes/blog/[slug].svelte`). Namun tidak seperti `prefetch`, cara ini tidak akan memanggil `preload` untuk setiap halaman.
 
-Возвращает объект `Promise`, который разрешается, когда упреждающая загрузка всех маршрутов будет завершена.
+Mengembalikan `Promise` yang diselesaikan saat rute telah dijemput sebelumnya.

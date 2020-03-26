@@ -7,7 +7,7 @@ Seperti yang telah kita lihat, Sapper memiliki dua jenis rute yaitu rute halaman
 
 Halaman adalah komponen Svelte yang ditulis dalam file `.svelte`. Ketika pengguna pertama kali mengunjungi aplikasi, mereka akan disajikan versi rute yang di-render oleh server, ditambah beberapa JavaScript yang 'meng-hidrasi' halaman dan menginisialisasi router sisi klien. Mulai dari situ, navigasi ke halaman lain ditangani sepenuhnya pada sisi klien untuk mendapatkan perasaan seperti aplikasi yang cepat.
 
-Nama file menentukan rute. Misalnya, `src /route/index.svelte` adalah file root dari situs Anda:
+Nama file menentukan rute. Misalnya, `src/route/index.svelte` adalah file root dari situs Anda:
 
 
 ```html

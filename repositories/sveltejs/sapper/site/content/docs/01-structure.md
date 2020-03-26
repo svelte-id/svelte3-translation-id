@@ -95,12 +95,12 @@ File ini adalah templat untuk tanggapan dari server. Selama proses pembuatan, Sa
 
 ### src / routes
 
-Ini adalah dasar dari aplikasi Anda - halaman server dan rute. Anda akan belajar lebih banyak di bagian [Rute] (docs # Marshruty).
+Ini adalah dasar dari aplikasi Anda - halaman server dan rute. Anda akan belajar lebih banyak di bagian [Rute](docs#routing).
 
 
 ### statis
 
-Ini adalah tempat untuk meletakkan file yang digunakan aplikasi Anda - font, gambar, dan sebagainya. Sebagai contoh, `static / favicon.png` akan tersedia sebagai` / favicon.png`.
+Ini adalah tempat untuk meletakkan file yang digunakan aplikasi Anda - font, gambar, dan sebagainya. Sebagai contoh, `static/favicon.png` akan tersedia sebagai `/favicon.png`.
 
 Sapper tidak akan menyajikan file-file ini. Biasanya Anda akan menggunakan [sirv](https://github.com/lukeed/sirv) atau [serve-static](https://github.com/expressjs/serve-static). Tetapi itu akan memindai isi folder `static` sehingga Anda dapat dengan mudah menghasilkan manifes cache untuk mendukung  luar jaringan (lihat [service-worker.js](docs#templates-service-worker-js)).
 
