@@ -1,36 +1,35 @@
 ---
-title: Развёртывание
+title: Deployment
 ---
 
-Приложения Sapper запускаются везде, где поддерживается работа Node 8 или выше.
+Sapper dapat berjalan di mana saja yang mendukung Node 8 atau lebih tinggi.
 
 
-### Развёртывание в Now
+### Men-Deploy ke Now
 
-> Этот раздел описывает работу только с Now 1, а не с Now 2
+> Bagian ini berkaitan dengan Now 1, bukan Now 2
 
-Мы легко можем развернуть приложение на платформе [Now][]:
+Kita dapat men-deploy aplikasi kita dengan mudahnya ke [Now][]:
 
 ```bash
 npm install -g now
 now
 ```
 
-Эти команды загрузят исходный код в Now, после чего он самостоятельно выполнит `npm run build` и `npm start` и даст вам URL, по которому будет располагаться развёрнутое приложение.
+Skrip ini akan mengunggah kode sumber ke Now, di sanalah akan dijalankan `npm run build` dan `npm start` dan akan mengeluarkan URL untuk aplikasi yang di-deploy.
 
-Для других хостингов вам скорее всего нужно будет выполнять `npm run build` вручную.
+Untuk _hosting environment_ lainnya, kamu harus melakukan sendiri `npm run build`.
 
+### Men-Deploy _service worker_
 
-### Развёртывание сервис-воркеров
+Sapper menghasilkan file Service Worker (`service-worker.js`) yang unik dengan adanya  timestamp pada _source code_ (yang dihitung dengan `Date.now()`).
 
-Sapper обеспечивает уникальность файла сервис-воркера(`service-worker.js`), путём добавления временной метки в исходный код, которая рассчитывается с использованием функции `Date.now ()`.
+Pada _environment_ di mana aplikasi di-_deploy_ pada multi server (semisal [Now][]), sangat disarankan untuk menggunakan _timestamp_ yang konsisten untuk semua _deployment_. Kalau ini tidak dilakukan maka para pengguna akan menghadapi masalah di mana _Service Worker_ melakukan _update_ tak disangka-sangka karena aplikasi meng-_hit_ server 1, lalu server 2, dan antara mereka selisih sedikit _timestamp_.
 
-В окружениях, где приложение разворачивается на нескольких физических серверах (например, [Now][]), следует использовать одинаковую временную метку для сервис-воркеров на всех инстансах. В противном случае пользователи могут столкнуться с проблемами, когда сервис-воркер будет неожиданно обновляться, потому что приложение обращается сначала к серверу 1, затем к серверу 2, а метка времени на них будет различаться.
-
-Чтобы переопределить метку времени Sapper, вы можете использовать переменную среды (например, `SAPPER_TIMESTAMP`), а затем изменить `service-worker.js` подобным образом:
+Untuk meng-_override_ _timestamp_ dari Sapper, kamu dapat menggunakan satu variabel _environment_ (yaitu `SAPPER_TIMESTAMP`) dan kemudian melakukan modifikasi atas  `service-worker.js`:
 
 ```js
-const timestamp = process.env.SAPPER_TIMESTAMP; // вместо `import { timestamp }`
+const timestamp = process.env.SAPPER_TIMESTAMP; // tidak menggunakan `import { timestamp }`
 
 const ASSETS = `cache${timestamp}`;
 
@@ -46,13 +45,13 @@ export default {
 }
 ```
 
-Затем вы можете определить эту переменную при запуске, например:
+Lalu kamu dapat mengaturnya menggunakan variabel _environment_, sebagai contoh:
 
 ```bash
 SAPPER_TIMESTAMP=$(date +%s%3N) npm run build
 ```
 
-При развертовании на [Now][], вы можете передать эту переменную непосредственно в Now:
+Pada saat men-_deploy_ ke [Now][], kamu bisa menyampaikan (_pass_) variabel _environment_ ke dalam Now itu sendiri:
 
 ```bash
 now -e SAPPER_TIMESTAMP=$(date +%s%3N)
