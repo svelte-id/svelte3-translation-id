@@ -46,4 +46,4 @@ npm install
 npm run dev
 ```
 
-Ini akan membuat proyek baru di direktori `my-app`, menginstal dependensinya, dan memulai server di [localhost: 3000] (http: // localhost: 3000). Cobalah mengedit file untuk melihat betapa sederhananya semuanya - Anda bahkan mungkin tidak perlu membaca sisa panduan ini!
+Ini akan membuat proyek baru di direktori `my-app`, menginstal dependensinya, dan memulai server di [localhost: 3000](http://localhost:3000). Cobalah mengedit file untuk melihat betapa sederhananya semuanya - Anda bahkan mungkin tidak perlu membaca sisa panduan ini!
