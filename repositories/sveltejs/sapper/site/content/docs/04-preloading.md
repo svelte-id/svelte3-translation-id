@@ -2,7 +2,7 @@
 title: Preloading
 ---
 
-Seperti yang terlihat di bagian [routing] (docs # Routing), komponen halaman dapat memiliki fungsi `preload` opsional yang akan memuat beberapa data yang tergantung pada halaman tersebut. Ini mirip dengan `getInitialProps` di Next.js atau` asyncData` di Nuxt.js.
+Seperti yang terlihat pada bagian [rute](docs#Rute), komponen halaman dapat memiliki fungsi `preload` opsional yang akan memuat beberapa data yang dibutuhkan oleh halaman tersebut. Mirip seperti `getInitialProps` pada Next.js atau` asyncData` pada Nuxt.js.
 
 ```html
 <script context="module">
@@ -24,22 +24,26 @@ Seperti yang terlihat di bagian [routing] (docs # Routing), komponen halaman dap
 
 ```
 
-Ia hidup dalam skrip `context =" module "` - lihat [tutorial] (https://svelte.dev/tutorial/module-exports) - karena ini bukan bagian dari instance komponen itu sendiri; alih-alih, ini berjalan * sebelum * komponen dibuat, memungkinkan Anda menghindari berkedip saat data diambil.
+Ia hadir dalam skrip `context ="module"` - lihat [tutorial] (https://svelte.dev/tutorial/module-exports) - karena ini bukan bagian dari instans komponen itu sendiri; alih-alih, ini berjalan *sebelum* komponen tercipta, memungkinkan Anda menghindari kedipan (_flash_) saat data diambil.
 
 ### Argumen
 
-Fungsi `preload` menerima dua argumen -` halaman` dan `sesi`.
+Fungsi `preload` menerima dua argumen parameter -`page` dan `session`.
 
-`page` adalah` {host, path, params, query} `objek di mana` host` adalah host URL, `path` adalah pathname-nya,` params` berasal dari `path` dan nama file rute, dan` query `adalah objek nilai dalam string kueri.
+`page` adalah `{host, path, params, query}` objek di mana 
+- `host` adalah host URL;
+- `path` adalah nama _path_-nya;
+- `params` berasal dari `path` dan nama file rute, dan
+- `query`adalah suatu objek nilai dalam string kueri.
 
-Jadi jika contoh di atas adalah `src / route / blog / [slug] .svelte` dan URL-nya adalah` / blog / some-post? Foo = bar & baz`, yang berikut ini benar:
+Jadi jika contoh di atas adalah `src/route/blog/[slug].svelte` dan URL-nya adalah`/blog /some-post?Foo=bar&baz`, yang berikut ini benar:
 
-* `page.path === '/ blog / some-post'`
+* `page.path === '/blog/some-post'`
 * `page.params.slug === 'some-post'`
 * `page.query.foo === 'bar'`
 * `page.query.baz === true`
 
-`session` dihasilkan di server dengan opsi` session` yang diteruskan ke `sapper.middleware`. Sebagai contoh:
+`session` terbentuk pada server dengan opsi `session` yang diteruskan sampai kepada `sapper.middleware`. Sebagai contoh:
 
 ```js
 sapper.middleware({
@@ -50,15 +54,15 @@ sapper.middleware({
 ```
 
 
-### Nilai pengembalian
+### Nilai Pengembalian
 
-Jika Anda mengembalikan Janji dari `preload`, halaman akan menunda render hingga janji terselesaikan. Anda juga dapat mengembalikan objek polos. Dalam kedua kasus, nilai-nilai dalam objek akan diteruskan ke komponen sebagai alat peraga.
+Apabila `preload` kamu menghasilkan suatu _promise_ maka proses _render_ halaman akan mengalami _delay_ sampai _promise_ terselesaikan. Dimungkinkan juga `preload` menghasilkan objek polos (_plain_). Pada kedua kemungkinan tersebut nilai-nilai pada objek akan diteruskan sampai ke dalam komponen-komponen sebagai properti.
 
-Ketika Sapper merender halaman pada server, ia akan mencoba membuat serialisasi nilai yang diselesaikan (menggunakan [devaluasi] (https://github.com/Rich-Harris/devalue)) dan memasukkannya pada halaman, sehingga klien tidak 'Juga perlu memanggil `preload` saat inisialisasi. Serialisasi akan gagal jika nilainya mencakup fungsi atau kelas khusus (referensi siklus dan berulang baik-baik saja, seperti built-in seperti `Date`,` Map`, `Set` dan` RegExp`).
+Ketika Sapper me-_render_ suatu halaman pada server, Sapper akan mencoba melakukan serialisasi nilai yang telah terselesaikan (_resolved value_) menggunakan [devaluasi] (https://github.com/Rich-Harris/devalue) dan memasukkannya pada halaman, sehingga klien tidak perlu juga memanggil `preload` pada saat inisialisasi. Serialisasi akan gagal apabila nilai tersebut berupa fungsi atau kelas khusus. Sedangkan serialisasi untuk referensi siklis dan berulang akan baik-baik saja sebagaimana nilai bawaan (_built-in_) seperti `Date`,`Map`, `Set` dan `RegExp`).
 
 ### Konteks
 
-Di dalam `preload`, Anda memiliki akses ke tiga metode:
+Di dalam `preload`, kamu memiliki akses ke tiga metode:
 
 * `this.fetch (url, options)`
 * `this.error (statusCode, error)`
@@ -67,9 +71,9 @@ Di dalam `preload`, Anda memiliki akses ke tiga metode:
 
 #### this.fetch
 
-Di browser, Anda dapat menggunakan `fetch` untuk membuat permintaan AJAX, untuk mendapatkan data dari rute server Anda (antara lain). Di server ini sedikit rumit - Anda dapat membuat permintaan HTTP, tetapi Anda harus menentukan asal, dan Anda tidak memiliki akses ke cookie. Ini berarti bahwa tidak mungkin untuk meminta data berdasarkan sesi pengguna, seperti data yang mengharuskan Anda untuk masuk.
+Kamu dapat menggunakan `fetch` untuk membuat permintaan AJAX pada _browser_, antara lain untuk mendapatkan data dari rute server. Pada server hal ini agak sedikit rumit - kamu dapat membuat permintaan HTTP, tetapi kamu harus menentukan suatu asal (_origin_), dan kamu _khan_ tidak memiliki akses ke _cookie_ _ya_, jadi artinya tidak mungkin kamu meminta data berdasarkan sesi pengguna, sebagaimana halnya data-data yang mewajibkan kamu untuk _login_ terlebih dahulu.
 
-Untuk memperbaikinya, Sapper menyediakan `this.fetch`, yang berfungsi di server maupun di klien:
+Untuk memperbaikinya, Sapper menyediakan `this.fetch` yang berfungsi pada server maupun klien:
 
 ```html
 <script context="module">
@@ -83,12 +87,12 @@ Untuk memperbaikinya, Sapper menyediakan `this.fetch`, yang berfungsi di server 
 </script>
 ```
 
-Perhatikan bahwa Anda perlu menggunakan middleware sesi seperti [sesi ekspres] (https://github.com/expressjs/session) di `app / server.js` Anda untuk mempertahankan sesi pengguna atau melakukan apa pun yang melibatkan otentikasi.
+Perhatikan bahwa kamu perlu menggunakan _middleware_ sesi seperti [sesi express] (https://github.com/expressjs/session) pada `app/server.js` untuk mempertahankan sesi pengguna atau melakukan apa saja terkait otentikasi.
 
 
 #### this.error
 
-Jika pengguna menavigasi ke `/ blog / some-invalid-slug`, kami ingin membuat halaman 404 Tidak Ditemukan. Kita bisa melakukannya dengan `this.error`:
+Apabila pengguna melakukan navigasi ke `/blog/some-invalid-slug`, maka kita perlu me-_render_ suatu halaman *404 Tidak Ditemukan*. Kita dapat membuatnya dengan `this.error`:
 
 ```html
 <script context="module">
@@ -102,17 +106,17 @@ Jika pengguna menavigasi ke `/ blog / some-invalid-slug`, kami ingin membuat hal
 			return { article };
 		}
 
-		this.error(404, 'Not found');
+		this.error(404, 'Tidak ditemukan');
 	}
 </script>
 ```
 
-Hal yang sama berlaku untuk kode kesalahan lain yang mungkin Anda temui.
+Hal serupa berlaku untuk kode kesalahan lain yang mungkin kamu hadapi.
 
 
 #### this.redirect
 
-Anda dapat membatalkan render dan mengarahkan ke lokasi lain dengan `this.redirect`:
+Kamu dapat membatalkan proses _render_ dan mengarahkan ulang (_redirect_) ke lokasi lain dengan `this.redirect`:
 
 ```html
 <script context="module">

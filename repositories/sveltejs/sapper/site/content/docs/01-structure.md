@@ -2,9 +2,9 @@
 title: Struktur Aplikasi
 ---
 
-Ini hanya bagian untuk yang penasaran. Kami menyarankan Anda bermain dulu dengan templat proyek dan kembali ke sini ketika Anda memahami keterkaitan banyak hal.
+Bagian ini adalah acuan hanya untuk kamu yang penasaran. Kami menyarankan kamu mencoba-coba dulu templat projek dan nanti kembali lagi ke sini saat Anda sudah memahami bagaimana berbagai hal saling terkait.
 
-Jika Anda melihat ke dalam templat [sapper-template](https://github.com/sveltejs/sapper-template), Anda akan melihat beberapa file yang diharapkan Sapper ada di sana:
+Apabila kamu melihat ke dalam repositori templat [sapper-template](https://github.com/sveltejs/sapper-template), kamu akan melihat beberapa _file_ yang dicari oleh Sapper:
 
 ```bash
 ├ package.json
@@ -22,25 +22,25 @@ Jika Anda melihat ke dalam templat [sapper-template](https://github.com/sveltejs
 └ rollup.config.js / webpack.config.js
 ```
 
-Ketika Anda pertama kali memulai, Sapper akan membuat direktori tambahan `__sapper__` yang berisi file-file yang dihasilkan.
+Saat kamu pertama kali mulai meluncurkan Sapper, akan tercipta direktori tambahan `__sapper__` yang berisi file-file yang ter-_generate_.
 
-Anda akan melihat beberapa file tambahan dan direktori `cypress`, yang terkait dengan proses [pengujian] (docs#Testing) - tetapi saat ini kita tidak perlu fokus ke sini.
+Kamu akan melihat beberapa file tambahan dan direktori `cypress`, yang terkait dengan proses [pengujian](docs#Testing) - yang pada saat ini belum perlu kita kuatirkan.
 
-> Anda dapat * membuat * file-file ini dari awal, tetapi jauh lebih mudah untuk menggunakan templat yang sudah jadi. Lihat [Memulai] (docs # Nachalo_raboty) untuk instruksi tentang cara mudah menggunakan templat ke komputer Anda.
+> Kamu dapat *membuat* file-file ini dari awal (_scratch_), tetapi adalah jauh lebih baik menggunakan templat yang sudah ada. Lihat [Memulai] (docs # Nachalo_raboty) untuk instruksi tentang cara mudah menggunakan templat ke komputer Anda.
 
 ### package.json
 
-Package.json Anda berisi dependensi aplikasi Anda dan mendefinisikan sejumlah skrip::
+Package.json berisi dependensi aplikasi kamu dan terdefinisikan sejumlah skrip::
 
-* `npm run dev` — jalankan aplikasi dalam mode pengembangan dan pantau perubahan pada file sumber
+* `npm run dev` — menjalankan aplikasi dalam mode pengembangan dan pantau perubahan pada file sumber
 * `npm run build` — membangun aplikasi _production_
-* `npm run export` — buat versi statis aplikasi, jika memungkinkan (lihat [Ekspor](docs#Proses_Ekspor))
-* `npm start` — memulai aplikasi dalam mode produksi setelah Anda membangunnya
-* `npm test` — jalankan tes (lihat [Pengujian](docs#Pengujian_Testing))
+* `npm run export` — membuat versi statis aplikasi apabila memungkinkan (lihat [Ekspor](docs#Proses_Ekspor))
+* `npm start` — memulai aplikasi dalam mode produksi setelah kamu membangunnya
+* `npm test` — menjalankan tes (lihat [Pengujian](docs#Pengujian_Testing))
 
 ### src
 
-Ada tiga entry point aplikasi Anda — `src/client.js`, `src/server.js` dan (opsional) `src/service-worker.js` — serta file `src/template.html`.
+Ada tiga _entry point_ aplikasi Anda — `src/client.js`, `src/server.js` dan (opsional) `src/service-worker.js` — serta file `src/template.html`.
 
 
 #### src/client.js
@@ -70,11 +70,11 @@ Selebihnya, Anda dapat menulis server sesuka Anda.
 
 #### src/service-worker.js
 
-_Service-worker_ bertindak sebagai penolong (proxy) yang memberi Anda kontrol yang terperinci mengenai cara menanggapi permintaan jaringan. Misalnya, ketika browser meminta `/goats.jpg`, pekerja layanan dapat mengembalikan file yang sebelumnya telah di-cache, atau ia dapat mentransfer permintaan ke server, atau ia bahkan dapat merespons dengan sesuatu yang sama sekali berbeda, misalnya, gambar rusa.
+Pekerja layanan (_service-worker_) bertindak sebagai penolong (_proxy_) yang memberi kamu kendali yang terperinci mengenai cara menanggapi permintaan jaringan. Misalnya, ketika browser meminta `/goats.jpg`, pekerja layanan dapat mengembalikan file yang sebelumnya telah di-_cache_, atau mentransfer permintaan ke server, atau bahkan dapat merespons dengan sesuatu yang sama sekali berbeda, misalnya gambar rusa.
 
-Di antaranya, mereka memungkinkan Anda membuat aplikasi yang bekerja offline.
+Di antaranya, mereka memungkinkan Anda membuat aplikasi yang bekerja _offline_.
 
-Karena setiap aplikasi memerlukan perilaku khusus pekerja layanan (satu perlu memberikan segalanya dari cache, sementara yang lain membutuhkan cache hanya jika tidak ada koneksi), Sapper tidak membatasi perilaku pekerja layanan dengan cara apa pun. Anda sendiri yang menulis logikanya di `service-worker.js`. Anda dapat mengimpor objek berikut dari `@sapper/service-worker`:
+Karena setiap aplikasi memerlukan perilaku khusus pekerja layanan (yang satu perlu memberikan segalanya dari cache, sementara yang lain membutuhkan cache hanya jika tidak ada koneksi), Sapper tidak membatasi perilaku pekerja layanan dengan cara apa pun. Anda sendiri yang menulis logikanya di `service-worker.js`. Anda dapat mengimpor objek berikut dari `@sapper/service-worker`:
 
 * `files` - larik file yang ditemukan pada direktori` static`
 * `shell` - kode JavaScript untuk klien yang dihasilkan oleh kolektor (Rollup atau webpack)
@@ -95,12 +95,12 @@ File ini adalah templat untuk tanggapan dari server. Selama proses pembuatan, Sa
 
 ### src/routes
 
-Ini adalah dasar dari aplikasi Anda - halaman server dan rute. Anda akan belajar lebih banyak di bagian [Rute](docs#Rute).
+Inilah dasar dari aplikasi Anda - halaman server dan rute. Anda akan belajar lebih banyak di bagian [Rute](docs#Rute).
 
 
 ### static
 
-Ini adalah tempat untuk meletakkan file yang digunakan aplikasi Anda - font, gambar, dan sebagainya. Sebagai contoh, `static/favicon.png` akan tersedia sebagai `/favicon.png`.
+Inilah tempat untuk meletakkan file yang digunakan aplikasi Anda - font, gambar, dan sebagainya. Sebagai contoh, `static/favicon.png` akan tersedia sebagai `/favicon.png`.
 
 Sapper tidak akan menyajikan file-file ini. Biasanya Anda akan menggunakan [sirv](https://github.com/lukeed/sirv) atau [serve-static](https://github.com/expressjs/serve-static). Tetapi itu akan memindai isi folder `static` sehingga Anda dapat dengan mudah menghasilkan manifes cache untuk mendukung  luar jaringan (lihat [service-worker.js](docs#src_service-worker_js)).
 

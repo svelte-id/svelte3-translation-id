@@ -121,7 +121,8 @@ export async function get(req, res, next) {
 
 Ada tiga aturan sederhana untuk memberi nama file yang menentukan rute Anda:
 
-* File bernama `src/route/about.svelte` bersesuaian dengan rute `/about`. File yang disebut `src/route/blog/[slug].svelte` bersesuaian dengan rute `/blog/:slug`, dalam hal ini `params.slug` tersedia untuk `preload`;
+* File bernama `src/route/about.svelte` bersesuaian dengan rute `/about`;
+* File yang disebut `src/route/blog/[slug].svelte` bersesuaian dengan rute `/blog/:slug`, dalam hal ini `params.slug` tersedia untuk `preload`;
 * File `src/route/index.svelte` bersesuaian dengan _root_ aplikasi Anda. `src/route/about/index.svelte` diperlakukan sama dengan `src/route/about.svelte`;
 * File dan direktori dengan garis bawah utama *tidak* membuat rute. Ini memungkinkan Anda untuk menempatkan modul pembantu dan komponen dengan rute yang bergantung padanya - misalnya Anda dapat memiliki file yang bernama `src/route/_helpers/datetime.js` dan hal itu tak akan *membuat* rute `/_helpers/datetime`.
 
@@ -129,7 +130,7 @@ Ada tiga aturan sederhana untuk memberi nama file yang menentukan rute Anda:
 
 ### Halaman Kesalahan
 
-Tambahan lagi selain halaman reguler, ada halaman 'khusus' yang Sapper harapkan untuk ditemukan keberadaannya - `src/route/_error.svelte`. Ini akan ditampilkan ketika kesalahan terjadi saat merender halaman.
+Tambahan lagi selain halaman reguler, ada halaman 'khusus' yang dicari Sapper - `src/route/_error.svelte`. Halaman ini akan ditampilkan ketika kesalahan terjadi saat merender halaman.
 
 Objek `error` tersedia untuk templat bersama dengan kode `status` HTTP.
 
@@ -137,7 +138,7 @@ Objek `error` tersedia untuk templat bersama dengan kode `status` HTTP.
 
 ### Regex pada Rute
 
-Anda dapat menggunakan subset dari ekspresi reguler untuk memenuhi syarat parameter rute, dengan menempatkannya dalam tanda kurung setelah nama parameter.
+Kamu bisa menggunakan subset dari ekspresi reguler untuk memenuhi syarat parameter rute, dengan menempatkannya dalam tanda kurung setelah nama parameter.
 
 Sebagai contoh, `src/route/items/[id([0-9]+)].svelte` hanya akan _match_ (cocok) dengan ID numerik —`/items/123` akan cocok, tetapi `/items/xyz` tidak akan cocok.
 

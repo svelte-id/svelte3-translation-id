@@ -19,22 +19,22 @@ Membuat aplikasi yang sesuai dengan semua tren modern terbaik, seperti pemisahan
 
 Anda tidak perlu tahu Svelte untuk memahami sisa panduan ini, tetapi itu akan membantu. Singkatnya, ini adalah kerangka kerja UI yang mengkompilasi komponen Anda ke JavaScript vanilla yang sangat optimal. Baca [artikel blog pengantar](https://svelte.dev/blog/svelte-3-rethinking-reactivity) dan [tutorial](https://svelte.dev/tutorial), untuk mempelajari lebih lanjut tentangnya.
 
-### Dari mana nama itu berasal?
+### Asal Muasal Nama?
 
-Ada tentara di tentara yang terlibat dalam pembersihan ranjau - *sappers*. Tentara Amerika juga memiliki *penyadap*, tetapi bidang kegiatan mereka jauh lebih luas - selain izin ranjau, mereka juga membangun jembatan dalam kondisi pertempuran, memperbaiki jalan dan melakukan pembongkaran.
+Dalam perang, ada tentara yang membangun jembatan, memperbaiki jalan, membersihkan ranjau dan melakukan pembasmian - semua dalam kondisi peperangan dikenal dengan nama _sappers_.
 
-Untuk pengembang web, tarifnya biasanya lebih rendah daripada insinyur militer. Tetapi kita juga memiliki musuh yang harus kita lawan: perangkat yang kurang kuat, koneksi jaringan lambat, dan keseluruhan kompleksitas desain antarmuka. Sapper (kependekan dari <b> S </b> velte <b> aplikasi </b> mak <b> er </b>) adalah prajuritmu yang gagah berani.
+Bagi para pengembang web taruhannya tidak setinggi para insinyur dalam peperangan. Tetapi kita menghadapi lingkungan musuh yang harus dihadapi: perangkat yang kurang kuat kemampuan, koneksi jaringan yang lambat dan kompleksitas yang pasti ada di dalam rekayasa antarmuka. Sapper (yang merupakan kependekan dari <b>S</b>velte <b>application</b> mak<b>er</b>) adalah sobatmu yang patuh dan gagah berani.
 
 ### Perbandingan dengan Next.js
 
-[Next.js](https://github.com/zeit/next.js) — kerangka kerja untuk React oleh [Zeit](https://zeit.co) adalah sumber inspirasi bagi Sapper. Namun, ada beberapa perbedaan mencolok di antaranya:
+[Next.js](https://github.com/zeit/next.js) — adalah _framework React_ dari [Zeit](https://zeit.co) dan juga adalah sumber inspirasi bagi Sapper. Namun, ada beberapa perbedaan yang perlu diperhatikan yaitu:
 
-* Sapper bekerja pada Svelte, bukan pada React, jadi lebih cepat dan aplikasinya lebih kecil
-* Alih-alih _masking_ rute, kami menggunakan parameter rute dalam nama file (lihat bagian [Rute] (docs/routing) di bawah)
-* Rute server * dibuat dengan cara yang sama seperti rute * halaman * biasa dalam direktori `src/routes`. Misalnya, ini membuatnya sangat mudah untuk menambahkan entri poin untuk API JSON, sama seperti pada halaman ini (coba - [/ doc.json 022 (/ doc.json))
-* Tautan adalah elemen `<a>` biasa, bukan komponen khusus seperti `<Link>`. Ini berarti, misalnya, bahwa [tautan ini] (/) berfungsi baik dengan router, meskipun awalnya terletak di dokumen yang diimpor dengan markup markup.
+* Sapper ditenagai oleh Svelte, bukan React. Aplikasiknya lebih kecil dan lebih cepat;
+* Sapper tidak menggunakan _masking_ rute, melainkan menggunakan nama file parameter untuk meng-encode rute (lihat bagian [Rute] (docs/routing) di bawah) 
+* Rute server dibuat dengan cara yang sama seperti rute *halaman* biasa dalam direktori `src/routes`. Membuatnya sangat mudah untuk menambahkan entri poin untuk API JSON, sama seperti yang memperkuat halaman ini (coba kunjungi - [/docs.json](/docs.json))
+* Tautan-tautan yang ada hanyalah elemen `<a>` biasa bukan komponen khusus seperti `<Link>`. Ini berarti bahwa sebagai contoh [tautan ini](/) berfungsi dengan baik pada _router_ meskipun berada dalam _blob markdown_.
 
-### Ayo Mulai
+### Ayo Memulai
 
 Cara termudah untuk mulai membuat aplikasi Sapper adalah menyalin repositori templat ke komputer Anda [sapper-template](https://github.com/sveltejs/sapper-template) menggunakan utilitas [degit](https://github.com/Rich-Harris/degit):
 
@@ -46,4 +46,4 @@ npm install
 npm run dev
 ```
 
-Hal ini akan membentuk projek baru pada direktori `my-app`, menginstal dependensinya, dan memulai server di [localhost: 3000](http://localhost:3000). Cobalah mengedit file untuk melihat betapa sederhananya semuanya - Anda bahkan mungkin tidak perlu membaca sisa panduan ini!
+Hal ini akan membentuk kerangka projek baru pada direktori `my-app`, menginstal dependensinya, dan memulai server di [localhost: 3000](http://localhost:3000). Cobalah mengedit file untuk melihat betapa sederhananya semuanya - Anda bahkan mungkin tidak perlu membaca sisa panduan ini!

@@ -2,17 +2,16 @@
 title: API Klien
 ---
 
-Modul `@ sapper/app`, yang menghasilkan Sapper berdasarkan pada struktur aplikasi Anda, berisi fungsi untuk mengendalikan Sapper secara programatis dan menanggapi _event_ (peristiwa).
-
+Modul `@ sapper/app` di-_generate_ oleh Sapper berdasarkan bentuk aplikasi Anda. Modul tersebut berisi fungsi-fungsi untuk mengendalikan Sapper secara programatis dan menanggapi _events_ (peristiwa-peristiwa).
 
 
 ### start ({target})
 
-* `target` - elemen di mana halaman akan di-render
+* `target` - elemen yang akan di-_render_ pada halaman
 
-Mengkonfigurasi router dan meluncurkan aplikasi - menangkap klik pada elemen `<a>`, berinteraksi dengan API `history`, menampilkan dan memperbarui komponen Svelte.
+Hal ini akan mengkonfigurasi _router_ dan mulai meluncurkan aplikasi - mendengarkan adakah klik pada elemen `<a>`, berinteraksi dengan API `history`, me-_render_ dan memperbarui komponen Svelte.
 
-Mengembalikan objek `Promise`, yang dieksekusi ketika halaman yang dimuat telah selesai 'hidrasi'.
+Memberikan hasil kembali `Promise`, yang dieksekusi ketika halaman yang dimuat telah selesai 'hidrasi'.
 
 
 ```js
@@ -28,9 +27,12 @@ sapper.start({
 
 ### goto(href, options?)
 
-* `href` - halaman yang akan dituju* `options` - dapat menyertakan properti` replaceState`, yang menentukan apakah akan menggunakan `history.pushState` (default) atau` history.replaceState`. Tidak wajibSecara terprogram menavigasi ke `href` yang diberikan. Jika tujuannya adalah rute Sapper, Sapper akan menangani navigasi, jika tidak halaman akan dimuat ulang dengan `href` yang baru. Dengan kata lain, perilaku tersebut seolah-olah pengguna mengklik tautan dengan `href` ini.
+* `href` - halaman yang akan dituju
+* `options` - dapat menyertakan properti` replaceState`, yang menentukan apakah akan menggunakan `history.pushState` (secara default) atau menggunakan `history.replaceState`. Tidak wajib
 
-Mengembalikan `Promise` yang diselesaikan saat navigasi selesai. Ini dapat digunakan untuk melakukan tindakan setelah navigasi selesai, seperti memperbarui basis data, menyimpan, dll.
+Secara terprogram menavigasi ke `href` yang diberikan. Jika tujuannya adalah rute Sapper, Sapper akan mengelola navigasi namun jika tidak maka halaman akan dimuat ulang dengan `href` yang baru. Dengan kata lain, perilaku tersebut seperti seolah-olah pengguna mengklik tautan dengan `href` ini.
+
+Memberikan hasil kembali `Promise` yang terselesaikan pada saat navigasi telah selesai. Dapat dimanfaatkan untuk melakukan aksi setelah navigasi telah selesai misalnya memperbarui basis data, menyimpan, dll.
 
 ```js
 import { goto } from '@sapper/app';
@@ -47,18 +49,18 @@ const saveItem = () => {
 
 ### prefetch(href)
 
-* `href` - halaman untuk prefetch
+* `href` - halaman untuk dijemput (_prefetch_)
 
-Secara terprogram mengambil halaman sebelumnya, yang berarti 
-a) memastikan bahwa kode untuk halaman dimuat, dan 
-b) memanggil metode `preload` halaman dengan opsi yang sesuai. Ini adalah perilaku yang sama yang dipicu oleh Sapper ketika pengguna mengetuk atau menggerakkan mouse di atas elemen `<a>` dengan [rel=prefetch](docs#Prefetching).
+Secara terprogram menjemput (_prefetch_) halaman tertentu untuk tujuan: 
+a) memastikan bahwa kode untuk halaman telah dimuat dan 
+b) memanggil metode `preload` halaman dengan opsi-opsi yang bersesuaian. Ini adalah perilaku yang sama yang dipicu Sapper saat ketika pengguna mengetuk atau menggerakkan mouse di atas elemen `<a>` dengan [rel=prefetch](docs#Prefetching).
 
-Mengembalikan `Promise` yang diselesaikan saat _prefetch_ selesai.
+Memberikan hasil kembali `Promise` yang terselesaikan saat penjemputan selesai.
 
 ### prefetchRoutes(routes?)
 
-* `route` - array string opsional yang merepresntasikan rute yang akan di-_prefetch_.
+* `route` - array string opsional yang merepresentasikan rute yang akan dijemput.
 
-Secara programatis melakukan _prefetch_ (penjemputan) kode untuk rute yang belum diambil. Biasanya kamu dapat memanggilnya setelah metode `sapper.start()` tuntas, untuk mempercepat navigasi selanjutnya (inilah kepanjangan akronim 'L' pada [pola PRPL](https://developers.google.com/web/fundamentals/performance/prpl-pattern/)). Mengabaikan argumen akan mengakibatkan semua rute diambil, atau kamu bisa menujuk rute dengan menggunakan nama path yang _matching_ dengan misalnya `/about` (yang _match_ dengan `src/routes/about.svelte`) atau `/blog/*` (yang _match_ `src/routes/blog/[slug].svelte`). Namun tidak seperti `prefetch`, cara ini tidak akan memanggil `preload` untuk setiap halaman.
+Secara programatis melakukan _prefetch_ (penjemputan) kode untuk rute yang belum diambil. Biasanya kamu dapat memanggilnya setelah metode `sapper.start()` telah diselesaikan untuk mempercepat navigasi selanjutnya (inilah kepanjangan akronim 'L' pada [pola PRPL](https://developers.google.com/web/fundamentals/performance/prpl-pattern/)). Mengabaikan argumen akan mengakibatkan semua rute diambil. Kamu bisa menunjuk rute spesifik dengan menggunakan nama _path_ yang bersesuaian dengan misalnya `/about` (yang bersesuaian dengan `src/routes/about.svelte`) atau `/blog/*` (yang bersesuaian dengan `src/routes/blog/[slug].svelte`). Namun tidak seperti `prefetch`, cara ini tidak akan memanggil `preload` untuk setiap halaman.
 
-Mengembalikan `Promise` yang diselesaikan saat rute telah dijemput sebelumnya.
+Memberikan hasil `Promise` yang terselesaikan saat rute telah dijemput.
