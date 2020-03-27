@@ -12,7 +12,7 @@ Perubahan yang paling signifikan: Sapper sekarang dibangun di atas Svelte 3.
 
 #### Mengimpor Sapper
 
-Runtime aplikasi Anda sekarang dibuat untuk `src / node_modules / @ sapper` - ini memungkinkan Anda untuk mengimpornya dengan mudah dari mana saja dalam kode sumber Anda. Perbarui `server.js` Anda ...
+Runtime aplikasi Anda kini dibentuk menjadi `src/node_modules/@ sapper` - hal ini memungkinkan Anda untuk mengimpornya dengan mudah dari mana saja dalam kode sumber Anda. Perbarui `server.js` Anda ...
 
 ```diff
 // src/server.js
