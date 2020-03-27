@@ -4,9 +4,9 @@ title: Tata Letak
 
 Sejauh ini, kami telah memperlakukan halaman sebagai komponen yang sepenuhnya berdiri sendiri - setelah navigasi, komponen yang ada akan dihancurkan, dan yang baru akan menggantikannya.
 
-Tetapi di banyak aplikasi, ada elemen yang harus terlihat di * setiap * halaman, seperti navigasi tingkat atas atau catatan kaki. Alih-alih mengulanginya di setiap halaman, kita dapat menggunakan komponen * layout *.
+Tetapi di banyak aplikasi, ada elemen yang harus terlihat di *setiap* halaman, seperti navigasi tingkat atas atau catatan kaki. Alih-alih mengulanginya di setiap halaman, kita dapat menggunakan komponen *layout*.
 
-Untuk membuat komponen tata letak yang berlaku untuk setiap halaman, buat file bernama `src / routes / _layout.svelte`. Komponen tata letak default (yang digunakan Sapper jika Anda tidak membawa sendiri) terlihat seperti ini ...
+Untuk membuat komponen tata letak yang berlaku untuk setiap halaman, buat file bernama `src/routes/_layout.svelte`. Komponen tata letak default (yang digunakan Sapper jika Anda tidak membawa sendiri) terlihat seperti ini ...
 
 ```html
 <slot></slot>
@@ -25,7 +25,7 @@ Untuk membuat komponen tata letak yang berlaku untuk setiap halaman, buat file b
 <slot></slot>
 ```
 
-Jika kita membuat halaman untuk `/`, `/ tentang` dan` / pengaturan` ...
+Jika kita membuat halaman untuk `/`, `/about` dan `/settings` ...
 
 ```html
 <!-- src/routes/index.svelte -->
@@ -45,11 +45,11 @@ Jika kita membuat halaman untuk `/`, `/ tentang` dan` / pengaturan` ...
 ... nav akan selalu terlihat, dan mengklik di antara tiga halaman hanya akan menghasilkan `<h1>` diganti.
 
 
-### Rute bersarang
+### Rute Bersarang
 
-Misalkan kita tidak hanya memiliki satu halaman `/ settings`, tetapi sebaliknya memiliki halaman bersarang seperti` / settings / profil` dan `/ settings / notifications` dengan submenu bersama (untuk contoh kehidupan nyata, lihat [github. com / settings] (https://github.com/settings)).
+Misalkan kita tidak hanya memiliki satu halaman `/settings`, tetapi sebaliknya memiliki halaman bersarang seperti `/settings/profil` dan `/settings/notifications` dengan submenu bersama (untuk contoh kehidupan nyata, lihat [github. com / settings] (https://github.com/settings)).
 
-Kita dapat membuat tata letak yang hanya berlaku untuk halaman di bawah `/ settings` (sambil mewarisi tata letak root dengan nav tingkat atas):
+Kita dapat membuat tata letak yang hanya berlaku untuk halaman di bawah `/settings` (sambil mewarisi tata letak root dengan nav tingkat atas):
 
 ```html
 <!-- src/routes/settings/_layout.svelte -->

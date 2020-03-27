@@ -1,5 +1,5 @@
 ---
-title: API klien
+title: API Klien
 ---
 
 Modul `@ sapper/app`, yang menghasilkan Sapper berdasarkan pada struktur aplikasi Anda, berisi fungsi untuk mengendalikan Sapper secara programatis dan menanggapi _event_ (peristiwa).

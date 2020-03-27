@@ -18,7 +18,7 @@ Di dalam komponen, dapatkan referensi ke toko-toko seperti:
 * `session` berisi data apa pun yang diunggah di server. Ini adalah [penyimpanan yang dapat ditulis] (https://svelte.dev/tutorial/writable-stores), artinya Anda dapat memperbaruinya dengan data baru (misalnya, setelah pengguna masuk) dan aplikasi Anda akan di-refresh.
 
 
-### _Seeding_ Data sesi
+### _Seeding_ Data Sesi
 
 Di server, Anda dapat mengisi `session` dengan mengirimkan opsi ke` sapper.middleware`:
 

@@ -4,7 +4,7 @@ title: Keamanan
 
 Secara bawaan (_default_), Sapper tidak menambahkan _security header_ pada aplikasi Anda, tapi kamu bisa menambahkan sendiri menggunakan _middleware_ seperti [Helmet][].
 
-### _Content Security Policy_ (CSP)/ Kebijakan Keamanan Konten
+### Kebijakan Keamanan Konten/ _Content Security Policy_ (CSP)
 
 Sapper men-generate  `<script>` _inline_, yang bisa gagal tereksekusi apabila header [Content Security Policy (CSP)](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP)  tidak mengizinkan eksekusi sembarang _script_`	(`unsafe-inline`).
 

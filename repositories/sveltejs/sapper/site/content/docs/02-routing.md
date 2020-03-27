@@ -90,7 +90,7 @@ Jika Anda tidak ingin membuat beberapa folder untuk mengambil lebih dari satu pa
 > Lihat bagian pada [preloading](docs#Preloading) untuk info lebih lanjut tentang `preload` dan` this.fetch`
 
 
-### Rute server
+### Rute Server
 
 Rute server adalah modul yang ditulis dalam file `.js` yang mengekspor fungsi yang berkorespondensi dengan metode HTTP. Setiap fungsi menerima objek HTTP `request` dan` response` sebagai argumen, ditambah fungsi `next`. Ini berguna untuk membuat API JSON. Misalnya, berikut ini cara untuk membuat _end point_ (titik akhir) yang melayani halaman blog di atas:
 
@@ -117,7 +117,7 @@ export async function get(req, res, next) {
 > `delete` adalah satu kata yang dikhususkan dalam JavaScript. Untuk menangani permintaan DELETE, eksporlah sebuah fungsi yang disebut `del`.
 
 
-### Aturan penamaan file
+### Aturan Penamaan File
 
 Ada tiga aturan sederhana untuk memberi nama file yang menentukan rute Anda:
 
@@ -127,7 +127,7 @@ Ada tiga aturan sederhana untuk memberi nama file yang menentukan rute Anda:
 
 
 
-### Halaman kesalahan
+### Halaman Kesalahan
 
 Tambahan lagi selain halaman reguler, ada halaman 'khusus' yang Sapper harapkan untuk ditemukan keberadaannya - `src/route/_error.svelte`. Ini akan ditampilkan ketika kesalahan terjadi saat merender halaman.
 
@@ -135,7 +135,7 @@ Objek `error` tersedia untuk templat bersama dengan kode `status` HTTP.
 
 
 
-### Regexes dalam rute
+### Regex pada Rute
 
 Anda dapat menggunakan subset dari ekspresi reguler untuk memenuhi syarat parameter rute, dengan menempatkannya dalam tanda kurung setelah nama parameter.
 

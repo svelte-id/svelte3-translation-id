@@ -1,11 +1,11 @@
 ---
-title: Testing
+title: Pengujian (Testing)
 ---
 
 Kamu dapat menggunakan _framework_ pengujian dan pustaka yang kamu suka. Bawaan (_default_) pada [templat-sapper](https://github.com/sveltejs/sapper-template) adalah [Cypress](https://cypress.io).
 
 
-### Running the tests
+### Menjalankan Pengujian
 
 ```bash
 npm test

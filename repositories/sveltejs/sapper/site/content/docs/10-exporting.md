@@ -1,5 +1,5 @@
 ---
-title: Pengeksporan
+title: Proses Ekspor
 ---
 
 Banyak situs secara efektif * statis *, artinya mereka tidak benar-benar membutuhkan server Express yang mendukung mereka. Sebagai gantinya, mereka dapat di-host dan disajikan sebagai file statis, yang memungkinkan mereka untuk digunakan ke lebih banyak lingkungan hosting (seperti [Netlify] (https://www.netlify.com/) atau [Halaman GitHub] (https: // pages.github.com/)). Situs statis umumnya lebih murah untuk beroperasi dan memiliki karakteristik kinerja yang lebih baik.
@@ -54,7 +54,7 @@ Aturan dasarnya adalah ini: agar aplikasi dapat diekspor, dua pengguna mana pun 
 Perhatikan bahwa Anda masih dapat mengekspor aplikasi dengan rute dinamis, seperti contoh `src/route/blog/[slug].svelte` kami dari sebelumnya. `sapper export` akan mencegat permintaan `fetch` yang dibuat di dalam `preload`, sehingga data yang disajikan dari `src/route/blog/[slug].json.js` juga akan ter-_capture_.
 
 
-### Konflik rute
+### Konflik Rute
 
 Karena `sapper export` menulis ke sistem file, tidak mungkin memiliki dua rute server direktori dan file sekaligus dengan nama yang sama. Sebagai contoh, `src/route/foo/index.js` dan` src/route/foo/bar.js` akan mencoba membuat `export/foo` dan `export/foo/bar`, yang tidak mungkin.
 

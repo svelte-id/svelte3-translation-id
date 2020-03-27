@@ -13,7 +13,7 @@ title: Pendahuluan
 Sapper — adalah kerangka kerja pembuat aplikasi web yang sangat produktif. Kamu sedang melihatnya sekarang! Inilah dua prinsip utama kami:
 
 * Setiap halaman aplikasimu adalah sebuah komponen [Svelte](https://svelte.dev)
-* Kamu membuat halaman baru dengan menambahkan komponen ke direktori `src / route` proyek Anda. Komponen-komponen itu akan di-_render_ di server, sehingga waktu pemuatan aplikasi pengguna akan sangat cepat untuk selanjutnya kendali akan diambil alih oleh klien.
+* Kamu membuat halaman baru dengan menambahkan komponen ke direktori `src/route` proyek Anda. Komponen-komponen itu akan di-_render_ di server, sehingga waktu pemuatan aplikasi pengguna akan sangat cepat untuk selanjutnya kendali akan diambil alih oleh klien.
 
 Membuat aplikasi yang sesuai dengan semua tren modern terbaik, seperti pemisahan kode, dukungan untuk mode offline, hidrasi adalah tugas yang sangat sulit. Sapper melakukan semua hal membosankan ini untuk Anda sehingga Anda dapat berkonsentrasi hanya pada bagian kreatif.
 
@@ -23,7 +23,7 @@ Anda tidak perlu tahu Svelte untuk memahami sisa panduan ini, tetapi itu akan me
 
 Ada tentara di tentara yang terlibat dalam pembersihan ranjau - *sappers*. Tentara Amerika juga memiliki *penyadap*, tetapi bidang kegiatan mereka jauh lebih luas - selain izin ranjau, mereka juga membangun jembatan dalam kondisi pertempuran, memperbaiki jalan dan melakukan pembongkaran.
 
-Untuk pengembang web, tarifnya biasanya lebih rendah daripada insinyur militer. Tetapi kita juga memiliki musuh yang harus kita lawan: perangkat yang kurang kuat, koneksi jaringan lambat, dan keseluruhan kompleksitas desain antarmuka. Sapper (kependekan dari <b> S </b> velte <b> aplikasi </b> mak <b> er </b>) adalah prajuritmu yang pemberani dan ulung.
+Untuk pengembang web, tarifnya biasanya lebih rendah daripada insinyur militer. Tetapi kita juga memiliki musuh yang harus kita lawan: perangkat yang kurang kuat, koneksi jaringan lambat, dan keseluruhan kompleksitas desain antarmuka. Sapper (kependekan dari <b> S </b> velte <b> aplikasi </b> mak <b> er </b>) adalah prajuritmu yang gagah berani.
 
 ### Perbandingan dengan Next.js
 
@@ -46,4 +46,4 @@ npm install
 npm run dev
 ```
 
-Ini akan membuat proyek baru di direktori `my-app`, menginstal dependensinya, dan memulai server di [localhost: 3000](http://localhost:3000). Cobalah mengedit file untuk melihat betapa sederhananya semuanya - Anda bahkan mungkin tidak perlu membaca sisa panduan ini!
+Hal ini akan membentuk projek baru pada direktori `my-app`, menginstal dependensinya, dan memulai server di [localhost: 3000](http://localhost:3000). Cobalah mengedit file untuk melihat betapa sederhananya semuanya - Anda bahkan mungkin tidak perlu membaca sisa panduan ini!

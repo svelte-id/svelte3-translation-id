@@ -1,10 +1,10 @@
 ---
-title: rendering sisi server
+title: Rendering Sisi-Server
 ---
 
 Sapper, secara default, menjadikan sisi server terlebih dahulu (SSR), dan kemudian memasang kembali elemen dinamis apa pun pada klien. Svelte menyediakan [dukungan luar biasa untuk ini] (https://svelte.dev/docs#Server-side_component_API). Ini memiliki manfaat dalam kinerja dan pengindeksan mesin pencari, antara lain, tetapi hadir dengan kerumitannya sendiri.
 
-### Membuat komponen SSR kompatibel
+### Membuat Komponen SSR yang Kompatibel
 
 Sapper bekerja dengan baik dengan sebagian besar perpustakaan pihak ketiga yang mungkin Anda temui. Namun, kadang-kadang, pustaka pihak ketiga dibundel dengan cara yang memungkinkannya bekerja dengan beberapa pemuat modul yang berbeda. Terkadang, kode ini menciptakan ketergantungan pada `window`, seperti memeriksa keberadaan` window.global` mungkin dilakukan.
 
