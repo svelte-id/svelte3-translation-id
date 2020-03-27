@@ -1,17 +1,18 @@
 ---
-title: Миграция
+title: Migrasi
 ---
 
-Пока мы не дойдём до версии 1.0, в структуре проекта, которую ожидает увидеть Sapper, могут происходить различные изменения.
+
+Sampai kita mencapai versi 1.0, mungkin ada perubahan sesekali pada struktur proyek yang diharapkan Sapper.
 
 
-### 0.25 to 0.26
+### dari 0.25 ke 0.26
 
-Пока что, самое значительное изменение: Sapper теперь базируется на Svelte 3.
+Perubahan yang paling signifikan: Sapper sekarang dibangun di atas Svelte 3.
 
-#### Импортирование Sapper
+#### Mengimpor Sapper
 
-Рантайм приложения теперь собирается в папке `src/node_modules/@sapper` — это позволяет проще импортировать его в любом месте вашего кода. Обновите ваш `server.js`...
+Runtime aplikasi Anda sekarang dibuat untuk `src / node_modules / @ sapper` - ini memungkinkan Anda untuk mengimpornya dengan mudah dari mana saja dalam kode sumber Anda. Perbarui `server.js` Anda ...
 
 ```diff
 // src/server.js
@@ -19,7 +20,7 @@ title: Миграция
 +import * as sapper from '@sapper/server';
 ```
 
-...и client.js:
+...dan client.js:
 
 ```diff
 -import * as sapper from '../__sapper__/client.js';
@@ -30,12 +31,12 @@ sapper.start({
 });
 ```
 
-Это же касается и прочих импортов, например `goto` и `prefetchRoutes`.
+Hal yang sama berlaku untuk import seperti `goto` dan `prefetchRoutes`.
 
 
-#### Настройка Webpack
+#### Konfigurasi Webpack
 
-Если вы используете webpack, необходимо обновить добавить в его конфигурацию распознавание файлов `.mjs` и `.svelte`:
+Apabila kamu menggunakan webpack, kamu harus meng-update konfigurasi untuk mengenali file `.mjs` dan `.svelte`:
 
 ```js
 resolve: {
@@ -43,7 +44,7 @@ resolve: {
 }
 ```
 
-При использовании `.svelte` файлов (рекомендуется), нужно сообщить об этом загрузчику `svelte-loader`:
+Apabila kamu menggunakan file .svelte (_recommended_), kamu juga perlu memberitahu `svelte-loader` untuk mengenalinya:
 
 ```diff
 -test: /\.html$/
@@ -51,26 +52,26 @@ resolve: {
 ```
 
 
-#### Данные сессии
+#### Data Sesi
 
-Передача данных с сервера на клиент теперь выполняется с помощью функции `session`, которая передаётся в прослойку, обслуживающую сессии:
+Menyampaikan data dari server ke klien sekarang dilakukan dengan fungsi `session` yang diteruskan ke middleware::
 
 ```js
 // src/server.js
 sapper.middleware({
 	session: (req, res) => ({
-		// данные сессии размещаются здесь
+		// data sesi di sini
 	})
 })
 ```
 
-Эти данные доступны в функциях `preload` в качестве второго аргумента:
+Data ini tersedia dalam fungsi `preload` sebagai parameter kedua:
 
 ```html
 <!-- SomeComponent.svelte -->
 <script context="module">
 	export function preload(page, session) {
-		const { path, params, query } = page; // как и раньше
+		const { path, params, query } = page; // seperti sebelumnya
 
 		if (!session.user) return this.redirect(302, 'login');
 		// ...
@@ -79,9 +80,9 @@ sapper.middleware({
 ```
 
 
-#### Хранилища
+#### Penyimpanan (Stores)
 
-Сессия, а так же `page` и` preloading`, доступны внутри компонентов как хранилища:
+Tersedia juga bersama `page` dan `preloading` sebagai suatu penyimpanan (_store_) dalam komponen:
 
 ```html
 <script>
@@ -90,12 +91,12 @@ sapper.middleware({
 </script>
 ```
 
-`page` и `preloading` — это [хранилища только для чтения](https://ru.svelte.dev/tutorial/readable-stores), а `session` — [записываемое хранилище](https://ru.svelte.dev/tutorial/writable-stores). Запись в хранилище сессии(например при авторизации пользователя) заставит перезапуститься все функции `preload`, которые зависят от данных сессии; на сервере при этом ничего не будет сохранено.
+`page` dan `preloading` adalah [penyimpanan-readable](https://svelte.dev/tutorial/readable-stores), sedangkan `session` adalah [penyimpanan-writable](https://svelte.dev/tutorial/writable-stores). Menulis pada penyimpanan sesi (sebagai contoh, setelah user log in) akan menyebabkan semua fungsi `preload` yang bergantung pada data sesi untuk dijalankan ulang (_re-run_); tidak ada data sesi yang dipertahankan kepada server.
 
 
-#### Макеты
+#### Tata Letak
 
-Компоненты макета теперь должны использовать элемент `<slot>` для рендеринга вложенных маршрутов вместо `<svelte: component>`:
+Komponen tata letak Anda sekarang harus menggunakan elemen `<slot>` untuk membuat rute bersarang, bukannya `<svelte: komponen>`:
 
 ```diff
 <main>
@@ -104,12 +105,12 @@ sapper.middleware({
 </main>
 ```
 
-Сам компонент в макете теперь получает свойство `segment`, которое эквивалентно `child.segment` в более ранних версиях.
+Komponen tata letak itu sendiri menerima prop `segment`, yang setara dengan` child.segment` di versi sebelumnya.
 
 
-### с 0.21 на 0.22
+### 0.21 ke 0.22
 
-Вместо импорта прослойки из пакета `sapper` или импорта клиентской среды выполнения из `sapper/runtime.js`, приложение *встраивается* в сгенерированные файлы:
+Alih-alih mengimpor middleware dari paket `sapper`, atau mengimpor _runtime_ klien dari` sapper / runtime.js`, aplikasi ini *dikompilasi* menjadi file yang terbentuk:
 
 ```diff
 // src/client.js
@@ -155,26 +156,27 @@ polka() // You can also use Express
 +import { files, shell, routes, timestamp } from '../__sapper__/service-worker.js';
 ```
 
-Кроме того, директории для сборки и экспорта по умолчанию теперь `__sapper__/build` и `__sapper__/export` соответственно.
-
-### с 0.20 на 0.21
-
-* Директория `app` переименована в `src`
-* Папка `routes` перемещена в `src/routes`
-* Каталог `assets` переименован в `static` (не забудьте обновить `src/server.js` с учётом этого изменения)
-* Вместо трёх отдельных конфигурационных файлов (`webpack/client.config.js`, `webpack/server.config.js` и `webpack/service-worker.config.js`), теперь имеется единый файл `webpack.config.js`, который экспортирует конфигурации `client`, `server` и `serviceworker`.
+Selain itu, direktori bawaan _build_ dan ekspor masing-masing sekarang adalah `__sapper__/build` dan `__sapper__/export`.
 
 
-### с 0.17 на 0.18
+### 0.20 ke 0.21
 
-Файл `sapper/webpack/config.js` (который импортируется в файлах `webpack/*.config.js`) теперь `sapper/config/webpack.js`.
+* Direktori `app` sekarang adalah `src`
+* Direktori `routes` sekarang `src/routes`
+* Direktori `assets` sekarang `static` (ingat untuk memperbarui file `src/server.js` Anda untuk mencerminkan perubahan ini juga)
+* Alih-alih memiliki tiga file konfigurasi terpisah (`webpack/client.config.js`,` webpack/server.config.js` dan `webpack/ service-worker.config.js`), cukup ada satu file `webpack.config.js` yang mengekspor konfigurasi `client`,`server` dan `serviceworker`.
 
 
-### с 0.14 на 0.15
+### 0.17 ke 0.18
 
-Этот выпуск изменил способ обработки маршрутов, что привело к ряду изменений.
+File `sapper/webpack/config.js` (diperlukan dalam file `webpack/*.Config.js`) sekarang menjadi `sapper/config/webpack.js`.
 
-Вместо единственного компонента `App.html`, теперь вы можете поместить компоненты `_layout.html` в любой каталог в директории `routes`. Вы должны переместить файл `app/App.html` в `routes/_layout.html` и изменить его следующим образом:
+
+### 0.14 ke 0.15
+
+Rilis ini mengubah cara penanganan rute, menghasilkan sejumlah perubahan.
+
+Alih-alih komponen `App.html` tunggal, Anda dapat menempatkan komponen` _layout.html` di direktori mana pun di bawah `routes`. Anda harus memindahkan `app/App.html` ke `routes/_layout.html` dan memodifikasinya seperti berikut ini:
 
 ```diff
 -<!-- app/App.html -->
@@ -187,7 +189,7 @@ polka() // You can also use Express
 +<svelte:component this={child.component} {...child.props}/>
 ```
 
-Затем вам нужно будет удалить `App` из точек входа вашего клиента и сервера и заменить `route` на `manifest`:
+selanjutnya kamu perlu menghapus `App` dari titik masuk (_entry point_) klien dan server Anda, dan mengganti `routes` dengan `manifes`::
 
 ```diff
 // app/client.js
@@ -226,30 +228,30 @@ polka()
 		console.log('error', err);
 	});
 ```
-
-`preload` функции больше не принимают весь объект запроса на сервере; вместо этого они получают такой же аргумент, что и на клиенте.
-
-
-
-### с 0.13 на 0.14
-
-Файлы страниц ошибок `4xx.html` и `5xx.html` заменены единым файлом `_error.html`. В дополнение к обычным свойствам `params`, `query` и `path`, также передаются `status` и `error`.
+fungsi `preload` tidak lagi mengambil seluruh objek permintaan pada server; sebaliknya, mereka menerima parameter yang sama seperti halnya pada klien.
 
 
 
-### с 0.11 на 0.12
+### 0.13 ke 0.14
 
-В более ранних версиях каждая страница была полностью независимым компонентом. При навигации вся страница отрисовывалась с нуля. Обычно, каждая страница могла импортировать общий компонент `<Layout>` для достижения визуального постоянства на разных страницах.
+Halaman kesalahan `4xx.html` dan` 5xx.html` telah diganti dengan satu halaman, `_error.html`. Selain propors `params`,` query` dan `path` biasa, halaman ini menerima` status` dan `error`.
 
-Начиная с версии 0.12 это изменилось: теперь у нас есть единый компонент `<App>`, определённый в `app/App.html`, который управляет рендерингом остальной части приложения. См. [sapper-template](https://github.com/sveltejs/sapper-template/blob/master/app/App.html) для примера.
 
-Этот компонент ренедрится со следующими значениями:
 
-* `Page` — конструктор компонента для текущей страницы
-* `props` — объект, содержащий `params`, `query` и любые иные данные, возвращённые из функции `preload`
-* `preloading` — `true` пока выполняется предзагрузка, и `false` по её окончании. Полезно для отображения прелоадеров или прогресс-баров
 
-Необходимо сообщить Sapper о компоненте `<App>`. Для этого вам нужно будет изменить `app/server.js` и `app/client.js`:
+### 0.11 ke 0.12
+
+Dalam versi sebelumnya, setiap halaman adalah komponen yang sepenuhnya mandiri. Pada saat navigasi, seluruh halaman akan di-reset dan dibuat yang baru. Biasanya, setiap halaman akan mengimpor komponen `<Layout>` bersama untuk mencapai konsistensi visual.
+
+Pada 0.12, perubahan ini: kita punya satu komponen `<App>` tunggal, yang didefinisikan dalam `app/App.html`, yang mengendalikan rendering dari sisa aplikasi. Lihat [templat-sapper] (https://github.com/sveltejs/sapper-template/blob/master/app/App.html) untuk contoh.
+
+Komponen ini dirender dengan nilai-nilai berikut:
+
+* `Page` - konstruktor komponen untuk halaman saat ini
+* `props` - objek dengan `params`, `query`, dan data apa pun yang dikembalikan dari fungsi `preload` halaman
+* `preloading` - `true` saat preload, `false` sebaliknya. Berguna untuk menunjukkan indikator kemajuan
+
+Sapper perlu tahu tentang komponen aplikasi Anda. Untuk itu, Anda perlu memodifikasi `app/server.js` dan `app/client.js` Anda:
 
 ```diff
 // app/server.js
@@ -282,83 +284,84 @@ import { routes } from './manifest/client.js';
 +});
 ```
 
-После того как вы создали `App.html` и обновили серверное и клиентское приложения, можете удалить компоненты `<Layout>` с всех ваших страниц.
+Setelah `App.html` Anda dibuat dan aplikasi server dan klien Anda diperbarui, Anda dapat menghapus komponen `<Layout> `dari setiap halaman Anda.
 
 
-### с <0.9 на 0.10
+### <0.9 ke 0.10
 
-#### app/template.html
+##### app / template.html
 
-* Элемент `<head>` должен содержать `%sapper.base%` (см. [Базовые URL](docs#Bazovye_URL))
-* Удалите ссылку на сервис-воркер; теперь она включена в`%sapper.scripts%`
+* Elemen `<head>` Anda harus mengandung `%sapper.base%` (lihat ([Basis URL](docs#Basis_URL))
+* Hapus referensi ke _service worker_ Anda; sekarang ditangani oleh `%sapper.scripts%`
 
-#### Страницы
+##### Halaman
 
-* Функции `preload` теперь должны использовать `this.fetch` вместо `fetch`. Функция `this.fetch` позволяет вам делать идентифицированные запросы на сервере и это означает, что вам больше не нужно создавать объект `global.fetch` в `app/server.js`.
-
-
-
-### с 0.6 на 0.7
-
-С полными примерами вы можетте ознакомиться в официальном шаблоне [sapper-template](https://github.com/sveltejs/sapper-template).
+* Fungsi `preload` Anda sekarang harus menggunakan `this.fetch` bukannya `fetch`. `this.fetch` memungkinkan Anda membuat permintaan kredensial di server, dan berarti Anda tidak perlu lagi membuat objek `global.fetch` di `app/server.js`.
 
 
-#### package.json
 
-Для запуска dev-сервера, теперь нужно использовать команду `sapper dev` вместо `node server.js`. Скорее всего нужно будет обновить скрипт `npm run dev` в вашем package.json.
+### 0.6 ke 0.7
 
-#### Точки входа
+Lihat [sapper-template](https://github.com/sveltejs/sapper-template) untuk contoh lengkap dari semua poin di bawah ini.
 
-Начиная с версии 0.7, Sapper ожидает найти ваши точки входа — для клиента, сервера и сервис-воркера — в папке `app`. Вместо использования `__variables__`, каждая точка входа импортируется из соответствующего файла в папке `app/manifests`. Они автоматически генерируются Sapper.
+
+##### package.json
+
+Untuk memulai server dev, gunakan `sapper dev` bukannya `node server.js`. Kemungkinan besar, `package.json` Anda memiliki skrip `npm run dev` yang perlu diperbarui.
+
+##### Entry points
+
+Pada versi 0.7, Sapper akan mencari titik masuk Anda - untuk klien, server dan service worker - dalam folder `app`. Alih-alih menggunakan `__variables__` yang di-inject secara ajaib, setiap titik masuk akan mengimpor dari file yang bersesuaian pada folder `app/manifests`. Semua ini dihasilkan oleh Sapper secara otomatis.
 
 ```js
-// app/client.js (было templates/main.js)
+// app/client.js (formerly templates/main.js)
 import { init } from 'sapper/runtime.js';
 import { routes } from './manifest/client.js';
 
 init(document.querySelector('#sapper'), routes);
 
-if (module.hot) module.hot.accept(); // включение горячей замены модулей
+if (module.hot) module.hot.accept(); // aktifkan hot reloading
 ```
 
 ```js
-// app/server.js (было server.js)
-// Обратите внимание, что теперь мы используем синтаксис ES модулей,
-// поскольку этот файл обрабатывается webpack, как и остальное приложение.
+// app/server.js (dahulu server.js)
+// Perhatikan bawah sekarang kita menggunakan sintaks modul ES,
+// karena file ini diproses oleh webpack sebagaimana halnya 
+// seperti seluruh sisa aplikasi ini selanjutnya
 import sapper from 'sapper';
 import { routes } from './manifest/server.js';
-// ..остальные импорты
+// ... import-import lainnya
 
-// теперь передаём объект `routes` в Sapper
+// kita dapat menyampaikan objek `routes` kepada middleware Sapper
 app.use(sapper({
 	routes
 }));
 ```
 
 ```js
-// app/service-worker.js (было templates/service-worker.js)
+// app/service-worker.js (dahulu templates/service-worker.js)
 import { assets, shell, timestamp, routes } from './manifest/service-worker.js';
 
-// не забудьте заменить, к примеру,  `__assets__` на `assets` в остальной части файла
+// misalnya menggantikan `__assets__` dengan `assets` di file
 ```
 
 
-#### Шаблоны и страницы ошибок
+##### Template dan halaman kesalahan
 
-В предыдущих версиях у нас были файлы `templates/2xx.html`, `templates/4xx.html` и `templates/5xx.html`. Теперь у нас есть только один файл, `app/template.html`, который должен выглядеть как ваш старый `templates/2xx.html`.
+Dalam versi sebelumnya, kami memiliki `templates/2xx.html`,` templates/4xx.html` dan `templates/5xx.html`. Sekarang, kita memiliki satu templat, `app/templat.html`, yang akan terlihat seperti` templat/2xx.html` lama Anda.
 
-Для отображения ошибок, у нас есть 'особый' маршрут: `routes/_error.html`.
+Untuk menangani status kesalahan, kami memiliki rute 'khusus': `route/_error.html`.
 
-Эта страница точно такая же, как и любая другая, за исключением того, что она будет отображаться всякий раз, когда будет обнаружена какая-либо ошибка. Компонент имеет доступ к объектам `status` и `error`.
+Halaman ini sama seperti halaman lainnya, kecuali halaman ini akan ditampilkan setiap kali status kesalahan tercapai. Komponen memiliki akses ke nilai `status` dan `error`.
 
-Кстати, теперь `this.error(statusCode, error)` можно использовать в функциях `preload`.
+Perhatikan bahwa Anda sekarang dapat menggunakan `this.error (statusCode, error)` di dalam fungsi `preload` Anda.
 
 
-#### Конфигурация Webpack
+##### Konfigurasi Webpack
 
-Конфигурационные файлы Webpack теперь находятся в каталоге `webpack`:
+Konfigurasi webpack Anda sekarang _live_ pada direktori `webpack`:
 
-* `webpack.client.config.js` теперь `webpack/client.config.js`
-* `webpack.server.config.js` теперь `webpack/server.config.js`
+* `webpack.client.config.js` sekarang menjadi `webpack/client.config.js`
+* `webpack.server.config.js` sekarang menjadi `webpack/server.config.js`
 
-Если в проекте есть сервис-воркер, то должен быть файл `webpack/service-worker.config.js`. См. пример на [sapper-template](https://github.com/sveltejs/sapper-template).
+Jika Anda memiliki _service-worker_, Anda juga harus memiliki file `webpack/service-worker.config.js`. Lihat [templat-sapper] (https://github.com/sveltejs/sapper-template) untuk contoh.
