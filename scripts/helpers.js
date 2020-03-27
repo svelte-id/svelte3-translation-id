@@ -2,7 +2,7 @@ const sh = require('shelljs');
 
 const check_dependency = (binary) => {
     if (!sh.which(binary)) {
-        error(`Sorry, this script requires ${binary}`);
+        error(`Maaf, script ini memerlukan ${binary}`);
     }
 }
 
@@ -17,7 +17,7 @@ const get_task = () => {
     const name = process.argv[2];
 
     if(name === undefined) {
-        error('task is not provided!');
+        error('tugas tak tersedia!');
     }
 
     const task = require('./tasks');
@@ -28,14 +28,14 @@ const get_task = () => {
         }
     }
 
-    error(`Unknown task ${name}`);
+    error(`Tugas tidak diketahui ${name}`);
 }
 
 const get_target = () => {
     const name = process.argv[3];
 
     if(name === undefined) {
-        error('target name is not provided!');
+        error('nama target tidak disediakan!');
     }
 
     const targets = require('./targets');
@@ -45,7 +45,7 @@ const get_target = () => {
     });
 
     if(result === undefined) {
-        error(`Unknown target ${name}`);
+        error(`Target tidak diketahui ${name}`);
     }
     
     return result;
