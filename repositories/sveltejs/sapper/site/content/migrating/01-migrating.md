@@ -54,7 +54,7 @@ Apabila kamu menggunakan file .svelte (_recommended_), kamu juga perlu memberita
 
 #### Data Sesi
 
-Menyampaikan data dari server ke klien sekarang dilakukan dengan fungsi `session` yang diteruskan ke middleware::
+Menyampaikan data dari _server_ ke klien kini dilakukan dengan fungsi `session` yang diteruskan ke _middleware_:
 
 ```js
 // src/server.js
@@ -110,7 +110,7 @@ Komponen tata letak itu sendiri menerima prop `segment`, yang setara dengan` chi
 
 ### 0.21 ke 0.22
 
-Alih-alih mengimpor middleware dari paket `sapper`, atau mengimpor _runtime_ klien dari` sapper / runtime.js`, aplikasi ini *dikompilasi* menjadi file yang terbentuk:
+Alih-alih mengimpor middleware dari paket `sapper`, atau mengimpor _runtime_ klien dari` sapper / runtime.js`, aplikasi ini *dikompilasi* menghasilkan file:
 
 ```diff
 // src/client.js
@@ -189,7 +189,7 @@ Alih-alih komponen `App.html` tunggal, Anda dapat menempatkan komponen` _layout.
 +<svelte:component this={child.component} {...child.props}/>
 ```
 
-selanjutnya kamu perlu menghapus `App` dari titik masuk (_entry point_) klien dan server Anda, dan mengganti `routes` dengan `manifes`::
+selanjutnya kamu perlu menghapus `App` dari titik masuk (_entry point_) klien dan server Anda, dan mengganti `routes` dengan `manifes`:
 
 ```diff
 // app/client.js
