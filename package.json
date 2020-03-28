@@ -37,7 +37,5 @@
     "node-watch": "^0.6.1",
     "shelljs": "^0.8.3"
   },
-  "dependencies": {
-    "svelte": "^3.20.1"
-  }
+  "dependencies": {}
 }
