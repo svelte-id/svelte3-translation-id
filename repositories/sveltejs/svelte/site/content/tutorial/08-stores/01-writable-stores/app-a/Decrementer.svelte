@@ -2,7 +2,7 @@
 	import { count } from './stores.js';
 
 	function decrement() {
-		// реализация уменьшения count
+		// TODO decrement the count
 	}
 </script>
 

@@ -1,13 +1,13 @@
 ---
-title: Синтаксис шаблонов
+title: Template syntax
 ---
 
 
-### Теги
+### Tags
 
 ---
 
-Тег в нижнем регистре, например `<div>` — это обычный HTML элемент. Тег, написанный с большой буквы, такой как `<Widget>` или `<Namespace.Widget>`, обозначает *компонент*.
+A lowercase tag, like `<div>`, denotes a regular HTML element. A capitalised tag, such as `<Widget>` or `<Namespace.Widget>`, indicates a *component*.
 
 ```html
 <script>
@@ -20,22 +20,21 @@ title: Синтаксис шаблонов
 ```
 
 
-### Атрибуты и свойства
+### Attributes and props
 
 ---
 
-
-По умолчанию атрибуты работают точно так же, как их HTML-аналоги.
+By default, attributes work exactly like their HTML counterparts.
 
 ```html
 <div class="foo">
-	<button disabled>ненажимаемая кнопка</button>
+	<button disabled>can't touch this</button>
 </div>
 ```
 
 ---
 
-Как и в HTML, значения могут быть указаны без кавычек.
+As in HTML, values may be unquoted.
 
 ```html
 <input type=checkbox>
@@ -43,15 +42,15 @@ title: Синтаксис шаблонов
 
 ---
 
-Значения атрибута могут содержать выражения JavaScript.
+Attribute values can contain JavaScript expressions.
 
 ```html
-<a href="page/{p}">страница {p}</a>
+<a href="page/{p}">page {p}</a>
 ```
 
 ---
 
-Или они *целиком* могут быть выражениями JavaScript.
+Or they can *be* JavaScript expressions.
 
 ```html
 <button disabled={!clickable}>...</button>
@@ -59,7 +58,18 @@ title: Синтаксис шаблонов
 
 ---
 
-Выражение может содержать символы, которые могут вызвать проблемы при подсветке синтаксиса в обычном HTML, поэтому допускается использование значения в кавычках. Кавычки не влияют на то, как анализируется значение:
+Boolean attributes are included on the element if their value is [truthy](https://developer.mozilla.org/en-US/docs/Glossary/Truthy) and excluded if it's [falsy](https://developer.mozilla.org/en-US/docs/Glossary/Falsy).
+
+All other attributes are included unless their value is [nullish](https://developer.mozilla.org/en-US/docs/Glossary/Nullish) (`null` or `undefined`).
+
+```html
+<input required={false} placeholder="This input field is not required">
+<div title={null}>This div has no title attribute</div>
+```
+
+---
+
+An expression might include characters that would cause syntax highlighting to fail in regular HTML, so quoting the value is permitted. The quotes do not affect how the value is parsed:
 
 ```html
 <button disabled="{number !== 42}">...</button>
@@ -67,19 +77,19 @@ title: Синтаксис шаблонов
 
 ---
 
-Когда имя и значение атрибута совпадают (`name = {name}`) — их можно заменить на `{name}`.
+When the attribute name and value match (`name={name}`), they can be replaced with `{name}`.
 
 ```html
-<!-- Эти строки эквивалентны -->
+<!-- These are equivalent -->
 <button disabled={disabled}>...</button>
 <button {disabled}>...</button>
 ```
 
 ---
 
-Значения, передаваемые в компоненты, называются *свойствами* или *пропсами*, но не *атрибутами*, поскольку они не относятся к DOM.
+By convention, values passed to components are referred to as *properties* or *props* rather than *attributes*, which are a feature of the DOM.
 
-Как и в DOM-элементах, `name={name}` можно заменить сокращением `{name}`.
+As with elements, `name={name}` can be replaced with the `{name}` shorthand.
 
 ```html
 <Widget foo={bar} answer={42} text="hello"/>
@@ -87,89 +97,102 @@ title: Синтаксис шаблонов
 
 ---
 
-*Развёртка атрибутов* позволяет передать компоненту сразу несколько атрибутов или свойств.
+*Spread attributes* allow many attributes or properties to be passed to an element or component at once.
 
-Элемент или компонент может иметь сразу несколько таких развёрток вперемешку с обычными атрибутами.
+An element or component can have multiple spread attributes, interspersed with regular ones.
 
 ```html
 <Widget {...things}/>
 ```
+
 ---
 
-Объект *`$$props`* содержит в себе все свойства передаваемые компоненту, включая и те, которые не объявлены с помощью оператора `export`. В редких случаях использование этого объекта может быть полезным, но в целом не рекомендуется его использовать, поскольку это вызовет определённые трудности у Svelte при оптимизации приложения.
+*`$$props`* references all props that are passed to a component – including ones that are not declared with `export`. It is useful in rare cases, but not generally recommended, as it is difficult for Svelte to optimise.
 
 ```html
 <Widget {...$$props}/>
 ```
 
-### Текстовые выражения
+---
 
-```sv
-{выражение}
+*`$$restProps`* contains only the props which are *not* declared with `export`. It can be used to pass down other unknown attributes to an element in a component.
+
+```html
+<input {...$$restProps}>
 ```
 
 ---
 
-Текст также может содержать JavaScript-выражения:
+### Text expressions
+
+```sv
+{expression}
+```
+
+---
+
+Text can also contain JavaScript expressions:
 
 ```html
-<h1>Привет, {name}!</h1>
+<h1>Hello {name}!</h1>
 <p>{a} + {b} = {a + b}.</p>
 ```
 
-### Комментарии
+
+### Comments
 
 ---
 
-Вы можете использовать внутри компонентов обычные HTML-комментарии.
+You can use HTML comments inside components.
 
 ```html
-<!-- это комментарий! -->
-<h1>Привет мир</h1>
+<!-- this is a comment! -->
+<h1>Hello world</h1>
 ```
 
 ---
 
-Комментарии, которые начинаются со `svelte-ignore`, отключают определённые предупреждения для следующего за ним блока разметки. Обычно это используется для предупреждениё о доступности — убедитесь, что вы отключаете их по уважительной причине.
+Comments beginning with `svelte-ignore` disable warnings for the next block of markup. Usually these are accessibility warnings; make sure that you're disabling them for a good reason.
 
 ```html
 <!-- svelte-ignore a11y-autofocus -->
 <input bind:value={name} autofocus>
 ```
 
+
 ### {#if ...}
 
 ```sv
-{#if выражение}...{/if}
+{#if expression}...{/if}
 ```
 ```sv
-{#if выражение}...{:else if выражение}...{/if}
+{#if expression}...{:else if expression}...{/if}
 ```
 ```sv
-{#if выражение}...{:else}...{/if}
+{#if expression}...{:else}...{/if}
 ```
 
 ---
 
-Для отображения содержимого при выполнении какого-либо условия, нужно добавить его в блок `if`.
+Content that is conditionally rendered can be wrapped in an if block.
 
 ```html
 {#if answer === 42}
-	<p>а какой был вопрос?</p>
+	<p>what was the question?</p>
 {/if}
 ```
 
 ---
 
-Дополнительные условия могут быть добавлены с помощью `{:else if выражение}`, а блок альтернативной разметки помещен после `{:else}`.
+Additional conditions can be added with `{:else if expression}`, optionally ending in an `{:else}` clause.
 
 ```html
-{#if porridge.temperature > 35}
-	<p>слишком горячая!</p>
-{:else if 25 > porridge.temperature}
-	<p>слишком холодная!</p>
+{#if porridge.temperature > 100}
+	<p>too hot!</p>
+{:else if 80 > porridge.temperature}
+	<p>too cold!</p>
 {:else}
-	<p>то, что надо!</p>
+	<p>just right!</p>
 {/if}
 ```
 
@@ -177,24 +200,24 @@ title: Синтаксис шаблонов
 ### {#each ...}
 
 ```sv
-{#each выражение as имя}...{/each}
+{#each expression as name}...{/each}
 ```
 ```sv
-{#each выражение as имя, индекс}...{/each}
+{#each expression as name, index}...{/each}
 ```
 ```sv
-{#each выражение as имя, индекс (ключ)}...{/each}
+{#each expression as name, index (key)}...{/each}
 ```
 ```sv
-{#each выражение as имя}...{:else}...{/each}
+{#each expression as name}...{:else}...{/each}
 ```
 
 ---
 
-Перебор списков значений может быть выполнен блоком `each`.
+Iterating over lists of values can be done with an each block.
 
 ```html
-<h1>Список покупок</h1>
+<h1>Shopping list</h1>
 <ul>
 	{#each items as item}
 		<li>{item.name} x {item.qty}</li>
@@ -202,11 +225,11 @@ title: Синтаксис шаблонов
 </ul>
 ```
 
-Можно выполнять перебор по массиву или массивоподобному значению, т.е. по любому объекту, у которого есть свойство `length`.
+You can use each blocks to iterate over any array or array-like value — that is, any object with a `length` property.
 
 ---
 
-Блок `each` также может отдавать *индекс* элемента, аналогично второму аргументу callback-функции в `array.map(...)`:
+An each block can also specify an *index*, equivalent to the second argument in an `array.map(...)` callback:
 
 ```html
 {#each items as item, i}
@@ -216,7 +239,7 @@ title: Синтаксис шаблонов
 
 ---
 
-Если указать параметр *ключ*, который однозначно идентифицирует каждый элемент списка, то при изменении данных Svelte будет использовать его для изменения списка в нужном месте, а не просто удалять и добавлять элементы в конец массива. Ключом может быть любой объект, но рекомендуется использовать строки и числа, поскольку они позволяют сохранять уникальность при изменении самих объектов.
+If a *key* expression is provided — which must uniquely identify each list item — Svelte will use it to diff the list when data changes, rather than adding or removing items at the end. The key can be any object, but strings and numbers are recommended since they allow identity to persist when the objects themselves change.
 
 ```html
 {#each items as item, i (item.id)}
@@ -226,7 +249,7 @@ title: Синтаксис шаблонов
 
 ---
 
-При желании в блоках `each` можно использовать деструктуризацию и развёртку:
+You can freely use destructuring and rest patterns in each blocks.
 
 ```html
 {#each items as { id, name, qty }, i (id)}
@@ -244,13 +267,13 @@ title: Синтаксис шаблонов
 
 ---
 
-Блок `each` тоже может иметь блок `{:else}`, который будет отрисовываться, если переданный список окажется пустым.
+An each block can also have an `{:else}` clause, which is rendered if the list is empty.
 
 ```html
 {#each todos as todo}
 	<p>{todo.text}</p>
 {:else}
-	<p>Нет задач!</p>
+	<p>No tasks today!</p>
 {/each}
 ```
 
@@ -258,72 +281,70 @@ title: Синтаксис шаблонов
 ### {#await ...}
 
 ```sv
-{#await выражение}...{:then имя}...{:catch имя}...{/await}
+{#await expression}...{:then name}...{:catch name}...{/await}
 ```
 ```sv
-{#await выражение}...{:then имя}...{/await}
+{#await expression}...{:then name}...{/await}
 ```
 ```sv
-{#await выражение then имя}...{/await}
+{#await expression then name}...{/await}
 ```
 
 ---
 
-Блоки `await` позволяют обрабатывать три возможных состояния промисов  — ожидание, выполнение или отклонение.
+Await blocks allow you to branch on the three possible states of a Promise — pending, fulfilled or rejected.
+
 ```html
 {#await promise}
-	<!-- промис в состоянии ожидания -->
-	<p>Ждём пока промис выполнится...</p>
+	<!-- promise is pending -->
+	<p>waiting for the promise to resolve...</p>
 {:then value}
-	<!-- промис выполнился -->
-	<p>Значение равно {value}</p>
+	<!-- promise was fulfilled -->
+	<p>The value is {value}</p>
 {:catch error}
-	<!-- промис отклонён -->
-	<p>Что-то пошло не так: {error.message}</p>
+	<!-- promise was rejected -->
+	<p>Something went wrong: {error.message}</p>
 {/await}
 ```
 
 ---
 
-Блок `catch` может быть опущен, если не нужно ничего отрисовывать, при отклонении промиса (или это вообще невозможно).
+The `catch` block can be omitted if you don't need to render anything when the promise rejects (or no error is possible).
 
 ```html
 {#await promise}
-	<!-- промис в состоянии ожидания -->
-	<p>Ждём пока промис выполнится...</p>
+	<!-- promise is pending -->
+	<p>waiting for the promise to resolve...</p>
 {:then value}
-	<!-- промис выполнился -->
-	<p>Значение равно {value}</p>
+	<!-- promise was fulfilled -->
+	<p>The value is {value}</p>
 {/await}
 ```
 
 ---
 
-Если состояние ожидания промиса не требует информирования, можно также опустить и первый блок.
+If you don't care about the pending state, you can also omit the initial block.
 
 ```html
 {#await promise then value}
-	<p>Значение равно {value}</p>
+	<p>The value is {value}</p>
 {/await}
 ```
-
 
 
 ### {@html ...}
 
 ```sv
-{@html выражение}
+{@html expression}
 ```
 
 ---
 
-В текстовых выражениях, символы вроде `<` и `>` экранируются, ав HTML выражениях — нет.
+In a text expression, characters like `<` and `>` are escaped; however, with HTML expressions, they're not.
 
-Выражение должно быть самодостаточной и валидной HTML-разметкой — `{@html "<div>"}содержимое{@html "</div>"}` *не сработает*, поскольку `</div>` не является валидной HTML-разметкой.
+The expression should be valid standalone HTML — `{@html "<div>"}content{@html "</div>"}` will *not* work, because `</div>` is not valid HTML.
 
-
-> Svelte не очищает HTML код перед его обработкой! Если данные приходят из ненадёжного источника, необходимо их проверить. В противном случае, вы подвергаете пользователей возможным XSS-атакам.
-
+> Svelte does not sanitize expressions before injecting HTML. If the data comes from an untrusted source, you must sanitize it, or you are exposing your users to an XSS vulnerability.
 
 ```html
 <div class="blog-post">
@@ -339,65 +360,65 @@ title: Синтаксис шаблонов
 {@debug}
 ```
 ```sv
-{@debug переменная1, переменная2, ..., переменнаяN}
+{@debug var1, var2, ..., varN}
 ```
 
 ---
 
-Тег `{@debug ...}` — это альтернатива для функции `console.log (...)`. Он отображает значение указанных переменных при их изменении, и приостанавливает дальнейшее выполнение кода при открытых *инструментах разработчика* в браузере.
+The `{@debug ...}` tag offers an alternative to `console.log(...)`. It logs the values of specific variables whenever they change, and pauses code execution if you have devtools open.
 
-Он принимает разделенный запятыми список имён переменных (не любых выражений).
+It accepts a comma-separated list of variable names (not arbitrary expressions).
 
 ```html
 <script>
 	let user = {
-		firstname: 'Ада',
-		lastname: 'Лавлейс'
+		firstname: 'Ada',
+		lastname: 'Lovelace'
 	};
 </script>
 
 {@debug user}
 
-<h1>Привет {user.firstname}!</h1>
+<h1>Hello {user.firstname}!</h1>
 ```
 
 ---
 
-`{@debug ...}` принимает разделенный запятыми список имён переменных (не любых выражений).
+`{@debug ...}` accepts a comma-separated list of variable names (not arbitrary expressions).
 
-```sv
-<!-- Успешно скомпилируется -->
+```html
+<!-- Compiles -->
 {@debug user}
 {@debug user1, user2, user3}
 
-<!-- НЕ скомпилируется -->
+<!-- WON'T compile -->
 {@debug user.firstname}
 {@debug myArray[0]}
 {@debug !isReady}
 {@debug typeof user === 'object'}
 ```
 
-Тег `{@debug}` без каких-либо аргументов установит оператор `debugger`, который будет срабатывать при любом изменении состояния.
+The `{@debug}` tag without any arguments will insert a `debugger` statement that gets triggered when *any* state changes, as opposed to the specified variables.
 
 
 
-### Директивы элементов
+### Element directives
 
-Наряду с атрибутами у элементов могут быть и *директивы*, которые предоставляют некоторые дополнительные возможности.
+As well as attributes, elements can have *directives*, which control the element's behaviour in some way.
 
 
-#### [on:*событие*](on_element_event)
+#### [on:*eventname*](on_element_event)
 
 ```sv
-on:событие={обработчик}
+on:eventname={handler}
 ```
 ```sv
-on:событие|модификаторы={обработчик}
+on:eventname|modifiers={handler}
 ```
 
 ---
 
-Используйте директиву `on:` для обработки событий в DOM.
+Use the `on:` directive to listen to DOM events.
 
 ```html
 <script>
@@ -409,54 +430,54 @@ on:событие|модификаторы={обработчик}
 </script>
 
 <button on:click={handleClick}>
-	счётчик: {count}
+	count: {count}
 </button>
 ```
 
 ---
 
-Можно задать обработчики непосредственно на месте, без какой-либо потери производительности.  Как и у атрибутов, значения директив могут быть заключены в кавычки для совместимости с подсветкой синтаксиса.
+Handlers can be declared inline with no performance penalty. As with attributes, directive values may be quoted for the sake of syntax highlighters.
 
 ```html
 <button on:click="{() => count += 1}">
-	счётчик: {count}
+	count: {count}
 </button>
 ```
 
 ---
 
-*Модификаторы* событий DOM добавляются после символа `|`.
+Add *modifiers* to DOM events with the `|` character.
 
 ```html
 <form on:submit|preventDefault={handleSubmit}>
-	<!-- стандартная обработка события `submit` предотвращена,
-	     поэтому страница не перезагрузится -->
+	<!-- the `submit` event's default is prevented,
+	     so the page won't reload -->
 </form>
 ```
 
-Доступны следующие модификаторы:
+The following modifiers are available:
 
-* `preventDefault` — вызывает `event.preventDefault()` перед запуском обработчика. Полезно, в том числе для обработки форм на клиентской стороне.
-* `stopPropagation` — вызывает `event.stopPropagation()`, предотвращает распространение события до следующих элементов.
-* `passive` — улучшает производительность прокрутки при тач-событиях или при прокрутке колёсиком мышки (Svelte добавит этот модификатор автоматически там, где это безопасно).
-* `capture` — вызывает событие в режиме *capture* вместо *bubbling*.
-* `once` — удаляет обработчик события после первого вызова.
+* `preventDefault` — calls `event.preventDefault()` before running the handler
+* `stopPropagation` — calls `event.stopPropagation()`, preventing the event reaching the next element
+* `passive` — improves scrolling performance on touch/wheel events (Svelte will add it automatically where it's safe to do so)
+* `capture` — fires the handler during the *capture* phase instead of the *bubbling* phase
+* `once` — remove the handler after the first time it runs
 
-
-Модификаторы можно соединять в цепочку, например `on:click|once|capture={...}`.
+Modifiers can be chained together, e.g. `on:click|once|capture={...}`.
 
 ---
 
-Если директива `on:` используется без значения, то компонент будет *пробрасывать* событие. Таким образом можно обрабатывать события из глубоко вложенных компонентов.
+If the `on:` directive is used without a value, the component will *forward* the event, meaning that a consumer of the component can listen for it.
 
 ```html
 <button on:click>
-	Так событие клика по кнопке сможет выйти за пределы компонента
+	The component itself will emit the click event
 </button>
 ```
+
 ---
 
-Можно назначить несколько обработчиков для одного события:
+It's possible to have multiple event listeners for the same event:
 
 ```html
 <script>
@@ -464,28 +485,26 @@ on:событие|модификаторы={обработчик}
 	function increment() {
 		counter = counter + 1;
 	}
+
 	function track(event) {
 		trackEvent(event)
 	}
 </script>
 
-<button on:click={increment} on:click={track}>Нажми меня!</button>
+<button on:click={increment} on:click={track}>Click me!</button>
 ```
 
-
-
-
-#### [bind:*свойство*](bind_element_property)
+#### [bind:*property*](bind_element_property)
 
 ```sv
-bind:свойство={переменная}
+bind:property={variable}
 ```
 
 ---
 
-Данные обычно передаются от родительского элемента к потомкам. Директива `bind:` позволяет передавать данные в другую сторону, от дочернего элемента в родительский. Большинство привязок соотносятся с конкретными элементами.
+Data ordinarily flows down, from parent to child. The `bind:` directive allows data to flow the other way, from child to parent. Most bindings are specific to particular elements.
 
-Простейшие привязки просто передают значение свойства элемента, например, `input.value`.
+The simplest bindings reflect the value of a property, such as `input.value`.
 
 ```html
 <input bind:value={name}>
@@ -496,28 +515,29 @@ bind:свойство={переменная}
 
 ---
 
-Если имя свойства и значения одинаковые, можно использовать сокращение.
+If the name matches the value, you can use a shorthand.
 
 ```html
-<!-- Эти строки эквивалентны -->
+<!-- These are equivalent -->
 <input bind:value={value}>
 <input bind:value>
 ```
 
 ---
 
-Значения из числовых `input` элементов автоматически приводятся к нужному типу. В структуре DOM значение свойства `input.value` таких элементов будет являться строкой, но Svelte будет рассматривать его как число. Если значение `input` пустое или недействительное (в случае `type="number"`), оно будет равно `undefined`.
+Numeric input values are coerced; even though `input.value` is a string as far as the DOM is concerned, Svelte will treat it as a number. If the input is empty or invalid (in the case of `type="number"`), the value is `undefined`.
 
 ```html
 <input type="number" bind:value={num}>
 <input type="range" bind:value={num}>
 ```
 
-##### Привязка к значению `<select>`
+
+##### Binding `<select>` value
 
 ---
 
-Привязка значения `<select>` соответствует свойству `value` в выбранном `<option>`, которое может быть абсолютно любым значением, а не только строкой, как это обычно бывает в DOM.
+A `<select>` value binding corresponds to the `value` property on the selected `<option>`, which can be any value (not just strings, as is normally the case in the DOM).
 
 ```html
 <select bind:value={selected}>
@@ -529,8 +549,7 @@ bind:свойство={переменная}
 
 ---
 
-Элемент `<select multiple>` ведет себя аналогично группе чекбоксов.
-
+A `<select multiple>` element behaves similarly to a checkbox group.
 
 ```html
 <select multiple bind:value={fillings}>
@@ -543,7 +562,7 @@ bind:свойство={переменная}
 
 ---
 
-Когда значение `<option>` соответствует его текстовому содержимому, атрибут может быть опущен.
+When the value of an `<option>` matches its text content, the attribute can be omitted.
 
 ```html
 <select multiple bind:value={fillings}>
@@ -553,38 +572,40 @@ bind:свойство={переменная}
 	<option>Guac (extra)</option>
 </select>
 ```
+
 ---
 
-Элементы с атрибутом `contenteditable` поддерживают привязки к `innerHTML` и `textContent`.
+Elements with the `contenteditable` attribute support `innerHTML` and `textContent` bindings.
 
 ```html
 <div contenteditable="true" bind:innerHTML={html}></div>
 ```
 
-##### Привязка к медиа-элементам
+##### Media element bindings
 
 ---
 
-Медиа-элементы (`<audio>` и `<video>`) имеют свой собственный набор привязок — шесть *только для чтения* ...
+Media elements (`<audio>` and `<video>`) have their own set of bindings — six *readonly* ones...
 
-* `duration` (только для чтения) — общая продолжительность, в секундах
-* `buffered` (только для чтения) — буфер, массив объектов `{start, end}`
-* `seekable` (только для чтения) — доступное для перемотки, то же самое
-* `played` (только для чтения) — уже проиграно, то же самое
-* `seeking` (только для чтения) — выполняется ли перемотка
-* `ended` (только для чтения) — окончилось ли воспроизведение
+* `duration` (readonly) — the total duration of the video, in seconds
+* `buffered` (readonly) — an array of `{start, end}` objects
+* `seekable` (readonly) — ditto
+* `played` (readonly) — ditto
+* `seeking` (readonly) — boolean
+* `ended` (readonly) — boolean
 
-... и четыре двусторонние привязки:
-* `currentTime` — текущая позиция проигрывания, в секундах
-* `playbackRate` — скорость проигрывания видео, где 1 обозначает 'нормально'
-* `paused` — остановлено проигрывание или нет
-* `volume` — громкость, значение между 0 и 1
+...and four *two-way* bindings:
 
-Для видео также доступны привязки для чтения ширины `videoWidth` и высоты `videoHeight`.
+* `currentTime` — the current point in the video, in seconds
+* `playbackRate` — how fast to play the video, where 1 is 'normal'
+* `paused` — this one should be self-explanatory
+* `volume` — a value between 0 and 1
+
+Videos additionally have readonly `videoWidth` and `videoHeight` bindings.
 
 ```html
 <video
-		src={clip}
+	src={clip}
 	bind:duration
 	bind:buffered
 	bind:seekable
@@ -599,11 +620,11 @@ bind:свойство={переменная}
 ></video>
 ```
 
-##### Привязка к блочным элементам
+##### Block-level element bindings
 
 ---
 
-У блочных элементов есть 4 привязки, доступных только для чтения. Они рассчитываются с использованием метода, аналогичного [этому](http://www.backalleycoder.com/2013/03/18/cross-browser-event-based-element-resize-detection/):
+Block-level elements have 4 readonly bindings, measured using a technique similar to [this one](http://www.backalleycoder.com/2013/03/18/cross-browser-event-based-element-resize-detection/):
 
 * `clientWidth`
 * `clientHeight`
@@ -622,12 +643,12 @@ bind:свойство={переменная}
 #### bind:group
 
 ```sv
-bind:group={переменная}
+bind:group={variable}
 ```
 
 ---
 
-Элементы `input`, которые работают вместе, могут использовать привязку `bind:group`.
+Inputs that work together can use `bind:group`.
 
 ```html
 <script>
@@ -635,12 +656,12 @@ bind:group={переменная}
 	let fillings = [];
 </script>
 
-<!-- сгруппированные радиокнопки являются взаимоисключающими -->
+<!-- grouped radio inputs are mutually exclusive -->
 <input type="radio" bind:group={tortilla} value="Plain">
 <input type="radio" bind:group={tortilla} value="Whole wheat">
 <input type="radio" bind:group={tortilla} value="Spinach">
 
-<!-- сгруппированные чекбоксы образуют массив своих значений -->
+<!-- grouped checkbox inputs populate an array -->
 <input type="checkbox" bind:group={fillings} value="Rice">
 <input type="checkbox" bind:group={fillings} value="Beans">
 <input type="checkbox" bind:group={fillings} value="Cheese">
@@ -650,11 +671,12 @@ bind:group={переменная}
 #### [bind:this](bind_element)
 
 ```sv
-bind:this={DOM-узел}
+bind:this={dom_node}
 ```
+
 ---
 
-Для получения ссылки на сам элемент в DOM, используйте `bind:this`.
+To get a reference to a DOM node, use `bind:this`.
 
 ```html
 <script>
@@ -672,39 +694,39 @@ bind:this={DOM-узел}
 ```
 
 
-#### class:*имя*
+#### class:*name*
 
 ```sv
-class:имя={значение}
+class:name={value}
 ```
 ```sv
-class:имя
+class:name
 ```
 
 ---
 
-Директива `class:` обеспечивает простой способ управления классами элемента.
+A `class:` directive provides a shorter way of toggling a class on an element.
 
 ```html
-<!-- Эти строки эквивалентны -->
+<!-- These are equivalent -->
 <div class="{active ? 'active' : ''}">...</div>
 <div class:active={active}>...</div>
 
-<!-- Сокращение, при одинаковых имени и значении -->
+<!-- Shorthand, for when name and value match -->
 <div class:active>...</div>
 
-<!-- можно использовать сразу несколько переключателей классов -->
+<!-- Multiple class toggles can be included -->
 <div class:active class:inactive={!active} class:isAdmin>...</div>
 ```
 
 
-#### use:*действие*
+#### use:*action*
 
 ```sv
-use:действие
+use:action
 ```
 ```sv
-use:действие={параметры}
+use:action={parameters}
 ```
 
 ```js
@@ -716,17 +738,16 @@ action = (node: HTMLElement, parameters: any) => {
 
 ---
 
-Действия — это функции, которые вызываются при создании элемента. Они могут возвращать объект с методом `destroy`, который вызывается, когда этот элемент удаляется из DOM.
+Actions are functions that are called when an element is created. They can return an object with a `destroy` method that is called after the element is unmounted:
 
 ```html
 <script>
 	function foo(node) {
-		// при добавлении элемента в DOM
-		// node — ссылка на элемент в DOM
+		// the node has been mounted in the DOM
 
 		return {
 			destroy() {
-				// при удалении элемента из DOM
+				// the node has been removed from the DOM
 			}
 		};
 	}
@@ -737,25 +758,24 @@ action = (node: HTMLElement, parameters: any) => {
 
 ---
 
-Действие может иметь параметры. Если возвращаемый объект имеет метод `update`, он будет вызываться всякий раз, когда эти параметры изменяются, сразу же после изменения разметки.
+An action can have parameters. If the returned value has an `update` method, it will be called whenever those parameters change, immediately after Svelte has applied updates to the markup.
 
-> Не беспокойтесь о том, что мы объявляем функцию `foo` в каждом экземпляре компонента — Svelte выведет из контекста компонента любые функции, которые не зависят от его локального состояния.
+> Don't worry about the fact that we're redeclaring the `foo` function for every component instance — Svelte will hoist any functions that don't depend on local state out of the component definition.
 
 ```html
 <script>
 	export let bar;
 
 	function foo(node, bar) {
-		// при добавлении элемента в DOM
-		// node — ссылка на элемент в DOM
+		// the node has been mounted in the DOM
 
 		return {
 			update(bar) {
-				// при изменении значения параметра `bar`
+				// the value of `bar` has changed
 			},
 
 			destroy() {
-				// при удалении элемента из DOM
+				// the node has been removed from the DOM
 			}
 		};
 	}
@@ -771,13 +791,13 @@ action = (node: HTMLElement, parameters: any) => {
 transition:fn
 ```
 ```sv
-transition:fn={параметры}
+transition:fn={params}
 ```
 ```sv
 transition:fn|local
 ```
 ```sv
-transition:fn|local={параметры}
+transition:fn|local={params}
 ```
 
 
@@ -793,47 +813,47 @@ transition = (node: HTMLElement, params: any) => {
 
 ---
 
-Переход инициируется добавлением или удалением элемента из DOM в результате изменения состояния приложения. 
+A transition is triggered by an element entering or leaving the DOM as a result of a state change.
 
-Элементы внутри *исчезающего* блока будут храниться в DOM до тех пор, пока не будут выполнены все запущенные переходы.
+When a block is transitioning out, elements inside the block are kept in the DOM until all current transitions have completed.
 
-Директива `transition:` указывает на то, что переход является *обратимым*. Т.е. он может в любой момент начать проигрываться в обратную сторону.
+The `transition:` directive indicates a *bidirectional* transition, which means it can be smoothly reversed while the transition is in progress.
 
 ```html
 {#if visible}
 	<div transition:fade>
-		появляется и исчезает
+		fades in and out
 	</div>
 {/if}
 ```
 
-> По умолчанию переход появления не проигрывается при первой отрисовке компонента. Вы можете изменить это поведение установив параметр `intro: true` при [создании компонента](docs#API_komponenta_na_kliente).
+> By default intro transitions will not play on first render. You can modify this behaviour by setting `intro: true` when you [create a component](docs#Client-side_component_API).
 
-##### Параметры перехода
+##### Transition parameters
 
 ---
 
-Как и действия, переходы могут иметь параметры.
+Like actions, transitions can have parameters.
 
-(Двойные фигурные скобки `{{...}}` не являются особым синтаксисом; это просто литерал объекта внутри тега выражения)
+(The double `{{curlies}}` aren't a special syntax; this is an object literal inside an expression tag.)
 
 ```html
 {#if visible}
 	<div transition:fade="{{ duration: 2000 }}">
-		Влетает, исчезает. По 2 секунды на каждый переход
+		flies in, fades out over two seconds
 	</div>
 {/if}
 ```
 
-##### Пользовательские переходы
+##### Custom transition functions
 
 ---
 
-Переходы могут использовать пользовательские функции. Если возвращённый объект имеет функцию `css`, Svelte создаст CSS-анимацию, которая воспроизводится на элементе.
+Transitions can use custom functions. If the returned object has a `css` function, Svelte will create a CSS animation that plays on the element.
 
-Аргумент `t`, передаваемый в функцию `css`, представляет собой значение между `0` и `1` после применения функции плавности `easing`. Переходы *появления* выполняются от `0` до` 1`, переходы *исчезновения* выполняются от `1` до `0` — другими словами, `1` - это естественное состояние элемента, как если бы переход не применялся. Аргумент `u` равен `1 - t`.
+The `t` argument passed to `css` is a value between `0` and `1` after the `easing` function has been applied. *In* transitions run from `0` to `1`, *out* transitions run from `1` to `0` — in other words `1` is the element's natural state, as though no transition had been applied. The `u` argument is equal to `1 - t`.
 
-Функция вызывается множество раз с разными аргументами `t` и `u` *до начала* перехода.
+The function is called repeatedly *before* the transition begins, with different `t` and `u` arguments.
 
 ```html
 <script>
@@ -855,16 +875,16 @@ transition = (node: HTMLElement, params: any) => {
 
 {#if visible}
 	<div in:whoosh>
-		whooshes
+		whooshes in
 	</div>
 {/if}
 ```
 
 ---
 
-Пользовательская функция перехода также может возвращать функцию `tick`, которая вызывается *во время* перехода с теми же аргументами` t` и `u`.
+A custom transition function can also return a `tick` function, which is called *during* the transition with the same `t` and `u` arguments.
 
-> Если возможно использовать `css` вместо` tick`, используйте — CSS-анимация может запускаться вне основного потока, предотвращая лаги на медленных устройствах.
+> If it's possible to use `css` instead of `tick`, do so — CSS animations can run off the main thread, preventing jank on slower devices.
 
 ```html
 <script>
@@ -893,18 +913,19 @@ transition = (node: HTMLElement, params: any) => {
 
 {#if visible}
 	<p in:typewriter="{{ speed: 20 }}">
-		Съешь ещё этих мягких французских булок, да выпей же чаю
+		The quick brown fox jumps over the lazy dog
 	</p>
 {/if}
 ```
 
-Если переход возвращает функцию вместо объекта перехода, то она будет вызвана в следующей микрозадаче. Это позволяет координировать несколько переходов, что дает возможность запускать [перекрёстные переходы](tutorial/deferred-transitions).
+If a transition returns a function instead of a transition object, the function will be called in the next microtask. This allows multiple transitions to coordinate, making [crossfade effects](tutorial/deferred-transitions) possible.
 
-##### События переходов
+
+##### Transition events
 
 ---
 
-Элемент, который имеет переходы, в дополнение к стандартным событиям DOM может запускать ещё и такие события:
+An element with transitions will dispatch the following events in addition to any standard DOM events:
 
 * `introstart`
 * `introend`
@@ -915,29 +936,29 @@ transition = (node: HTMLElement, params: any) => {
 {#if visible}
 	<p
 		transition:fly="{{ y: 200, duration: 2000 }}"
-		on:introstart="{() => status = 'начало появления'}"
-		on:outrostart="{() => status = 'начало исчезновения'}"
-		on:introend="{() => status = 'конец появления'}"
-		on:outroend="{() => status = 'конец исчезновения'}"
+		on:introstart="{() => status = 'intro started'}"
+		on:outrostart="{() => status = 'outro started'}"
+		on:introend="{() => status = 'intro ended'}"
+		on:outroend="{() => status = 'outro ended'}"
 	>
-		Прилетает и улетает
+		Flies in and out
 	</p>
 {/if}
 ```
 
 ---
 
-Локальные переходы воспроизводятся только когда создается или убирается конкретный блок, к которому они прикреплены, а *не* его родительские блоки.
+Local transitions only play when the block they belong to is created or destroyed, *not* when parent blocks are created or destroyed.
 
 ```html
 {#if x}
 	{#if y}
 		<p transition:fade>
-			проигрывается когда изменяются 'x' или 'y'
+			fades in and out when x or y change
 		</p>
 
 		<p transition:fade|local>
-			проигрывается только когда изменяется 'y'
+			fades in and out only when y changes
 		</p>
 	{/if}
 {/if}
@@ -950,38 +971,38 @@ transition = (node: HTMLElement, params: any) => {
 in:fn
 ```
 ```sv
-in:fn={параметры}
+in:fn={params}
 ```
 ```sv
 in:fn|local
 ```
 ```sv
-in:fn|local={параметры}
+in:fn|local={params}
 ```
 
 ```sv
 out:fn
 ```
 ```sv
-out:fn={параметры}
+out:fn={params}
 ```
 ```sv
 out:fn|local
 ```
 ```sv
-out:fn|local={параметры}
+out:fn|local={params}
 ```
 
 ---
 
-Аналогичны `transition:`, но применяются только когда элемент появляется (`in:`) или убирается (`out:`) из DOM.
+Similar to `transition:`, but only applies to elements entering (`in:`) or leaving (`out:`) the DOM.
 
-В отличие от `transition:`, переходы `in:` и `out:` не являются *обратимыми*. При исчезновении элемента, если переход появления ещё не закончился, он будет проигрываться дальше, но уже вместе с переходом исчезновения. Если исчезновение элемента, было прервано, то переходы будут запущены заново.
+Unlike with `transition:`, transitions applied with `in:` and `out:` are not bidirectional — an in transition will continue to 'play' alongside the out transition, rather than reversing, if the block is outroed while the transition is in progress. If an out transition is aborted, transitions will restart from scratch.
 
 ```html
 {#if visible}
 	<div in:fly out:fade>
-		влетает, исчезает
+		flies in, fades out
 	</div>
 {/if}
 ```
@@ -991,11 +1012,11 @@ out:fn|local={параметры}
 #### animate:*fn*
 
 ```sv
-animate:имя
+animate:name
 ```
 
 ```sv
-animate:имя={параметры}
+animate:name={params}
 ```
 
 ```js
@@ -1023,24 +1044,24 @@ DOMRect {
 
 ---
 
-Анимация запускается, когда изменяется порядок содержимого [блока each с ключом](docs#each). Анимации не запускаются при удалении элемента, а только лишь при переупорядочивании данных внутри блока each. Директиву animate можно устанавливать только для элемента, который является *непосредственным* дочерним элементом блока each с ключом.
+An animation is triggered when the contents of a [keyed each block](docs#each) are re-ordered. Animations do not run when an element is removed, only when the each block's data is reordered. Animate directives must be on an element that is an *immediate* child of a keyed each block.
 
-Анимация может использовать [встроенные функции анимации](docs#svelte_animate) или [пользовательские функции анимации](docs#Polzovatelskie_funkczii_animaczii).
+Animations can be used with Svelte's [built-in animation functions](docs#svelte_animate) or [custom animation functions](docs#Custom_animation_functions).
 
 ```html
-<!-- при изменении порядка элементов в списке запустится анимация-->
+<!-- When `list` is reordered the animation will run-->
 {#each list as item, index (item)}
 	<li animate:flip>{item}</li>
 {/each}
 ```
 
-##### Параметры анимации
+##### Animation Parameters
 
 ---
 
-Как действия и переходы, анимации также могут иметь параметры.
+As with actions and transitions, animations can have parameters.
 
-(Двойные фигурные скобки `{{...}}` здесь не являются особым синтаксисом - это просто литерал объекта внутри тега выражения)
+(The double `{{curlies}}` aren't a special syntax; this is an object literal inside an expression tag.)
 
 ```html
 {#each list as item, index (item)}
@@ -1048,17 +1069,17 @@ DOMRect {
 {/each}
 ```
 
-##### Пользовательские функции анимации
+##### Custom animation functions
 
 ---
 
-Анимации могут использовать пользовательские функции, которые принимают в качестве аргументов ссылку на элемент `node`, объект `animation` и объект параметров. Объект `animation` содержит свойства` from` и `to`, каждое из которых является объектом [DOMRect](https://developer.mozilla.org/ru/docs/Web/API/DOMRect#Properties), описывающим геометрию элемента в начальном и конечном положениях. Свойство `from` - это DOMRect элемента в его начальной позиции, свойство `to` - это DOMRect элемента в его конечной позиции после переупорядочивания списка и обновления DOM.
+Animations can use custom functions that provide the `node`, an `animation` object and any `paramaters` as arguments. The `animation` parameter is an object containing `from` and `to` properties each containing a [DOMRect](https://developer.mozilla.org/en-US/docs/Web/API/DOMRect#Properties) describing the geometry of the element in its `start` and `end` positions. The `from` property is the DOMRect of the element in its starting position, the `to` property is the DOMRect of the element in its final position after the list has been reordered and the DOM updated.
 
-Если в возвращаемом из функции объекте есть метод `css`, Svelte создаст CSS-анимацию, которая будет применена к элементу `node`.
+If the returned object has a `css` method, Svelte will create a CSS animation that plays on the element.
 
-Аргумент `t`, передаваемый в метод `css`, представляет собой значение от `0` до `1`, которое возвращает функция плавности `easing` для нужного момента времени. Аргумент `u` равен `1 - t`.
+The `t` argument passed to `css` is a value that goes from `0` and `1` after the `easing` function has been applied. The `u` argument is equal to `1 - t`.
 
-Функция вызывается множество раз *до начала* анимации, с различными аргументами `t` и `u`.
+The function is called repeatedly *before* the animation begins, with different `t` and `u` arguments.
 
 
 ```html
@@ -1089,9 +1110,10 @@ DOMRect {
 
 ---
 
-Пользовательская функция анимации также может возвращать функцию `tick`, которая вызывается *во время* анимации с теми же аргументами `t` и `u`.
 
-> Всегда старайтесь использовать`css` вместо` tick`, поскольку CSS-анимация запускается вне основного потока, предотвращая подёргивания на медленных устройствах.
+A custom animation function can also return a `tick` function, which is called *during* the animation with the same `t` and `u` arguments.
+
+> If it's possible to use `css` instead of `tick`, do so — CSS animations can run off the main thread, preventing jank on slower devices.
 
 ```html
 <script>
@@ -1121,17 +1143,17 @@ DOMRect {
 {/each}
 ```
 
-### Директивы компонентов
+### Component directives
 
-#### [on:*событие*](on_component_event)
+#### [on:*eventname*](on_component_event)
 
 ```sv
-on:событие={обработчик}
+on:eventname={handler}
 ```
 
 ---
 
-Компоненты могут отправлять события, используя диспетчер событий [createEventDispatcher](docs#createEventDispatcher) или пробрасывая события DOM. Обработка событий компонента выглядит так же, как обработка событий DOM.
+Components can emit events using [createEventDispatcher](docs#createEventDispatcher), or by forwarding DOM events. Listening for component events looks the same as listening for DOM events:
 
 ```html
 <SomeComponent on:whatever={handler}/>
@@ -1139,22 +1161,22 @@ on:событие={обработчик}
 
 ---
 
-Если директива `on:` используется без значения, то компонент будет *пробрасывать* событие выше, как и в аналогичном случае с событиями DOM. Событие станет доступно для прослушивания в родительском компоненте.
+As with DOM events, if the `on:` directive is used without a value, the component will *forward* the event, meaning that a consumer of the component can listen for it.
 
 ```html
 <SomeComponent on:whatever/>
 ```
 
 
-#### [bind:*свойство*](bind_component_property)
+#### [bind:*property*](bind_component_property)
 
 ```sv
-bind:свойство={переменная}
+bind:property={variable}
 ```
 
 ---
 
-К свойствам компонента можно привязаться, точно так же как к атрибутам элементов.
+You can bind to component props using the same syntax as for elements.
 
 ```html
 <Keypad bind:value={pin}/>
@@ -1163,20 +1185,20 @@ bind:свойство={переменная}
 #### [bind:this](bind_component)
 
 ```sv
-bind:this={экземпляр_компонента}
+bind:this={component_instance}
 ```
 
 ---
 
-Компоненты также поддерживают привязку `bind:this`, позволяющую взаимодействовать с экземпляром компонента в коде.
+Components also support `bind:this`, allowing you to interact with component instances programmatically.
 
-> Обратите внимание, что использование `{cart.empty}` вызовет ошибку, поскольку при первой отрисовке кнопки `cart` ещё имеет значение `undefined`.
+> Note that we can't do `{cart.empty}` since `cart` is `undefined` when the button is first rendered and throws an error.
 
 ```html
 <ShoppingCart bind:this={cart}/>
 
 <button on:click={() => cart.empty()}>
-	Очистить корзину
+	Empty shopping cart
 </button>
 ```
 
@@ -1185,77 +1207,77 @@ bind:this={экземпляр_компонента}
 ### `<slot>`
 
 ```sv
-<slot><!-- содержимое по умолчанию --></slot>
+<slot><!-- optional fallback --></slot>
 ```
 ```sv
-<slot name="x"><!-- содержимое по умолчанию --></slot>
+<slot name="x"><!-- optional fallback --></slot>
 ```
 ```sv
-<slot свойство={значениие}></slot>
+<slot prop={value}></slot>
 ```
 
 ---
 
-Как и любой HTML-элемент, компоненты могут иметь вложенные элементы.
+Components can have child content, in the same way that elements can.
 
-Вложенное содержимое размещается в компоненте при помощи элемента `<slot>`, который также может содержать содержимое по умолчанию, которое отображается, если в компонент не было предано никакого содержимого.
+The content is exposed in the child component using the `<slot>` element, which can contain fallback content that is rendered if no children are provided.
 
 ```html
 <!-- App.svelte -->
 <Widget></Widget>
+
 <Widget>
-	<p>вложенный элемент, который заменит собой содержимое по умолчанию.</p>
+	<p>this is some child content that will overwrite the default slot content</p>
 </Widget>
 
 <!-- Widget.svelte -->
 <div>
 	<slot>
-		это содержимое по умолчанию, которое отобразится, если не передали иного содержимого.
+		this fallback content will be rendered when no content is provided, like in the first example
 	</slot>
 </div>
 ```
 
-#### [`<slot name="`*имя*`">`](slot_name)
+#### [`<slot name="`*name*`">`](slot_name)
 
 ---
 
-Именованные слоты позволяют указать конкретные области. Они тоже могут иметь запасное содержимое по умолчанию.
+Named slots allow consumers to target specific areas. They can also have fallback content.
 
 ```html
 <!-- App.svelte -->
 <Widget>
-	<h1 slot="header">Привет</h1>
-	<p slot="footer">Все права (c) 2019 Svelte Industries</p>
+	<h1 slot="header">Hello</h1>
+	<p slot="footer">Copyright (c) 2019 Svelte Industries</p>
 </Widget>
 
 <!-- Widget.svelte -->
 <div>
-	<slot name="header">Заголовок не предоставлен</slot>
-	<p>Любое содержимое между заголовком и футером</p>
+	<slot name="header">No header was provided</slot>
+	<p>Some content between header and footer</p>
 	<slot name="footer"></slot>
 </div>
 ```
 
-#### [`<slot let:`*имя*`={`*значение*`}>`](slot_let)
+#### [`<slot let:`*name*`={`*value*`}>`](slot_let)
 
 ---
 
+Slots can be rendered zero or more times, and can pass values *back* to the parent using props. The parent exposes the values to the slot template using the `let:` directive.
 
-Слоты могут быть отрисованы ноль или более раз и могут передавать значения *обратно* родителю через свои свойства. Родитель может получить эти значения от слота при помощи директивы `let:`.
-
-Обычные правила сокращения работают и тут — `let:item` то же самое, что и `let:item={item}`, а `<slot {item}>` эквивалентно `<slot item={item}>`.
+The usual shorthand rules apply — `let:item` is equivalent to `let:item={item}`, and `<slot {item}>` is equivalent to `<slot item={item}>`.
 
 ```html
 <!-- App.svelte -->
-<FancyList {items} let:item={item}>
-	<div>{item.text}</div>
+<FancyList {items} let:prop={thing}>
+	<div>{thing.text}</div>
 </FancyList>
 
 <!-- FancyList.svelte -->
 <ul>
 	{#each items as item}
 		<li class="fancy">
-			<slot item={item}></slot>
+			<slot prop={item}></slot>
 		</li>
 	{/each}
 </ul>
@@ -1263,20 +1285,20 @@ bind:this={экземпляр_компонента}
 
 ---
 
-Именованные слоты также могут предоставлять значения. Директива `let:` указывается на элементе с атрибутом `slot`.
+Named slots can also expose values. The `let:` directive goes on the element with the `slot` attribute.
 
 ```html
 <!-- App.svelte -->
 <FancyList {items}>
-	<div slot="item" let:item={item}>{item.text}</div>
-	<p slot="footer">Все права (c) 2019 Svelte Industries</p>
+	<div slot="item" let:item>{item.text}</div>
+	<p slot="footer">Copyright (c) 2019 Svelte Industries</p>
 </FancyList>
 
 <!-- FancyList.svelte -->
 <ul>
 	{#each items as item}
 		<li class="fancy">
-			<slot name="item" item={item}></slot>
+			<slot name="item" {item}></slot>
 		</li>
 	{/each}
 </ul>
@@ -1289,9 +1311,9 @@ bind:this={экземпляр_компонента}
 
 ---
 
-Элемент `<svelte: self>` позволяет компоненту включать самого себя себя рекурсивно.
+The `<svelte:self>` element allows a component to include itself, recursively.
 
-Он не может отображаться на верхнем уровне разметки, а должен быть помещён внутри блока `if` или `each`, чтобы избежать бесконечного цикла.
+It cannot appear at the top level of your markup; it must be inside an if or each block to prevent an infinite loop.
 
 ```html
 <script>
@@ -1299,24 +1321,24 @@ bind:this={экземпляр_компонента}
 </script>
 
 {#if count > 0}
-	<p>Отсчёт... {count}</p>
+	<p>counting down... {count}</p>
 	<svelte:self count="{count - 1}"/>
 {:else}
-	<p>Поехали!</p>
+	<p>lift-off!</p>
 {/if}
 ```
 
 ### `<svelte:component>`
 
 ```sv
-<svelte:component this={выражение}/>
+<svelte:component this={expression}/>
 ```
 
 ---
 
-Элемент `<svelte:component>` отрисовывает компонент динамически, используя конструктор компонента, переданный в свойстве`this`. Когда значение свойства изменяется, компонент уничтожается и создается заново.
+The `<svelte:component>` element renders a component dynamically, using the component constructor specified as the `this` property. When the property changes, the component is destroyed and recreated.
 
-Если выражение в свойстве `this` ложное, компонент не отрисовывается.
+If `this` is falsy, no component is rendered.
 
 ```html
 <svelte:component this={currentSelection.component} foo={bar}/>
@@ -1326,20 +1348,20 @@ bind:this={экземпляр_компонента}
 ### `<svelte:window>`
 
 ```sv
-<svelte:window on:событие={обработчик}/>
+<svelte:window on:event={handler}/>
 ```
 ```sv
-<svelte:window bind:свойство={значение}/>
+<svelte:window bind:prop={value}/>
 ```
 
 ---
 
-Элемент `<svelte:window>` позволяет добавлять обработчики событий к объекту `window`, не беспокоясь об их удалении при уничтожении компонента или проверять существование `window` при рендеринге на стороне сервера.
+The `<svelte:window>` element allows you to add event listeners to the `window` object without worrying about removing them when the component is destroyed, or checking for the existence of `window` when server-side rendering.
 
 ```html
 <script>
 	function handleKeydown(event) {
-		alert(`нажата клавиша ${event.key}`);
+		alert(`pressed the ${event.key} key`);
 	}
 </script>
 
@@ -1348,7 +1370,7 @@ bind:this={экземпляр_компонента}
 
 ---
 
-Также можно сделать привязку к следующим свойствам:
+You can also bind to the following properties:
 
 * `innerWidth`
 * `innerHeight`
@@ -1356,9 +1378,9 @@ bind:this={экземпляр_компонента}
 * `outerHeight`
 * `scrollX`
 * `scrollY`
-* `online` — сокращение для window.navigator.onLine
+* `online` — an alias for window.navigator.onLine
 
-Все свойства, кроме `scrollX` и `scrollY` доступны только для чтения.
+All except `scrollX` and `scrollY` are readonly.
 
 ```html
 <svelte:window bind:scrollY={y}/>
@@ -1368,12 +1390,12 @@ bind:this={экземпляр_компонента}
 ### `<svelte:body>`
 
 ```sv
-<svelte:body on:событие={обработчик}/>
+<svelte:body on:event={handler}/>
 ```
 
 ---
 
-Как и в случае с `<svelte:window>`, этот элемент позволяет добавлять обработчики событий к `document.body`, например к `mouseenter` и` mouseleave`, которые не запускаются в `window`.
+As with `<svelte:window>`, this element allows you to add listeners to events on `document.body`, such as `mouseenter` and `mouseleave` which don't fire on `window`.
 
 ```html
 <svelte:body
@@ -1391,7 +1413,7 @@ bind:this={экземпляр_компонента}
 
 ---
 
-Этот элемент позволяет вставлять элементы в `document.head`. При рендеринге на стороне сервера содержимое `head` предоставляется отдельно от основного содержимого `html`.
+This element makes it possible to insert elements into `document.head`. During server-side rendering, `head` content is exposed separately to the main `html` content.
 
 ```html
 <svelte:head>
@@ -1403,20 +1425,19 @@ bind:this={экземпляр_компонента}
 ### `<svelte:options>`
 
 ```sv
-<svelte:options параметр={значение}/>
+<svelte:options option={value}/>
 ```
 
 ---
 
-Элемент `<svelte:options>` позволяет установить определенные параметры для компилятора для каждого отдельного компонента. Подробнее о параметрах компилятора можно узнать в разделе про функцию [compile](docs#svelte_compile). Параметры, которые можно установить:
+The `<svelte:options>` element provides a place to specify per-component compiler options, which are detailed in the [compiler section](docs#svelte_compile). The possible options are:
 
-* `immutable={true}` — установите, если вы нигде не используете изменяемые данные — тогда компилятор сможет выполнять более простые проверки равенства объектов для определения их изменения
-* `immutable={false}` — по умолчанию. Svelte будет проверять изменение объектов обычным способом
-* `accessors={true}` — добавляет сеттеры и геттеры для свойств компонента
-* `accessors={false}` — по умолчанию, аксессоры не добавляются
-* `namespace="..."` — пространство имен, где компонент будет использован (обычно нужно "svg")
-* `tag="..."` — имя, которое используется при компиляции компонента в пользовательский элемент
-
+* `immutable={true}` — you never use mutable data, so the compiler can do simple referential equality checks to determine if values have changed
+* `immutable={false}` — the default. Svelte will be more conservative about whether or not mutable objects have changed
+* `accessors={true}` — adds getters and setters for the component's props
+* `accessors={false}` — the default
+* `namespace="..."` — the namespace where this component will be used, most commonly "svg"
+* `tag="..."` — the name to use when compiling this component as a custom element
 
 ```html
 <svelte:options tag="my-custom-element"/>

@@ -1,8 +1,8 @@
 <script>
 	let todos = [
-		{ done: false, text: 'дочитать учебник по Svelte' },
-		{ done: false, text: 'создать приложение' },
-		{ done: false, text: 'захватить мир' }
+		{ done: false, text: 'finish Svelte tutorial' },
+		{ done: false, text: 'build an app' },
+		{ done: false, text: 'world domination' }
 	];
 
 	function add() {
@@ -22,7 +22,7 @@
 	}
 </style>
 
-<h1>Задачи</h1>
+<h1>Todos</h1>
 
 {#each todos as todo}
 	<div class:done={todo.done}>
@@ -32,18 +32,18 @@
 		>
 
 		<input
-			placeholder="Что надо сделать?"
+			placeholder="What needs to be done?"
 			value={todo.text}
 		>
 	</div>
 {/each}
 
-<p>Осталось: {remaining}</p>
+<p>{remaining} remaining</p>
 
 <button on:click={add}>
-	Новая
+	Add new
 </button>
 
 <button on:click={clear}>
-	Убрать завершенные
+	Clear completed
 </button>

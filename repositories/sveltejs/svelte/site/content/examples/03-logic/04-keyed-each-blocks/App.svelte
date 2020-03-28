@@ -15,19 +15,19 @@
 </script>
 
 <button on:click={handleClick}>
-	Удалить первый элемент
+	Remove first thing
 </button>
 
 <div style="display: grid; grid-template-columns: 1fr 1fr; grip-gap: 1em">
 	<div>
-		<h2>С ключом</h2>
+		<h2>Keyed</h2>
 		{#each things as thing (thing.id)}
 			<Thing current={thing.color}/>
 		{/each}
 	</div>
 
 	<div>
-		<h2>Без ключа</h2>
+		<h2>Unkeyed</h2>
 		{#each things as thing}
 			<Thing current={thing.color}/>
 		{/each}

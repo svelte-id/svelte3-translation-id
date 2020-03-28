@@ -1,10 +1,10 @@
 ---
-title: Пользовательские хранилища
+title: Custom stores
 ---
 
-Покуда у объекта есть правильный метод `subscribe` — это хранилище, и не важно, что ещё в нем может содержаться. Поэтому создать хранилище, предлагающее собственную логику для конкретных задач, очень просто.
+As long as an object correctly implements the `subscribe` method, it's a store. Beyond that, anything goes. It's very easy, therefore, to create custom stores with domain-specific logic.
 
-Например, хранилище `count` из прошлых уроков может сразу включать в себя методы `increment`, `decrement` и `reset`, а методы `set` и `update`, напротив, можно сделать недоступными:
+For example, the `count` store from our earlier example could include `increment`, `decrement` and `reset` methods and avoid exposing `set` and `update`:
 
 ```js
 function createCount() {

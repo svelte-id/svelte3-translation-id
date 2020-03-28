@@ -1,12 +1,12 @@
 ---
-title: Блок each с ключом
+title: Keyed each blocks
 ---
 
-По умолчанию, когда вы изменяете список, который используется в блоке `each`, Svelte будет добавлять и удалять элементы в *конце* блока и обновит все значения, которые изменились. Возможно, вам такое поведение не подойдет.
+By default, when you modify the value of an `each` block, it will add and remove items at the *end* of the block, and update any values that have changed. That might not be what you want.
 
-Проще показать, чем объяснить. Нажмите кнопку 'Удалить первый элемент' несколько раз и обратите внимание, что она удаляет компоненты `<Thing>` с конца и обновляет `color` для оставшихся. Вместо этого мы хотели бы удалить первый компонент `<Thing>` и оставить остальные без изменений.
+It's easier to show why than to explain. Click the 'Remove first thing' button a few times, and notice that it's removing `<Thing>` components from the end and updating the `color` for those that remain. Instead, we'd like to remove the first `<Thing>` component and leave the rest unaffected.
 
-Для этого мы указываем в блоке `each` идентификатор, который однозначно идентифицирует элемент в списке:
+To do that, we specify a unique identifier for the `each` block:
 
 ```html
 {#each things as thing (thing.id)}
@@ -14,6 +14,6 @@ title: Блок each с ключом
 {/each}
 ```
 
-Выражение `(thing.id)` помогает Svelte понять, что именно изменилось.
+The `(thing.id)` tells Svelte how to figure out what changed.
 
-> В качестве ключа можно использовать абсолютно любой объект, так как внутри Svelte использует `Map` — иначе говоря, можно использовать `(thing)` вместо `(thing.id)`. Однако использование строки или числа, как правило, безопаснее, поскольку, ссылка на объект не изменится в случае, если он, например, будет обновлен свежими данными полученными с сервера по API.
+> You can use any object as the key, as Svelte uses a `Map` internally — in other words you could do `(thing)` instead of `(thing.id)`. Using a string or number is generally safer, however, since it means identity persists without referential equality, for example when updating with fresh data from an API server.

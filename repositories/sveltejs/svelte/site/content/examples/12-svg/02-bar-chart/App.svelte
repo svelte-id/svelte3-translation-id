@@ -81,21 +81,21 @@
 	}
 </style>
 
-<h2>Рождаемость в США по годам</h2>
+<h2>US birthrate by year</h2>
 
 <div class="chart" bind:clientWidth={width} bind:clientHeight={height}>
 	<svg>
-		<!-- ось y -->
+		<!-- y axis -->
 		<g class="axis y-axis" transform="translate(0,{padding.top})">
 			{#each yTicks as tick}
 				<g class="tick tick-{tick}" transform="translate(0, {yScale(tick) - padding.bottom})">
 					<line x2="100%"></line>
-					<text y="-4">{tick} {tick === 20 ? ' на 1,000 населения' : ''}</text>
+					<text y="-4">{tick} {tick === 20 ? ' per 1,000 population' : ''}</text>
 				</g>
 			{/each}
 		</g>
 
-		<!-- ось x -->
+		<!-- x axis -->
 		<g class="axis x-axis">
 			{#each points as point, i}
 				<g class="tick" transform="translate({xScale(i)},{height})">

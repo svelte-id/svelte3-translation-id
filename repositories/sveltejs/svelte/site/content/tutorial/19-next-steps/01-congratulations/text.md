@@ -1,11 +1,11 @@
 ---
-title: Поздравляем!
+title: Congratulations!
 ---
 
-Вы закончили изучение Svelte и готовы приступить к созданию приложений. Вы можете в любое время вернуться к отдельным главам этого учебника —  кликните по заголовку выше, чтобы открыть список разделов. Кроме того вы можете продолжить обучение посмотрев [документацию API](docs), [примеры](examples) и [блог](blog). Также  обо всех новостях читайте в нашем Twitter [@sveltejs](https://twitter.com/sveltejs).
+You've now finished the Svelte tutorial and are ready to start building apps. You can refer back to individual chapters at any time (click the title above to reveal a dropdown) or continue your learning via the [API reference](docs), [Examples](examples) and [Blog](blog). If you're a Twitter user, you can get updates via [@sveltejs](https://twitter.com/sveltejs).
 
-Чтобы настроить свою локальную среду разработки, ознакомьтесь с [руководством по быстрому запуску](blog/the-easiest-way-to-get-started).
+To get set up in your local development environment, check out [the quickstart guide](blog/the-easiest-way-to-get-started).
 
-Если вам нужен фреймворк с дополнительными возможностями, который умеет делать маршрутизацию, рендеринг на стороне сервера и все остальное, взгляните на [Sapper](https://ru.sapper.svelte.dev).
+If you're looking for a more expansive framework that includes routing, server-side rendering and everything else, take a look at [Sapper](https://sapper.svelte.dev).
 
-Самое главное: поскольку вы теперь являетесь участником сообщества Svelte, вам следует присоединиться к нашему [чату Discord](chat) и к русскоязычному [каналу в Telegram](https://t.me/sveltejs). Там вы найдете других пользователей Svelte, и именно там мы обсуждаем будущее фреймворка.
+Most importantly: since you're now a member of the Svelte community, you should [join our friendly Discord chatroom](chat). That's where you'll find fellow Svelte users, and it's where we plan the future of the framework.

@@ -1,32 +1,34 @@
 ---
-title: Нативные приложения на Svelte
-description: Svelte и NativeScript теперь вместе
+title: Svelte Goes Native
+description: Svelte comes to NativeScript
 pubdate: 2019-02-28
 author: Halfnelson
 authorURL: https://twitter.com/halfnelson_au/
 ---
 
-Svelte — это веб-фреймворк следующего поколения, который компилирует код вашего компонента в быстрые, эффективные манипуляции с DOM на ванильном JavaScript.
+Svelte is a next gen web framework that compiles your component code into fast, efficient, vanilla javascript DOM manipulations. 
 
-Nativescript предоставляет доступ к нативным API iOS как к ванильным объектам JavaScript.
+Nativescript takes the native api surface of iOS and Android and exposes them as vanilla javascript objects.
 
-Svelte Native — это библиотека, в которой к визуальным компонентам NativeScripts предоставляется доступ как к DOM элементам, которыми могут управлять компоненты Svelte.
+Svelte Native is a library that exposes NativeScripts view objects as DOM elements which can be manipulated by Svelte components.
 
 ![nativescript + svelte = svelte-native](/logos_combined.svg)
 
 
-### Но разве NativeScript уже не предлагает поддержку Vue и Angular?
 
-Предлагает!, и они даже поддерживаются разработчиками NativeScript. Однако, сочетание крошечного размера  Svelte-приложений, лаконичности кода компонентов и сверхэффективного обновлений DOM дают нам уникальный набор, который кажется очень подходящим для мобильной разработки.
+### But doesn't NativeScript already offer Vue and Angular support?
+
+It does!, and they are supported by the nativescript developers. However the marriage of Svelte's tiny payload size, low boilerplate component definitions, and hyper efficient DOM updates seem like a great fit for mobile development.
 
 
-### На что это похоже
+
+### What does it look like
 
 ```html
 <page xmlns="tns" class="page">
-    <actionBar title="Нативное приложение Svelte" class="action-bar" />
+    <actionBar title="Svelte Native App" class="action-bar" />
     <stackLayout class="p-20">
-        <label text="Нажми кнопку" class="h1 text-center" />
+        <label text="Tap the button" class="h1 text-center" />
         <button text="TAP" on:tap="{ () => counter-- }" class="btn btn-primary btn-active" />
         <label class="h2 text-center" textWrap="true">{message}</label>
     </stackLayout>
@@ -36,10 +38,10 @@ Svelte Native — это библиотека, в которой к визуал
     let counter = 42;
     let message;
     $: message = (counter <= 0)
-                    ? "Ю-у-у-х-у! Вы разблокировали достижение — Кликер Svelte-Native!"
-                    : `Осталось нажатий: ${counter}`
+                    ? "Hoorraaay! You unlocked the Svelte-Native clicker achievement!"
+                    : `${counter} taps left`
 </script>
 ```
 
-Чтобы начать работу со Svelte-Native, почитайте [Документацию](/docs) или пройдите уроки в [Учебнике](/tutorial).
+Jump into the [Docs](/docs) or follow the [Tutorial](/tutorial) to get started.
 

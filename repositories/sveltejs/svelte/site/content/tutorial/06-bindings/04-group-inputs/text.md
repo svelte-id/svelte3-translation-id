@@ -1,29 +1,29 @@
 ---
-title: Группы полей
+title: Group inputs
 ---
 
-Если у вас есть несколько полей, относящихся к одному и тому же значению, вы можете использовать `bind:group` совместно с атрибутом `value`. Радиокнопки в одной группе будут давать `value` выбранной кнопки, а сгруппированные чекбоксы образуют массив выбранных значений.
+If you have multiple inputs relating to the same value, you can use `bind:group` along with the `value` attribute. Radio inputs in the same group are mutually exclusive; checkbox inputs in the same group form an array of selected values.
 
-Добавьте `bind:group` к каждому элементу `input`:
+Add `bind:group` to each input:
 
 ```html
 <input type=radio bind:group={scoops} value={1}>
 ```
 
-В данном случае мы можем упростить код, поместив чекбоксы в блок `each`. Сначала добавьте переменную `menu` в блок `<script>`...
+In this case, we could make the code simpler by moving the checkbox inputs into an `each` block. First, add a `menu` variable to the `<script>` block...
 
 ```js
 let menu = [
-	'Печенье со сливками',
-	'Шоколадная крошка с мятой',
-	'Малиновый джем'
+	'Cookies and cream',
+	'Mint choc chip',
+	'Raspberry ripple'
 ];
 ```
 
-...а затем замените вторую часть:
+...then replace the second section:
 
 ```html
-<h2>Вкусы</h2>
+<h2>Flavours</h2>
 
 {#each menu as flavour}
 	<label>
@@ -33,4 +33,4 @@ let menu = [
 {/each}
 ```
 
-Теперь, добавить новые сочные вкусы в наше меню мороженного будет проще.
+It's now easy to expand our ice cream menu in new and exciting directions.

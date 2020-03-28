@@ -18,13 +18,13 @@
 </script>
 
 <button on:click={handleClick}>
-	получить случайное число
+	generate random number
 </button>
 
 {#await promise}
-	<p>...подождите</p>
+	<p>...waiting</p>
 {:then number}
-	<p>Число равно {number}</p>
+	<p>The number is {number}</p>
 {:catch error}
 	<p style="color: red">{error.message}</p>
 {/await}

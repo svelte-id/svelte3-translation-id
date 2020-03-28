@@ -1,17 +1,17 @@
 ---
-title: Многострочное текстовое поле
+title: Textarea inputs
 ---
 
-Элемент `<textarea>` в Svelte ведёт себя аналогично простому текстовому полю — используйте `bind:value`:
+The `<textarea>` element behaves similarly to a text input in Svelte — use `bind:value`:
 
 ```html
 <textarea bind:value={value}></textarea>
 ```
 
-При совпадении имени привязки и переменной, как в данном случае, можно использовать сокращённую форму:
+In cases like these, where the names match, we can also use a shorthand form:
 
 ```html
 <textarea bind:value></textarea>
 ```
 
-Это относится ко всем привязкам, а не только к элементу `<textarea>`.
+This applies to all bindings, not just textareas.

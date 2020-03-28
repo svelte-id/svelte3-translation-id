@@ -5,11 +5,11 @@
 
 <label>
 	<input type="checkbox" bind:checked={visible}>
-	показать
+	visible
 </label>
 
 {#if visible}
 	<p transition:fly="{{ y: 200, duration: 2000 }}">
-		Влетает и улетает
+		Flies in and out
 	</p>
 {/if}

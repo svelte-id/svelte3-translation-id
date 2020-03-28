@@ -1,12 +1,12 @@
 <script>
 	let cats = [
-		{ id: 'J---aiyznGQ', name: 'Кот на клавишных' },
-		{ id: 'z_AbfPXTKms', name: 'Мару' },
-		{ id: 'OUtn3pvWmpg', name: 'Экзистенциальный кот' }
+		{ id: 'J---aiyznGQ', name: 'Keyboard Cat' },
+		{ id: 'z_AbfPXTKms', name: 'Maru' },
+		{ id: 'OUtn3pvWmpg', name: 'Henri The Existential Cat' }
 	];
 </script>
 
-<h1>Знаменитые YouTube котики</h1>
+<h1>The Famous Cats of YouTube</h1>
 
 <ul>
 	{#each cats as { id, name }, i}

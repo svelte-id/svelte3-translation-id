@@ -6,5 +6,6 @@
 </script>
 
 <p>
-	Страница открылась {seconds} сек. назад
+	The page has been open for
+	{seconds} {seconds === 1 ? 'second' : 'seconds'}
 </p>

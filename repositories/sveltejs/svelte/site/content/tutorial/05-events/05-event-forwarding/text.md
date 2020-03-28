@@ -1,12 +1,12 @@
 ---
-title: Проброс событий
+title: Event forwarding
 ---
 
-В отличие от событий DOM, события компонентов не *всплывают* через иерархию компонентов. Если нужно словить событие из какого-либо глубоко вложенного компонента, промежуточные компоненты должны *пробросить* событие.
+Unlike DOM events, component events don't *bubble*. If you want to listen to an event on some deeply nested component, the intermediate components must *forward* the event.
 
-У нас есть такие же `App.svelte` и `Inner.svelte`, что и в [предыдущем уроке](tutorial/component-events), плюс к ним добавился компонент `Outer.svelte`, который содержит `<Inner/>`.
+In this case, we have the same `App.svelte` and `Inner.svelte` as in the [previous chapter](tutorial/component-events), but there's now an `Outer.svelte` component that contains `<Inner/>`.
 
-Один из способов передать событие через все компоненты — добавить `createEventDispatcher` в `Outer.svelte`, прослушать событие `message` и создать для него обработчик:
+One way we could solve the problem is adding `createEventDispatcher` to `Outer.svelte`, listening for the `message` event, and creating a handler for it:
 
 ```html
 <script>
@@ -21,9 +21,9 @@ title: Проброс событий
 </script>
 
 <Inner on:message={forward}/>
-``` 
+```
 
-Многовато кода, но в Svelte есть сокращённый вариант на такой случай — директива события `on:message`, без заданного значения, осуществляет проброс всех событий `message` вышестоящим компонентам.
+But that's a lot of code to write, so Svelte gives us an equivalent shorthand — an `on:message` event directive without a value means 'forward all `message` events'.
 
 ```html
 <script>

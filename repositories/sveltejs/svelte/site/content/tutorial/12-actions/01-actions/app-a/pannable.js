@@ -1,9 +1,9 @@
 export function pannable(node) {
-	// логика идет тут...
+	// setup work goes here...
 
 	return {
 		destroy() {
-			// ...тут подчищаем все концы
+			// ...cleanup goes here
 		}
 	};
 }

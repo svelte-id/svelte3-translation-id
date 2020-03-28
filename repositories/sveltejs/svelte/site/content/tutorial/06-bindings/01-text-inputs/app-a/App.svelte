@@ -1,7 +1,7 @@
 <script>
-	let name = 'мир';
+	let name = 'world';
 </script>
 
 <input value={name}>
 
-<h1>Привет, {name}!</h1>
+<h1>Hello {name}!</h1>

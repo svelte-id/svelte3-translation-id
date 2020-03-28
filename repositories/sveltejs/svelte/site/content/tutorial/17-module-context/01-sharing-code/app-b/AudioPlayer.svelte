@@ -26,7 +26,7 @@
 
 <article class:playing={!paused}>
 	<h2>{title}</h2>
-	<p><strong>{composer}</strong> / в исполнении {performer}</p>
+	<p><strong>{composer}</strong> / performed by {performer}</p>
 
 	<audio
 		bind:this={audio}

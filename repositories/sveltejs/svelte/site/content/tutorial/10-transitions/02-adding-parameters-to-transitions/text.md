@@ -1,8 +1,8 @@
 ---
-title: Добавление параметров
+title: Adding parameters
 ---
 
-Функции перехода могут принимать параметры. Замените переход `fade` на `fly`...
+Transition functions can accept parameters. Replace the `fade` transition with `fly`...
 
 ```html
 <script>
@@ -11,12 +11,12 @@ title: Добавление параметров
 </script>
 ```
 
-...и дополните элемент `<p>` такими параметрами:
+...and apply it to the `<p>` along with some options:
 
 ```html
 <p transition:fly="{{ y: 200, duration: 2000 }}">
-	Появляется и исчезает
+	Flies in and out
 </p>
 ```
 
-Обратите внимание, что переходы являются *обратимыми* — если вы переключите чекбокс во время выполнения перехода, он станет переходить обратно из текущей позиции, а не с начала или конца.
+Note that the transition is *reversible* — if you toggle the checkbox while the transition is ongoing, it transitions from the current point, rather than the beginning or the end.

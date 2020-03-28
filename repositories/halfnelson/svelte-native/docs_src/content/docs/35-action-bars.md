@@ -1,23 +1,23 @@
 ---
-title: Панель действий
+title: ActionBars
 ---
 
 ### ActionBar
 
-<div class="nsref"><a title="Документация NativeScript" href="https://docs.nativescript.org/api-reference/classes/_ui_action_bar_.actionbar">Описание класса</a></div>
+<div class="nsref"><a title="NativeScript Documentation" href="https://docs.nativescript.org/api-reference/classes/_ui_action_bar_.actionbar">Class Docs</a></div>
 
-`<actionBar>` — это UI компонент, который размещает панель инструментов вверху экрана. 
+`<actionBar>` is a UI component that provides a toolbar at the top of the activity window.
 
-Этот компонент является абстракцией NativeScript для [app bar](https://developer.android.com/training/appbar/) в Android и [navigation bar](https://developer.apple.com/design/human-interface-guidelines/ios/bars/navigation-bars/) в iOS.
+This component is the NativeScript abstraction for the Android [app bar](https://developer.android.com/training/appbar/) and the iOS [navigation bar](https://developer.apple.com/design/human-interface-guidelines/ios/bars/navigation-bars/).
 
 
-#### Использование заголовка
+#### Using a title
 
 ```html
 <actionBar title="MyApp" />
 ```
 
-#### Использование представления заголовка
+#### Using a custom title view
 
 ```html
 <actionBar>
@@ -28,32 +28,32 @@ title: Панель действий
 </actionBar>
 ```
 
-#### Установка иконки приложения для Android
+#### Setting an app icon for Android
 
 ```html
 <actionBar title="My App" android.icon="res://icon" android.iconVisibility="always" />
 ```
 
-#### Удаление границы
+#### Removing the border
 
-По умолчанию по низу `<actionBar>` рисуется граница. В дополнение к границе, на устройствах iOS также применяется фильтр полупрозрачности для `<actionBar>`.
+By default, a border is drawn at the bottom of the `<actionBar>`. In addition to the border, on iOS devices a translucency filter is also applied over the `<actionBar>`.
 
-Для того, чтобы убрать эту стилизацию, установите свойству `flat` значение `true`.
+To remove this styling from your app, you can set the `flat` property to `true`.
 
 ```html
 <actionBar title="My App" flat="true" />
 ```
 
-#### Свойства
+#### Props
 
-| Имя | Тип | Описание |
-|-----|-----|----------|
-| `title` | `String` | Возвращает или задаёт заголовок, отображаемый на панели.
-| `android.icon` | `String` | Возвращает или задаёт иконку, которая будет отображена на Android устройствах.
-| `android.iconVisibility` | `String` | Возвращает или задаёт видимость иконки на Android устройствах.
-| `flat` | `boolean` | Удаляет границу на Android и убирает полупрозрачность на iOS. По умолчанию: `false`.
+| Name | Type | Description |
+|------|------|-------------|
+| `title` | `String` | Gets or sets the title shown in the bar.
+| `android.icon` | `String` | Gets or sets the icon to be shown on Android devices.
+| `android.iconVisibility` | `String` | Gets or sets icon visibility on Android devices.
+| `flat` | `boolean` | Removes the border on Android and the translucency on iOS. Default value is `false`.
 
-#### Нативный компонент
+#### Native component
 
 | Android | iOS |
 |---------|-----|
@@ -62,40 +62,40 @@ title: Панель действий
 
 ### ActionItem
 
-<div class="nsref"><a title="Документация NativeScript" href="https://docs.nativescript.org/api-reference/classes/_ui_action_bar_.actionitem">Описание класса</a></div>
+<div class="nsref"><a title="NativeScript Documentation" href="https://docs.nativescript.org/api-reference/classes/_ui_action_bar_.actionitem">Class Docs</a></div>
 
-`<actionItem>` — UI компонент, который позволяет добавить кнопки на компонент панели действий `<actionBar>`.
+`<actionItem>` is a UI component that lets you add action buttons to the `<actionBar>` component.
 
 
-#### Основное использование
+#### Basic use
 
 ```html
 <actionBar title="My App">
   <actionItem on:tap="{onTapShare}"
     ios.systemIcon="9" ios.position="left"
     android.systemIcon="ic_menu_share" android.position="actionBar" />
-  <actionItem on:tap="onTapDelete"
+  <actionItem on:tap="{onTapDelete}"
     ios.systemIcon="16" ios.position="right"
     text="delete" android.position="popup" />
 </actionBar>
 ```
 
-#### Свойства
+#### Props
 
-| Имя | Тип | Описание |
-|-----|-----|----------|
-| `ios.systemIcon` | `Number` | Возвращает или задаёт иконку кнопки `ActionItem` для iOS. Значение должно быть числом из [Перечисление `UIBarButtonSystemItem`](https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIBarButtonItem_Class/#//apple_ref/c/tdef/UIBarButtonSystemItem).
-| `android.systemIcon` | `String` | Возвращает или задаёт иконку кнопки `ActionItem` для Android. Значение должно быть именем [drawable-ресурса](http://androiddrawables.com).
-| `ios.position` | `String` | Возвращает или задаёт позицию кнопки `ActionItem` на панели `ActionBar` для iOS.<br/>Допустимые значения: `left` или `right`.<br/>По умолчанию: `left`.
-| `android.position` | `String` | Возвращает или задаёт позицию `ActionItem` на панели `ActionBar` для Android.<br/>Допустимые значения:<br/>`actionBar` (размещает кнопку в панели действий)<br/>`popup` (размещает кнопку в меню опций; отрисовывается как текст)<br/>`actionBarIfRoom` (размещает кнопку в панели действий `ActionBar` при наличии свободного пространства; иначе, размещает кнопку в меню опций)<br/>По умолчанию: `actionBar`.
+| Name | Type | Description |
+|------|------|-------------|
+| `ios.systemIcon` | `Number` | Gets or sets the icon of the `ActionItem` for iOS. The value must be a number from the [`UIBarButtonSystemItem` enumeration](https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIBarButtonItem_Class/#//apple_ref/c/tdef/UIBarButtonSystemItem).
+| `android.systemIcon` | `String` | Gets or sets the icon of the `ActionItem` for Android. The value must be the name of a [drawable resource](https://developer.android.com/reference/android/R.drawable).
+| `ios.position` | `String` | Gets or sets the position of the `ActionItem` within the `ActionBar` for iOS.<br/>Valid values: `left` or `right`.<br/>Default value is `left`.
+| `android.position` | `String` | Gets or sets the position of the `ActionItem` within the `ActionBar` for Android.<br/>Valid values:<br/>`actionBar` (places the item in the ActionBar),<br/>`popup` (places the item in the options menu; renders items as text), and<br/>`actionBarIfRoom` (places the item in the `ActionBar` if there is enough room for it there; otherwise, places it in the options menu).<br/>Default value is `actionBar`.
 
-#### События
+#### Events
 
-| Имя | Описание |
-|-----|----------|
-| `tap`| Вызывается, когда пользователь тапает по `ActionItem`.
+| Name | Description |
+|------|-------------|
+| `tap`| Emitted when the `ActionItem` is tapped.
 
-#### Нативный компонент
+#### Native component
 
 | Android | iOS |
 |---------|-----|
@@ -104,11 +104,11 @@ title: Панель действий
 
 ### NavigationButton
 
-<div class="nsref"><a title="Документация NativeScript" href="https://docs.nativescript.org/api-reference/classes/_ui_action_bar_.navigationbutton">Описание класса</a></div>
+<div class="nsref"><a title="NativeScript Documentation" href="https://docs.nativescript.org/api-reference/classes/_ui_action_bar_.navigationbutton">Class Docs</a></div>
 
-`<navigationButton>` — UI компонент, который является абстракцией для кнопки навигации в Android и кнопки 'Назад' в iOS.
+`<navigationButton>` is a UI component that provides an abstraction for the Android navigation button and the iOS back button.
 
-Расширяет [`<actionItem>`](docs#actionitem).
+Extends [`<actionItem>`](docs#actionitem).
 
 
 ```html
@@ -117,20 +117,20 @@ title: Панель действий
 </actionBar>
 ```
 
-#### Свойства
+#### Props
 
-| Имя | Тип | Описание |
-|-----|-----|----------|
-| `text` | `String` | (только iOS) Задаёт текст кнопки.
-| `android.systemIcon` | `String` | (только Android) Задаёт иконку для кнопки. Можно указать любую системную иконку, чьё имя начинается с префикса `ic_`.  Полный список таких иконок можно посмотреть тут: [Android класс `R.drawable`](https://developer.android.com/reference/android/R.drawable.html).
+| Name | Type | Description |
+|------|------|-------------|
+| `text` | `String` | (iOS-only) Sets the text of the button.
+| `android.systemIcon` | `String` | (Android-only) The icon to be shown in the button. You can specify any system icon whose name begins with the `ic_` prefix. For a complete list of the available icons, see [the `R.drawable` Android class](https://developer.android.com/reference/android/R.drawable.html).
 
-#### События
+#### Events
 
-| Имя | Описание |
-|-----|----------|
-| `tap`| Вызывается, когда пользователь тапает по `<NavigationButton>`.
+| Name | Description |
+|------|-------------|
+| `tap`| Emitted when the `<navigationButton>` is tapped.
 
-#### Нативный компонент
+#### Native component
 
 | Android | iOS |
 |---------|-----|

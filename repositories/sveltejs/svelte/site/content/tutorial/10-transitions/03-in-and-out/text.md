@@ -1,20 +1,19 @@
 ---
-title: Переходы появления и исчезновения
+title: In and out
 ---
 
-Вместо одной директивы `transition`, элементу можно установить директивы на появление `in` и исчезновение `out` по раздельности:
-Импортируйте `fade` вместе с `fly`...
+Instead of the `transition` directive, an element can have an `in` or an `out` directive, or both together. Import `fade` alongside `fly`...
 
 ```js
 import { fade, fly } from 'svelte/transition';
 ```
 
-...затем замените директиву `transition` на отдельные директивы `in` и `out`:
+...then replace the `transition` directive with separate `in` and `out` directives:
 
 ```html
 <p in:fly="{{ y: 200, duration: 2000 }}" out:fade>
-	Влетает, исчезает
+	Flies in, fades out
 </p>
 ```
 
-При использовании этих директив переходы уже не будут *обратимыми*.
+In this case, the transitions are *not* reversed.

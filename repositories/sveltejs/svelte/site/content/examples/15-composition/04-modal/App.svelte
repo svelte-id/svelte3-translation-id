@@ -5,23 +5,25 @@
 </script>
 
 <button on:click="{() => showModal = true}">
-	показать модальное окно
+	show modal
 </button>
 
 {#if showModal}
 	<Modal on:close="{() => showModal = false}">
 		<h2 slot="header">
-			Окно
-			<small><em>существительное</em>  окно́</small>
+			modal
+			<small><em>adjective</em>  mod·al \ˈmō-dəl\</small>
 		</h2>
 
 		<ol class="definition-list">
-			<li>Отверстие в стене здания для света и воздуха.</li>
-			<li>Ничем не заполненный перерыв, пробел между уроками, лекциями, ведущий к потере времени преподавателя или учащихся.</li>
-			<li>Остаток водоема, открытое углубление в болоте, трясине.</li>
-			<li>Место, через которое можно выйти куда-нибудь, увидеть что-нибудь, завязать сношения с чем-нибудь, принять участие в чем-нибудь</li>
+			<li>of or relating to modality in logic</li>
+			<li>containing provisions as to the mode of procedure or the manner of taking effect —used of a contract or legacy</li>
+			<li>of or relating to a musical mode</li>
+			<li>of or relating to structure as opposed to substance</li>
+			<li>of, relating to, or constituting a grammatical form or category characteristically indicating predication</li>
+			<li>of or relating to a statistical mode</li>
 		</ol>
 
-		<a href="https://ru.wikipedia.org/wiki/%D0%A1%D0%BB%D0%BE%D0%B2%D0%B0%D1%80%D1%8C_%D0%A3%D1%88%D0%B0%D0%BA%D0%BE%D0%B2%D0%B0">Толковый словарь Ушакова</a>
+		<a href="https://www.merriam-webster.com/dictionary/modal">merriam-webster.com</a>
 	</Modal>
 {/if}

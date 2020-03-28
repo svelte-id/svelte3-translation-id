@@ -1,28 +1,29 @@
 ---
-title: Использование CSS-in-JS в Svelte
-description: Вам это не нужно, но вы можете
+title: Using CSS-in-JS with Svelte
+description: You don't need to, but you can
 author: Rich Harris
 authorURL: https://twitter.com/Rich_Harris
-translator: Alexey Schebelev
 ---
 
-CSS стили являются основной частью любого веб-приложения. И по определению, UI фреймворк без встроеных средств работы со стилями не будет полноценным.
+CSS is a core part of any web app. By extension, a UI framework that doesn't have a built-in way to add styles to your components is unfinished.
 
-Вот почему Svelte позволяет добавлять CSS стили в тег `<style>` *внутри* компонента. Совместное размещение вашего CSS вместе с HTML разметкой [решает самые большие проблемы, с которыми сталкиваются разработчики при написании CSS](/blog/the-zen-of-just-writing-css), при этом избегая новых проблем, одновременно предлагая совершенно прекрасный опыт разработки.
+That's why Svelte allows you to add CSS in a component's `<style>` tag. Co-locating your CSS with your markup means we can [solve the biggest problems developers face when writing CSS](/blog/the-zen-of-just-writing-css) without introducing new ones, all while providing a rather nice development experience.
 
-Но всё же у Svelte имеются некоторые ограничения при обработке стилей. Например, сложно шарить стили между компонентами или оптимизировать стили всего приложения целиком. Это те области, которыми мы планируем заняться в будущих версиях, а пока, если вам нужны эти вещи, используйте любую, независящую от фреймворков, библиотеку CSS-in-JS.
+But Svelte's style handling does have some limitations. It's too difficult to share styles between components, or apply app-level optimisations. These are areas we plan to address in future versions, but in the meantime if you need those things you can use any framework-agnostic CSS-in-JS library.
 
 
-## Пример
+## For example
 
-Можно использовать библиотеку [Emotion](https://emotion.sh) для генерации изолированных имён классов в отельно взятой области видимости, которые можно использовать сразу в нескольких компонентах:
+Here, we're using [Emotion](https://emotion.sh) to generate scoped class names that can be used across multiple components:
 
-<iframe
-	title="Пример Emotion"
-	src="/repl/embed?example=blog-svelte-css-in-js"
-	scrolling="no"
-></iframe>
+<div class="max">
+	<iframe
+		title="Aphrodite example"
+		src="/repl/embed?example=blog-svelte-css-in-js"
+		scrolling="no"
+	></iframe>
+</div>
 
-Важно понимать, что большинство библиотек CSS-in-JS работают в своей среде выполнения и не поддерживают статическое извлечение стилей в отдельный файл <code>.css</code> во время сборки (а это важно для производительности). Поэтому рекомендую использовать CSS-in-JS, только если это реально необходимо для вашего приложения!
-В некоторых случаях, хорошим решением будет сочетание, встроенной в Svelte, обработки CSS стилей вместе с дополнительным использованием CSS-in-JS библиотеки.
+It's important to note that most CSS-in-JS libraries have a runtime library, and many don't support statically extracting styles out into a separate <code>.css</code> file at build time (which is essential for the best performance). You should therefore only use CSS-in-JS if it's necessary for your application!
 
+Note that you can mix-and-match — you can still use Svelte's built-in CSS handling alongside a CSS-in-JS library.

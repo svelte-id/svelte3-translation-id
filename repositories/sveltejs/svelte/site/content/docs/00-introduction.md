@@ -1,9 +1,9 @@
 ---
-title: Pemberitahuan Penting
+title: Before we begin
 ---
 
-Bagian ini berisi dokumentasi terperinci mengenai referensi API yang ditujukan untuk orang-orang yang sudah terbiasa dengan Svelte.
+This page contains detailed API reference documentation. It's intended to be a resource for people who already have some familiarity with Svelte.
 
-Jika Anda belum sempat berkenalan dengan _framework_ kami, lakukan di [Tutorial interaktif] (tutorial) atau lihat [contoh] (examples) - setelah itu dokumentasi ini akan lebih bermanfaat bagi Anda.
+If that's not you (yet), you may prefer to visit the [interactive tutorial](tutorial) or the [examples](examples) before consulting this reference.
 
-Jangan ragu untuk meminta bantuan kami di grup Telegram berbahasa Indonesia [@svelte_id] (https://t.me/svelte_id).
+Don't be shy about asking for help in the [Discord chatroom](chat).

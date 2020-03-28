@@ -1,1 +1,1 @@
-<p>...не влияют на этот элемент</p>
+<p>...don't affect this element</p>

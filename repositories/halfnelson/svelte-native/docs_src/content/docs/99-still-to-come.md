@@ -2,4 +2,4 @@
 title: TODO...
 ---
 
-Эта документация все еще находится в стадии разработки, как и сам Svelte Native. Если вы нашли определенные вещи, которые отсутствуют или могут быть улучшены, напишите в [Issues на GitHub](https://github.com/halfnelson/svelte-native)!
+This documentation is still a work-in-progress, like Svelte Native itself. If there are particular things that are missing or could be improved, then [please raise an issue on GitHub](https://github.com/halfnelson/svelte-native)!

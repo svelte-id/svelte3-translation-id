@@ -1,15 +1,15 @@
 ---
-title: Тег @debug
+title: The @debug tag
 ---
 
-Иногда полезно проследить за данными, когда они проходят по вашему приложению.
+Occasionally, it's useful to inspect a piece of data as it flows through your app.
 
-Обычно используют вызов `console.log(...)` внутри разметки. Однако, если вы хотите приостановить выполнение приложения в данной точке, вы можете использовать тег `{@debug ...}` со списком интересующих переменных, разделенных запятыми:
+One approach is to use `console.log(...)` inside your markup. If you want to pause execution, though, you can use the `{@debug ...}` tag with a comma-separated list of values you want to inspect:
 
 ```html
 {@debug user}
 
-<h1>Привет, {user.firstname}!</h1>
+<h1>Hello {user.firstname}!</h1>
 ```
 
-Теперь, если открыть инструменты разработчика и начать изменять текстовые поля, то сразу же при изменении значения `user` запустится отладчик.
+If you now open your devtools and start interacting with the `<input>` elements, you'll trigger the debugger as the value of `user` changes.

@@ -6,7 +6,6 @@
 
 	export let page;
 
-	let previous_page;
 	let items;
 	let offset;
 
@@ -41,7 +40,7 @@
 		<Summary {item} {i} {offset}/>
 	{/each}
 
-	<a href="#/top/{page + 1}">страница {page + 1}</a>
+	<a href="#/top/{page + 1}">page {page + 1}</a>
 {:else}
-	<p class="loading">загрузка...</p>
+	<p class="loading">loading...</p>
 {/if}

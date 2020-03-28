@@ -1,8 +1,8 @@
 ---
-title: Сокращение для директивы class
+title: Shorthand class directive
 ---
 
-Часто имя класса совпадает с именем значения, от которого оно зависит:
+Often, the name of the class will be the same as the name of the value it depends on:
 
 ```html
 <div class:big={big}>
@@ -10,7 +10,7 @@ title: Сокращение для директивы class
 </div>
 ```
 
-В таких случаях мы можем использовать сокращенную форму:
+In those cases we can use a shorthand form:
 
 ```html
 <div class:big>

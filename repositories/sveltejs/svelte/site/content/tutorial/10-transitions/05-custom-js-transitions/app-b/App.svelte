@@ -8,7 +8,6 @@
 		);
 
 		if (!valid) {
-			//Переход работает только для элементов, содержащих внутри только текст
 			throw new Error(`This transition only works on elements with a single text node child`);
 		}
 
@@ -27,11 +26,11 @@
 
 <label>
 	<input type="checkbox" bind:checked={visible}>
-	показать
+	visible
 </label>
 
 {#if visible}
 	<p in:typewriter>
-		Съешь же ещё этих мягких французских булок, да выпей чаю
+		The quick brown fox jumps over the lazy dog
 	</p>
 {/if}

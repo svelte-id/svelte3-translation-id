@@ -1,54 +1,54 @@
 <script>
 	let scoops = 1;
-	let flavours = ['Шоколадная крошка с мятой'];
+	let flavours = ['Mint choc chip'];
 
 	function join(flavours) {
 		if (flavours.length === 1) return flavours[0];
-		return `${flavours.slice(0, -1).join(', ')} и ${flavours[flavours.length - 1]}`;
+		return `${flavours.slice(0, -1).join(', ')} and ${flavours[flavours.length - 1]}`;
 	}
 </script>
 
-<h2>Размер</h2>
+<h2>Size</h2>
 
 <label>
 	<input type=radio group={scoops} value={1}>
-	Один шарик
+	One scoop
 </label>
 
 <label>
 	<input type=radio group={scoops} value={2}>
-	Два шарика
+	Two scoops
 </label>
 
 <label>
 	<input type=radio group={scoops} value={3}>
-	Три шарика
+	Three scoops
 </label>
 
-<h2>Вкусы</h2>
+<h2>Flavours</h2>
 
 <label>
-	<input type=checkbox group={flavours} value="Печенье со сливками">
-	Печенье со сливками
-</label>
-
-<label>
-	<input type=checkbox group={flavours} value="Шоколадная крошка с мятой">
-	Шоколадная крошка с мятой
+	<input type=checkbox group={flavours} value="Cookies and cream">
+	Cookies and cream
 </label>
 
 <label>
-	<input type=checkbox group={flavours} value="Малиновый джем">
-	Малиновый джем
+	<input type=checkbox group={flavours} value="Mint choc chip">
+	Mint choc chip
+</label>
+
+<label>
+	<input type=checkbox group={flavours} value="Raspberry ripple">
+	Raspberry ripple
 </label>
 
 {#if flavours.length === 0}
-	<p>Выберите хотя бы один вкус</p>
+	<p>Please select at least one flavour</p>
 {:else if flavours.length > scoops}
-	<p>Нельзя выбрать вкусов больше, чем шариков!</p>
+	<p>Can't order more flavours than scoops!</p>
 {:else}
 	<p>
-		Вы заказали {scoops} {scoops === 1 ? 'шарик' : 'шарика'}:
-		{join(flavours)}
+		You ordered {scoops} {scoops === 1 ? 'scoop' : 'scoops'}
+		of {join(flavours)}
 	</p>
 {/if}

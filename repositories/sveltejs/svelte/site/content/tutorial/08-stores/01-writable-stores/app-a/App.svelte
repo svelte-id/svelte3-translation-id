@@ -11,7 +11,7 @@
 	});
 </script>
 
-<h1>Счётчик равен {count_value}</h1>
+<h1>The count is {count_value}</h1>
 
 <Incrementer/>
 <Decrementer/>

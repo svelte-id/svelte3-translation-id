@@ -1,7 +1,7 @@
 <script>
 	let src = 'tutorial/image.gif';
-	let name = 'Рик Эстли';
+	let name = 'Rick Astley';
 </script>
 
-<!-- {src} — это сокращение для src={src} -->
-<img {src} alt="{name} танцует">
+<!-- {src} is short for src={src} -->
+<img {src} alt="{name} dancing">

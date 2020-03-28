@@ -2,7 +2,7 @@
 title: <svelte:head>
 ---
 
-Элемент `<svelte:head>` позволяет вставлять содержимое внутрь блока `<head>` вашего приложения:
+The `<svelte:head>` element allows you to insert elements inside the `<head>` of your document:
 
 ```html
 <svelte:head>
@@ -10,5 +10,4 @@ title: <svelte:head>
 </svelte:head>
 ```
 
-
-> В режиме рендеринга на стороне сервера (SSR) содержимое `<svelte:head>` возвращается отдельно от остальной части HTML разметки.
+> In server-side rendering (SSR) mode, contents of `<svelte:head>` are returned separately from the rest of your HTML.

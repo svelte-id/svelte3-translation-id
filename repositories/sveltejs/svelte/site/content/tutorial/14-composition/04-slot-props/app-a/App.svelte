@@ -18,9 +18,9 @@
 <Hoverable>
 	<div class:active={hovering}>
 		{#if hovering}
-			<p>На меня навели.</p>
+			<p>I am being hovered upon.</p>
 		{:else}
-			<p>Наведи на меня!</p>
+			<p>Hover over me!</p>
 		{/if}
 	</div>
 </Hoverable>

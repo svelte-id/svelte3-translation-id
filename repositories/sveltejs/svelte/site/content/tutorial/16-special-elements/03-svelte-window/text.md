@@ -2,12 +2,12 @@
 title: <svelte:window>
 ---
 
-Вы можете добавлять обработчики событий не только к любому элементу в DOM, но и к объекту `window`, используя специальный элемент `<svelte:window>`.
+Just as you can add event listeners to any DOM element, you can add event listeners to the `window` object with `<svelte:window>`.
 
-В строке №33, добавьте обработчик для события `keydown`:
+On line 33, add the `keydown` listener:
 
 ```html
 <svelte:window on:keydown={handleKeydown}/>
 ```
 
-> Как и в случае с элементами DOM, можно добавить [модификаторы событий](tutorial/event-modifiers), например `preventDefault`.
+> As with DOM elements, you can add [event modifiers](tutorial/event-modifiers) like `preventDefault`.

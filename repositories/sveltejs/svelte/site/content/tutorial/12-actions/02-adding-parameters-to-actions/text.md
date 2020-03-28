@@ -1,12 +1,12 @@
 ---
-title: Добавление параметров
+title: Adding parameters
 ---
 
-Аналогично переходам и анимациям, действия могут принимать аргумент, который будет передан функции действия после ссылки на соответствующий HTML-элемент.
+Like transitions and animations, an action can take an argument, which the action function will be called with alongside the element it belongs to.
 
-В этом уроке мы используем действие обрабатывающее длинное нажатие, посылающее событие `longpress` всякий раз, когда пользователь зажимает кнопку на определённое время. Но на данный момент, если вы заглянете в файл `longpress.js`, вы увидите, что там задано фиксированное время в 500мс.
+Here, we're using a `longpress` action that fires an event with the same name whenever the user presses and holds the button for a given duration. Right now, if you switch over to the `longpress.js` file, you'll see it's hardcoded to 500ms.
 
-Измените функцию действия, чтобы она принимала второй аргумент `duration` и предавала его в вызов функции `setTimeout`:
+We can change the action function to accept a `duration` as a second argument, and pass that `duration` to the `setTimeout` call:
 
 ```js
 export function longpress(node, duration) {
@@ -22,16 +22,17 @@ export function longpress(node, duration) {
 
 	// ...
 }
+```
 
-Вернитесь к файлу `App.svelte`, и передайте действию параметр `duration`:
+Back in `App.svelte`, we can pass the `duration` value to the action:
 
 ```html
 <button use:longpress={duration}
 ```
 
-Это *почти* рабочий вариант — событие произойдёт через 2 секунды нажатия кнопки. Но если вы уменьшите значение задержки, событие всё равно произойдет через 2 секунды.
+This *almost* works — the event now only fires after 2 seconds. But if you slide the duration down, it will still take two seconds.
 
-Чтобы это исправить, нужно добавить метод `update` в файле `longpress.js`. Он будет вызываться всякий раз при изменении параметра.
+To change that, we can add an `update` method in `longpress.js`. This will be called whenever the argument changes:
 
 ```js
 return {
@@ -42,4 +43,4 @@ return {
 };
 ```
 
-> Если нужно передать несколько параметров в действие, сгруппируйте их в объект, например `use:longpress={{duration, spiciness}}`
+> If you need to pass multiple arguments to an action, combine them into a single object, as in `use:longpress={{duration, spiciness}}`

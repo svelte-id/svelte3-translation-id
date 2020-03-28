@@ -1,82 +1,82 @@
 ---
-title: Навигация/Маршруты
+title: Navigation/Routing
 ---
 
-Так как Svelte Native — это тонкая прослойка между Svelte и NativeScript. Лучше всего, если вы ознакомитесь с основной концепцией [маршрутизации в NativeScript](https://docs.nativescript.org/core-concepts/navigation)
+Since Svelte Native is a thin bridge between Svelte and NativeScript. It is best if you familiarize yourself with the core concept of [routing in NativeScript](https://docs.nativescript.org/core-concepts/navigation).
 
-Маршрутизация в Svelte Native устроена очень похожим образом. Модуль `svelte-native` предоставляет следующие функции:
+Routing in Svelte Native is designed to be very similar and the `svelte-native` module exposes the following functions:
 
 ### navigate
 
-Укажите страницу назначения в обязательной опции `page`, которая принимает экземпляр компонента `Svelte`.
+Specify the destination page with the mandatory `page` option. This takes a `Svelte` component class.
 
 ```html
 <!--{ filename: 'App.svelte' }-->
 <page>
-    <actionBar title="Master" />
-    <stackLayout>
-        <button text="To Details directly" on:tap="{ () => navigate({ page: Detail }) }" />
-    </stackLayout>
+  <actionBar title="Master" />
+  <stackLayout>
+    <button text="To Details directly" on:tap="{ () => navigate({ page: Detail }) }" />
+  </stackLayout>
 </page>
 
 <script>
-    import Detail from './Detail.svelte'
-    import { navigate } from 'svelte-native'
+  import Detail from './Detail.svelte'
+  import { navigate } from 'svelte-native'
 </script>
 ```
 
-#### Передача свойств в компонент
+#### Passing props to the target component
 
-Вы можете передать свойства, требуемые компонентом Svelte, используя опцию `props`.
+You can specify the props used to create the Svelte component using the `props` option.
 
 ```html
 <!--{ filename: 'App.svelte' }-->
 <page>
-    <actionBar title="Master" />
-    <stackLayout>
-        <button text="To Details directly" on:tap="{showDetailWithProps}" />
-    </stackLayout>
+  <actionBar title="Master" />
+  <stackLayout>
+    <button text="To Details directly" on:tap="{showDetailWithProps}" />
+  </stackLayout>
 </page>
 
 <script>
-    import Detail from './Detail.svelte'
-    import { navigate } from 'svelte-native'
+  import Detail from './Detail.svelte'
+  import { navigate } from 'svelte-native'
 
-    function showDetailWithProps() {
-        navigate({ 
-            page: Detail,
-            props: { message: "Hello from master" }
-        });
-    }
+  function showDetailWithProps() {
+    navigate({
+      page: Detail,
+      props: { message: "Hello from master" }
+    })
+  }
 </script>
 ```
 
-#### Указание фрейма
+#### Specifying a Frame
 
-Каждый элемент `<frame>` имеет свой собственный стек навигации. Если вы используете несколько фреймов, вы можете явно указать, в каком фрейме должна происходить навигация. Например, такая необходимость может возникнуть в ситуации, когда есть приложение с кнопкой на боковой панели, которая сменяет страницу в основной области. Это можно сделать, добавив опцию `frame`:
+Each `<frame>` element has its own navigation stack. If you are using multiple frames, you may want to specify in which frame the navigation will occur. For example, having a button in the sidebar that changes the page in the main area. You can do this by adding the `frame` option:
 
 ```js
-navigate({ 
-    page: Detail,
-    frame: '<id, ссылка или экземпляр>'
-});
+navigate({
+  page: Detail,
+  frame: '<id, or ref, or instance>'
+})
 ```
 
-Значениями параметра `frame` могут быть:
-* идентификатор `id` компонента `<frame>` (например: `<frame id="main-frame">`)
-* ссылка на элемент `<frame>` (например: `<frame bind:this="{mainFrame}">`)
-* экземпляр объекта NativeScript `Frame`.
+The value for the `frame` option can be one of the following:
 
-Если фрейм не указан, навигация будет выполняться в [самом верхнем](https://docs.nativescript.org/api-reference/modules/_ui_frame_#topmost) фрейме.
+* the `id` of the `<frame>` component (for example: `<frame id="main-frame">`)
+* a reference to the `<frame>` (for example: `<frame bind:this="{mainFrame}">`)
+* a NativeScript `Frame` instance.
 
-#### Другие опции
+If no frame is specified, the navigation will occur on the [topmost](https://docs.nativescript.org/api-reference/modules/_ui_frame_#topmost) frame.
 
-Для получения дополнительной информации об опциях, которые вы можете передать, см. раздел [NavigationEntry](https://docs.nativescript.org/api-reference/interfaces/_ui_frame_.navigationentry).
+#### Other Options
 
+For more information about the options that you can pass, see [NavigationEntry](https://docs.nativescript.org/api-reference/interfaces/_ui_frame_.navigationentry).
 
 ### goBack
 
-Для перехода на предыдущую страницу, используйте функцию `goBack`.
+To navigate back to a previous page, use the `goBack` function.
 
 ```html
 <!--{filename: 'App.svelte'}-->
@@ -88,42 +88,41 @@ navigate({
 </page>
 
 <script>
-import { goBack } from 'svelte-native'
+  import { goBack } from 'svelte-native'
 </script>
 ```
 
-Чтобы переход назад произошел в другом фрейме, передайте ссылку или идентификатор кадра в опцию `frame`.
+To cause the back to happen on another frame, pass in a frame reference or id to the  `frame` option.
 
 ```js
-  goBack({frame: 'sub-nav-frame'})
+goBack({ frame: 'sub-nav-frame' })
 ```
 
-`goBack` по умолчанию возвращается на предыдущую страницу, но вы можете вернуться сразу на несколько страниц назад, если укажите в опциях ссылку на страницу `page`.
+`goBack` by default goes back to the previous page, you can go back multiple pages if you specify a `page` reference in options.
 
 ```js
-  goBack({to: options_page_ref})
+goBack({ to: options_page_ref })
 ```
 
 ### showModal
 
-Для отображения страницы или компонента в модальном окне используйте функцию `showModal`. Укажите страницу, которую нужно открыть опцией `page`, а свойства передайте в `props` (как в [navigate](#navigate)).
+To show a page or component modally use the `showModal` function. Specify the page to open using the `page` option and props using the `props` option (just like in [navigate](#navigate)).
 
 ```html
 <!--{ filename: 'App.svelte'} -->
 <page>
-   <actionBar title="Master" />
-   <stackLayout>
-     <button text="Open Modal" on:tap="{launchModal}" />
-   </stackLayout>
+  <actionBar title="Master" />
+  <stackLayout>
+    <button text="Open Modal" on:tap="{launchModal}" />
+  </stackLayout>
 </page>
 
-
 <script>
-    import DetailPage from './DetailPage.svelte'
-    import { showModal } from 'svelte-native'
-    function launchModal() {
-        showModal({ page: DetailPage, props: { msg: 'hi' } })
-    }
+  import DetailPage from './DetailPage.svelte'
+  import { showModal } from 'svelte-native'
+  function launchModal() {
+    showModal({ page: DetailPage, props: { msg: 'hi' } })
+  }
 </script>
 ```
 
@@ -131,40 +130,40 @@ import { goBack } from 'svelte-native'
 <!--{filename: "DetailPage.svelte" }-->
 <frame id="detail-page-frame">
   <page>
-    
+    <label text="Detail Page" />
   </page>
 </frame>
 ```
 
-Другие доступные параметры напрямую соответствуют параметрам в [ShowModalOptions](https://docs.nativescript.org/api-reference/interfaces/_ui_core_view_base_.showmodaloptions) и передаются в базовый метод NativeScript showModal.
+The other options available correspond directly to those in [ShowModalOptions](https://docs.nativescript.org/api-reference/interfaces/_ui_core_view_base_.showmodaloptions) and are passed through to the underlying NativeScript showModal method.
 
-Функция `showModal` возвращает промис, который выполняется, когда что-либо возвращается функцией `closeModal`.
+The `showModal` function returns a promise which resolves to whatever is passed to `closeModal`.
 
-> **ПРИМИЧАНИЕ** Модальное окно открывается в новом контексте навигации. Если вам требуется совершить навигацию в приложении из модального окна или показать панель действий, вам нужно будет обернуть целевую страницу в элемент `frame`. Если вам не нужна какая-либо навигация, то в этом нет необходимости.
-
+> **NOTE** The modal is opened in a new navigation context. If you want to allow navigation within the modal, or show an action bar, you will need to wrap the target page in a `frame` element. If you don't need any navigation within the modal then this won't be necessary.
 
 ### closeModal
 
-Функция `closeModal` закрывает текущее модальное окно и опционально возвращает значение туда, откуда была вызвана функция `showModal` в виде результата промиса.
+The `closeModal` function closes the current modal view and optionally returns a value to the caller of the original `showModal` via a promise result.
 
 ```html
 <!--{ filename: 'App.svelte'} -->
 <page>
-   <actionBar title="Master" />
-   <stackLayout>
-     <button text="Open Modal" on:tap="{launchModal}" />
-     <label text="{modalResult}" />
-   </stackLayout>
+  <actionBar title="Master" />
+  <stackLayout>
+    <button text="Open Modal" on:tap="{launchModal}" />
+    <label text="{modalResult}" />
+  </stackLayout>
 </page>
-<script>
-    import DetailPage from './DetailPage.svelte'
-    import { showModal } from 'svelte-native'
 
-    let modalResult = "Waiting for modal"
-    async function launchModal() {
-        let result = await showModal({ page: DetailPage, props: { msg: 'hi' } })
-        modalResult = `got result: ${result}`
-    }
+<script>
+  import DetailPage from './DetailPage.svelte'
+  import { showModal } from 'svelte-native'
+
+  let modalResult = "Waiting for modal"
+  async function launchModal() {
+    let result = await showModal({ page: DetailPage, props: { msg: 'hi' } })
+    modalResult = `got result: ${result}`
+  }
 </script>
 ```
 
@@ -175,10 +174,8 @@ import { goBack } from 'svelte-native'
     <button text="Close me" on:tap="{ () => closeModal('hi from modal') }" />
   </page>
 </frame>
+
 <script>
   import { closeModal } from 'svelte-native'
 </script>
 ```
-
-
-

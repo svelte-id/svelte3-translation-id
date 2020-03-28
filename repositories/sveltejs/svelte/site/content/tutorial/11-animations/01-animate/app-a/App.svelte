@@ -23,12 +23,12 @@
 	let uid = 1;
 
 	let todos = [
-		{ id: uid++, done: false, description: 'написать что-нибудь в документацию' },
-		{ id: uid++, done: false, description: 'начать писать статью в блог' },
-		{ id: uid++, done: true, description: 'купить молока' },
-		{ id: uid++, done: false, description: 'покосить газон' },
-		{ id: uid++, done: false, description: 'покормить черепашку' },
-		{ id: uid++, done: false, description: 'пофиксить пару багов' },
+		{ id: uid++, done: false, description: 'write some docs' },
+		{ id: uid++, done: false, description: 'start writing blog post' },
+		{ id: uid++, done: true,  description: 'buy some milk' },
+		{ id: uid++, done: false, description: 'mow the lawn' },
+		{ id: uid++, done: false, description: 'feed the turtle' },
+		{ id: uid++, done: false, description: 'fix some bugs' },
 	];
 
 	function add(input) {
@@ -55,12 +55,12 @@
 
 <div class='board'>
 	<input
-		placeholder="что нужно сделать?"
+		placeholder="what needs to be done?"
 		on:keydown={e => e.which === 13 && add(e.target)}
 	>
 
 	<div class='left'>
-		<h2>задачи</h2>
+		<h2>todo</h2>
 		{#each todos.filter(t => !t.done) as todo (todo.id)}
 			<label
 				in:receive="{{key: todo.id}}"
@@ -68,13 +68,13 @@
 			>
 				<input type=checkbox on:change={() => mark(todo, true)}>
 				{todo.description}
-				<button on:click="{() => remove(todo)}">удалить</button>
+				<button on:click="{() => remove(todo)}">remove</button>
 			</label>
 		{/each}
 	</div>
 
 	<div class='right'>
-		<h2>готово</h2>
+		<h2>done</h2>
 		{#each todos.filter(t => t.done) as todo (todo.id)}
 			<label
 				class="done"
@@ -83,7 +83,7 @@
 			>
 				<input type=checkbox checked on:change={() => mark(todo, false)}>
 				{todo.description}
-				<button on:click="{() => remove(todo)}">удалить</button>
+				<button on:click="{() => remove(todo)}">remove</button>
 			</label>
 		{/each}
 	</div>

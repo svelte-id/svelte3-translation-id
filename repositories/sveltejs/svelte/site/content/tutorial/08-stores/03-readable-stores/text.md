@@ -1,10 +1,10 @@
 ---
-title: Хранилища только для чтения
+title: Readable stores
 ---
 
-Не все хранилища должны быть доступны для записи своим подписчикам. Например, у вас может быть хранилище, содержащее положение мыши или геолокацию пользователя, которые не нужно записывать 'снаружи'. Для таких случаев существуют *readable* хранилища, доступные только для чтения.
+Not all stores should be writable by whoever has a reference to them. For example, you might have a store representing the mouse position or the user's geolocation, and it doesn't make sense to be able to set those values from 'outside'. For those cases, we have *readable* stores.
 
-Нажмите на вкладку `stores.js`. Первый аргумент `readable` — начальное значение, которому можно задать `null` или `undefined`, если на данный момент значение ещё неизвестно. Второй — это функция `start`, которая принимает callback-функцию `set` и возвращает функцию `stop`. Функция `start` вызывается, когда у хранилища появляется первый подписчик; `stop` вызывается, когда отписывается последний подписчик.
+Click over to the `stores.js` tab. The first argument to `readable` is an initial value, which can be `null` or `undefined` if you don't have one yet. The second argument is a `start` function that takes a `set` callback and returns a `stop` function. The `start` function is called when the store gets its first subscriber; `stop` is called when the last subscriber unsubscribes.
 
 ```js
 export const time = readable(new Date(), function start(set) {

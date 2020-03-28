@@ -1,76 +1,97 @@
 ---
-title: Начало работы
+title: Getting Started
 ---
 
-### Быстрый старт
+### Quick Start
 
-#### Установите Nativescript
+#### Install Nativescript
 
-Svelte-Native работает поверх NativeScript. Чтобы установить NativeScript выполните:
+Svelte-Native works on top of NativeScript. To install NativeScript:
 
 ```bash
 $ npm install -g nativescript
 ```
 
-Проверьте, что он установился, запустив команду `tns`:
+Check it worked by running `tns`:
 
 ![Success](/media/tns-success.png)
 
+#### Install the NativeScript Playground app
 
-#### Установите мобильное приложение NativeScript Playground
+Svelte-Native really is native, so it needs a mobile device to run. The build setup for iOS or Android can be a pain, so the wizards at Progress have created the NativeScript playground app. This allows us to run Svelte-Native application code without having to build the full mobile application.
 
-Svelte-Native действительно является нативным, поэтому для его работы требуется мобильное устройство. Настройка сборки приложения под iOS или Android не очень простая процедура, поэтому мастера из Progress создали приложение NativeScript Playground. Это позволяет нам запускать код приложения Svelte-Native без необходимости сборки полноценного мобильного приложения.
+[<img src="/media/app-store.png" alt="Get if rom the App Store">](https://itunes.apple.com/us/app/nativescript-playground/id1263543946?mt=8&amp;ls=1)
+[<img src="/media/google-play.png" alt="Get it from Google Play">](https://play.google.com/store/apps/details?id=org.nativescript.play)
 
+#### Create a new Svelte-Native app
 
-[<img src="/media/app-store.png" alt="Скачать а App Store">](https://itunes.apple.com/us/app/nativescript-playground/id1263543946?mt=8&amp;ls=1)
-[<img src="/media/google-play.png" alt="Скачать в Google Play">](https://play.google.com/store/apps/details?id=org.nativescript.play)
-
-#### Создайте новое приложение Svelte-Native
-
-Самый простой способ начать — использовать последнюю веерсию [шаблона приложения](https://github.com/halfnelson/svelte-native-template)
+The easiest way to get started is to use the [latest template app](https://github.com/halfnelson/svelte-native-template):
 
 ```bash
-$ degit halfnelson/svelte-native-template myapp
+$ npx degit halfnelson/svelte-native-template myapp
 ```
 
-Голое приложение svelte-native будет находится в папке `myapp`
+A fresh svelte-native app will be found in the `myapp` folder.
 
-#### Запустите приложение
+#### Launch It
 
-Запустите приложение, которое вы только что создали:
+Launch your app with:
 
 ```bash
 $ cd myapp
 $ tns preview
 ```
 
-В терминале появится ASCII QR-код, который нужно будет отсканировать в приложении NativeScript Playground, которое вы установили ранее.
+You will need to scan the QR Code using the "Playground" app you installed previously.
 
-![Запущенное приложение](/media/quick-start-screenshot.png)
+<img src="/media/quick-start-screenshot.png" width=200 alt="Running App" >
 
+### Advanced Install
 
-### Расширенная установка
+To compile your apps for distribution, you will need to set up your system for local compilation.
 
-Чтобы создавать приложения готовые к распространению, нужно настроить систему для локальной компиляции.
+Svelte-Native runs on top of an unmodified NativeScript platform. Installation instructions for your operating system can be found in the [Native Script Guide](https://docs.nativescript.org/start/quick-setup).
 
-Svelte-Native работает поверх немодифицированной платформы NativeScript. Инструкции по установке для вашей операционной системы можно найти в [Руководстве по Native Script](https://docs.nativescript.org/start/quick-setup)
-
-Проверить, что настройка среды сборки NativeScript была выполнена правильно, можно с помощью Nativescript команды doctor:
+Check you have the NativeScript build environment configured correctly by using the Nativescript doctor command:
 
 ```bash
 $  tns doctor
 ```
 
-Когда все будет в порядке, вы можете выполнить полную компиляцию и запуск приложения следующим образом:
+Once that is happy you can do a full compile and launch of your application with
 
 ```bash
 $ tns run android
 ```
 
-или
+or
 
 ```bash
 $ tns run ios
 ```
 
 
+### Using Nativescript Plugins
+
+Since Svelte Native uses unmodified NativeScript, it is possible to use NativeScript plugins, such as those found on the [marketplace](https://market.nativescript.org/).
+
+Follow the instructions for the component and if there isn't instructions for svelte, look for the Nativescript Vue instructions involving `registerElement`. 
+Register the element using `registerNativeViewElement(tagName, ()=> NativeConstructor)`
+
+eg for [Nativescript Mapbox Plugin](https://market.nativescript.org/plugins/nativescript-mapbox)
+
+```bash
+$ tns plugin add nativescript-mapbox
+```
+
+in app.ts before app startup
+
+```js
+import { registerNativeViewElement } from 'svelte-native/dom'
+
+registerNativeViewElement("mapBox", () => require("nativescript-mapbox").MapboxView);
+```
+
+You can now use the `<mapBox>` tag in your application following the plugin's documentation.
+
+> **NOTE** For examples of how to register more complex components, check out the code in [svelte-native-nativescript-ui](https://github.com/halfnelson/svelte-native-nativescript-ui) which supports the Nativescript Professional UI components

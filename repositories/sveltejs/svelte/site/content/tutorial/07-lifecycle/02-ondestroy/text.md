@@ -2,9 +2,9 @@
 title: onDestroy
 ---
 
-Для выполнения действий при уничтожении компонента используйте `onDestroy`.
+To run code when your component is destroyed, use `onDestroy`.
 
-Например, мы можем запустить функцию `setInterval`, когда наш компонент инициализируется, и затем вызвать `clearInterval`, когда таймер больше не нужен. Это помогает бороться с утечками памяти.
+For example, we can add a `setInterval` function when our component initialises, and clean it up when it's no longer relevant. Doing so prevents memory leaks.
 
 ```html
 <script>
@@ -17,7 +17,7 @@ title: onDestroy
 </script>
 ```
 
-Хоть функции жизненного цикла нужно вызывать только во время инициализации компонента, но не имеет значения, *откуда* они буду вызваны. Поэтому, при желании, мы можем вынести логику таймера в отдельную функцию в файле `utils.js` ...
+While it's important to call lifecycle functions during the component's initialisation, it doesn't matter *where* you call them from. So if we wanted, we could abstract the interval logic into a helper function in `utils.js`...
 
 ```js
 import { onDestroy } from 'svelte';
@@ -31,7 +31,7 @@ export function onInterval(callback, milliseconds) {
 }
 ```
 
-...и импортировать её в наш компонент:
+...and import it into our component:
 
 ```html
 <script>

@@ -15,7 +15,7 @@
 </style>
 
 <div class="chart">
-	<h2>Квартет Энскомба</h2>
+	<h2>Anscombe's quartet</h2>
 
 	<Scatterplot points={data.a}/>
 	<Scatterplot points={data.b}/>

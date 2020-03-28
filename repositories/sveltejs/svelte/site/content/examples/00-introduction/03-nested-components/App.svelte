@@ -10,5 +10,5 @@
 	}
 </style>
 
-<p>Эти стили...</p>
+<p>These styles...</p>
 <Nested/>

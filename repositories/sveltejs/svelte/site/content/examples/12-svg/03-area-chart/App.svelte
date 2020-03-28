@@ -27,21 +27,21 @@
 	}
 </script>
 
-<h2>Минимальная площадь арктического льда</h2>
+<h2>Arctic sea ice minimum</h2>
 
 <div class="chart" bind:clientWidth={width} bind:clientHeight={height}>
 	<svg>
-		<!-- ось y -->
+		<!-- y axis -->
 		<g class="axis y-axis" transform="translate(0, {padding.top})">
 			{#each yTicks as tick}
 				<g class="tick tick-{tick}" transform="translate(0, {yScale(tick) - padding.bottom})">
 					<line x2="100%"></line>
-					<text y="-4">{tick} {tick === 8 ? ' млн. кв. км' : ''}</text>
+					<text y="-4">{tick} {tick === 8 ? ' million sq km' : ''}</text>
 				</g>
 			{/each}
 		</g>
 
-		<!-- ось x -->
+		<!-- x axis -->
 		<g class="axis x-axis">
 			{#each xTicks as tick}
 				<g class="tick tick-{ tick }" transform="translate({xScale(tick)},{height})">
@@ -51,13 +51,13 @@
 			{/each}
 		</g>
 
-		<!-- данные -->
+		<!-- data -->
 		<path class="path-area" d={area}></path>
 		<path class="path-line" d={path}></path>
 	</svg>
 </div>
 
-<p>Средняя выборка по Сентябрю. Источник: <a href='https://climate.nasa.gov/vital-signs/arctic-sea-ice/'>NSIDC/NASA</a></p>
+<p>Average September extent. Source: <a href='https://climate.nasa.gov/vital-signs/arctic-sea-ice/'>NSIDC/NASA</a></p>
 
 <style>
 	.chart, h2, p {

@@ -1,6 +1,6 @@
 <script>
 	import marked from 'marked';
-	let text = `Что-то написано *курсивом*, а что-то **жирным** шрифтом`;
+	let text = `Some words are *italic*, some are **bold**`;
 </script>
 
 <style>

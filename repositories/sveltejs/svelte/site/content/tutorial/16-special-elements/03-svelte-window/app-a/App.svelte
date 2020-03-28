@@ -34,9 +34,9 @@
 
 <div style="text-align: center">
 	{#if key}
-		<kbd>{key === ' ' ? 'Пробел' : key}</kbd>
+		<kbd>{key === ' ' ? 'Space' : key}</kbd>
 		<p>{keyCode}</p>
 	{:else}
-		<p>Кликните сюда и нажмите любую клавишу</p>
+		<p>Focus this window and press any key</p>
 	{/if}
 </div>

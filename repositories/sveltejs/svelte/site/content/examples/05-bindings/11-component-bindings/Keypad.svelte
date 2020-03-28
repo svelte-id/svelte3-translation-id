@@ -21,14 +21,6 @@
 	button {
 		margin: 0
 	}
-
-	.ok{
-		color:green;
-	}
-
-	.clear{
-		color:red;
-	}
 </style>
 
 <div class="keypad">
@@ -42,7 +34,7 @@
 	<button on:click={select(8)}>8</button>
 	<button on:click={select(9)}>9</button>
 
-	<button disabled={!value} on:click={clear} class="clear">X</button>
+	<button disabled={!value} on:click={clear}>clear</button>
 	<button on:click={select(0)}>0</button>
-	<button disabled={!value} on:click={submit} class="ok">OK</button>
+	<button disabled={!value} on:click={submit}>submit</button>
 </div>

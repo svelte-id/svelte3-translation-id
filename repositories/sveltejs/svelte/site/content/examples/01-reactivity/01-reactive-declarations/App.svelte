@@ -1,7 +1,7 @@
 <script>
 	let count = 1;
 
-	// префикс `$:` означает 'пересчитать, когда переменные изменятся'
+	// the `$:` means 're-run whenever these values change'
 	$: doubled = count * 2;
 	$: quadrupled = doubled * 2;
 
@@ -11,7 +11,7 @@
 </script>
 
 <button on:click={handleClick}>
-	Кликов: {count}
+	Count: {count}
 </button>
 
 <p>{count} * 2 = {doubled}</p>

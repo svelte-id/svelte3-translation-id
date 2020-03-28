@@ -1,5 +1,5 @@
 <script>
-	let string = `в этой строке есть <strong>HTML!!!</strong> код`;
+	let string = `this string contains some <strong>HTML!!!</strong>`;
 </script>
 
 <p>{string}</p>

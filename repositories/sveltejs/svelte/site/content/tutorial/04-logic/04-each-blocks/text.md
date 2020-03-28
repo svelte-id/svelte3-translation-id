@@ -1,8 +1,8 @@
 ---
-title: Блок each
+title: Each blocks
 ---
 
-Если вам нужно перебрать какие-либо списки данных, используйте блок `each`:
+If you need to loop over lists of data, use an `each` block:
 
 ```html
 <ul>
@@ -14,9 +14,9 @@ title: Блок each
 </ul>
 ```
 
-> Аргумент (в данном случае `cats`) может быть любым массивом или ему подобным объектом, у которого есть свойство `length`. Также можно просто пройтись по списку элементов `each [элемент1, элемент2, ...]`.
+> The expression (`cats`, in this case) can be any array or array-like object (i.e. it has a `length` property). You can loop over generic iterables with `each [...iterable]`.
 
-Вы можете получить текущий *индекс* элемента в качестве второго аргумента:
+You can get the current *index* as a second argument, like so:
 
 ```html
 {#each cats as cat, i}
@@ -26,4 +26,4 @@ title: Блок each
 {/each}
 ```
 
-По желанию, можно применить *деструктуризацию* — `each cats as { id, name }` — и заменить `cat.id` и `cat.name` просто на `id` и `name`.
+If you prefer, you can use destructuring — `each cats as { id, name }` — and replace `cat.id` and `cat.name` with `id` and `name`.

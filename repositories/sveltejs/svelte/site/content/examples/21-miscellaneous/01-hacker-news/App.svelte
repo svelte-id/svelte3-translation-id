@@ -7,7 +7,7 @@
 	let page;
 
 	async function hashchange() {
-		// минимальный роутер!
+		// the poor man's router!
 		const path = window.location.hash.slice(1);
 
 		if (path.startsWith('/item')) {
@@ -22,7 +22,7 @@
 			window.location.hash = '/top/1';
 		}
 	}
-	
+
 	onMount(hashchange);
 </script>
 

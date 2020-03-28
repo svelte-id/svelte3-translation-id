@@ -1,11 +1,11 @@
 ---
-title: Рантайм
+title: Run time
 ---
 
 
 ### `svelte`
 
-Пакет `svelte` предоставляет [функции жизненного цикла](tutorial/onmount) и [API контекста](tutorial/context-api).
+The `svelte` package exposes [lifecycle functions](tutorial/onmount) and the [context API](tutorial/context-api).
 
 #### `onMount`
 
@@ -18,23 +18,23 @@ onMount(callback: () => () => void)
 
 ---
 
-Функция `onMount` запланирует запуск своей callback-функции, как только компонент будет смонтирован в DOM. Эта функцция должна быть вызвана только во время инициализации компонента (но она не обязана находится *внутри* компонента; её можно вызывать и из внешнего модуля).
+The `onMount` function schedules a callback to run as soon as the component has been mounted to the DOM. It must be called during the component's initialisation (but doesn't need to live *inside* the component; it can be called from an external module).
 
-`onMount` не запускается для [компонентов на стороне сервера](docs#API_компонента_на_сервере).
+`onMount` does not run inside a [server-side component](docs#Server-side_component_API).
 
 ```html
 <script>
 	import { onMount } from 'svelte';
 
 	onMount(() => {
-		console.log('компонент смонтирован');
+		console.log('the component has mounted');
 	});
 </script>
 ```
 
 ---
 
-Если `onMount` возвращает функцию, то она будет вызвана при удалении компонента из DOM.
+If a function is returned from `onMount`, it will be called when the component is unmounted.
 
 ```html
 <script>
@@ -58,16 +58,16 @@ beforeUpdate(callback: () => void)
 
 ---
 
-Запланирует запуск своей callback-функции непосредственно перед обновлением компонента после любого изменения состояния приложения.
+Schedules a callback to run immediately before the component is updated after any state change.
 
-> Первый раз функция в `beforeUpdate` сработает непосредственно перед запуском `onMount`
+> The first time the callback runs will be before the initial `onMount`
 
 ```html
 <script>
 	import { beforeUpdate } from 'svelte';
 
 	beforeUpdate(() => {
-		console.log('компонент сейчас обновится');
+		console.log('the component is about to update');
 	});
 </script>
 ```
@@ -80,14 +80,14 @@ afterUpdate(callback: () => void)
 
 ---
 
-Запланирует запуск своей callback-функции сразу после обновления компонента.
+Schedules a callback to run immediately after the component has been updated.
 
 ```html
 <script>
 	import { afterUpdate } from 'svelte';
 
 	afterUpdate(() => {
-		console.log('компонент только что обновился');
+		console.log('the component just updated');
 	});
 </script>
 ```
@@ -100,16 +100,16 @@ onDestroy(callback: () => void)
 
 ---
 
-Запланирует запуск своей callback-функции при удалении компонента из DOM.
+Schedules a callback to run once the component is unmounted.
 
-Из всех функций жизненного цикла `onMount`, `beforeUpdate`, `afterUpdate` и `onDestroy`, эта единственная, которая запускается в при рендеринге на стороне сервера.
+Out of `onMount`, `beforeUpdate`, `afterUpdate` and `onDestroy`, this is the only one that runs inside a server-side component.
 
 ```html
 <script>
 	import { onDestroy } from 'svelte';
 
 	onDestroy(() => {
-		console.log('компонент удаляется');
+		console.log('the component is being destroyed');
 	});
 </script>
 ```
@@ -122,16 +122,16 @@ promise: Promise = tick()
 
 ---
 
-Возвращает промис, который выполняется после применения всех ожидающих изменений состояния приложения либо в следующей микрозадаче, если таковые отсутствуют.
+Returns a promise that resolves once any pending state changes have been applied, or in the next microtask if there are none.
 
 ```html
 <script>
 	import { beforeUpdate, tick } from 'svelte';
 
 	beforeUpdate(async () => {
-		console.log('компонент сейчас будет обновляться');
+		console.log('the component is about to update');
 		await tick();
-		console.log('компонент обновился');
+		console.log('the component just updated');
 	});
 </script>
 ```
@@ -144,9 +144,9 @@ setContext(key: any, context: any)
 
 ---
 
-Связывает произвольный объект `context` с текущим компонентом и указанным ключом `key`. После этого, при помощи метода `getContext`, контекст становится доступным для всех дочерних элементов компонента (включая содержимое слотов).
+Associates an arbitrary `context` object with the current component and the specified `key`. The context is then available to children of the component (including slotted content) with `getContext`.
 
-Как и функции жизненного цикла, этот метод должен вызываться во время инициализации компонента.
+Like lifecycle functions, this must be called during component initialisation.
 
 ```html
 <script>
@@ -156,8 +156,7 @@ setContext(key: any, context: any)
 </script>
 ```
 
-> По своей сути значение, устанавливаемое функцией `setContext`, не является реактивным. Если нужно иметь в контексте реактивное значения, то передайте в качестве параметра `context` объект хранилища.
-
+> Context is not inherently reactive. If you need reactive values in context then you can pass a store into context, which *will* be reactive.
 
 #### `getContext`
 
@@ -167,7 +166,7 @@ context: any = getContext(key: any)
 
 ---
 
-Извлекает контекст, который был объявлен с указананным ключом в ближайшем родительском компоненте. Этот метод также должен вызываться во время инициализации компонента.
+Retrieves the context that belongs to the closest parent component with the specified `key`. Must be called during component initialisation.
 
 ```html
 <script>
@@ -185,27 +184,28 @@ dispatch: ((name: string, detail?: any) => void) = createEventDispatcher();
 
 ---
 
-Создает диспетчер событий, который можно использовать для отправки [событий компонента](docs#Sobytiya_komponenta). Диспетчер событий — это функция, которая может принимать два аргумента: `name` и` detail`.
+Creates an event dispatcher that can be used to dispatch [component events](docs#on_component_event). Event dispatchers are functions that can take two arguments: `name` and `detail`.
 
-События компонента созданные при помощи метода `createEventDispatcher` создают пользовательские события [CustomEvent](https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent). Эти события не [всплывают](https://developer.mozilla.org/ru/docs/Learn/JavaScript/Building_blocks/%D0%A1%D0%BE%D0%B1%D1%8B%D1%82%D0%B8%D1%8F#%D0%92%D1%81%D0%BF%D0%BB%D1%8B%D1%82%D0%B8%D0%B5_%D0%B8_%D0%BF%D0%B5%D1%80%D0%B5%D1%85%D0%B2%D0%B0%D1%82_%D1%81%D0%BE%D0%B1%D1%8B%D1%82%D0%B8%D0%B9) и не могут быть отменены методом `event.preventDefault()`. Аргумент `detail` соответствует свойству [CustomEvent.detail](https://developer.mozilla.org/ru/docs/Web/API/CustomEvent/detail) и может содержать данные любого типа.
+Component events created with `createEventDispatcher` create a [CustomEvent](https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent). These events do not [bubble](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Building_blocks/Events#Event_bubbling_and_capture) and are not cancellable with `event.preventDefault()`. The `detail` argument corresponds to the [CustomEvent.detail](https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent/detail) property and can contain any type of data.
 
 ```html
 <script>
 	import { createEventDispatcher } from 'svelte';
+
 	const dispatch = createEventDispatcher();
 </script>
 
-<button on:click="{() => dispatch('notify', 'любые данные')}">Запустить событие</button>
+<button on:click="{() => dispatch('notify', 'detail value')}">Fire Event</button>
 ```
 
 ---
 
-События, отправленные из дочернего компонента, можно прослушивать в их родительском компоненте. Любые данные, указанные при отправке события, будут доступны в свойстве `detail` объекта события.
+Events dispatched from child components can be listened to in their parent. Any data provided when the event was dispatched is available on the `detail` property of the event object.
 
 ```html
 <script>
 	function callbackFunction(event) {
-		console.log(`Событие запущено! Данные: ${event.detail}`)
+		console.log(`Notify fired! Detail: ${event.detail}`)
 	}
 </script>
 
@@ -214,12 +214,11 @@ dispatch: ((name: string, detail?: any) => void) = createEventDispatcher();
 
 ### `svelte/store`
 
-Модуль `svelte/store` предоставляет функции [readable](docs#readable), [writable](docs#writable) и [derived](docs#derived) для создания соответствующих хранилищ.
+The `svelte/store` module exports functions for creating [readable](docs#readable), [writable](docs#writable) and [derived](docs#derived) stores.
 
-Вы *не обязаны* использовать только эти функции для того, чтобы иметь возможность работать с [префиксом $ для хранилищ](docs#4_Dobavte_prefiks_$_k_hranilishhu_dlya_polucheniya_ego_znacheniya) в компонентах. Любой объект, в котором есть методы `.subscribe`, `.unsubscribe` и `.set`(опционально), является валидным хранилищем и будет работать как с соответствующим синтаксисом в компонентах, так и с [`производными` хранилищами](docs#derived).
+Keep in mind that you don't *have* to use these functions to enjoy the [reactive `$store` syntax](docs#4_Prefix_stores_with_$_to_access_their_values) in your components. Any object that correctly implements `.subscribe`, unsubscribe, and (optionally) `.set` is a valid store, and will work both with the special syntax, and with Svelte's built-in [`derived` stores](docs#derived).
 
-Таким образом можно легко создать обертку практически для любой библиотеки управления состоянием для использования её в Svelte. Прочитайте про [контракт хранилища](docs#Store_contract) для правильной реализации подобной обертки.
-
+This makes it possible to wrap almost any other reactive state handling library for use in Svelte. Read more about the [store contract](docs#Store_contract) to see what a correct implementation looks like.
 
 #### `writable`
 
@@ -232,11 +231,11 @@ store = writable(value: any, (set: (value: any) => void) => () => void)
 
 ---
 
-Функция создаёт хранилище со значениями, которые могут быть установлены 'снаружи' компонентов. Оно создаётся как объект с двумя дополнительными методами `set` и `update`.
+Function that creates a store which has values that can be set from 'outside' components. It gets created as an object with additional `set` and `update` methods.
 
-Метод `set` принимает единственный аргумент, который является новым значением. Значение хранилища устанавливается равным ему, если оно уже не равно ему.
+`set` is a method that takes one argument which is the value to be set. The store value gets set to the value of the argument if the store value is not already equal to it.
 
-Метод `update` принимает единственный аргумент, который является callback-функцией. Эта функция получает в качестве параметра текущее значение хранилища и возвращает новое значение, которое должно быть присвоено значению хранилища.
+`update` is a method that takes one argument which is a callback. The callback takes the existing store value as its argument and returns the new value to be set to the store.
 
 ```js
 import { writable } from 'svelte/store';
@@ -245,31 +244,32 @@ const count = writable(0);
 
 count.subscribe(value => {
 	console.log(value);
-}); // выведет '0'
+}); // logs '0'
 
-count.set(1); // выведет '1'
+count.set(1); // logs '1'
 
-count.update(n => n + 1); // выведет '2'
+count.update(n => n + 1); // logs '2'
 ```
+
 ---
 
-Если в качестве второго аргумента передается функция, она вызывается, когда число подписчиков меняется с ноля на единицу (но не с одного на два и т.д.). Этой функции будет передана функция `set`, которая задаёт значение хранилища. Также она должна возвращать функцию `stop`, которая вызывается, когда счётчик подписчиков изменяется с одного на ноль.
+If a function is passed as the second argument, it will be called when the number of subscribers goes from zero to one (but not from one to two, etc). That function will be passed a `set` function which changes the value of the store. It must return a `stop` function that is called when the subscriber count goes from one to zero.
 
 ```js
 import { writable } from 'svelte/store';
 
 const count = writable(0, () => {
-	console.log('у нас есть подписчик');
-	return () => console.log('подписчиков не осталось');
+	console.log('got a subscriber');
+	return () => console.log('no more subscribers');
 });
 
-count.set(1); // ничего не делает
+count.set(1); // does nothing
 
 const unsubscribe = count.subscribe(value => {
 	console.log(value);
-}); // выводит 'у нас есть подписчик', потом '1'
+}); // logs 'got a subscriber', then '1'
 
-unsubscribe(); // выводит 'подписчиков не осталось'
+unsubscribe(); // logs 'no more subscribers'
 ```
 
 #### `readable`
@@ -280,9 +280,9 @@ store = readable(value: any, (set: (value: any) => void) => () => void)
 
 ---
 
-Создает хранилище, значение которого нельзя установить извне. Первый аргумент задаёт начальное значение хранилища.
+Creates a store whose value cannot be set from 'outside', the first argument is the store's initial value.
 
-Второй аргумент в `readable` такой же, как второй аргумент в `writable`, за исключением того, что он является обязательным для `readable` (в противном случае не было бы возможности обновить значение хранилища).
+The second argument to `readable` is the same as the second argument to `writable`, except that it is required with `readable` (since otherwise there would be no way to update the store value).
 
 ```js
 import { readable } from 'svelte/store';
@@ -295,6 +295,7 @@ const time = readable(new Date(), set => {
 	return () => clearInterval(interval);
 });
 ```
+
 #### `derived`
 
 ```js
@@ -312,9 +313,9 @@ store = derived([a, ...b], callback: ([a: any, ...b: any[]], set: (value: any) =
 
 ---
 
-Создаёт производное хранилище, на основе одного или нескольких других хранилищ. Всякий раз, когда меняются значения отслеживаемых хранилищ, выполняется callback-функция.
+Derives a store from one or more other stores. Whenever those dependencies change, the callback runs.
 
-В самом простом случае в `derived` передаётся одно хранилище, а из callback-функции возвращается производное значение.
+In the simplest version, `derived` takes a single store, and the callback returns a derived value.
 
 ```js
 import { derived } from 'svelte/store';
@@ -324,24 +325,25 @@ const doubled = derived(a, $a => $a * 2);
 
 ---
 
-Callback-функция может устанавливать значение асинхронно, принимая второй аргумент `set` и вызывая его при необходимости.
+The callback can set a value asynchronously by accepting a second argument, `set`, and calling it when appropriate.
 
-В этом случае,  также можно передать третий аргумент в `derived`, которое будет начальным значением производного хранилища до первого вызова метода `set`.
+In this case, you can also pass a third argument to `derived` — the initial value of the derived store before `set` is first called.
 
 ```js
 import { derived } from 'svelte/store';
 
 const delayed = derived(a, ($a, set) => {
 	setTimeout(() => set($a), 1000);
-}, 'секундочку...');
+}, 'one moment...');
 ```
 
 ---
 
-Если из callback-функции возвращается какая-либо функция, то она будет вызвана, когда callback-функция сработает снова или от хранилища отпишется последний подписчик:
+If you return a function from the callback, it will be called when a) the callback runs again, or b) the last subscriber unsubscribes.
 
 ```js
 import { derived } from 'svelte/store';
+
 const tick = derived(frequency, ($frequency, set) => {
 	const interval = setInterval(() => {
 	  set(Date.now());
@@ -350,12 +352,12 @@ const tick = derived(frequency, ($frequency, set) => {
 	return () => {
 		clearInterval(interval);
 	};
-}, 'секундочку...');
+}, 'one moment...');
 ```
 
 ---
 
-В качестве первого аргумента может быть передан массив хранилищ.
+In both cases, an array of arguments can be passed as the first argument instead of a single store.
 
 ```js
 import { derived } from 'svelte/store';
@@ -375,9 +377,9 @@ value: any = get(store)
 
 ---
 
-Обычно, нужно получить значение хранилища, подписавшись на него, затем использовать его в нужных местах, с учетом того, что оно может изменяться со временем. Иногда может понадобиться просто получить значение хранилища, на которое вы не подписывались. `get` позволяет сделать это.
+Generally, you should read the value of a store by subscribing to it and using the value as it changes over time. Occasionally, you may need to retrieve the value of a store to which you're not subscribed. `get` allows you to do so.
 
-> Этот метод просто подписывается на хранилище, получает значение и отписывается. Поэтому, не рекомендуется использовать его в высоконагружненых частях кода.
+> This works by creating a subscription, reading the value, then unsubscribing. It's therefore not recommended in hot code paths.
 
 ```js
 import { get } from 'svelte/store';
@@ -388,7 +390,7 @@ const value = get(store);
 
 ### `svelte/motion`
 
-Модуль `svelte/motion` экспортирует две функции, `tweened` и `spring`, для создания записываемых хранилищ, чьи значения, при изменении функциями `set` и `update`, меняются постепенно в течение какого-то количества времени, а не моментально.
+The `svelte/motion` module exports two functions, `tweened` and `spring`, for creating writable stores whose values change over time after `set` and `update`, rather than immediately.
 
 #### `tweened`
 
@@ -396,20 +398,20 @@ const value = get(store);
 store = tweened(value: any, options)
 ```
 
-Хранилище, которое обновляет свои значения в течение фиксированного периода времени. Доступны следующие опции:
+Tweened stores update their values over a fixed duration. The following options are available:
 
-* `delay` (`number`, по умолчанию 0) — миллисекунды до начала изменения
-* `duration` (`number`, по умолчанию 400) — длительность изменения в миллисекундах
-* `easing` (`function`, по умолчанию `t => t`) —  [функция плавности](docs#svelte_easing)
-* `interpolate` (`function`) — смотри ниже
+* `delay` (`number`, default 0) — milliseconds before starting
+* `duration` (`number`, default 400) — milliseconds the tween lasts
+* `easing` (`function`, default `t => t`) — an [easing function](docs#svelte_easing)
+* `interpolate` (`function`) — see below
 
-Методы `store.set` и `store.update` могут принимать второй аргумент `options`, который может перезаписать параметры, установленные при инициализации хранилища.
+`store.set` and `store.update` can accept a second `options` argument that will override the options passed in upon instantiation.
 
-Обе функции возвращают промис, который выполняется, когда изменение завершается. Если изменение прервать, промис никогда не будет выполнен.
+Both functions return a Promise that resolves when the tween completes. If the tween is interrupted, the promise will never resolve.
 
 ---
 
-Из коробки Svelte умеет рассчитывать изменения между двумя числами, двумя массивами или двумя объектами (при условии, что массивы и объекты имеют одинаковую структуру, а все окончания ветвлений свойств также являются числами).
+Out of the box, Svelte will interpolate between two numbers, two arrays or two objects (as long as the arrays and objects are the same 'shape', and their 'leaf' properties are also numbers).
 
 ```html
 <script>
@@ -422,7 +424,7 @@ store = tweened(value: any, options)
 	});
 
 	function handleClick() {
-		// эквивалентно вызову size.update(n => n + 1)
+		// this is equivalent to size.update(n => n + 1)
 		$size += 1;
 	}
 </script>
@@ -430,12 +432,12 @@ store = tweened(value: any, options)
 <button
 	on:click={handleClick}
 	style="transform: scale({$size}); transform-origin: 0 0"
->увеличить</button>
+>embiggen</button>
 ```
 
 ---
 
-Если начальное значение равно `undefined` или `null`, то следующее значение будет достигнуто моментально. Это полезно, когда вы получаете значение `tweened`-хранилища из свойств компонента и не хотите видеть никакого движения при первой отрисовке компонента.
+If the initial value is `undefined` or `null`, the first value change will take effect immediately. This is useful when you have tweened values that are based on props, and don't want any motion when the component first renders.
 
 ```js
 const size = tweened(undefined, {
@@ -448,7 +450,7 @@ $: $size = big ? 100 : 10;
 
 ---
 
-Опция `interpolate` позволяет вам рассчитывать промежуточные значения между *любыми* произвольными значениями. Это должна быть функция `(a, b) => t => value`, где` a` - начальное значение, `b` - конечное значение,` t` - число от 0 до 1 и `value` это результат. Например, мы можем использовать пакет [d3-interpolate](https://github.com/d3/d3-interpolate) для плавного перехода между двумя цветами.
+The `interpolate` option allows you to tween between *any* arbitrary values. It must be an `(a, b) => t => value` function, where `a` is the starting value, `b` is the target value, `t` is a number between 0 and 1, and `value` is the result. For example, we can use the [d3-interpolate](https://github.com/d3/d3-interpolate) package to smoothly interpolate between two colours.
 
 ```html
 <script>
@@ -483,21 +485,19 @@ $: $size = big ? 100 : 10;
 store = spring(value: any, options)
 ```
 
-Хранилище `spring` постепенно меняет свое значение на основе параметров `stiffness`(жёсткость) и `damping`(затухание), получаются колебания по типу движения пружины. В отличие от хранилищ типа `tweened`, где значение меняется строго определенное количество времени, хранилища типа `spring` изменяют значение в течение продолжительности, которая задается их текущей скоростью, что позволяет более естественно выглядеть во многих ситуациях. Доступны следующие опции:
+A `spring` store gradually changes to its target value based on its `stiffness` and `damping` parameters. Whereas `tweened` stores change their values over a fixed duration, `spring` stores change over a duration that is determined by their existing velocity, allowing for more natural-seeming motion in many situations. The following options are available:
 
-* `stiffness` (`number`, по умолчанию `0.15`) — значение от 0 до 1, чем больше, тем *туже пружина*
-* `damping` (`number`, по умолчанию `0.8`) — значение 0 до 1, чем меньше тем *пружиннее пружина*
-* `precision` (`number`, по умолчанию `0.001`) — определяет порог, при котором *колебания пружины* прекращаются, чем меньше, тем точнее
+* `stiffness` (`number`, default `0.15`) — a value between 0 and 1 where higher means a 'tighter' spring
+* `damping` (`number`, default `0.8`) — a value between 0 and 1 where lower means a 'springier' spring
+* `precision` (`number`, default `0.001`) — determines the threshold at which the spring is considered to have 'settled', where lower means more precise
 
 ---
 
-Как и в случае с [`tweened`](docs#tweened) хранилищами, `set` и `update` возвращают промис, который выполняется, когда колебания прекратятся. Свойства `store.stiffness` и` store.damping` могут быть изменены, даже во время колебаний и применяются немедленно.
+As with [`tweened`](docs#tweened) stores, `set` and `update` return a Promise that resolves if the spring settles. The `store.stiffness` and `store.damping` properties can be changed while the spring is in motion, and will take immediate effect.
 
-Оба метода `set` и `update` могут принимать второй аргумент — объект со свойствами `hard` или `soft`. `{ hard: true }` устанавливает новое значение немедленно; `{ soft: n }` сохраняет существующий импульс в течение `n` секунд перед установкой значения. `{ soft: true }` эквивалентно `{ soft: 0.5 }`.
+Both `set` and `update` can take a second argument — an object with `hard` or `soft` properties. `{ hard: true }` sets the target value immediately; `{ soft: n }` preserves existing momentum for `n` seconds before settling. `{ soft: true }` is equivalent to `{ soft: 0.5 }`.
 
-
-
-[Посмотрите полноценный пример.](tutorial/spring)
+[See a full example on the spring tutorial.](tutorial/spring)
 
 ```html
 <script>
@@ -512,7 +512,7 @@ store = spring(value: any, options)
 
 ---
 
-Если начальное значение равно `undefined` или `null`, то следующее значение будет достигнуто моментально, аналогично   `tweened`-хранилищу (см. выше).
+If the initial value is `undefined` or `null`, the first value change will take effect immediately, just as with `tweened` values (see above).
 
 ```js
 const size = spring();
@@ -521,30 +521,30 @@ $: $size = big ? 100 : 10;
 
 ### `svelte/transition`
 
-Модуль `svelte / transition` экспортирует шесть функций:` fade`, `fly`,` slide`, `scale`,` draw` и `crossfade`. Они предназначены для использования в [`переходах`](docs#Perehody).
+The `svelte/transition` module exports six functions: `fade`, `fly`, `slide`, `scale`, `draw` and `crossfade`. They are for use with svelte [`transitions`](docs#Transitions).
 
 #### `fade`
 
 ```sv
-transition:fade={параметры}
+transition:fade={params}
 ```
 ```sv
-in:fade={параметры}
+in:fade={params}
 ```
 ```sv
-out:fade={параметры}
+out:fade={params}
 ```
 
 ---
 
-Анимирует прозрачность элемента от 0 до установленной прозрачности для переходов `in` и от текущей прозрачности до 0 для переходов `out`.
+Animates the opacity of an element from 0 to the current opacity for `in` transitions and from the current opacity to 0 for `out` transitions.
 
-`fade` принимает следующие параметры:
+`fade` accepts the following parameters:
 
-* `delay` (`number`, по умолчанию 0) — задержка до начала перехода в миллисекундах
-* `duration` (`number`, по умолчанию 400) — длительность перехода в миллисекундах
+* `delay` (`number`, default 0) — milliseconds before starting
+* `duration` (`number`, default 400) — milliseconds the transition lasts
 
-Вы можете посмотреть переход `fade` в действии в соответствующем [разделе учебника](tutorial/transition).
+You can see the `fade` transition in action in the [transition tutorial](tutorial/transition).
 
 ```html
 <script>
@@ -553,7 +553,7 @@ out:fade={параметры}
 
 {#if condition}
 	<div transition:fade="{{delay: 250, duration: 300}}">
-		появляется и исчезает
+		fades in and out
 	</div>
 {/if}
 ```
@@ -561,26 +561,26 @@ out:fade={параметры}
 #### `blur`
 
 ```sv
-transition:blur={параметры}
+transition:blur={params}
 ```
 ```sv
-in:blur={параметры}
+in:blur={params}
 ```
 ```sv
-out:blur={параметры}
+out:blur={params}
 ```
 
 ---
 
-Анимирует эффект размытия через фильтр `blur` и прозрачность элемента.
+Animates a `blur` filter alongside an element's opacity.
 
-`blur` принимает следующие параметры:
+`blur` accepts the following parameters:
 
-* `delay` (`number`, по умолчанию 0) — задержка начала перехода в миллисекундах
-* `duration` (`number`, по умолчанию 400) — длительность перехода в миллисекундах
-* `easing` (`function`, по умолчанию `cubicOut`) — [функция плавности](docs#svelte_easing)
-* `opacity` (`number`, по умолчанию 0) — значение прозрачности, конечное для `out` и начальное для `in`
-* `amount` (`number`, по умолчанию 5) - величина размытия в пикселях
+* `delay` (`number`, default 0) — milliseconds before starting
+* `duration` (`number`, default 400) — milliseconds the transition lasts
+* `easing` (`function`, default `cubicInOut`) — an [easing function](docs#svelte_easing)
+* `opacity` (`number`, default 0) - the opacity value to animate out to and in from
+* `amount` (`number`, default 5) - the size of the blur in pixels
 
 ```html
 <script>
@@ -589,7 +589,7 @@ out:blur={параметры}
 
 {#if condition}
 	<div transition:blur="{{amount: 10}}">
-		появляется и исчезает
+		fades in and out
 	</div>
 {/if}
 ```
@@ -597,29 +597,29 @@ out:blur={параметры}
 #### `fly`
 
 ```sv
-transition:fly={параметры}
+transition:fly={params}
 ```
 ```sv
-in:fly={параметры}
+in:fly={params}
 ```
 ```sv
-out:fly={параметры}
+out:fly={params}
 ```
 
 ---
 
-Анимирует позицию и прозрачность элемента. Переход появления `in` осуществляет анимацию перемещения элемента из текущей (по умолчанию) позиции на указанное в параметрах расстояние по `x` и `y`. Переход исчезновения `out`  анимирует перемещение элемента из указанной параметрами позиции в его естественное состояние.
+Animates the x and y positions and the opacity of an element. `in` transitions animate from an element's current (default) values to the provided values, passed as parameters. `out` transitions animate from the provided values to an element's default values.
 
-`fly` принимает следующие параметры:
+`fly` accepts the following parameters:
 
-* `delay` (`number`, по умолчанию 0) — задержка начала перехода в миллисекундах
-* `duration` (`number`, по умолчанию 400) — длительность перехода в миллисекундах
-* `easing` (`function`, по умолчанию `cubicOut`) — [функция плавности](docs#svelte_easing)
-* `x` (`number`, по умолчанию 0) — сдвиг по оси x, конечная позиция для `out` и начальная для `in`
-* `y` (`number`, по умолчанию 0) — сдвиг по оси y, конечная позиция для `out` и начальная для `in`
-* `opacity` (`number`, по умолчанию 0) — значение прозрачности, конечное для `out` и начальное для `in`
+* `delay` (`number`, default 0) — milliseconds before starting
+* `duration` (`number`, default 400) — milliseconds the transition lasts
+* `easing` (`function`, default `cubicOut`) — an [easing function](docs#svelte_easing)
+* `x` (`number`, default 0) - the x offset to animate out to and in from
+* `y` (`number`, default 0) - the y offset to animate out to and in from
+* `opacity` (`number`, default 0) - the opacity value to animate out to and in from
 
-Вы можете посмотреть переход `fadflye` в действии в соответствующем [разделе учебника](tutorial/adding-parameters-to-transitions).
+You can see the `fly` transition in action in the [transition tutorial](tutorial/adding-parameters-to-transitions).
 
 ```html
 <script>
@@ -629,7 +629,7 @@ out:fly={параметры}
 
 {#if condition}
 	<div transition:fly="{{delay: 250, duration: 300, x: 100, y: 500, opacity: 0.5, easing: quintOut}}">
-		прилетает и улетает
+		flies in and out
 	</div>
 {/if}
 ```
@@ -637,24 +637,24 @@ out:fly={параметры}
 #### `slide`
 
 ```sv
-transition:slide={параметры}
+transition:slide={params}
 ```
 ```sv
-in:slide={параметры}
+in:slide={params}
 ```
 ```sv
-out:slide={параметры}
+out:slide={params}
 ```
 
 ---
 
-Сворачивает и разворачивает элемент.
+Slides an element in and out.
 
-`slide`  принимает следующие параметры:
+`slide` accepts the following parameters:
 
-* `delay` (`number`, по умолчанию 0) — задержка начала перехода в миллисекундах
-* `duration` (`number`, по умолчанию 400) — длительность перехода в миллисекундах
-* `easing` (`function`, по умолчанию `cubicOut`) — [функция плавности](docs#svelte_easing)
+* `delay` (`number`, default 0) — milliseconds before starting
+* `duration` (`number`, default 400) — milliseconds the transition lasts
+* `easing` (`function`, default `cubicOut`) — an [easing function](docs#svelte_easing)
 
 ```html
 <script>
@@ -664,7 +664,7 @@ out:slide={параметры}
 
 {#if condition}
 	<div transition:slide="{{delay: 250, duration: 300, easing: quintOut }}">
-		разворачивается и сворачивается
+		slides in and out
 	</div>
 {/if}
 ```
@@ -672,26 +672,26 @@ out:slide={параметры}
 #### `scale`
 
 ```sv
-transition:scale={параметры}
+transition:scale={params}
 ```
 ```sv
-in:scale={параметры}
+in:scale={params}
 ```
 ```sv
-out:scale={параметры}
+out:scale={params}
 ```
 
 ---
 
-Анимирует прозрачность и размер элемента. Переход появления `in` осуществляет анимацию элемента из текущего (по умолчанию) состояния в состояние, указанное через параметры. Переход исчезновения `out`  анимирует изменение состояния элемента из заданного параметрами в естественное состояние.
+Animates the opacity and scale of an element. `in` transitions animate from an element's current (default) values to the provided values, passed as parameters. `out` transitions animate from the provided values to an element's default values.
 
-`scale`  принимает следующие параметры:
+`scale` accepts the following parameters:
 
-* `delay` (`number`, по умолчанию 0) — задержка начала перехода в миллисекундах
-* `duration` (`number`, по умолчанию 400) — длительность перехода в миллисекундах
-* `easing` (`function`, по умолчанию `cubicOut`) — [функция плавности](docs#svelte_easing)
-* `start` (`number`, по умолчанию 0) — размер, конечный для `out` и начальный для `in`
-* `opacity` (`number`, по умолчанию 0) — значение прозрачности, конечное для `out` и начальное для `in`
+* `delay` (`number`, default 0) — milliseconds before starting
+* `duration` (`number`, default 400) — milliseconds the transition lasts
+* `easing` (`function`, default `cubicOut`) — an [easing function](docs#svelte_easing)
+* `start` (`number`, default 0) - the scale value to animate out to and in from
+* `opacity` (`number`, default 0) - the opacity value to animate out to and in from
 
 ```html
 <script>
@@ -701,7 +701,7 @@ out:scale={параметры}
 
 {#if condition}
 	<div transition:scale="{{duration: 500, delay: 500, opacity: 0.5, start: 0.5, easing: quintOut}}">
-		увеличивается и уменьшается
+		scales in and out
 	</div>
 {/if}
 ```
@@ -709,27 +709,27 @@ out:scale={параметры}
 #### `draw`
 
 ```sv
-transition:draw={параметры}
+transition:draw={params}
 ```
 ```sv
-in:draw={параметры}
+in:draw={params}
 ```
 ```sv
-out:draw={параметры}
+out:draw={params}
 ```
 
 ---
 
-Анимация закрашивания элемента в SVG. Переход появления `in` начинается с невидимого элемента path, который затем постепенно закрашивается. Переход исчезновения `out` начинается с видимого элемента path, который затем постепенно стирается. `draw` работает только с элементами, у которых есть метод `getTotalLength`, например `<path>` и `<polyline>`.
+Animates the stroke of an SVG element, like a snake in a tube. `in` transitions begin with the path invisible and draw the path to the screen over time. `out` transitions start in a visible state and gradually erase the path. `draw` only works with elements that have a `getTotalLength` method, like `<path>` and `<polyline>`.
 
-`draw` принимает следующие параметры:
+`draw` accepts the following parameters:
 
-* `delay` (`number`, по умолчанию 0) — задержка начала перехода в миллисекундах
-* `speed` (`number`, по умолчанию undefined) - скорость анимации, см. ниже
-* `duration` (`number` | `function`, по умолчанию 800) — длительность перехода в миллисекундах
-* `easing` (`function`, по умолчанию `cubicInOut`) — [функция плавности](docs#svelte_easing)
+* `delay` (`number`, default 0) — milliseconds before starting
+* `speed` (`number`, default undefined) - the speed of the animation, see below.
+* `duration` (`number` | `function`, default 800) — milliseconds the transition lasts
+* `easing` (`function`, default `cubicInOut`) — an [easing function](docs#svelte_easing)
 
-Параметр `speed` задаёт длительность перехода в зависимости от длины элемента path. Это модификатор, который применяется к длине пути: `длительность = длина/скорость`. Отрисовка линии в 1000 пикселей со скоростью 1 будет иметь длительность 1000мс, при `speed` равном `0.5` длительность увеличится вдвое, а при `2` — уменьшится в два раза.
+The `speed` parameter is a means of setting the duration of the transition relative to the path's length. It is modifier that is applied to the length of the path: `duration = length / speed`. A path that is 1000 pixels with a speed of 1 will have a duration of `1000ms`, setting the speed to `0.5` will double that duration and setting it to `2` will halve it.
 
 ```html
 <script>
@@ -758,37 +758,38 @@ out:draw={параметры}
 
 ### `svelte/animate`
 
-Модуль `svelte/animate` экспортирует единственную функцию, которая используется для отображения [анимации](docs#Animaczii).
+The `svelte/animate` module exports one function for use with svelte [animations](docs#Animations).
 
 #### `flip`
 
 ```sv
-animate:flip={параметры}
+animate:flip={params}
 ```
 
-Функция `flip` вычисляет начальную и конечную позиции элемента и создаёт анимацию перемещения между ними, подставляя соответствующие значения `x` и `y`. Аббревиатура `flip` расшифровывается как [First, Last, Invert, Play](https://aerotwist.com/blog/flip-your-animations/).
+The `flip` function calculates the start and end position of an element and animates between them, translating the `x` and `y` values. `flip` stands for [First, Last, Invert, Play](https://aerotwist.com/blog/flip-your-animations/).
 
-`flip` принимает следующие параметры:
+`flip` accepts the following parameters:
 
-* `delay` (`number`, по умолчанию 0) — миллисекунды до начала анимации
-* `duration` (`number` | `function`, по умолчанию `d => Math.sqrt(d) * 120`) — длительность анимации, см.ниже
-* `easing` (`function`, по умолчанию [`cubicOut`](docs#cubicOut)) ъ[функция плавности](docs#svelte_easing)
+* `delay` (`number`, default 0) — milliseconds before starting
+* `duration` (`number` | `function`, default `d => Math.sqrt(d) * 120`) — see below
+* `easing` (`function`, default [`cubicOut`](docs#cubicOut)) — an [easing function](docs#svelte_easing)
 
 
-`duration` может быть передана двумя способами:
+`duration` can be be provided as either:
 
-- просто число, в миллисекундах.
-- функция, `distance: number => duration: number`, которая получает расстояние в пикселях, на которое элемент должен переместится и возвращает длительность в миллисекундах. Она позволяет задавать длительность анимации для разных элементов в зависимости от расстояния перемещения для каждого из них.
+- a `number`, in milliseconds.
+- a function, `distance: number => duration: number`, receiving the distance the element will travel in pixels and returning the duration in milliseconds. This allows you to assign a duration that is relative to the distance travelled by each element.
 
 ---
 
-Вы можете познакомиться с полноценным примером в [разделе учебника](tutorial/animate).
+You can see a full example on the [animations tutorial](tutorial/animate)
 
 
 ```html
 <script>
 	import { flip } from 'svelte/animate';
 	import { quintOut } from 'svelte/easing';
+
 	let list = [1, 2, 3];
 </script>
 
@@ -799,11 +800,13 @@ animate:flip={параметры}
 {/each}
 ```
 
+
+
 ### `svelte/easing`
 
-Функции плавности определяют скорость изменения параметра с течением времени и полезны при работе со встроенными в Svelte переходами, анимациями и функциями `tweened` или `spring`. Модуль `svelte/easing` содержит 31 наименования — функцию линейной плавности `linear` и 10 различных функций плавности в 3 вариантах: `in`, `out` и `inOut`.
+Easing functions specificy the rate of change over time and are useful when working with Svelte's built-in transitions and animations as well as the tweened and spring utilities. `svelte/easing` contains 31 named exports, a `linear` ease and 3 variants of 10 different easing functions: `in`, `out` and `inOut`.
 
-Вы можете посмотреть как работают все эти функции в [визуализаторе функций плавности](examples#easing) в [разделе примеров](examples).
+You can explore the various eases using the [ease visualiser](examples#easing) in the [examples section](examples).
 
 
 | ease | in | out | inOut |
@@ -822,36 +825,39 @@ animate:flip={параметры}
 
 ### `svelte/register`
 
-Чтобы отрендерить компонент Svelte в Node.js без сборки, используйте `require('svelte/register')`. После этого можно импортировать любой файл `.svelte` при помощи `require`.
+To render Svelte components in Node.js without bundling, use `require('svelte/register')`. After that, you can use `require` to include any `.svelte` file.
 
 ```js
 require('svelte/register');
+
 const App = require('./App.svelte').default;
+
 ...
+
 const { html, css, head } = App.render({ answer: 42 });
 ```
 
-> Свойство `.default` необходимо, потому что происходит преобразование из нативных модулей JavaScript в модули CommonJS, используемые в Node. Учтите, что если в компоненте есть импорты JavaScript-модулей, то они не смогут загрузиться в Node, и тогда придётся использовать сборщик.
+> The `.default` is necessary because we're converting from native JavaScript modules to the CommonJS modules recognised by Node. Note that if your component imports JavaScript modules, they will fail to load in Node and you will need to use a bundler instead.
 
-Чтобы установить параметры компиляции или использовать собственное расширение файла, вызовите хук `register` как функцию:
+To set compile options, or to use a custom file extension, call the `register` hook as a function:
 
 ```js
 require('svelte/register')({
-  extensions: ['.customextension'], // по умолчанию ['.html', '.svelte']
+  extensions: ['.customextension'], // defaults to ['.html', '.svelte']
 	preserveComments: true
 });
 ```
 
 
-### API компонента на клиенте
+### Client-side component API
 
-#### Создание компонента
+#### Creating a component
 
 ```js
 const component = new Component(options)
 ```
 
-Компонент на стороне клиента — это компонент, скомпилированный с помощью метода `generate: 'dom'`(или опция `generate` не была указана) и являющийся JavaScript классом.
+A client-side component — that is, a component compiled with `generate: 'dom'` (or the `generate` option left unspecified) is a JavaScript class.
 
 ```js
 import App from './App.svelte';
@@ -859,33 +865,33 @@ import App from './App.svelte';
 const app = new App({
 	target: document.body,
 	props: {
-		// предполагается, что App.svelte содержит что-то вроде
+		// assuming App.svelte contains something like
 		// `export let answer`:
 		answer: 42
 	}
 });
 ```
 
-Могут быть указаны следующие параметры инициализации:
+The following initialisation options can be provided:
 
-| Параметр | По умолчанию | Описание |
+| option | default | description |
 | --- | --- | --- |
-| `target` | **none** | `HTML` элемент в который необходимо отрисовать компонент. Обязательный.
-| `anchor` | `null` | Потомок `target`, перед которым будет отрисован компонент
-| `props` | `{}` | Объект свойств для передачи компоненту
-| `hydrate` | `false` | См.ниже
-| `intro` | `false` | Если `true`, будет отыгрывать переходы при начальной отрисовке, а не ждать последующих изменений состояния
+| `target` | **none** | An `HTMLElement` to render to. This option is required
+| `anchor` | `null` | A child of `target` to render the component immediately before
+| `props` | `{}` | An object of properties to supply to the component
+| `hydrate` | `false` | See below
+| `intro` | `false` | If `true`, will play transitions on initial render, rather than waiting for subsequent state changes
 
-Существующие вложенные элементы в `target` остаются там, где они есть.
+Existing children of `target` are left where they are.
 
 
 ---
 
-Параметр `hydrate` инструктирует Svelte обновить существующий DOM (обычно полученный в ходе рендеринга на стороне сервера), а не создавать новые элементы. Это будет работать только в том случае, если компонент был скомпилирован с параметром [`hydratable: true`](docs#svelte_compile). Гидратация элемента `<head>` работает корректно лишь в случае, когда код на стороне сервера также был скомпилирован с параметром `hydratable: true`, который добавляет маркер каждому элементу внутри `<head>`, благодаря которому которому компонент знает какие их элементов может удалить в процессе гидратации.
+The `hydrate` option instructs Svelte to upgrade existing DOM (usually from server-side rendering) rather than creating new elements. It will only work if the component was compiled with the [`hydratable: true` option](docs#svelte_compile). Hydration of `<head>` elements only works properly if the server-side rendering code was also compiled with `hydratable: true`, which adds a marker to each element in the `<head>` so that the component knows which elements it's responsible for removing during hydration.
 
-В то время как дочерние элементы `target` обычно нормально остаются одни,` hydrate: true` приведет к удалению всех детей. По этой причине опция `anchor` не может использоваться вместе с` hydrate: true`.
+Whereas children of `target` are normally left alone, `hydrate: true` will cause any children to be removed. For that reason, the `anchor` option cannot be used alongside `hydrate: true`.
 
-Существующий DOM не обязан полностью совпадать с компонентом - Svelte будет 'чинить' структуру DOM по мере необходимости.
+The existing DOM doesn't need to match the component — Svelte will 'repair' the DOM as it goes.
 
 ```js
 import App from './App.svelte';
@@ -904,9 +910,9 @@ component.$set(props)
 
 ---
 
-Программно устанавливает свойство экземпляру компонента. Действие `component.$set({ x: 1 })` эквивалентно присвоению `x = 1` внутри блока `<script>` компонента.
+Programmatically sets props on an instance. `component.$set({ x: 1 })` is equivalent to `x = 1` inside the component's `<script>` block.
 
-Вызов этого метода запланирует обновление в следующей микрозадаче - DOM *не* обновляется синхронно.
+Calling this method schedules an update for the next microtask — the DOM is *not* updated synchronously.
 
 ```js
 component.$set({ answer: 42 });
@@ -920,9 +926,9 @@ component.$on(event, callback)
 
 ---
 
-Вызывает функцию `callback` каждый раз когда компонент отправляет событие `event`.
+Causes the `callback` function to be called whenever the component dispatches an `event`.
 
-Возвращает функцию, при вызове которой обработчик события удаляется.
+A function is returned that will remove the event listener when called.
 
 ```js
 const off = app.$on('selected', event => {
@@ -938,9 +944,9 @@ off();
 component.$destroy()
 ```
 
-Удаляет компонент из DOM и запускает все имеющиеся обработчики функции `onDestroy`.
+Removes a component from the DOM and triggers any `onDestroy` handlers.
 
-#### Свойства компонента
+#### Component props
 
 ```js
 component.prop
@@ -951,9 +957,9 @@ component.prop = value
 
 ---
 
-Если компонент скомпилирован с параметром `accessors: true`, каждый экземпляр будет иметь геттеры и сеттеры, соответствующие каждому из компонентов компонента. Установка значения приведет к *синхронному* обновлению, а не к асинхронному обновлению по умолчанию, которое вызывается методом `component.$set(...)`.
+If a component is compiled with `accessors: true`, each instance will have getters and setters corresponding to each of the component's props. Setting a value will cause a *synchronous* update, rather than the default async update caused by `component.$set(...)`.
 
-По умолчанию `accessors` имеет значение` false`, если вы не компилируете компонент как пользовательский элемент.
+By default, `accessors` is `false`, unless you're compiling as a custom element.
 
 ```js
 console.log(app.count);
@@ -961,26 +967,26 @@ app.count += 1;
 ```
 
 
-### API пользовательского элемента
+### Custom element API
 
 ---
 
-Компоненты Svelte также могут быть скомпилированы в пользовательские элементы (или web-компоненты) с помощью параметра компилятора `customElement: true`. Вы должны указать имя тега для компонента, используя [элемент](docs#svelte_options) `<svelte:options>`.
+Svelte components can also be compiled to custom elements (aka web components) using the `customElement: true` compiler option. You should specify a tag name for the component using the `<svelte:options>` [element](docs#svelte_options).
 
 ```html
-<svelte:options tag="my-element">
+<svelte:options tag="my-element" />
 
 <script>
-	export let name = 'мир';
+	export let name = 'world';
 </script>
 
-<h1>Привет, {name}!</h1>
+<h1>Hello {name}!</h1>
 <slot></slot>
 ```
 
 ---
 
-Либо используйте `tag={null}`, чтобы указать, что тот кто будет использовать этот пользовательский элемент должен сам задать имя тега.
+Alternatively, use `tag={null}` to indicate that the consumer of the custom element should name it.
 
 ```js
 import MyElement from './MyElement.svelte';
@@ -990,44 +996,44 @@ customElements.define('my-element', MyElement);
 
 ---
 
-Как только пользовательский элемент будет определён методом `define`, можно использовать его как обычный элемент DOM:
+Once a custom element has been defined, it can be used as a regular DOM element:
 
 ```js
 document.body.innerHTML = `
 	<my-element>
-		<p>Вложенное содержимое</p>
+		<p>This is some slotted content</p>
 	</my-element>
 `;
 ```
 
 ---
 
-По умолчанию пользовательские элементы компилируются с параметром `accessors: true`, то есть любые [свойства](docs#Atributy_i_svojstva) будут представлены как свойства DOM-элемента (а также, при возможности, будут доступны для чтения и записи как атрибуты).
+By default, custom elements are compiled with `accessors: true`, which means that any [props](docs#Attributes_and_props) are exposed as properties of the DOM element (as well as being readable/writable as attributes, where possible).
 
-Если это нежелательно, добавьте параметр `accessors={false}` в `<svelte:options>`.
+To prevent this, add `accessors={false}` to `<svelte:options>`.
 
 ```js
 const el = document.querySelector('my-element');
 
-// получаем текущее значение свойства 'name'
+// get the current value of the 'name' prop
 console.log(el.name);
 
-// устанавливаем новое значение, обновляем Shadow DOM
+// set a new value, updating the shadow DOM
 el.name = 'everybody';
 ```
 
+Custom elements can be a useful way to package components for consumption in a non-Svelte app, as they will work with vanilla HTML and JavaScript as well as [most frameworks](https://custom-elements-everywhere.com/). There are, however, some important differences to be aware of:
 
-Компиляция в пользовательские элементы может быть полезна, если предполагается их использование не в Svelte-приложениях, поскольку они будут работать с обычными HTML и JavaScript, а также с [большинством фреймворков](https://custom-elements-everywhere.com/). Однако следует помнить о некоторых важных различиях:
-
-* Стили полностью *инкапсулированы*, а не просто имеют *ограниченную область видимости*. Это означает, что любые стили вне компонента (например из `global.css`) не будут применяться к пользовательскому элементу, включая стили с модификатором `:global(...)`
-* Стили встраиваются в компонент в виде JavaScript строки, а не выносятся в отдельный .css файл
-* Пользовательские элементы обычно не подходят для отрисовки на стороне сервера, поскольку Shadow DOM невидим до загрузки JavaScript 
-* В Svelte, вложенное содержимое отрисовывается *лениво*. В DOM, оно отрисовывается *сразу же*. Иначе говоря, оно всегда будет создаваться в компоненте, даже если элемент `<slot>` находится внутри блока `{#if ...}`.  Также, помещение `<slot>` в блок `{#each ...}` не приведет к множественному повтору вложенного содержимого.
-* Директива `let:` не имеет никакого действия
-* Для поддержки старых браузеров необходимы полифилы
+* Styles are *encapsulated*, rather than merely *scoped*. This means that any non-component styles (such as you might have in a `global.css` file) will not apply to the custom element, including styles with the `:global(...)` modifier
+* Instead of being extracted out as a separate .css file, styles are inlined into the component as a JavaScript string
+* Custom elements are not generally suitable for server-side rendering, as the shadow DOM is invisible until JavaScript loads
+* In Svelte, slotted content renders *lazily*. In the DOM, it renders *eagerly*. In other words, it will always be created even if the component's `<slot>` element is inside an `{#if ...}` block. Similarly, including a `<slot>` in an `{#each ...}` block will not cause the slotted content to be rendered multiple times
+* The `let:` directive has no effect
+* Polyfills are required to support older browsers
 
 
-### API компонента на сервере
+
+### Server-side component API
 
 ```js
 const result = Component.render(...)
@@ -1035,12 +1041,16 @@ const result = Component.render(...)
 
 ---
 
-В отличие от компонентов на стороне клиента, компоненты на стороне сервера не имеют такого же жизненного цикла после их рендеринга - вся их работа заключается лишь в создании HTML и CSS. По этой причине API несколько отличается.
+Unlike client-side components, server-side components don't have a lifespan after you render them — their whole job is to create some HTML and CSS. For that reason, the API is somewhat different.
 
-Компонент на стороне сервера предоставляет метод `render`, который можно вызывать, передав при необходимости нужные свойства. Он возвращает объект со свойствами `head`, `html` и `css`. При этом в `head` будет помещено содержимое всех имеющихся элементов `<svelte:head>`.
+A server-side component exposes a `render` method that can be called with optional props. It returns an object with `head`, `html`, and `css` properties, where `head` contains the contents of any `<svelte:head>` elements encountered.
+
+You can import a Svelte component directly into Node using [`svelte/register`](docs#svelte_register).
 
 ```js
-const App = require('./App.svelte');
+require('svelte/register');
+
+const App = require('./App.svelte').default;
 
 const { head, html, css } = App.render({
 	answer: 42

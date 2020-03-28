@@ -1,20 +1,18 @@
 ---
-title: Директива animate
+title: The animate directive
 ---
 
-В [предыдущем уроке](tutorial/deferred-transitions) мы использовали отложенные переходы, чтобы создать иллюзию движения, при перемещении элементов из одного списка задач в другой.
+In the [previous chapter](tutorial/deferred-transitions), we used deferred transitions to create the illusion of motion as elements move from one todo list to the other.
 
-Чтобы завершить иллюзию, нам нужно, чтобы элементы, которые остаются в списке тоже двигались плавно. Для этого мы используем директиву `animate`.
+To complete the illusion, we also need to apply motion to the elements that *aren't* transitioning. For this, we use the `animate` directive.
 
-Сначала, импортируйте функцию `flip` из `svelte/animate`:
+First, import the `flip` function — flip stands for ['First, Last, Invert, Play'](https://aerotwist.com/blog/flip-your-animations/) — from `svelte/animate`:
 
 ```js
 import { flip } from 'svelte/animate';
 ```
 
-> flip - это аббревиатура от слов ['First, Last, Invert, Play'](https://aerotwist.com/blog/flip-your-animations/)
-
-Затем добавьте новую директиву в оба элемента `<label>`:
+Then add it to the `<label>` elements:
 
 ```html
 <label
@@ -24,7 +22,7 @@ import { flip } from 'svelte/animate';
 >
 ```
 
-Во втором случае мы можем немного ускорить анимацию, добавив параметр `duration`:
+The movement is a little slow in this case, so we can add a `duration` parameter:
 
 ```html
 <label
@@ -34,5 +32,6 @@ import { flip } from 'svelte/animate';
 >
 ```
 
-> `duration` также может являться функцией `d => миллисекунд`, где `d` - количество пикселей, которое должен пройти элемент.
-Обратите внимание, что все переходы и анимации осуществляются при помощи CSS, а не JavaScript, поэтому они не будут блокировать выполнение основного потока.
+> `duration` can also be a `d => milliseconds` function, where `d` is the number of pixels the element has to travel
+
+Note that all the transitions and animations are being applied with CSS, rather than JavaScript, meaning they won't block (or be blocked by) the main thread.

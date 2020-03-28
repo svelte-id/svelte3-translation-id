@@ -1,15 +1,15 @@
 ---
-title: Текстовые поля
+title: Text inputs
 ---
 
-Как правило, поток данных в Svelte идёт *сверху вниз*, т.е. родительский компонент может устанавливать свойства для дочернего компонента, а компонент может устанавливать атрибуты для элемента, но не наоборот.
+As a general rule, data flow in Svelte is *top down* — a parent component can set props on a child component, and a component can set attributes on an element, but not the other way around.
 
-Иногда полезно нарушить это правило. Возьмем случай с элементом `<input>` в этом компоненте — мы *могли бы* добавить обработчик события `on:input`, который присваивает переменной `name` значение свойства `event.target.value`, но это малость... многословно. А с другими видами элементов формы ситуация ещё хуже.
+Sometimes it's useful to break that rule. Take the case of the `<input>` element in this component — we *could* add an `on:input` event handler that sets the value of `name` to `event.target.value`, but it's a bit... boilerplatey. It gets even worse with other form elements, as we'll see.
 
-Вместо этого, мы можем использовать директиву `bind:value`:
+Instead, we can use the `bind:value` directive:
 
 ```html
 <input bind:value={name}>
 ```
 
-Это означает, что не только изменение значения переменной `name` обновит значение в текстовом поле, но и изменение текста в поле приведет к изменению значения `name`.
+This means that not only will changes to the value of `name` update the input value, but changes to the input value will update `name`.

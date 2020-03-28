@@ -1,7 +1,7 @@
 <script>
 	import { mapbox } from './mapbox.js';
 
-	// ...получите контекст здесь
+	// ...get the context here
 
 	export let lat;
 	export let lon;

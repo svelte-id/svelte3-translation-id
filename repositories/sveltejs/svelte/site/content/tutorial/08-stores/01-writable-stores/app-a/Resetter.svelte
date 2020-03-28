@@ -2,10 +2,10 @@
 	import { count } from './stores.js';
 
 	function reset() {
-		// реализация сброса count
+		// TODO reset the count
 	}
 </script>
 
 <button on:click={reset}>
-	сброс
+	reset
 </button>

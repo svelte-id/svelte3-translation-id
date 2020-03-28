@@ -3,8 +3,8 @@
 
 	let time = new Date();
 
-	// эти переменные автоматически обновляются, каждый раз
-	// когда изменяется `time`, блягодаря префиксу `$:`
+	// these automatically update when `time`
+	// changes, because of the `$:` prefix
 	$: hours = time.getHours();
 	$: minutes = time.getMinutes();
 	$: seconds = time.getSeconds();
@@ -61,7 +61,7 @@
 <svg viewBox='-50 -50 100 100'>
 	<circle class='clock-face' r='48'/>
 
-	<!-- отметки -->
+	<!-- markers -->
 	{#each [0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55] as minute}
 		<line
 			class='major'
@@ -80,7 +80,7 @@
 		{/each}
 	{/each}
 
-	<!-- часовая стрелка -->
+	<!-- hour hand -->
 	<line
 		class='hour'
 		y1='2'
@@ -88,7 +88,7 @@
 		transform='rotate({30 * hours + minutes / 2})'
 	/>
 
-	<!-- минутная стрелка -->
+	<!-- minute hand -->
 	<line
 		class='minute'
 		y1='4'
@@ -96,7 +96,7 @@
 		transform='rotate({6 * minutes + seconds / 10})'
 	/>
 
-	<!-- секундная стрелка-->
+	<!-- second hand -->
 	<g transform='rotate({6 * seconds})'>
 		<line class='second' y1='10' y2='-38'/>
 		<line class='second-counterweight' y1='10' y2='2'/>

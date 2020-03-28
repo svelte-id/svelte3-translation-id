@@ -1,10 +1,10 @@
 ---
-title: Изменение массивов и объектов
+title: Updating arrays and objects
 ---
 
-Поскольку реактивные изменения в Svelte вызываются только присваиванием значений переменным, использование методов массива `push` или `splice` не приведёт к автоматическому обновлению. Например, нажатие кнопки ничего не сделает.
+Because Svelte's reactivity is triggered by assignments, using array methods like `push` and `splice` won't automatically cause updates. For example, clicking the button doesn't do anything.
 
-Один из способов исправить кнопку, добавить излишнее присваивание переменной самой себе:
+One way to fix that is to add an assignment that would otherwise be redundant:
 
 ```js
 function addNumber() {
@@ -13,7 +13,7 @@ function addNumber() {
 }
 ```
 
-Но есть более грамотное решение:
+But there's a more idiomatic solution:
 
 ```js
 function addNumber() {
@@ -21,23 +21,21 @@ function addNumber() {
 }
 ```
 
-Вы можете использовать подобный способ для замены методов `pop`, `shift`, `unshift` и `splice`.
+You can use similar patterns to replace `pop`, `shift`, `unshift` and `splice`.
 
-Присваивания значений *свойствам* массивов и объектов — например, `obj.foo + = 1` или `array[i] = x` — работают так же, как и присваивания обычным переменным.
+Assignments to *properties* of arrays and objects — e.g. `obj.foo += 1` or `array[i] = x` — work the same way as assignments to the values themselves.
 
- ```js
- function addNumber() {
+```js
+function addNumber() {
 	numbers[numbers.length] = numbers.length + 1;
- }
- ```
+}
+```
 
-Запомните простое правило: имя обновляемой переменной должно присутствовать в левой части равенства, чтобы сработала реактивность при присваивании.
-
-Например, это...
+A simple rule of thumb: the name of the updated variable must appear on the left hand side of the assignment. For example this...
 
 ```js
 const foo = obj.foo;
 foo.bar = 'baz';
 ```
 
-... не обновит ссылку на `obj.foo.bar`, пока не будет добавлена строка `obj = obj`.
+...won't update references to `obj.foo.bar`, unless you follow it up with `obj = obj`.

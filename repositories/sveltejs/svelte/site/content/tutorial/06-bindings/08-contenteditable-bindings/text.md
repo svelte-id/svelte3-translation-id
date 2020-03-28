@@ -1,8 +1,8 @@
 ---
-title: Блоки с редактируемым содержимым
+title: Contenteditable bindings
 ---
 
-Элементы с атрибутом `contenteditable="true"` поддерживают привязки `textContent` и `innerHTML`:
+Elements with a `contenteditable="true"` attribute support `textContent` and `innerHTML` bindings:
 
 ```html
 <div

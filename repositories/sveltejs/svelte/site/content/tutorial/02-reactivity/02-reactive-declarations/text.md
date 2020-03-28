@@ -1,22 +1,22 @@
 ---
-title: Объявления
+title: Declarations
 ---
 
-Svelte автоматически обновляет DOM при изменении состояния вашего компонента. При этом иногда некоторые части состояния компонента должны быть вычислены из *других* частей и пересчитаны всякий раз, когда эти части изменяются. Например, переменная `fullname` может быть получена из `firstname` и `lastname`.
+Svelte automatically updates the DOM when your component's state changes. Often, some parts of a component's state need to be computed from *other* parts (such as a `fullname` derived from a `firstname` and a `lastname`), and recomputed whenever they change.
 
-Для этого у нас есть *реактивные объявления*. Они выглядят так:
+For these, we have *reactive declarations*. They look like this:
 
 ```js
 let count = 0;
 $: doubled = count * 2;
 ```
 
-> Не волнуйтесь, если код выглядит для вас странно. Это [валидный](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/label) (хоть и необычный) JavaScript, который Svelte понимает как 'повторить вычисление выражения, как только изменится любое значение внутри него'. Просто начните использовать эту возможность и вы быстро привыкнете.
+> Don't worry if this looks a little alien. It's [valid](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/label) (if unconventional) JavaScript, which Svelte interprets to mean 're-run this code whenever any of the referenced values change'. Once you get used to it, there's no going back.
 
-Давайте поместим `doubled` в нашу разметку:
+Let's use `doubled` in our markup:
 
 ```html
-<p>Удвоим {count} и получим {doubled}</p>
+<p>{count} doubled is {doubled}</p>
 ```
 
-Конечно, вы можете просто написать `{count * 2}` в разметке - но это всего лишь очень простой случай. Реактивные объявления становятся гораздо полезнее, когда нужно ссылаться на них несколько раз, или у вас есть значения, которые зависят от *других* реактивных значений.
+Of course, you could just write `{count * 2}` in the markup instead — you don't have to use reactive values. Reactive values become particularly valuable when you need to reference them multiple times, or you have values that depend on *other* reactive values.

@@ -1,16 +1,16 @@
 ---
-title: Присваивания
+title: Assignments
 ---
 
-Сердцем Svelte является мощная система *реактивности*, которая синхронизирует DOM с состоянием вашего приложения — например, при реагировании на какое-либо событие.
+At the heart of Svelte is a powerful system of *reactivity* for keeping the DOM in sync with your application state — for example, in response to an event.
 
-Чтобы показать как это работает, нам сначала нужно подключить обработчик событий к кнопке. Замените строку №9 на это:
+To demonstrate it, we first need to wire up an event handler. Replace line 9 with this:
 
 ```html
 <button on:click={handleClick}>
 ```
 
-Внутри функции `handleClick` просто добавляем изменение значения переменной `count`:
+Inside the `handleClick` function, all we need to do is change the value of `count`:
 
 ```js
 function handleClick() {
@@ -18,4 +18,4 @@ function handleClick() {
 }
 ```
 
-Svelte при компиляции дополнит это присваивание некоторым кодом, который будет сообщать о том, что DOM нужно обновить.
+Svelte 'instruments' this assignment with some code that tells it the DOM will need to be updated.

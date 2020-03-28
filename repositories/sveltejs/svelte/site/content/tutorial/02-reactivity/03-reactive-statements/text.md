@@ -1,27 +1,27 @@
 ---
-title: Выражения
+title: Statements
 ---
 
-Мы не ограничены объявлением реактивных *значений* - мы также можем реактивно запускать произвольные *выражения*. Например, мы можем выводить в консоль переменную `count` всякий раз, когда она изменяется:
+We're not limited to declaring reactive *values* — we can also run arbitrary *statements* reactively. For example, we can log the value of `count` whenever it changes:
 
 ```js
-$: console.log(`значение count равно ${count}`);
+$: console.log(`the count is ${count}`);
 ```
 
-Вы можете легко сгруппировать выражения в единый блок:
+You can easily group statements together with a block:
 
 ```js
 $: {
-	console.log(`значение count равно ${count}`);
-	alert(`Я СКАЗАЛ ЗНАЧЕНИЕ count РАВНО ${count}`);
+	console.log(`the count is ${count}`);
+	alert(`I SAID THE COUNT IS ${count}`);
 }
 ```
 
-Вы можете ставить `$:` даже перед выражениями вроде оператора `if`:
+You can even put the `$:` in front of things like `if` blocks:
 
 ```js
 $: if (count >= 10) {
-	alert(`значение count слишком велико!`);
+	alert(`count is dangerously high!`);
 	count = 9;
 }
 ```

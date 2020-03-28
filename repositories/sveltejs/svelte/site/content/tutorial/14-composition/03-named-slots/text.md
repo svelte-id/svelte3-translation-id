@@ -1,44 +1,44 @@
 ---
-title: Именованные слоты
+title: Named slots
 ---
 
-В предыдущем примере у нас был только *слот по умолчанию*, который напрямую отображает переданные элементы. Иногда требуется больше контроля над размещением содержимого в разметке, например, в нашем компоненте `<ContactCard>`. Тут нам могут помочь *именованные слоты*.
+The previous example contained a *default slot*, which renders the direct children of a component. Sometimes you will need more control over placement, such as with this `<ContactCard>`. In those cases, we can use *named slots*.
 
-В `ContactCard.svelte` добавьте атрибут `name` в каждый слот:
+In `ContactCard.svelte`, add a `name` attribute to each slot:
 
 ```html
 <article class="contact-card">
 	<h2>
 		<slot name="name">
-			<span class="missing">Имя не указано</span>
+			<span class="missing">Unknown name</span>
 		</slot>
 	</h2>
 
 	<div class="address">
 		<slot name="address">
-			<span class="missing">Адрес не указан</span>
+			<span class="missing">Unknown address</span>
 		</slot>
 	</div>
 
 	<div class="email">
 		<slot name="email">
-			<span class="missing">E-Mail не указан</span>
+			<span class="missing">Unknown email</span>
 		</slot>
 	</div>
 </article>
 ```
 
-Затем добавьте элементы с соответствующими атрибутами `slot=" ... "` внутри компонента `<ContactCard>`:
+Then, add elements with corresponding `slot="..."` attributes inside the `<ContactCard>` component:
 
 ```html
 <ContactCard>
 	<span slot="name">
-		П. Шерман
+		P. Sherman
 	</span>
 
 	<span slot="address">
-		улица Валаби, д.42<br>
-		Сидней
+		42 Wallaby Way<br>
+		Sydney
 	</span>
 </ContactCard>
 ```

@@ -1,15 +1,15 @@
 ---
-title: Встроенные обработчики 
+title: Inline handlers
 ---
 
-Вы можете объявить обработчик события непосредственно в строке:
+You can also declare event handlers inline:
 
 ```html
 <div on:mousemove="{e => m = { x: e.clientX, y: e.clientY }}">
-	Позиция курсора мыши {m.x} x {m.y}
+	The mouse position is {m.x} x {m.y}
 </div>
 ```
 
-Кавычки тут являются необязательными, но в некоторых редакторах они полезны для правильной подсветки синтаксиса.
+The quote marks are optional, but they're helpful for syntax highlighting in some environments.
 
-> В некоторых фреймворках существуют рекомендации избегать встроенных обработчиков событий из-за снижения производительности, особенно внутри циклов. К Svelte это не относится — компилятор создает быстрый код независимо от типа обработчика.
+> In some frameworks you may see recommendations to avoid inline event handlers for performance reasons, particularly inside loops. That advice doesn't apply to Svelte — the compiler will always do the right thing, whichever form you choose.

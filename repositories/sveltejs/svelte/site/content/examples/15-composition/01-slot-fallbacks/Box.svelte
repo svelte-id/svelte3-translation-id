@@ -11,6 +11,6 @@
 
 <div class="box">
 	<slot>
-		<em>контент не был передан</em>
+		<em>no content was provided</em>
 	</slot>
 </div>

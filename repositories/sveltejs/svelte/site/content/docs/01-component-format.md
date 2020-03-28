@@ -1,213 +1,209 @@
 ---
-title: Format Komponen
+title: Component format
 ---
 
 ---
 
-Komponen adalah _building block_ semua aplikasi dalam __framework__ Svelte. Komponen tersebut dijabarkan dalam sebuah file yang berakhiran `.svelte` menggunakan superset dari bahasa markup HTML.
+Components are the building blocks of Svelte applications. They are written into `.svelte` files, using a superset of HTML.
 
-Ketiga unsur - script, style, dan markup - adalah opsional.
+All three sections — script, styles and markup — are optional.
 
 ```html
 <script>
-	// Logikanya dijelaskan di sini
+	// logic goes here
 </script>
 
 <style>
-	/* style harus ada di sini */
+	/* styles go here */
 </style>
 
-<!-- markup (0 elemen atau lebih) ditempatkan di sini -->
+<!-- markup (zero or more items) goes here -->
 ```
 
 ### &lt;script&gt;
 
-blok `<script>` berisi JavaScript yang dijalankan saat komponen dibuat. Variabel yang dideklarasikan (atau diimpor) di blok ini akan 'tampak' dari komponen markup. Ada empat aturan tambahan:
+A `<script>` block contains JavaScript that runs when a component instance is created. Variables declared (or imported) at the top level are 'visible' from the component's markup. There are four additional rules:
 
-##### 1. `export` mendeklarasikan properti komponen
+##### 1. `export` creates a component prop
 
 ---
 
-Svelte использует ключевое слово `export`, чтобы пометить объявление переменной как *свойство*, что означает, что оно становится доступным извне всему, что будет использовать этот компонент (см. раздел [Атрибуты и свойства](docs#Atributy_i_svojstva) для дополнительной информации).
-
-Svelte memakai kata kunci `export` untuk menandai deklarasi variabel sebagai *property *, yang artinya properti ini menjadi dapat diakses dari luar oleh semua yang akan menggunakan kompenen ini (lihat [Atribut dan Properti] (docs # attribut_properti) untuk informasi lebih lanjut) .
+Svelte uses the `export` keyword to mark a variable declaration as a *property* or *prop*, which means it becomes accessible to consumers of the component (see the section on [attributes and props](docs#Attributes_and_props) for more information).
 
 ```html
 <script>
 	export let foo;
 
-	// nilai variabel yang dideklarasikan sebagai properti,
-	// tersedia seketika
+	// Values that are passed in as props
+	// are immediately available
 	console.log({ foo });
 </script>
 ```
 
 ---
-Kamu bisa menentukan nilai _default_ yang akan terpakai pada saat ada komponen konsumen (_consumer component_) yang menggunakan properti tersebut.
-Dalam modus pengembangan (lihat [opsi kompilasi] (docs # svelte_compile)), apabila konsumen tidak menentukan nilai properti dan tidak ada nilai _default_, maka peringatan kesalahan akan muncul. Untuk mencegah munculnya kesalahan, pastikan bahwa properti diatur ke nilai _default_, meskipun nilai _default_ itu sama dengan `undefined` (tidak terdefinisi).
+
+You can specify a default initial value for a prop. It will be used if the component's consumer doesn't specify the prop on the component (or if its initial value is `undefined`) when instantiating the component. Note that whenever a prop is removed by the consumer, its value is set to `undefined` rather than the initial value.
+
+In development mode (see the [compiler options](docs#svelte_compile)), a warning will be printed if no default initial value is provided and the consumer does not specify a value. To squelch this warning, ensure that a default initial value is specified, even if it is `undefined`.
 
 ```html
 <script>
-	export let bar = 'nilai default opsional';
+	export let bar = 'optional default initial value';
 	export let baz = undefined;
 </script>
 ```
 
 ---
 
-Properti yang ditandai dengan kata kunci `const`,` class` atau `function` pada saat diekspor ke luar akan bersifat _read-only_. Properti berupa *function* akan menjadi properti umum.
-
+If you export a `const`, `class` or `function`, it is readonly from outside the component. Function *expressions* are valid props, however.
 
 ```html
 <script>
-	// read-only
+	// these are readonly
 	export const thisIs = 'readonly';
 
 	export function greet(name) {
 		alert(`hello ${name}!`);
 	}
 
-	// properti umum
+	// this is a prop
 	export let format = n => n.toFixed(2);
 </script>
 ```
 
 ---
 
-Dimungkinkan menggunakan _reserved word_ sebagai nama properti.
+You can use reserved words as prop names.
 
 ```html
 <script>
 	let className;
 
-	// membuat properti dengan nama  `class`, 
-	// yang adalah reserved word dalam JS
+	// creates a `class` property, even
+	// though it is a reserved word
 	export { className as class };
 </script>
 ```
 
-##### 2. _Assignment_ 'Reaktif'
+##### 2. Assignments are 'reactive'
 
 ---
 
-Untuk mengubah status sebuah komponen dan mulai menggambar kembali caranya mudah hanya dengan cara memberikan assignment pada sebuah variabel yang dideklarasikan secara lokal.
+To change component state and trigger a re-render, just assign to a locally declared variable.
 
-Assignment dengan _update_ (`count += 1`) dan _assignment_ properti (`obj.x = y`) akan memberikan hasil yang sama.
+Update expressions (`count += 1`) and property assignments (`obj.x = y`) have the same effect.
 
-Oleh karena sifat reaktivitas Svelte didasarkan pada _assignment_, penggunaan metode _array_ seperti `.push()` dan `.splic()` tidak akan meng-_update_ secara otomatis namun kamu bisa cari tahu bagaimana cara mengatasi keterbatasan ini dalam [tutorial](tutorial/updating-arrays-and-objects).
+Because Svelte's reactivity is based on assignments, using array methods like `.push()` and `.splice()` won't automatically trigger updates. Options for getting around this can be found in the [tutorial](tutorial/updating-arrays-and-objects).
 
 ```html
 <script>
 	let count = 0;
 
 	function handleClick () {
-		// memanggil fungsi ini akan meng-update komponen,
-		// apabila dalam markup-nya ada link ke `count`
+		// calling this function will trigger an
+		// update if the markup references `count`
 		count = count + 1;
 	}
 </script>
 ```
 
-##### 3. `$:` Membuat Ekspresi Menjadi Reaktif
+##### 3. `$:` marks a statement as reactive
 
 ---
-Ekspresi apapun yang berada pada level teratas (maksudnya yang tidak berada di dalam blok atau di dalam fungsi) dapat dibuat menjadi bersifat reaktif dengan cara menambahkan label `$:` di depannya. [JS Label](https://developer.mozilla.org/id/docs/Web/JavaScript/Reference/Statements/label). Ekspresi yang bersifat reaktif diluncurkan seketika saat sebelum komponennya ter-update ketika nilai variabel yang tercakup dalamnya berubah. 
+
+Any top-level statement (i.e. not inside a block or a function) can be made reactive by prefixing it with the `$:` [JS label syntax](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/label). Reactive statements run immediately before the component updates, whenever the values that they depend on have changed.
 
 ```html
 <script>
 	export let title;
 
-	// pada saat properti `title` berubah,
-	// ekspresi berikut ini akan memperbarui `document.title`
+	// this will update `document.title` whenever
+	// the `title` prop changes
 	$: document.title = title;
 
 	$: {
-		console.log(`kamu bisa menggabungkan beberapa ekspresi dalam satu blok`);
-		console.log(`title saat ini: ${title}`);
+		console.log(`multiple statements can be combined`);
+		console.log(`the current title is ${title}`);
 	}
 </script>
 ```
 
 ---
 
-Apabila suatu ekspresi belum dideklarasikan sebelumnya maka Svelte akan secara mandiri mendeklarasikan variabel tersebut melalui variabel sebelumnya yang dideklarasikan dengan pernyataan `let`.
+If a statement consists entirely of an assignment to an undeclared variable, Svelte will inject a `let` declaration on your behalf.
 
 ```html
 <script>
 	export let num;
 
-	// tidak perlu mendeklarasikan `squared` dan` cubed`,
-	// Svelte akan melakukannya untuk kita
+	// we don't need to declare `squared` and `cubed`
+	// — Svelte does it for us
 	$: squared = num * num;
 	$: cubed = squared * num;
 </script>
 ```
 
-##### 4. Tambahkan Awalan `$` pada Repositori untuk Mendapatkan Nilainya
+##### 4. Prefix stores with `$` to access their values
 
 ---
-Repositori adalah segala macam objek yang _value_ (nilai)-nya dapat diakses secara reaktif melalui * kontrak repositori *.
 
-[Modul `svelte / store`] (docs # svelte_store) berisikan implementasi minimum _storage_ (penyimpanan) atas kontrak tersebut.
+A *store* is an object that allows reactive access to a value via a simple *store contract*. The [`svelte/store` module](docs#svelte_store) contains minimal store implementations which fulfil this contract.
 
-Setiap saat kamu perlu mengambil sebuah _value_ (nilai) dari repositori, kamu dapat melakukannya dengan cara menambahkan awalan bersimbol `$`. Simbol ini memberitahukan kepada Svelte untuk mendeklarasikan variabel berawalan dan men-_subscribe_ variabel pada repositori yang dapat melakukan penghapusan otomatis bila diperlukan.
+Any time you have a reference to a store, you can access its value inside a component by prefixing it with the `$` character. This causes Svelte to declare the prefixed variable, and set up a store subscription that will be unsubscribed when appropriate.
 
-Memberikan penunjukan nilai menggunakan awalan `$` ini membuat variabel harus berlaku sebagai repositori yang _writable_ dan repositori ini akan menghasilkan nilai saat dipanggil dengan metode  `.set`.
+Assignments to `$`-prefixed variables require that the variable be a writable store, and will result in a call to the store's `.set` method.
 
-Catatlah bahwa repositori harus dideklarasikan pada level teratas komponen dan bukan di dalam sebuah fungsi atau di dalam blok `if`.
+Note that the store must be declared at the top level of the component — not inside an `if` block or a function, for example.
 
-Variabel lokal (yang tidak menunjuk kepada repositori) * tidak boleh* berawalan `$`.
+Local variables (that do not represent store values) must *not* have a `$` prefix.
 
 ```html
 <script>
 	import { writable } from 'svelte/store';
 
 	const count = writable(0);
-	console.log($count); // akan menghasilkan 0
+	console.log($count); // logs 0
 
 	count.set(1);
-	console.log($count); // akan menghasilkan 1
+	console.log($count); // logs 1
 
 	$count = 2;
-	console.log($count); // akan menghasilkan 2
+	console.log($count); // logs 2
 </script>
 ```
 
-##### Kontrak Penyimpanan
+##### Store contract
 
 ```js
 store = { subscribe: (subscription: (value: any) => void) => () => void, set?: (value: any) => void }
 ```
 
-Kamu dapat memilih opsi sendiri untuk repositori tanpa mengikutsertakan [`svelte / store`] (docs # svelte_store) dengan mengimplementasikan * kontrak repositori *::
+You can create your own stores without relying on [`svelte/store`](docs#svelte_store), by implementing the *store contract*:
 
-1. Repository harus memiliki metode `.subscribe`, dengan fungsi _subscription_ sebagai argumennya. Saat menggunakan metode ini, fungsi subscription harus dipanggil segera dengan memberikan nilai _storage value_ padanya. Selanjutnya, semua fungsi subscription functions yang diterima harus dipanggil secara _synchronous_ terhadap setiap perubahan yang ada dalam nilai _storage_.
-2. Metode `.subscribe` harus mengembalikan (_return_) fungsi _unsubscribe_. Panggilan terhadap fungsi _cancel_ harus membuat fungsi _subscription_ tidak lagi dipanggil oleh  repositori.
-3. * Opsional *, repositori dapat memiliki metode `.set`, dengan parameter nilai baru untuk repositori dan secara synchronous memanggil semua fungsi _subscription_ yang sedang aktif. _Storage_ yang demikian disebut * _recordable storage_ *. 
+1. A store must contain a `.subscribe` method, which must accept as its argument a subscription function. This subscription function must be immediately and synchronously called with the store's current value upon calling `.subscribe`. All of a store's active subscription functions must later be synchronously called whenever the store's value changes.
+2. The `.subscribe` method must return an unsubscribe function. Calling an unsubscribe function must stop its subscription, and its corresponding subscription function must not be called again by the store.
+3. A store may *optionally* contain a `.set` method, which must accept as its argument a new value for the store, and which synchronously calls all of the store's active subscription functions. Such a store is called a *writable store*.
 
-Untuk memastikan kompatibilitas dengan observabel RxJS, metode `.subscribe()` dapat mengembalikan (_return_) objek yang memiliki metode `.unsubscribe()` dan tidak harus langsung menghasilkan fungsi _unsubscribe_. Namun apabila metode `.subscribe` memanggil _subscription_ secara _asynchronous_ (spesifikasi Observabel memang mengizinkan hal ini), Svelte akan menganggap nilai _storage_ sebagai `undefined` sampai panggilan terhadap metode ini berhenti. 
-
----
+For interoperability with RxJS Observables, the `.subscribe` method is also allowed to return an object with an `.unsubscribe` method, rather than return the unsubscription function directly. Note however that unless `.subscribe` synchronously calls the subscription (which is not required by the Observable spec), Svelte will see the value of the store as `undefined` until it does.
 
 
 ### &lt;script context="module"&gt;
 
 ---
 
-Blok `<script>` yang mengandung atribut `context ="module"` tereksekusi hanya sekali selama proses awal modul, dan bukan setiap kali instans komponen terinisialisasi. Nilai yang dideklarasikan pada blok ini tersedia dalam markup komponen dan dalam blok `<script>` (tetapi tidak sebaliknya).
+A `<script>` tag with a `context="module"` attribute runs once when the module first evaluates, rather than for each component instance. Values declared in this block are accessible from a regular `<script>` (and the component markup) but not vice versa.
 
-Segala sesuatu yang diekspor dari blok tersebut menggunakan operator `export` akan menjadi terekspor dari _compiled module_ itu sendiri.
+You can `export` bindings from this block, and they will become exports of the compiled module.
 
-Kamu tidak bisa membuat `export default` karena default ekspor adalah komponen itu sendiri.
+You cannot `export default`, since the default export is the component itself.
 
-> Variabel yang dideklarasikan pada blok `context =" module "` tidak bersifat reaktif, jadi memberikan nilai baru tidak akan memberi pengaruh perubahan pada komponen, meskipun nilai variabelnya sendiri berubah. Untuk nilai yang memang ditujukan untuk digunakan pada beberapa komponen, sebaiknya menggunakan [_storage_](docs#svelte_store).
-
+> Variables defined in `module` scripts are not reactive — reassigning them will not trigger a rerender even though the variable itself will update. For values shared between multiple components, consider using a [store](docs#svelte_store).
 
 ```html
 <script context="module">
 	let totalComponents = 0;
 
-	// contoh berikut kamu nantinya dapat mengimpor fungsi di lain tempat yang tepat:
+	// this allows an importer to do e.g.
 	// `import Example, { alertTotal } from './Example.svelte'`
 	export function alertTotal() {
 		alert(totalComponents);
@@ -216,7 +212,7 @@ Kamu tidak bisa membuat `export default` karena default ekspor adalah komponen i
 
 <script>
 	totalComponents += 1;
-	console.log(`untuk komponen ini terbentuk sejumlah ${totalComponents} contoh`);
+	console.log(`total number of times this component has been created: ${totalComponents}`);
 </script>
 ```
 
@@ -225,14 +221,14 @@ Kamu tidak bisa membuat `export default` karena default ekspor adalah komponen i
 
 ---
 
-CSS style di dalam blok <style> akan terisolasi di dalam komponen ini.
+CSS inside a `<style>` block will be scoped to that component.
 
-Ini bisa terjadi karena penambahan _class_ pada semua elemen terdampak memiliki nama _class_ yang berasal dari fungsi hash dari style komponen itu (contohnya `svelte-123xyz`).
+This works by adding a class to affected elements, which is based on a hash of the component styles (e.g. `svelte-123xyz`).
 
 ```html
 <style>
 	p {
-		/* ini hanya akan berdampak pada element <p> dalam komponen ini */
+		/* this will only affect <p> elements in this component */
 		color: burlywood;
 	}
 </style>
@@ -240,19 +236,19 @@ Ini bisa terjadi karena penambahan _class_ pada semua elemen terdampak memiliki 
 
 ---
 
-Untuk mengaplikasikan _style_ pada _selector_ secara global, gunakan _modifier_ `:global(...)`.
+To apply styles to a selector globally, use the `:global(...)` modifier.
 
 ```html
 <style>
 	:global(body) {
-		/* style untuk <body> */
+		/* this will apply to <body> */
 		margin: 0;
 	}
 
 	div :global(strong) {
-		/* style ini akan berlaku untuk semua element <strong> 
-		   di semua komponen yang berada di dalam 
-	       elemen <div> dari komponen ini */
+		/* this will apply to all <strong> elements, in any
+			 component, that are inside <div> elements belonging
+			 to this component */
 		color: goldenrod;
 	}
 </style>
@@ -260,8 +256,9 @@ Untuk mengaplikasikan _style_ pada _selector_ secara global, gunakan _modifier_ 
 
 ---
 
-Apabila kamu hendak membuat animasi @keyframes global, tambahkanlah awalan `-global-` pada nama animasi.
-Awalan nama `-global-` akan terhapus pada saat kompilasi dan untuk mengakses animasi tersebut di mana saja dalam kode kamu cukup memanggil dengan nama tanpa awalan tersebut.
+If you want to make @keyframes that are accessible globally, you need to prepend your keyframe names with `-global-`.
+
+The `-global-` part will be removed when compiled, and the keyframe then be referenced using just `my-animation-name` elsewhere in your code.
 
 ```html
 <style>

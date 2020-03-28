@@ -1,34 +1,35 @@
 ---
-title: Динамические атрибуты
+title: Dynamic attributes
 ---
 
-Вы можете использовать выражения в фигурных скобках не только в тексте, но и для управления атрибутами элементов.
+Just like you can use curly braces to control text, you can use them to control element attributes.
 
-У нашего изображения не хватает атрибута `src` - давайте добавим:
+Our image is missing a `src` — let's add one:
 
 ```html
 <img src={src}>
 ```
 
-Стало лучше, но Svelte показывает нам предупреждение:
+That's better. But Svelte is giving us a warning:
 
 > A11y: &lt;img&gt; element should have an alt attribute
 
-При создании веб-приложений важно добиваться их *доступности* для максимально широкой пользовательской аудитории, например, для людей со слабым зрением, ограниченной подвижностью или для людей со слабым 'железом' и плохим интернет-соединением. Обеспечить такую доступность (в английском accessibility, часто сокращают до a11y) не всегда легко, но Svelte может помочь, предупредив о вещах, ухудшающих доступность.
+When building web apps, it's important to make sure that they're *accessible* to the broadest possible userbase, including people with (for example) impaired vision or motion, or people without powerful hardware or good internet connections. Accessibility (shortened to a11y) isn't always easy to get right, but Svelte will help by warning you if you write inaccessible markup.
 
-В данном случае нам не хватает атрибута `alt`, который описывает изображение для людей, использующих программы чтения с экрана, или для людей с медленным или нестабильным подключением к Интернету, которые не могут загрузить изображение. Давайте добавим этот атрибут:
+In this case, we're missing the `alt` attribute that describes the image for people using screenreaders, or people with slow or flaky internet connections that can't download the image. Let's add one:
 
 ```html
-<img src={src} alt="Танцующий человек.">
+<img src={src} alt="A man dances.">
 ```
 
-Мы можем использовать фигурные скобки и *внутри* атрибута. Попробуйте заменить его значение на `"{name} танцует."` — и не забудьте объявить переменную `name` в блоке `<script>`.
+We can use curly braces *inside* attributes. Try changing it to `"{name} dances."` — remember to declare a `name` variable in the `<script>` block.
 
-## Сокращение для атрибутов
 
-Довольно часто будет возникать ситуация, когда имя атрибута и переменной совпадают, например `src={src}`. В Svelte для таких случаев предусмотрено удобное сокращение:
+## Shorthand attributes
+
+It's not uncommon to have an attribute where the name and value are the same, like `src={src}`. Svelte gives us a convenient shorthand for these cases:
 
 ```html
-<img {src} alt="Танцующий человек.">
+<img {src} alt="A man dances.">
 ```
 

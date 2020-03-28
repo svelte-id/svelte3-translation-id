@@ -1,23 +1,23 @@
 ---
-title: Блок if
+title: If blocks
 ---
 
-У HTML нет способа использовать *логику* в виде условных выражений и циклов. А у Svelte есть.
+HTML doesn't have a way of expressing *logic*, like conditionals and loops. Svelte does.
 
-Чтобы отобразить часть разметки при выполнении некоторого условия, мы заключаем её в блок `if`:
+To conditionally render some markup, we wrap it in an `if` block:
 
 ```html
 {#if user.loggedIn}
 	<button on:click={toggle}>
-		Выйти
+		Log out
 	</button>
 {/if}
 
 {#if !user.loggedIn}
 	<button on:click={toggle}>
-		Войти
+		Log in
 	</button>
 {/if}
 ```
 
-Попробуйте в деле — допишите компонент и понажимайте на кнопку.
+Try it — update the component, and click on the buttons.

@@ -1,10 +1,10 @@
 ---
-title: Числовые поля
+title: Numeric inputs
 ---
 
-В DOM всё имеет тип строки. Это мешает, когда дело доходит до числовых полей — `type="number"` и `type="range"` — приходится помнить, что нужно принудительно вызывать `input.value` перед использованием значения.
+In the DOM, everything is a string. That's unhelpful when you're dealing with numeric inputs — `type="number"` and `type="range"` — as it means you have to remember to coerce `input.value` before using it.
 
-Но при использовании `bind:value`, Svelte позаботится об этом за вас:
+With `bind:value`, Svelte takes care of it for you:
 
 ```html
 <input type=number bind:value={a} min=0 max=10>

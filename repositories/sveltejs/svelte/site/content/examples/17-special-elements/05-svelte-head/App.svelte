@@ -2,4 +2,4 @@
 	<link rel="stylesheet" href="tutorial/dark-theme.css">
 </svelte:head>
 
-<h1>Привет, мир!</h1>
+<h1>Hello world!</h1>

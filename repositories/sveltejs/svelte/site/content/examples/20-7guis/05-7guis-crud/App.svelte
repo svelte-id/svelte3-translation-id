@@ -36,7 +36,7 @@
 	}
 
 	function remove() {
-		// Удаляем выбранную персону из исходного массива (people), не из отфильтрованного
+		// Remove selected person from the source array (people), not the filtered array
 		const index = people.indexOf(selected);
 		people = [...people.slice(0, index), ...people.slice(index + 1)];
 
@@ -72,7 +72,7 @@
 	}
 </style>
 
-<input placeholder="найти" bind:value={prefix}>
+<input placeholder="filter prefix" bind:value={prefix}>
 
 <select bind:value={i} size={5}>
 	{#each filteredPeople as person, i}
@@ -80,11 +80,11 @@
 	{/each}
 </select>
 
-<label><input bind:value={first} placeholder="имя"></label>
-<label><input bind:value={last} placeholder="фамилия"></label>
+<label><input bind:value={first} placeholder="first"></label>
+<label><input bind:value={last} placeholder="last"></label>
 
 <div class='buttons'>
-	<button on:click={create} disabled="{!first || !last}">новый</button>
-	<button on:click={update} disabled="{!first || !last || !selected}">обновить</button>
-	<button on:click={remove} disabled="{!selected}">удалить</button>
+	<button on:click={create} disabled="{!first || !last}">create</button>
+	<button on:click={update} disabled="{!first || !last || !selected}">update</button>
+	<button on:click={remove} disabled="{!selected}">delete</button>
 </div>

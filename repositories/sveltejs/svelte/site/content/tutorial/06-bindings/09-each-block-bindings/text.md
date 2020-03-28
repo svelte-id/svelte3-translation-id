@@ -1,8 +1,8 @@
 ---
-title: Привязки внутри блока each
+title: Each block bindings
 ---
 
-Вы можете выполнить привязку даже к свойствам внутри блока `each`.
+You can even bind to properties inside an `each` block.
 
 ```html
 <input
@@ -11,9 +11,9 @@ title: Привязки внутри блока each
 >
 
 <input
-	placeholder="Что надо сделать?"
+	placeholder="What needs to be done?"
 	bind:value={todo.text}
 >
 ```
 
-> Обратите внимание, что взаимодействие с этими элементами `<input>` приведёт к изменению соответствующего массива. Если вы предпочитаете работать с неизменяемыми данными, не создавайте таких привязок и используйте вместо них обработчики событий.
+> Note that interacting with these `<input>` elements will mutate the array. If you prefer to work with immutable data, you should avoid these bindings and use event handlers instead.

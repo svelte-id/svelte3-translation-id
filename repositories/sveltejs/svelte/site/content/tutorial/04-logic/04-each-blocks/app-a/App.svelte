@@ -1,17 +1,17 @@
 <script>
 	let cats = [
-		{ id: 'J---aiyznGQ', name: 'Кот на клавишных' },
-		{ id: 'z_AbfPXTKms', name: 'Мару' },
-		{ id: 'OUtn3pvWmpg', name: 'Экзистенциальный кот' }
+		{ id: 'J---aiyznGQ', name: 'Keyboard Cat' },
+		{ id: 'z_AbfPXTKms', name: 'Maru' },
+		{ id: 'OUtn3pvWmpg', name: 'Henri The Existential Cat' }
 	];
 </script>
 
-<h1>Знаменитые YouTube котики</h1>
+<h1>The Famous Cats of YouTube</h1>
 
 <ul>
-	<!-- начало блока each -->
+	<!-- open each block -->
 		<li><a target="_blank" href="https://www.youtube.com/watch?v={cat.id}">
 			{cat.name}
 		</a></li>
-	<!-- конец блока each -->
+	<!-- close each block -->
 </ul>

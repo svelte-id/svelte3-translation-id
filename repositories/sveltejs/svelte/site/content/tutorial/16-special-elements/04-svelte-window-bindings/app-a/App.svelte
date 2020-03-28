@@ -18,11 +18,11 @@
 
 <div class="text">
 	<span style="opacity: {1 - Math.max(0, y / 40)}">
-		прокрутите вниз
+		scroll down
 	</span>
 
 	<div class="foreground">
-		Вы прокрутили {y} пикселей
+		You have scrolled {y} pixels
 	</div>
 </div>
 

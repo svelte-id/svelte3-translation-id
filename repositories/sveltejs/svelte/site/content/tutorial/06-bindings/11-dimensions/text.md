@@ -1,8 +1,8 @@
 ---
-title: Размеры
+title: Dimensions
 ---
 
-Каждый блочный элемент может иметь привязки `clientWidth`, `clientHeight`, `offsetWidth` и `offsetHeight`:
+Every block-level element has `clientWidth`, `clientHeight`, `offsetWidth` and `offsetHeight` bindings:
 
 ```html
 <div bind:clientWidth={w} bind:clientHeight={h}>
@@ -10,8 +10,8 @@ title: Размеры
 </div>
 ```
 
-Эти привязки доступны только для чтения — изменение значений `w` и `h` не будет иметь никакого эффекта.
+These bindings are readonly — changing the values of `w` and `h` won't have any effect.
 
-> Элементы измеряются с использованием методики, аналогичной [этой](http://www.backalleycoder.com/2013/03/18/cross-browser-event-based-element-resize-detection/). Добавляются кое-какие дополнительные вычисления,  поэтому не рекомендуется использовать такие привязки для очень большого количества элементов.
+> Elements are measured using a technique similar to [this one](http://www.backalleycoder.com/2013/03/18/cross-browser-event-based-element-resize-detection/). There is some overhead involved, so it's not recommended to use this for large numbers of elements.
 >
-> При таком подходе не могут быть измерены элементы со свойством `display: inline` и элементы, которые не могут содержать в себе других элементов (например `<canvas>`). В этих случаях вам придётся измерять элемент в который они помещены.
+> `display: inline` elements cannot be measured with this approach; nor can elements that can't contain other elements (such as `<canvas>`). In these cases you will need to measure a wrapper element instead.

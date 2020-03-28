@@ -10,9 +10,9 @@
 
 <label>
 	<input type=checkbox bind:checked={big}>
-	большой
+	big
 </label>
 
 <div class:big>
-	какой-то {big ? 'большой' : 'маленький'} текст
+	some {big ? 'big' : 'small'} text
 </div>

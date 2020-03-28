@@ -2,7 +2,7 @@
 	import { onMount } from 'svelte';
 	import { mapbox } from './mapbox.js';
 
-	// установите контекст здесь...
+	// set the context here...
 
 	export let lat;
 	export let lon;

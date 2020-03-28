@@ -2,4 +2,4 @@
 	strong { color: green; }
 </style>
 
-<strong>зелёная штука</strong>
+<strong>green thing</strong>

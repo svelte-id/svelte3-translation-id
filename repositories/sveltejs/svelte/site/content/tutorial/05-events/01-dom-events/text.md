@@ -1,10 +1,11 @@
 ---
-title: События DOM
+title: DOM events
 ---
 
-Ранее мы уже видели, что прослушивать любое событие в элементе можно при помощи директивы `on:`:
+As we've briefly seen already, you can listen to any event on an element with the `on:` directive:
+
 ```html
 <div on:mousemove={handleMousemove}>
-	Позиция курсора мыши {m.x} x {m.y}
+	The mouse position is {m.x} x {m.y}
 </div>
 ```

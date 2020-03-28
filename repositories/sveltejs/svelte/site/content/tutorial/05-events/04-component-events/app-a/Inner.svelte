@@ -1,5 +1,5 @@
 <script>
-	// код инициализации должен быть здесь
+	// setup code goes here
 
 	function sayHello() {
 
@@ -7,5 +7,5 @@
 </script>
 
 <button on:click={sayHello}>
-	Нажми для приветствия
+	Click to say hello
 </button>

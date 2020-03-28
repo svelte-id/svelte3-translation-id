@@ -2,17 +2,17 @@
 title: tick
 ---
 
-Функция `tick` отличается от других функций жизненного цикла тем, что вы можете вызывать ее в любое время, а не только при первоначальной инициализации компонента. Она возвращает промис, который будет выполнен, как только к DOM будут применены все необходимые на данный момент изменения состояния(или сразу, при отсутствии таковых).
+The `tick` function is unlike other lifecycle functions in that you can call it any time, not just when the component first initialises. It returns a promise that resolves as soon as any pending state changes have been applied to the DOM (or immediately, if there are no pending state changes).
 
-Когда изменяется состояние компонента, Svelte не обновляет DOM немедленно. Вместо этого он ожидает запуска *микрозадачи* по обновлению DOM, и проверяет, есть ли какие-либо другие изменения, которые необходимо применить, в том числе в других компонентах. Это позволяет избежать лишней работы и позволяет браузеру более эффективно группировать задачи.
+When you invalidate component state in Svelte, it doesn't update the DOM immediately. Instead, it waits until the next *microtask* to see if there are any other changes that need to be applied, including in other components. Doing so avoids unnecessary work and allows the browser to batch things more effectively.
 
-Вы можете наблюдать такое поведение в нашем примере. Выделите часть текста и нажмите клавишу Tab. Поскольку значение `<textarea>` изменяется, текущее выделение пропадёт, а курсор окажется в конце строки. Мы можем исправить это, при помощи `tick`...
+You can see that behaviour in this example. Select a range of text and hit the tab key. Because the `<textarea>` value changes, the current selection is cleared and the cursor jumps, annoyingly, to the end. We can fix this by importing `tick`...
 
 ```js
 import { tick } from 'svelte';
 ```
 
-...и запустим её непосредственно перед установкой `this.selectionStart` и `this.selectionEnd` в конце обработчика `handleKeydown`:
+...and running it immediately before we set `this.selectionStart` and `this.selectionEnd` at the end of `handleKeydown`:
 
 ```js
 await tick();

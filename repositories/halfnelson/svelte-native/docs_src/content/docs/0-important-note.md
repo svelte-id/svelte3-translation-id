@@ -1,9 +1,9 @@
 ---
-title: Важное замечание
+title: Important note
 ---
 
-### Это проект сообщества
+### This is a community project
 
-Svelte Native разрабатывается членами сообщества Svelte, которые хотят создавать приложения для мобильных платформ с такой же лёгкостю и лаконичностью, которую обеспечивает Svelte при разработке web-приложений. Этот проект официально не поддерживается ни проектом NativeScript, ни проектом Svelte.
+Svelte Native is developed by members of the Svelte community who wish to have the same smooth development experience on mobile devices as they have on the web. This project is not an officially supported product of either the NativeScript or Svelte projects.
 
-Пока что.
+Yet.

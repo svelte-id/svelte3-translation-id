@@ -14,15 +14,15 @@
 	$: endDate = convertToDate(end);
 
 	function bookFlight() {
-		const type = isReturn ? 'туда-обратно' : 'в один конец';
+		const type = isReturn ? 'return' : 'one-way';
 
-		let message = `Вы забронировали полет ${type}, вылет ${startDate.toDateString()}`;
-		if (type === 'туда-обратно') {
-			message += `, обратно ${endDate.toDateString()}`;
+		let message = `You have booked a ${type} flight, leaving ${startDate.toDateString()}`;
+		if (type === 'return') {
+			message += ` and returning ${endDate.toDateString()}`;
 		}
 
 		alert(message);
-}
+	}
 
 	function convertToDate(str) {
 		const split = str.split('-');
@@ -46,8 +46,8 @@
 
 <!-- https://github.com/eugenkiss/7guis/wiki#flight-booker -->
 <select bind:value={isReturn}>
-	<option value={false}>в один конец</option>
-	<option value={true}>туда-обратно</option>
+	<option value={false}>one-way flight</option>
+	<option value={true}>return flight</option>
 </select>
 
 <input type=date bind:value={start}>
@@ -56,4 +56,4 @@
 <button
 	on:click={bookFlight}
 	disabled="{isReturn && (startDate >= endDate)}"
->заказать</button>
+>book</button>

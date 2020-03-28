@@ -1,6 +1,6 @@
 <script>
 	let src = 'tutorial/image.gif';
-	let name = 'Рик Эстли';
+	let name = 'Rick Astley';
 </script>
 
-<img {src} alt="{name} танцует.">
+<img {src} alt="{name} dances.">

@@ -2,7 +2,7 @@
 title: <svelte:component>
 ---
 
-Можно добавить в разметку полностью заменяемый компонент при помощи `<svelte:component>`. Вместо последовательности блоков `if`...
+A component can change its category altogether with `<svelte:component>`. Instead of a sequence of `if` blocks...
 
 ```html
 {#if selected.color === 'red'}
@@ -14,10 +14,10 @@ title: <svelte:component>
 {/if}
 ```
 
-...у нас может быть всего лишь один динамический компонент:
+...we can have a single dynamic component:
 
 ```html
 <svelte:component this={selected.component}/>
 ```
 
-Значение `this` может быть либо конструктором компонента, либо `false` — и тогда вообще никакой компонент не будет отрисован.
+The `this` value can be any component constructor, or a falsy value — if it's falsy, no component is rendered.

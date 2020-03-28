@@ -2,11 +2,11 @@
 title: onMount
 ---
 
-У каждого компонента есть *жизненный цикл*, который начинается при его создании и заканчивается когда он уничтожается. Существует несколько функций, позволяющих запускать код в нужные моменты этого жизненного цикла.
+Every component has a *lifecycle* that starts when it is created, and ends when it is destroyed. There are a handful of functions that allow you to run code at key moments during that lifecycle.
 
-Наиболее часто используемой является `onMount`, которая запускается сразу после первой отрисовки компонента в DOM. Мы уже встречались с ней [ранее](tutorial/bind-this), когда нам нужно было взаимодействовать с элементом `<canvas>` после его рендеринга.
+The one you'll use most frequently is `onMount`, which runs after the component is first rendered to the DOM. We briefly encountered it [earlier](tutorial/bind-this) when we needed to interact with a `<canvas>` element after it had been rendered.
 
-Давайте добавим обработчик `onMount`, который загружает некоторые данные из сети:
+We'll add an `onMount` handler that loads some data over the network:
 
 ```html
 <script>
@@ -21,8 +21,8 @@ title: onMount
 </script>
 ```
 
-> При использовании рендеринга на стороне сервера (SSR) рекомендуется помещать `fetch` в `onMount`, а не на верхний уровень блока `<script>`. Функции жизненного цикла, кроме `onDestroy`, не выполняются во время SSR, поэтому на сервере не будет тратится время на загрузку данных, которые должны 'лениво' загружаться  после монтирования компонента в DOM.
+> It's recommended to put the `fetch` in `onMount` rather than at the top level of the `<script>` because of server-side rendering (SSR). With the exception of `onDestroy`, lifecycle functions don't run during SSR, which means we can avoid fetching data that should be loaded lazily once the component has been mounted in the DOM.
 
-Функции жизненного цикла должны вызываться во время инициализации компонента, чтобы их функции обратного вызова были привязаны к экземпляру этого компонента. Так что, нельзя ее вызывать, например, в `setTimeout`.
+Lifecycle functions must be called while the component is initialising so that the callback is bound to the component instance — not (say) in a `setTimeout`.
 
-Если из `onMount` возвращается функция, то эта функция будет вызвана при уничтожении компонента.
+If the `onMount` callback returns a function, that function will be called when the component is destroyed.

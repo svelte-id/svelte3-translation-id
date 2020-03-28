@@ -5,7 +5,7 @@
 	import Resetter from './Resetter.svelte';
 </script>
 
-<h1>Счётчик равен {$count}</h1>
+<h1>The count is {$count}</h1>
 
 <Incrementer/>
 <Decrementer/>

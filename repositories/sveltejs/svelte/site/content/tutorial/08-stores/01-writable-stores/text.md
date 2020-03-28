@@ -1,14 +1,14 @@
 ---
-title: Записываемые хранилища
+title: Writable stores
 ---
 
-Не всё состояние приложения находится только внутри компонентов вашего приложения. Иногда у вас будут значения, к которым нужно обращаться сразу нескольким независимым компонентам или стандартным JavaScript модулям.
+Not all application state belongs inside your application's component hierarchy. Sometimes, you'll have values that need to be accessed by multiple unrelated components, or by a regular JavaScript module.
 
-В Svelte для этого существуют *хранилища*. Хранилище — это просто объект с методом `subscribe`, который позволяет всем заинтересованным сторонам получать уведомления при каждом изменении значения в хранилище. В компоненте `App.svelte` у нас есть хранилище `count`, где в callback-функции у `count.subscribe` мы устанавливаем значение переменной `count_value`.
+In Svelte, we do this with *stores*. A store is simply an object with a `subscribe` method that allows interested parties to be notified whenever the store value changes. In `App.svelte`, `count` is a store, and we're setting `count_value` in the `count.subscribe` callback.
 
-Перейдите на вкладку `stores.js`, чтобы увидеть определение `count`. Это доступное для записи *writable* хранилище, т.е. кроме метода `subscribe` у него также есть `set` и `update`.
+Click the `stores.js` tab to see the definition of `count`. It's a *writable* store, which means it has `set` and `update` methods in addition to `subscribe`.
 
-Теперь перейдите на вкладку `Incrementer.svelte`, чтобы описать логику кнопки `+`:
+Now go to the `Incrementer.svelte` tab so that we can wire up the `+` button:
 
 ```js
 function increment() {
@@ -16,9 +16,9 @@ function increment() {
 }
 ```
 
-Нажатие кнопки `+` теперь будет *обновлять* `count`. Сделайте аналогичную реализацию для кнопки `-` на вкладке `Decrementer.svelte`.
+Clicking the `+` button should now update the count. Do the inverse for `Decrementer.svelte`.
 
-Наконец, в `Resetter.svelte`, реализуйте `reset`:
+Finally, in `Resetter.svelte`, implement `reset`:
 
 ```js
 function reset() {

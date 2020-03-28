@@ -1,10 +1,10 @@
 ---
-title: Свойства слотов
+title: Slot props
 ---
 
-У нас есть компонент `<Hoverable>`, который отслеживает, находится ли курсор мыши над ним. Он должен передать эти данные *обратно* в родительский компонент, чтобы мы могли обновить содержимое слота.
+In this app, we have a `<Hoverable>` component that tracks whether the mouse is currently over it. It needs to pass that data *back* to the parent component, so that we can update the slotted contents.
 
-Для этого мы будем использовать *свойство слота*. В `Hoverable.svelte` передайте значение `hovering` в слот:
+For this, we use *slot props*. In `Hoverable.svelte`, pass the `hovering` value into the slot:
 
 ```html
 <div on:mouseenter={enter} on:mouseleave={leave}>
@@ -12,36 +12,36 @@ title: Свойства слотов
 </div>
 ```
 
-> Помните, что в данном случае, по желанию, мы можем использовать сокращение `{hovering}`.
+> Remember you can also use the `{hovering}` shorthand, if you prefer.
 
-Затем, мы используем директиву `let`, чтобы сделать `hovering` доступным для содержимого компонента `<Hoverable>`:
+Then, to expose `hovering` to the contents of the `<Hoverable>` component, we use the `let` directive:
 
 ```html
 <Hoverable let:hovering={hovering}>
 	<div class:active={hovering}>
 		{#if hovering}
-			<p>На меня навели.</p>
+			<p>I am being hovered upon.</p>
 		{:else}
-			<p>Наведи на меня!</p>
+			<p>Hover over me!</p>
 		{/if}
 	</div>
 </Hoverable>
 ```
 
-Если нужно, вы можете переименовать переменную — давайте в родительском компоненте назовём её `active`:
+You can rename the variable, if you want — let's call it `active` in the parent component:
 
 ```html
 <Hoverable let:hovering={active}>
 	<div class:active>
 		{#if active}
-			<p>На меня навели.</p>
+			<p>I am being hovered upon.</p>
 		{:else}
-			<p>Наведи на меня!</p>
+			<p>Hover over me!</p>
 		{/if}
 	</div>
 </Hoverable>
 ```
 
-У вас может использоваться несколько одинаковых компонентов и в каждом экземпляре компонента будут независимые значения свойств.
+You can have as many of these components as you like, and the slotted props will remain local to the component where they're declared.
 
-> Именованные слоты тоже могут иметь свойства; используйте директиву `let` в элементе с атрибутом  `slot="..."`, а не для самого компонента.
+> Named slots can also have props; use the `let` directive on an element with a `slot="..."` attribute, instead of on the component itself.

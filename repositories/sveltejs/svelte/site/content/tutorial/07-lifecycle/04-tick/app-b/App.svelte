@@ -1,7 +1,7 @@
 <script>
 	import { tick } from 'svelte';
 
-	let text = `Выделите часть текста и нажмите Tab`;
+	let text = `Select some text and hit the tab key to toggle uppercase`;
 
 	async function handleKeydown(event) {
 		if (event.which !== 9) return;
@@ -11,7 +11,7 @@
 		const { selectionStart, selectionEnd, value } = this;
 		const selection = value.slice(selectionStart, selectionEnd);
 
-		const replacement = /[a-zа-я]/.test(selection)
+		const replacement = /[a-z]/.test(selection)
 			? selection.toUpperCase()
 			: selection.toLowerCase();
 

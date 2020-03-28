@@ -1,10 +1,10 @@
 ---
-title: Директива transition
+title: The transition directive
 ---
 
-Мы можем сделать пользовательские интерфейсы привлекательнее, плавно отображая и скрывая элементы в DOM. В Svelte это легко реализуется при помощи директивы `transition`.
+We can make more appealing user interfaces by gracefully transitioning elements into and out of the DOM. Svelte makes this very easy with the `transition` directive.
 
-Сначала импортируйте функцию `fade` из `svelte/transition`...
+First, import the `fade` function from `svelte/transition`...
 
 ```html
 <script>
@@ -13,8 +13,8 @@ title: Директива transition
 </script>
 ```
 
-...затем добавьте директиву в элемент `<p>`:
+...then add it to the `<p>` element:
 
 ```html
-<p transition:fade>Появляется и исчезает</p>
+<p transition:fade>Fades in and out</p>
 ```

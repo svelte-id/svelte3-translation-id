@@ -1,6 +1,6 @@
 ---
-title: Настройка редактора кода
-description: Инструкция по конфигурации линтера и подсветки синтаксиса
+title: Setting up your editor
+description: Instructions for configuring linting and syntax highlighting
 author: Rich Harris
 authorURL: https://twitter.com/Rich_Harris
 draft: true
@@ -8,7 +8,7 @@ draft: true
 
 *__Coming soon__*
 
- This post will walk you through setting up your editor so that recognises Svelte files:
+This post will walk you through setting up your editor so that recognises Svelte files:
 
 * eslint-plugin-svelte3
 * svelte-vscode
@@ -16,7 +16,7 @@ draft: true
 
 ## Atom
 
-Чтобы файлы `.svelte` воспринимались как HTML,  в меню выберите *__Правка → Настройки__* и добавьте следующие две строки в  раздел `core`:
+To treat `*.svelte` files as HTML, open *__Edit → Config...__* and add the following lines to your `core` section:
 
 ```cson
 "*":
@@ -30,19 +30,19 @@ draft: true
 
 ## Vim/Neovim
 
-Для проверки всех `*.svelte` файлов как HTML файлов, добавьте следующую строку в файл `init.vim`:
+To treat all `*.svelte` files as HTML, add the following line to your `init.vim`:
 
 ```
 au! BufNewFile,BufRead *.svelte set ft=html
 ```
 
-Чтобы временно включить подсветку синтаксиса HTML для текущего буфера используйте:
+To temporarily turn on HTML syntax highlighting for the current buffer, use:
 
 ```
 :set ft=html
 ```
 
-Для того чтобы прописать тип для конкретного файла, используйте [modeline](https://vim.fandom.com/wiki/Modeline_magic):
+To set the filetype for a single file, use a [modeline](https://vim.fandom.com/wiki/Modeline_magic):
 
 ```
 <!-- vim: set ft=html :-->
@@ -50,7 +50,7 @@ au! BufNewFile,BufRead *.svelte set ft=html
 
 ## Visual Studio Code
 
-Чтобы файлы `*.svelte` воспринимались как HTML, добавьте следующие строки в файл `settings.json`:
+To treat `*.svelte` files as HTML, add the following lines to your `settings.json` file:
 
 ```cson
   "files.associations": {
@@ -60,10 +60,10 @@ au! BufNewFile,BufRead *.svelte set ft=html
 
 ## JetBrains WebStorm
 
-Для добавления поддержки Svelte в WebStorm (или иную IDE от Jetbrains) следует установит плагин [Svelte Framework Integration](https://plugins.jetbrains.com/plugin/12375-svelte/). Подробнее об использовании плагинов вы можете узнать на [официальном сайте Jetbrains](https://www.jetbrains.com/help/webstorm/managing-plugins.html).
+The [Svelte Framework Integration](https://plugins.jetbrains.com/plugin/12375-svelte/) can be used to add support for Svelte to WebStorm, or other Jetbrains IDEs. Consult the [WebStorm plugin installation guide](https://www.jetbrains.com/help/webstorm/managing-plugins.html) on the JetBrains website for more details.
 
 ## Sublime Text 3
 
-Откройте любой файл `.svelte`.
+Open any `.svelte` file.
 
-Выберите пункт меню *__View → Syntax → Open all with current extension as... → HTML__*.
+Go to *__View → Syntax → Open all with current extension as... → HTML__*.

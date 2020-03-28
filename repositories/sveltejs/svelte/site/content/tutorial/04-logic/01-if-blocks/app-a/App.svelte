@@ -7,9 +7,9 @@
 </script>
 
 <button on:click={toggle}>
-	Выйти
+	Log out
 </button>
 
 <button on:click={toggle}>
-	Войти
+	Log in
 </button>

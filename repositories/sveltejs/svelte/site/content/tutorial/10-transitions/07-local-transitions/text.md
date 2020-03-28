@@ -1,12 +1,12 @@
 ---
-title: Локальные переходы
+title: Local transitions
 ---
 
-Обычно переходы для элемента будут воспроизводиться, когда любой из родительских элементов будет добавлен или убран из DOM. В нашем примере переключение видимости всего списка проигрывает переходы у каждого отдельного элемента в списке.
+Ordinarily, transitions will play on elements when any container block is added or destroyed. In the example here, toggling the visibility of the entire list also applies transitions to individual list elements.
 
-Однако нам нужно, чтобы переходы воспроизводились только, когда пользователь добавляет или удаляет из списка перетаскиванием ползунка.
+Instead, we'd like transitions to play only when individual items are added and removed — in other words, when the user drags the slider.
 
-Мы можем добиться этого с помощью *локального* перехода, который воспроизводится только при добавлении или удалении блока, для которого указан такой переход:
+We can achieve this with a *local* transition, which only plays when the immediate parent block is added or removed:
 
 ```html
 <div transition:slide|local>

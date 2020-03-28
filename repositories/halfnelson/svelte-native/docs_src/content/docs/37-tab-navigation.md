@@ -1,238 +1,227 @@
 ---
-title: Навигация по вкладками
+title: Tab Navigation
 ---
 
 ### TabStrip
 
-<div class="nsref"><a title="Документация NativeScript" href="https://docs.nativescript.org/api-reference/classes/_ui_tab_navigation_tab_strip_.tabstrip">Описание класса</a></div>
+<div class="nsref"><a title="NativeScript Documentation" href="https://docs.nativescript.org/api-reference/classes/_ui_tab_navigation_tab_strip_.tabstrip">Class Docs</a></div>
 
-Компонент TabStrip может применяться только внутри компонентов [`BottomNavigation`](docs#bottom-navigation) или [`Tabs`](docs#tabs). Он содержит набор элементов [`TabStripItem`](docs#tabstripitem), которые определяют конфигурацию вкладок.
+The TabStrip component is only valid within [`BottomNavigation`](docs#bottom-navigation) or [`Tabs`](docs#tabs) components. It contains a set of [`TabStripItem`](docs#tabstripitem) elements which specify the configuration of the tabs within the parent tab view.
 
 ```html
 <tabStrip>
-    <tabStripItem>
-        <label text="Домой"></Label>
-        <image src="font://&#xf015;" class="fas t-36"></image>
-    </tabStripItem>
-    <tabStripItem>
-        <label text="Профиль"></Label>
-        <image src="font://&#xf007;" class="fas t-36"></image>
-    </tabStripItem>
+  <tabStripItem>
+    <label text="Home" />
+    <image src="font://&#xf015;" class="fas t-36" />
+  </tabStripItem>
+  <tabStripItem>
+    <label text="Account" />
+    <image src="font://&#xf007;" class="fas t-36" />
+  </tabStripItem>
 </tabStrip>
 ```
 
-#### Свойства
+#### Props
 
-| Имя | Тип | Описание |
+| Name | Type | Description |
 |------|------|-------------|
-| `iosIconRenderingMode` | 	`"automatic", "alwaysOriginal", "alwaysTemplate"` | 	Возвращает или задаёт режим отрисовки иконок на iOS.
-| `isIconSizeFixed` | 	`Boolean` | 	При установке в значение true иконка будет иметь фиксированный размер, соответствующий гайдлайну текущей платформы.the icon will have fixed size following the platform-specific design guidelines. По умолчанию:  true.
+| `iosIconRenderingMode` |  `"automatic", "alwaysOriginal", "alwaysTemplate"` |     Gets or sets the icon rendering mode on iOS.
+| `isIconSizeFixed` |   `Boolean` |     When set to true the icon will have fixed size following the platform-specific design guidelines. Default value: `true`.
 
-#### События
+#### Events
 
-| Имя | Описание |
+| Name | Description |
 |------|-------------|
-| `itemTap` | Вызывается, когда происходит тап по `TabStripItem`.
-
+| `itemTap` | Emitted when a `TabStripItem` is tapped.
 
 ### TabStripItem
 
-<div class="nsref"><a title="Документация NativeScript" href="https://docs.nativescript.org/api-reference/classes/_ui_tab_navigation_tab_strip_item_.tabstripitem">Описание класса</a></div>
+<div class="nsref"><a title="NativeScript Documentation" href="https://docs.nativescript.org/api-reference/classes/_ui_tab_navigation_tab_strip_item_.tabstripitem">Class Docs</a></div>
 
-
-Элементы TabStripItem определяют отображение селектора вкладок внутри [`TabStrip`](docs#tabstrip). Они могут содержать теги [`Label`](docs#label) и/или [`Image`](docs#image).
+Tab strip items define the display of a tab selector within a [`TabStrip`](docs#tabstrip). They may contain a [`Label`](docs#label) and/or [`Image`](docs#image) tag.
 
 ```html
 <tabStrip>
-    <tabStripItem>
-        <label text="Домой"></Label>
-        <image src="font://&#xf015;" class="fas t-36"></image>
-    </tabStripItem>
-    ...
- </tabStrip>
+  <tabStripItem>
+    <label text="Home" />
+    <image src="font://&#xf015;" class="fas t-36" />
+  </tabStripItem>
+  ...
+</tabStrip>
 ```
 
-#### Свойства
+#### Props
 
-| Имя | Тип | Описание |
+| Name | Type | Description |
 |------|------|-------------|
-| `title` | `string` | Возвращает или задаёт заголовок вкладки.
-| `iconSource` | `string` |	Возвращает или задаёт источник иконки для вкладки. Поддерживает локальные пути до изображения (~), ресурсы изображений (res://) и иконочные шрифты (font://)
+| `title` | `string` | Gets or sets the title of the tab strip entry.
+| `iconSource` | `string` | Gets or sets the icon source of the tab strip entry. Supports local image paths (~), resource images (res://) and icon fonts (font://).
 
-#### События
+#### Events
 
-| Имя | Описание |
+| Name | Description |
 |------|-------------|
-| `tap` | Вызывается, когда происходит тап по `TabStripItem`.
-
+| `tap` | Emitted when a `TabStripItem` is tapped.
 
 ### TabContentItem
 
-<div class="nsref"><a title="Документация NativeScript" href="https://docs.nativescript.org/api-reference/classes/_ui_tab_navigation_tab_content_item_.tabcontentitem">Описание класса</a></div>
+<div class="nsref"><a title="NativeScript Documentation" href="https://docs.nativescript.org/api-reference/classes/_ui_tab_navigation_tab_content_item_.tabcontentitem">Class Docs</a></div>
 
-`TabContentItem`  содержит контент, который будет показан при выборе соответствующей вкладки TabStripItem.
+A `TabContentItem` contains the view to be displayed when the corresponding TabStripItem is selected.
 
-> **ВНИМАНИЕ:** На текущий момент, `TabContentItem` ожидает получить единственный дочерний элемент. В большинстве случаев, вам нужно будет обернуть контент в какой-либо макет.
+> **NOTE:** Currently, `TabContentItem` expects a single child element. In most cases, you might want to wrap your content in a layout.
 
 ```html
-<tabContentitem>
-    <stackLayout>
-        <label>Привет из этой вкладки</label>
-    </stackLayout>
+<tabContentItem>
+  <stackLayout>
+    <label text="Hello From This Tab" />
+  </stackLayout>
 </tabContentItem>
 ```
 
-#### Свойства
+#### Props
 
-Нет
+None
 
-#### События
+#### Events
 
-Нет
-
+None
 
 ### Bottom Navigation
 
-<div class="nsref"><a title="Документация NativeScript" href="https://docs.nativescript.org/api-reference/classes/_ui_tab_navigation_bottom_navigation_.bottomnavigation">Описание класса</a></div>
+<div class="nsref"><a title="NativeScript Documentation" href="https://docs.nativescript.org/api-reference/classes/_ui_tab_navigation_bottom_navigation_.bottomnavigation">Class Docs</a></div>
 
+The BottomNavigation component is a cross-platform implementation of the [Bottom Navigation UI from the Material Design Guidelines](https://material.io/design/components/bottom-navigation.html#usage). Ideal for use when there are 3 to 5 tabs each with their own function.
 
-Компонент BottomNavigation является кроссплатформенной реализацией [Bottom Navigation UI из гайдлайнов Material Design](https://material.io/design/components/bottom-navigation.html#usage). Идеально подходит для случаев когда имеется от 3 до 5 вкладок, каждая из которых несет свою собственную функциональность.
-
-
-Он может содержать в себе единственный [`TabStrip`](docs#tabstrip) (который содержит несколько TabStripItems), и несколько [`TabContentItem`](docs#tabcontentitem) (соответствующих каждому элементу из TabStripItem)
+It can contain a single [`TabStrip`](docs#tabstrip) child (which contains multiple TabStripItems), and multiple [`TabContentItem`](docs#tabcontentitem) children (corresponding to each TabStripItem).
 
 ```html
 <bottomNavigation bind:selectedIndex={selectedTab}>
 
-    <!-- Bottom tab UI создается с помощью TabStrip (контейнер) и TabStripItem (для каждой вкладки)-->
-    <tabStrip>
-        <tabStripItem>
-            <label text="Домой"></label>
-            <image src="font://&#xf015;" class="fas t-36"></image>
-        </tabStripItem>
-        <tabStripItem class="special">
-            <label text="Профиль"></label>
-            <image src="font://&#xf007;" class="fas t-36"></image>
-        </tabStripItem>
-        <tabStripItem class="special">
-            <label text="Поиск"></label>
-            <image src="font://&#xf00e;" class="fas t-36"></image>
-        </tabStripItem>
-    </tabStrip>
+  <!-- The bottom tab UI is created via TabStrip (the containier) and TabStripItem (for each tab)-->
+  <tabStrip>
+    <tabStripItem>
+      <label text="Home" />
+      <image src="font://&#xf015;" class="fas t-36" />
+    </tabStripItem>
+    <tabStripItem class="special">
+      <label text="Account" />
+      <image src="font://&#xf007;" class="fas t-36" />
+    </tabStripItem>
+    <tabStripItem class="special">
+      <label text="Search" />
+      <image src="font://&#xf00e;" class="fas t-36" />
+    </tabStripItem>
+  </tabStrip>
 
-    <!-- Количество компонентов TabContentItem должно соответствовать количеству компонентов TabStripItem -->
-    <tabContentItem>
-        <gridLayout>
-            <label text="Домашняя страница" class="h2 text-center"></label>
-        </gridLayout>
-    </tabContentItem>
-    <tabContentItem>
-        <gridLayout>
-            <label text="Страница профиля" class="h2 text-center"></label>
-        </gridLayout>
-    </tabContentItem>
-    <tabContentItem>
-        <gridLayout>
-            <label text="Страница поиска" class="h2 text-center"></label>
-        </gridLayout>
-    </tabContentItem>
+  <!-- The number of TabContentItem components should corespond to the number of TabStripItem components -->
+  <tabContentItem>
+    <gridLayout>
+      <label text="Home Page" class="h2 text-center" />
+    </gridLayout>
+  </tabContentItem>
+  <tabContentItem>
+    <gridLayout>
+      <label text="Account Page" class="h2 text-center" />
+    </gridLayout>
+  </tabContentItem>
+  <tabContentItem>
+    <gridLayout>
+      <label text="Search Page" class="h2 text-center" />
+    </gridLayout>
+  </tabContentItem>
 
 </bottomNavigation>
 ```
 
-#### Свойства
+#### Props
 
-| Имя | Тип | Описание |
+| Name | Type | Description |
 |------|------|-------------|
-| `selectedIndex` | `number` | Возвращает или задаёт индекс выбранной вкладки в BottomNavigation.
+| `selectedIndex` | `number` | Gets or sets the selectedIndex of the BottomNavigation.
 
-#### События
+#### Events
 
-| Имя | Описание |
+| Name | Description |
 |------|-------------|
-| `selectedIndexChanged` | Вызывается, когда изменяется свойство selectedIndex.
-| `loaded` | Вызывается, когда представление будет загружено.
-| `unloaded` | Вызывается, когда представление будет убрано.
-| `layoutChanged` | Вызывается, когда границы макета представления изменяются из-за изменения макета.
+| `selectedIndexChanged` | Emitted when the selectedIndex property is changed.
+| `loaded` | Emitted when the view is loaded.
+| `unloaded` | Emitted when the view is unloaded.
+| `layoutChanged` | Emitted when the layout bounds of a view change due to layout processing.
 
-
-#### Нативный компонент
+#### Native component
 
 | Android | iOS |
 |---------|-----|
-| [`FrameLayout`](https://developer.android.com/reference/android/widget/FrameLayout)	| [`UITabViewController`](https://developer.apple.com/documentation/uikit/uitabbarcontroller?language=objc)
-
+| [`FrameLayout`](https://developer.android.com/reference/android/widget/FrameLayout)   | [`UITabViewController`](https://developer.apple.com/documentation/uikit/uitabbarcontroller?language=objc)
 
 ### Tabs
 
-<div class="nsref"><a title="Документация NativeScript" href="https://docs.nativescript.org/api-reference/classes/_ui_tab_navigation_bottom_navigation_.bottomnavigation">Описание класса</a></div>
+<div class="nsref"><a title="NativeScript Documentation" href="https://docs.nativescript.org/api-reference/classes/_ui_tab_navigation_bottom_navigation_.bottomnavigation">Class Docs</a></div>
 
+The Tabs component is a cross-platform implementation of the [Tabs UI from the Material Design Guidelines](https://material.io/design/components/tabs.html#usage). It is recommended for mid level navigation.
 
-Компонент Tabs является кроссплатформенной реализацией [Tabs UI из гайдлайнов Material Design](https://material.io/design/components/tabs.html#usage). Рекомендуется для навигации среднего уровня.
+It can contain a single [`TabStrip`](docs#tabstrip) child (which contains multiple TabStripItems), and multiple [`TabContentItem`](docs#tabcontentitem) children (corresponding to each TabStripItem).
 
-Он может содержать в себе единственный [`TabStrip`](docs#tabstrip) (который содержит несколько TabStripItems), и несколько [`TabContentItem`](docs#tabcontentitem) (соответствующих каждому элементу из TabStripItem)
-
-В отличие от компонента [`Bottom Navigation`](docs#bottom-navigation), компонент Tabs сделан для вкладок общей функциональности и поддерживает переходы и жесты.
-
+Unlike the [`Bottom Navigation`](docs#bottom-navigation) component, the tabs component is made for tabs with a common function and supports transitions and gestures.
 
 ```html
 <tabs bind:selectedIndex={selectedTab}>
 
-    <!-- Bottom tab UI создается с помощью TabStrip (контейнер) и TabStripItem (для каждой вкладки)-->
-    <tabStrip>
-        <tabStripItem>
-            <label text="Домой"></label>
-            <image src="font://&#xf015;" class="fas t-36"></image>
-        </tabStripItem>
-        <tabStripItem class="special">
-            <label text="Профиль"></label>
-            <image src="font://&#xf007;" class="fas t-36"></image>
-        </tabStripItem>
-        <tabStripItem class="special">
-            <label text="Поиск"></label>
-            <image src="font://&#xf00e;" class="fas t-36"></image>
-        </tabStripItem>
-    </tabStrip>
+  <!-- The bottom tab UI is created via TabStrip (the containier) and TabStripItem (for each tab)-->
+  <tabStrip>
+    <tabStripItem>
+      <label text="Home" />
+      <image src="font://&#xf015;" class="fas t-36" />
+    </tabStripItem>
+    <tabStripItem class="special">
+      <label text="Account" />
+      <image src="font://&#xf007;" class="fas t-36" />
+    </tabStripItem>
+    <tabStripItem class="special">
+      <label text="Search" />
+      <image src="font://&#xf00e;" class="fas t-36" />
+    </tabStripItem>
+  </tabStrip>
 
-    <!-- Количество компонентов TabContentItem должно соответствовать количеству компонентов TabStripItem -->
-    <tabContentItem>
-        <gridLayout>
-            <label text="Домашняя страница" class="h2 text-center"></label>
-        </gridLayout>
-    </tabContentItem>
-    <tabContentItem>
-        <gridLayout>
-            <label text="Страница профиля" class="h2 text-center"></label>
-        </gridLayout>
-    </tabContentItem>
-    <tabContentItem>
-        <gridLayout>
-            <label text="Страница поиска" class="h2 text-center"></label>
-        </gridLayout>
-    </tabContentItem>
+  <!-- The number of TabContentItem components should corespond to the number of TabStripItem components -->
+  <tabContentItem>
+    <gridLayout>
+      <label text="Home Page" class="h2 text-center" />
+    </gridLayout>
+  </tabContentItem>
+  <tabContentItem>
+    <gridLayout>
+      <label text="Account Page" class="h2 text-center" />
+    </gridLayout>
+  </tabContentItem>
+  <tabContentItem>
+    <gridLayout>
+      <label text="Search Page" class="h2 text-center" />
+    </gridLayout>
+  </tabContentItem>
 
 </tabs>
 ```
 
-#### Свойства
+#### Props
 
-| Имя | Тип | Описание |
+| Name | Type | Description |
 |------|------|-------------|
-| `selectedIndex` | `number` | Возвращает или задаёт индекс выбранной вкладки в BottomNavigation.
-| `tabsPosition` | `"top", "bottom"` | Возвращает или задаёт позицию для Tabs. По умолчанию:  top
+| `selectedIndex` | `number` | Gets or sets the selectedIndex of the BottomNavigation.
+| `tabsPosition` | `"top", "bottom"` | Gets or sets the position state of the Tabs. Default value: `top`.
 
-#### События
+#### Events
 
-| Имя | Описание |
+| Name | Description |
 |------|-------------|
-| `selectedIndexChanged` | Вызывается, когда изменяется свойство selectedIndex.
-| `loaded` | Вызывается, когда представление будет загружено.
-| `unloaded` | Вызывается, когда представление будет убрано.
-| `layoutChanged` | Вызывается, когда границы макета представления изменяются из-за изменения макета.
+| `selectedIndexChanged` | Emitted when the selectedIndex property is changed.
+| `loaded` | Emitted when the view is loaded.
+| `unloaded` | Emitted when the view is unloaded.
+| `layoutChanged` | Emitted when the layout bounds of a view change due to layout processing.
 
-
-#### Нативный компонент
+#### Native component
 
 | Android | iOS |
 |---------|-----|
-| [`FrameLayout`](https://developer.android.com/reference/android/widget/FrameLayout)	| [`UITabViewController`](https://developer.apple.com/documentation/uikit/uitabbarcontroller?language=objc)
+| [`FrameLayout`](https://developer.android.com/reference/android/widget/FrameLayout)   | [`UITabViewController`](https://developer.apple.com/documentation/uikit/uitabbarcontroller?language=objc)

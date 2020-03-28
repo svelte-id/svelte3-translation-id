@@ -1,15 +1,15 @@
 ---
-title: Блок else-if
+title: Else-if blocks
 ---
 
-Несколько условий могут быть 'сцеплены' вместе блоками `else if`:
+Multiple conditions can be 'chained' together with `else if`:
 
 ```html
 {#if x > 10}
-	<p>{x} больше, чем 10</p>
+	<p>{x} is greater than 10</p>
 {:else if 5 > x}
-	<p>{x} меньше, чем 5</p>
+	<p>{x} is less than 5</p>
 {:else}
-	<p>{x} между 5 и 10</p>
+	<p>{x} is between 5 and 10</p>
 {/if}
 ```

@@ -1,8 +1,8 @@
 ---
-title: Экспорты
+title: Exports
 ---
 
-Все, что экспортируется из блока скрипта `context="module"`, становится экспортом из самого модуля. Если мы экспортируем функцию `stopAll` из `AudioPlayer.svelte`...
+Anything exported from a `context="module"` script block becomes an export from the module itself. If we export a `stopAll` function from `AudioPlayer.svelte`...
 
 ```html
 <script context="module">
@@ -16,7 +16,7 @@ title: Экспорты
 </script>
 ```
 
-...то можем затем импортировать её в `App.svelte`...
+...we can then import it from `App.svelte`...
 
 ```html
 <script>
@@ -24,12 +24,12 @@ title: Экспорты
 </script>
 ```
 
-...и использовать как обработчик события:
+...and use it in an event handler:
 
 ```html
 <button on:click={stopAll}>
-	остановить всё
+	stop all audio
 </button>
 ```
 
-> Вы не сможете сделать `default export`, потому что *сам компонент* уже является экспортом по-умолчанию.
+> You can't have a default export, because the component *is* the default export.

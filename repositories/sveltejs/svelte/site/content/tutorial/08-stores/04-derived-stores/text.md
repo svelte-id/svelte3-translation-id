@@ -1,8 +1,8 @@
 ---
-title: Производные хранилища
+title: Derived stores
 ---
 
-С помощью `derived` можно создать хранилище, значение которого вычисляется на основе значения одного или нескольких *других* хранилищ. Мы можем дополнить пример из предыдущего урока, и добавить производное хранилище для вычисления времени, прошедшего с момента открытия страницы:
+You can create a store whose value is based on the value of one or more *other* stores with `derived`. Building on our previous example, we can create a store that derives the time the page has been open:
 
 ```js
 export const elapsed = derived(
@@ -11,4 +11,4 @@ export const elapsed = derived(
 );
 ```
 
-> Можно создать производное хранилище сразу из нескольких входов и устанавливать его значение через функцию `set`, что полезно при асинхронном получении значений. Обратитесь к [Документации API](docs/#derived) для получения дополнительной информации.
+> It's possible to derive a store from multiple inputs, and to explicitly `set` a value instead of returning it (which is useful for deriving values asynchronously). Consult the [API reference](docs#derived) for more information.

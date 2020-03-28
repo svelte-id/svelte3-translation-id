@@ -1,14 +1,14 @@
 ---
-title: setContext и getContext
+title: setContext and getContext
 ---
 
-API контекста предоставляет механизм, позволяющий компонентам 'разговаривать' друг с другом, не передавая данные и функции через свойства, и не генерируя множество событий. Это одна из дополнительных возможностей, но она может быть полезной.
+The context API provides a mechanism for components to 'talk' to each other without passing around data and functions as props, or dispatching lots of events. It's an advanced feature, but a useful one.
 
-Пусть у нас есть приложение, которое показывает карту [Mapbox GL](https://docs.mapbox.com/mapbox-gl-js/overview/). Нам нужно нанести на карту маркеры при помощи компонента `<MapMarker>`. Но для этого нам придется передавать ссылку на объект Mapbox через свойство в каждый экземпляр этого компонента.
+Take this example app using a [Mapbox GL](https://docs.mapbox.com/mapbox-gl-js/overview/) map. We'd like to display the markers, using the `<MapMarker>` component, but we don't want to have to pass around a reference to the underlying Mapbox instance as a prop on each component.
 
-API контекста состоит из двух методов - `setContext` и `getContext`. Если компонент вызывает `setContext(key, context)`, то любой *дочерний* компонент может получить нужный контекст с помощью `const context = getContext(key)`.
+There are two halves to the context API — `setContext` and `getContext`. If a component calls `setContext(key, context)`, then any *child* component can retrieve the context with `const context = getContext(key)`.
 
-Давайте сначала установим контекст. В `Map.svelte` импортируйте `setContext` из `svelte` и `key` из `mapbox.js`, затем вызовите `setContext`:
+Let's set the context first. In `Map.svelte`, import `setContext` from `svelte` and `key` from `mapbox.js` and call `setContext`:
 
 ```js
 import { onMount, setContext } from 'svelte';
@@ -19,9 +19,9 @@ setContext(key, {
 });
 ```
 
-Объект контекста может быть чем угодно. Как и в случае с [функциями жизненного цикла](tutorial/onmount), `setContext` и `getContext` должны вызываться только во время инициализации компонента. Поскольку переменная `map` не существует, пока компонент не будет смонтирован, наш контекстный объект содержит функцию `getMap`, а не саму `map`.
+The context object can be anything you like. Like [lifecycle functions](tutorial/onmount), `setContext` and `getContext` must be called during component initialisation; since `map` isn't created until the component has mounted, our context object contains a `getMap` function rather than `map` itself.
 
-Теперь на другом конце, в `MapMarker.svelte`, мы можем получить ссылку на экземпляр Mapbox:
+On the other side of the equation, in `MapMarker.svelte`, we can now get a reference to the Mapbox instance:
 
 ```js
 import { getContext } from 'svelte';
@@ -31,25 +31,25 @@ const { getMap } = getContext(key);
 const map = getMap();
 ```
 
-Маркеры теперь могут добавлять сами себя на карту.
+The markers can now add themselves to the map.
 
-> Более законченная версия `<MapMarker>` также должна поддерживать удаление и изменение маркеров, но здесь мы просто демонстрируем работу с контекстом.
+> A more finished version of `<MapMarker>` would also handle removal and prop changes, but we're only demonstrating context here.
 
-## ключи контекста
+## Context keys
 
-В `mapbox.js` вы можете найти такую строку:
+In `mapbox.js` you'll see this line:
 
 ```js
 const key = {};
 ```
 
-В качестве ключа мы можем использовать что угодно - например, очевидный вариант использовать строку `setContext('mapbox', ...)`. Но тут может случиться ситуация, когда разные библиотеки компонентов могут случайно использовать одинаковую строку в качестве ключа. Использование литерала объекта `{}` *гарантирует* отсутствие подобных конфликтов (объекты можно сравнивать только по его ссылкам, т.е. `{} !== {}` в то время, как `"x" === "x"`), даже при большом числе различных контекстов, работающих через несколько компонентных слоёв.
+We can use anything as a key — we could do `setContext('mapbox', ...)` for example. The downside of using a string is that different component libraries might accidentally use the same one; using an object literal means the keys are guaranteed not to conflict in any circumstance (since an object only has referential equality to itself, i.e. `{} !== {}` whereas `"x" === "x"`), even when you have multiple different contexts operating across many component layers.
 
-## Контекст vs. хранилище
+## Contexts vs. stores
 
-Контекст и хранилища кажутся похожими. Они отличаются тем, что хранилища доступны в *любой* части приложения, в то время как контекст доступен только для *компонента и его потомков*. Это может быть полезно, если вы хотите использовать несколько копий компонента, чтобы состояние одного не влияло на состояние других.
+Contexts and stores seem similar. They differ in that stores are available to *any* part of an app, while a context is only available to *a component and its descendants*. This can be helpful if you want to use several instances of a component without the state of one interfering with the state of the others.
 
-Впрочем, их можно использовать и совместно. Поскольку контекст не реактивен, значения, которые будут изменяться со временем, можно поместить в хранилища внутри контекста:
+In fact, you might use the two together. Since context is not reactive, values that change over time should be represented as stores:
 
 ```js
 const { these, are, stores } = getContext(...);

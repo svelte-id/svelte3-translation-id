@@ -1,27 +1,26 @@
 ---
-title: Svelte 3: Переосмысление реактивности
-description: Наконец-то он здесь
+title: Svelte 3: Rethinking reactivity
+description: It's finally here
 author: Rich Harris
 authorURL: https://twitter.com/Rich_Harris
-translator: Pavel Malyshev
 ---
 
-После нескольких месяцев, которые пролетели как пара дней, мы на седьмом небе от счастья потому, что можем объявить о стабильном релизе Svelte 3. Этот по-настоящему огромный релиз, результат сотен часов работы многих людей в сообществе Svelte, включая бета-тестеров, чьи бесценные отзывы помогали оттачивать дизайн фреймворка на каждом этапе этого пути.
+After several months of being just days away, we are over the moon to announce the stable release of Svelte 3. This is a huge release representing hundreds of hours of work by many people in the Svelte community, including invaluable feedback from beta testers who have helped shape the design every step of the way.
 
-Мы думаем, он вам понравится.
+We think you're going to love it.
 
 
-## Что такое Svelte?
+## What is Svelte?
 
-Svelte — это компонентный фреймворк, похожий на React или Vue, но с важным отличием. Традиционные фреймворки позволяют вам писать *декларативный* state-driven код, но не без наказаний: браузер должен выполнить дополнительную работу для преобразования этих декларативных структур в манипуляции с DOM, используя техники, такие как [virtual DOM diffing](blog/virtual-dom-is-pure-overhead), которые проедают имеющийся бюджет кадров отрисовки и добавляют обязанностей сборщику мусора.
+Svelte is a component framework — like React or Vue — but with an important difference. Traditional frameworks allow you to write *declarative* state-driven code, but there's a penalty: the browser must do extra work to convert those declarative structures into DOM operations, using techniques like [virtual DOM diffing](blog/virtual-dom-is-pure-overhead) that eat into your frame budget and tax the garbage collector.
 
-Вместо этого Svelte работает во *время сборки*, преобразуя ваши компоненты в высокоэффективный *императивный* код, который с хирургической точностью обновляет DOM. В результате вы можете писать амбициозные приложения с отличными характеристиками по производительности.
+Instead, Svelte runs at *build time*, converting your components into highly efficient *imperative* code that surgically updates the DOM. As a result, you're able to write ambitious applications with excellent performance characteristics.
 
-Первая версия Svelte была посвящена [проверке гипотезы](blog/frameworks-without-the-framework) — что специально созданный компилятор может генерировать надёжный код и обеспечивает отличный пользовательский опыт. Вторая версия была посвящена небольшим улучшениям, которые привели ряд вещей в порядок.
+The first version of Svelte was all about [testing a hypothesis](blog/frameworks-without-the-framework) — that a purpose-built compiler could generate rock-solid code that delivered a great user experience. The second was a small upgrade that tidied things up a bit.
 
-Svelte 3 — это уже существенный пересмотр. В течение последних пяти или шести месяцев мы уделяли особое внимание пользовательскому опыту разработчиков. Теперь можно писать компоненты с количеством шаблонного кода, [значительно меньшим](blog/write-less-code), чем где либо ещё. Попробуйте наш совершенно новый [учебник](tutorial) и посмотрите, что мы имеем ввиду — если вы уже знакомы с другими фреймворками, думаем, вы будете приятно удивлены.
+Version 3 is a significant overhaul. Our focus for the last five or six months has been on delivering an outstanding *developer* experience. It's now possible to write components with [significantly less boilerplate](blog/write-less-code) than you'll find elsewhere. Try the brand new [tutorial](tutorial) and see what we mean — if you're familiar with other frameworks we think you'll be pleasantly surprised.
 
-Чтобы эта возможность стала реальностью, нам сначала нужно было переосмыслить концепцию, лежащую в основе современных UI фреймворков: *реактивность*.
+To make that possible we first needed to rethink the concept at the heart of modern UI frameworks: reactivity.
 
 <div class="max">
 <figure style="max-width: 960px; margin: 0 auto">
@@ -29,14 +28,14 @@ Svelte 3 — это уже существенный пересмотр. В те�
 	<iframe style="position: absolute; width: 100%; height: 100%; left: 0; top: 0; margin: 0;" src="https://www.youtube-nocookie.com/embed/AdNJ3fydeao" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 
-<figcaption>'Переосмысление реактивности' на <a href="https://www.israel.yglfconf.com/">You Gotta Love Frontend Code Camp</a></figcaption>
+<figcaption>'Rethinking Reactivity' from <a href="https://www.israel.yglfconf.com/">You Gotta Love Frontend Code Camp</a></figcaption>
 </figure>
 </div>
 
 
-## Перемещение реактивности в язык
+## Moving reactivity into the language
 
-В предыдущих версиях Svelte, вы должны были сообщить компьютеру, что какая-то часть состояния изменилась с помощью вызова метода `this.set`:
+In old Svelte, you would tell the computer that some state had changed by calling the `this.set` method:
 
 ```js
 const { count } = this.get();
@@ -45,7 +44,7 @@ this.set({
 });
 ```
 
-Он заставлял компонент *реагировать*. Кстати говоря, `this.set` практически идентичен методу `this.setState`, который использовался в классическом (до хуков) React:
+That would cause the component to *react*. Speaking of which, `this.set` is almost identical to the `this.setState` method used in classical (pre-hooks) React:
 
 ```js
 const { count } = this.state;
@@ -53,44 +52,46 @@ this.setState({
 	count: count + 1
 });
 ```
-Тут есть важные технические различия (как я объясняю в видео выше — React не реагирует), но концептуально это одно и то же.
+
+There are some important technical differences (as I explain in the video above, React is not reactive) but conceptually it's the same thing.
 
 <aside>
-	<p>По факту, Svelte 3 в основном <a target="_blank" href="https://twitter.com/threepointone/status/1057179801109311488">вина Sunil'а </a>.</p>
+	<p>In fact, Svelte 3 is basically <a href="https://twitter.com/threepointone/status/1057179801109311488">Sunil's fault</a>.</p>
 </aside>
 
-Все изменилось с появлением [хуков в React](https://reactjs.org/docs/hooks-intro.html), которые управляют состоянием совсем по-другому. Многие фреймворки начали экспериментировать со своими собственными реализациями хуков, но мы быстро пришли к выводу, что это не то направление, куда бы мы хотели идти. Хуки имеют некоторые интригующие свойства, но они также включают в себя неестественный код и создают ненужную работу для сборщика мусора. Для фреймворка, который используется на [embedded-устройствах](https://mobile.twitter.com/sveltejs/status/1088500539640418304), а также в тяжелых интерактивных анимациях, это не хорошо.
+That all changed with the advent of [hooks](https://reactjs.org/docs/hooks-intro.html), which handle state in a very different fashion. Many frameworks started experimenting with their own implementations of hooks, but we quickly concluded it wasn't a direction we wanted to go in. Hooks have some intriguing properties, but they also involve some unnatural code and create unnecessary work for the garbage collector. For a framework that's used in [embedded devices](https://mobile.twitter.com/sveltejs/status/1088500539640418304) as well as animation-heavy interactives, that's no good.
 
-Поэтому мы сделали шаг назад и спросили себя, какой тип API был бы лучшим для нас... и поняли, что лучший API — это отсутствие API. Мы можем просто *использовать язык*. Обновление значения `count` и всех вещей, которые зависят от него, должно быть простым:
+So we took a step back and asked ourselves what kind of API would work for us... and realised that the best API is no API at all. We can just *use the language*. Updating some `count` value — and all the things that depend on it — should be as simple as this:
 
 ```js
 count += 1;
 ```
 
-Поскольку мы являемся компилятором, мы можем сделать это, осуществляя фактическое присваивание за кулисами:
+Since we're a compiler, we can do that by instrumenting assignments behind the scenes:
 
 ```js
 count += 1; $$invalidate('count', count);
 ```
-Важно отметить, что мы можем сделать всё это без лишних затрат и сложности использования прокси или аксессоров. Это просто переменная.
 
-## Новый облик
-
-Не только компоненты получили подтяжку лица. Сам Svelte теперь имеет совершенно новый внешний вид благодаря удивительной дизайнерской работе [Achim Vedam](https://vedam.de/), создавшего новый логотип и веб-сайт, который переехал со [svelte.technology](https://svelte.technology) на [svelte.dev](https://svelte.dev).
-
-Мы также изменили наш слоган с «Магически исчезающего UI фреймворка» на «Кибернетически улучшенные web-приложения». У Svelte много сильных сторон — отличная производительность, небольшой размер бандла, доступность, встроенная инкапсуляция стилей, декларативные анимации переходов, простота использования, тот факт, что это компилятор и многие другие. Поэтому сосредоточение внимания на одной из них кажется несправедливым по отношению к другим.
-
-## Обновление с версии 2
-
-Если вы уже являетесь пользователем Svelte 2, боюсь, потребуется ручное обновление ваших проектов. В ближайшие дни мы выпустим руководство по миграции и обновлённую версию утилиты [svelte-upgrade](https://github.com/sveltejs/svelte-upgrade), которая сделает всё возможное, чтобы автоматизировать процесс. Но изменения *слишком существенные*, поэтому не всё может быть обработано автоматически.
-
-Такое решение далось нам не легко: надеюсь, что, испытав Svelte 3, вы поймете, почему мы сочли необходимым порвать с прошлым.
+Importantly, we can do all this without the overhead and complexity of using proxies or accessors. It's just a variable.
 
 
-## Все ещё впереди
+## New look
 
-Каким бы изнурительным ни был этот релиз, мы ещё не закончили. У нас есть масса идей как генерировать код умнее, более компактно, и длинный список пожеланий. [Sapper](https://ru.sapper.svelte.dev), наш фреймворк для приложений в стиле Next.js, всё ёще находится в процессе обновления для использования совместно со Svelte 3. Проект сообщества [Svelte Native](https://svelte-native.technology/), который позволяет писать приложения для Android и iOS на Svelte, продвигается вперед и заслуживает более полной поддержки со стороны ядра.
+Your components aren't the only thing that's getting a facelift. Svelte itself has a completely new look and feel, thanks to the amazing design work of [Achim Vedam](https://vedam.de/) who created our new logo and website, which has moved from [svelte.technology](https://svelte.technology) to [svelte.dev](https://svelte.dev).
 
-У нас пока нет множества расширений для редакторов, подсветки синтаксиса, наборов компонентов, devtools и т. д., которые есть у других фреймворков, и мы должны это исправить. И мы *действительно* хотим добавить первоклассную поддержку TypeScript.
+We've also changed our tagline, from 'The magical disappearing UI framework' to 'Cybernetically enhanced web apps'. Svelte has many aspects — outstanding performance, small bundles, accessibility, built-in style encapsulation, declarative transitions, ease of use, the fact that it's a compiler, etc — that focusing on any one of them feels like an injustice to the others. 'Cybernetically enhanced' is designed to instead evoke Svelte's overarching philosophy that our tools should work as intelligent extensions of ourselves — hopefully with a retro, William Gibson-esque twist.
 
-Несмотря на всё это, мы считаем, что сейчас Svelte 3 — лучший способ создания веб-приложений. Потратьте час, чтобы пройти [учебник](tutorial) и мы надеемся, что убедим вас в этом. В любом случае, мы хотели бы видеть вас в нашем [Discord чате](chat), русскоязычном [канале Telegram](https://t.me/sveltejs) и на [GitHub](https://github.com/sveltejs/svelte) — добро пожаловать всем, особенно вам.
+
+## Upgrading from version 2
+
+If you're an existing Svelte 2 user, I'm afraid there is going to be some manual upgrading involved. In the coming days we'll release a migration guide and an updated version of [svelte-upgrade](https://github.com/sveltejs/svelte-upgrade) which will do the best it can to automate the process, but this *is* a significant change and not everything can be handled automatically.
+
+We don't take this lightly: hopefully once you've experienced Svelte 3 you'll understand why we felt it was necessary to break with the past.
+
+
+## Still to come
+
+As grueling as this release has been, we're nowhere near finished. We have a ton of ideas for generating smarter, more compact code, and a long feature wish-list. [Sapper](https://sapper.svelte.dev), our Next.js-style app framework, is still in the middle of being updated to use Svelte 3. The [Svelte Native](https://svelte-native.technology/) community project, which allows you to write Android and iOS apps in Svelte, is making solid progress but deserves more complete support from core. We don't yet have the bounty of editor extensions, syntax highlighters, component kits, devtools and so on that other frameworks have, and we should fix that. We *really* want to add first-class TypeScript support.
+
+But in the meantime we think Svelte 3 is the best way to build web apps yet. Take an hour to go through the [tutorial](tutorial) and we hope to convince you of the same. Either way, we'd love to see you in our [Discord chatroom](chat) and on [GitHub](https://github.com/sveltejs/svelte) — everyone is welcome, especially you.

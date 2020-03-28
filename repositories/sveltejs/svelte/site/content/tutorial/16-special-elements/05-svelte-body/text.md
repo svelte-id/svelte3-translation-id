@@ -2,9 +2,9 @@
 title: <svelte:body>
 ---
 
-Как и в случае со `<svelte:window>`, специальный элемент `<svelte:body>` позволяет прослушивать события на объекте `document.body`. Это может пригодится при отслеживании событий `mouseenter` и `mouseleave`, которые не запускаются на объекте `window`.
+Similar to `<svelte:window>`, the `<svelte:body>` element allows you to listen for events that fire on `document.body`. This is useful with the `mouseenter` and `mouseleave` events, which don't fire on `window`.
 
-Добавьте обработчики для `mouseenter` и `mouseleave` в элемент `<svelte:body>`:
+Add the `mouseenter` and `mouseleave` handlers to the `<svelte:body>` tag:
 
 ```html
 <svelte:body

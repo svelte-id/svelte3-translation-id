@@ -1,15 +1,15 @@
 ---
-title: HTML теги
+title: HTML tags
 ---
 
-Обычно строки вставляются в виде простого текста, т.е. символы вроде `<` и `>`, не будут иметь никакого специального значения.
+Ordinarily, strings are inserted as plain text, meaning that characters like `<` and `>` have no special meaning.
 
-Но иногда в компоненте нужно визуализировать именно HTML разметку. Например, слова, которые вы сейчас читаете, написаны в Markdown-файле и вставляются на сайт в виде куска HTML кода.
+But sometimes you need to render HTML directly into a component. For example, the words you're reading right now exist in a markdown file that gets included on this page as a blob of HTML.
 
-В Svelte это можно сделать при помощи специального тега `{@html ...}`:
+In Svelte, you do this with the special `{@html ...}` tag:
 
 ```html
 <p>{@html string}</p>
 ```
 
-> Svelte не пытается обезопасить код выражения внутри тега `{@html ...}` перед его вставкой в DOM! Если вы отрисовываете пользовательский ввод в таком теге, то несёте ответственность за его первичную проверку. Невыполнение этого требования может привести к XSS атакам на ваше приложение.
+> Svelte doesn't perform any sanitization of the expression inside `{@html ...}` before it gets inserted into the DOM. In other words, if you use this feature it's critical that you manually escape HTML that comes from sources you don't trust, otherwise you risk exposing your users to XSS attacks.

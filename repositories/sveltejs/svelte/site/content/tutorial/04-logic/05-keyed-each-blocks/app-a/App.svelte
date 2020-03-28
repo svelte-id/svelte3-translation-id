@@ -15,7 +15,7 @@
 </script>
 
 <button on:click={handleClick}>
-	Удалить первый элемент
+	Remove first thing
 </button>
 
 {#each things as thing}

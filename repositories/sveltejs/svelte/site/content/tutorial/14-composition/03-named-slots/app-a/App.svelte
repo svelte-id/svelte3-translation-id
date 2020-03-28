@@ -3,5 +3,5 @@
 </script>
 
 <ContactCard>
-	<!-- добавьте здесь контактные данные -->
+	<!-- contact details go here -->
 </ContactCard>

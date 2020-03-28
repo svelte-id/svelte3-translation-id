@@ -1,8 +1,8 @@
 <script>
 	let questions = [
-		{ id: 1, text: `В какой школе ты учился?` },
-		{ id: 2, text: `Девичья фамилия твоей мамы?` },
-		{ id: 3, text: `Любая другая персональная информация, которую злоумышленник спокойно нагуглит?` }
+		{ id: 1, text: `Where did you go to school?` },
+		{ id: 2, text: `What is your mother's name?` },
+		{ id: 3, text: `What is another personal fact that an attacker could easily find with Google?` }
 	];
 
 	let selected;
@@ -10,7 +10,7 @@
 	let answer = '';
 
 	function handleSubmit() {
-		alert(`Ответ на вопрос №${selected.id} (${selected.text}): "${answer}"`);
+		alert(`answered question ${selected.id} (${selected.text}) with "${answer}"`);
 	}
 </script>
 
@@ -18,7 +18,7 @@
 	input { display: block; width: 500px; max-width: 100%; }
 </style>
 
-<h2>Секретные вопросы</h2>
+<h2>Insecurity questions</h2>
 
 <form on:submit|preventDefault={handleSubmit}>
 	<select value={selected} on:change="{() => answer = ''}">
@@ -32,8 +32,8 @@
 	<input bind:value={answer}>
 
 	<button disabled={!answer} type=submit>
-		Отправить
+		Submit
 	</button>
 </form>
 
-<p>выбранный вопрос {selected ? selected.id : '[ждём...]'}</p>
+<p>selected question {selected ? selected.id : '[waiting...]'}</p>

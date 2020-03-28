@@ -10,5 +10,5 @@
 </style>
 
 <div class="box">
-	<!-- содержимое должно быть размещено здесь -->
+	<!-- content should be injected here -->
 </div>

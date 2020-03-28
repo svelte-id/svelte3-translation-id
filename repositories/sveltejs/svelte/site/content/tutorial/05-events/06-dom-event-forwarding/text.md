@@ -1,13 +1,13 @@
 ---
-title: Проброс событий DOM
+title: DOM event forwarding
 ---
 
-Проброс событий работает и для событий DOM.
+Event forwarding works for DOM events too.
 
-Мы хотим получать уведомления о кликах по нашей красивой кнопке `<FancyButton>` — для этого нам просто нужно пробросить событие `click` по элементу `<button>` в `FancyButton.svelte`:
+We want to get notified of clicks on our `<CustomButton>` — to do that, we just need to forward `click` events on the `<button>` element in `CustomButton.svelte`:
 
 ```html
 <button on:click>
-	Нажми меня
+	Click me
 </button>
 ```

@@ -1,8 +1,8 @@
 ---
-title: Стили
+title: Styling
 ---
 
-Как и в обычном HTML, в компоненте можно использовать тег `<style>`. Давайте добавим несколько стилей к элементу `<p>`:
+Just like in HTML, you can add a `<style>` tag to your component. Let's add some styles to the `<p>` element:
 
 ```html
 <style>
@@ -13,7 +13,7 @@ title: Стили
 	}
 </style>
 
-<p>Просто строка текста</p>
+<p>This is a paragraph.</p>
 ```
 
-Важно отметить, что эти стили *изолируются в компоненте*. Вы не сможете случайно затереть стили элементов `<p>` из других частей вашего приложения. Мы сможем в этом убедиться в следующем уроке.
+Importantly, these rules are *scoped to the component*. You won't accidentally change the style of `<p>` elements elsewhere in your app, as we'll see in the next step.

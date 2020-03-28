@@ -1,8 +1,8 @@
 ---
-title: Пользовательские CSS переходы
+title: Custom CSS transitions
 ---
 
-В модуле `svelte/transition` есть несколько встроенных переходов, но вы можете легко создавать и свои собственные переходы. Например, так выглядит реализация перехода `fade`:
+The `svelte/transition` module has a handful of built-in transitions, but it's very easy to create your own. By way of example, this is the source of the `fade` transition:
 
 ```js
 function fade(node, {
@@ -11,7 +11,7 @@ function fade(node, {
 }) {
 	const o = +getComputedStyle(node).opacity;
 
-	return {  
+	return {
 		delay,
 		duration,
 		css: t => `opacity: ${t * o}`
@@ -19,19 +19,19 @@ function fade(node, {
 }
 ```
 
-Функция принимает два аргумента — элемент `node`, к которому применяется переход, и любые необходимые переходу параметры. Она возвращает объект перехода, который может иметь следующие свойства:
+The function takes two arguments — the node to which the transition is applied, and any parameters that were passed in — and returns a transition object which can have the following properties:
 
-* `delay` — миллисекунды до начала перехода
-* `duration` — длительность перехода в миллисекундах
-* `easing` — функция плавности `p => t` (см. урок [Рассчёт движения](tutorial/tweened))
-* `css` — функция `(t, u) => css`, где `u === 1 - t`
-* `tick` — функция `(t, u) => {...}`, которая применяет какие-либо изменения к элементу, посложнее CSS
+* `delay` — milliseconds before the transition begins
+* `duration` — length of the transition in milliseconds
+* `easing` — a `p => t` easing function (see the chapter on [tweening](tutorial/tweened))
+* `css` — a `(t, u) => css` function, where `u === 1 - t`
+* `tick` — a `(t, u) => {...}` function that has some effect on the node
 
-Значение `t` равно `0` при старте перехода появления и в конце перехода исчезновения, и равно `1` в конце появления и начале исчезновения.
+The `t` value is `0` at the beginning of an intro or the end of an outro, and `1` at the end of an intro or beginning of an outro.
 
-Старайтесь всегда возвращать свойство `css`, а *не* свойство `tick`, так как CSS-анимация запускается вне основного потока и работает более эффективно. Svelte 'симулирует' переход и покадрово создает CSS-анимацию, а затем запускает ее.
+Most of the time you should return the `css` property and *not* the `tick` property, as CSS animations run off the main thread to prevent jank where possible. Svelte 'simulates' the transition and constructs a CSS animation, then lets it run.
 
-Например переход `fade` превращается в CSS анимацию вроде этого:
+For example, the `fade` transition generates a CSS animation somewhat like this:
 
 ```css
 0% { opacity: 0 }
@@ -41,7 +41,7 @@ function fade(node, {
 100% { opacity: 1 }
 ```
 
-Мы можем повысить градус креатива. Давайте сделаем что-то совсем бесбашенное:
+We can get a lot more creative though. Let's make something truly gratuitous:
 
 ```html
 <script>
@@ -69,4 +69,4 @@ function fade(node, {
 </script>
 ```
 
-Помните: с большими возможностями приходит и большая ответственность.
+Remember: with great power comes great responsibility.

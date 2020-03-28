@@ -4,9 +4,9 @@
 	import BlueThing from './BlueThing.svelte';
 
 	const options = [
-		{ color: 'красный',   component: RedThing   },
-		{ color: 'зелёный', component: GreenThing },
-		{ color: 'синий',  component: BlueThing  },
+		{ color: 'red',   component: RedThing   },
+		{ color: 'green', component: GreenThing },
+		{ color: 'blue',  component: BlueThing  },
 	];
 
 	let selected = options[0];
@@ -18,10 +18,10 @@
 	{/each}
 </select>
 
-{#if selected.color === 'красный'}
+{#if selected.color === 'red'}
 	<RedThing/>
-{:else if selected.color === 'зелёный'}
+{:else if selected.color === 'green'}
 	<GreenThing/>
-{:else if selected.color === 'синий'}
+{:else if selected.color === 'blue'}
 	<BlueThing/>
 {/if}

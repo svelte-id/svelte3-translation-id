@@ -32,6 +32,6 @@
 <!-- creative commons BY-NC http://www.pngall.com/kitten-png/download/7247 -->
 <img
 	class:curious={hereKitty}
-	alt="Котенок хочет знать, что происходит"
+	alt="Kitten wants to know what's going on"
 	src="tutorial/kitten.png"
 >

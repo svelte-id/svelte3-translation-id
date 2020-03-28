@@ -2,7 +2,7 @@
 	let count = 0;
 
 	$: if (count >= 10) {
-		alert(`count слишком велико!`);
+		alert(`count is dangerously high!`);
 		count = 9;
 	}
 
@@ -12,5 +12,5 @@
 </script>
 
 <button on:click={handleClick}>
-	{count === 0 ? 'Кликни по мне' : `Кликов: ${count}`}
+	Clicked {count} {count === 1 ? 'time' : 'times'}
 </button>

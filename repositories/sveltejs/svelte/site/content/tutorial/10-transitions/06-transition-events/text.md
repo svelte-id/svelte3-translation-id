@@ -1,17 +1,17 @@
 ---
-title: События перехода
+title: Transition events
 ---
 
-Иногда полезно знать, когда переходы начинаются и заканчиваются. Svelte генерирует события в процессе переходов, которые вы можете прослушивать, как любые другие события DOM:
+It can be useful to know when transitions are beginning and ending. Svelte dispatches events that you can listen to like any other DOM event:
 
 ```html
 <p
 	transition:fly="{{ y: 200, duration: 2000 }}"
-	on:introstart="{() => status = 'начало появления'}"
-	on:outrostart="{() => status = 'начало исчезновения'}"
-	on:introend="{() => status = 'конец появления'}"
-	on:outroend="{() => status = 'конец исчезновения'}"
+	on:introstart="{() => status = 'intro started'}"
+	on:outrostart="{() => status = 'outro started'}"
+	on:introend="{() => status = 'intro ended'}"
+	on:outroend="{() => status = 'outro ended'}"
 >
-	Прилетает и улетает
+	Flies in and out
 </p>
 ```

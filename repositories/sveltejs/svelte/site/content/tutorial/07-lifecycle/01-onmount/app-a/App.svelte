@@ -16,7 +16,7 @@
 	}
 </style>
 
-<h1>Фотоальбом</h1>
+<h1>Photo album</h1>
 
 <div class="photos">
 	{#each photos as photo}
@@ -25,7 +25,7 @@
 			<figcaption>{photo.title}</figcaption>
 		</figure>
 	{:else}
-		<!-- этот блок отрисовывается, пока photos.length === 0 -->
-		<p>загрузка...</p>
+		<!-- this block renders when photos.length === 0 -->
+		<p>loading...</p>
 	{/each}
 </div>

@@ -1,9 +1,9 @@
 <!--
 https://eugenkiss.github.io/7guis/tasks#circle
 
-Кликните по холсту, чтобы нарисовать круг. Кликните по кругу,
-чтобы выделить его. Правый клик, для изменения радиуса 
-выбранного круга.
+Click on the canvas to draw a circle. Click on a circle
+to select it. Right-click on the canvas to adjust the
+radius of the selected circle.
 -->
 
 <script>
@@ -18,8 +18,8 @@ https://eugenkiss.github.io/7guis/tasks#circle
 		if (adjusting) {
 			adjusting = false;
 
-			// при изменнии круга,
-			// отправляем в стек
+			// if circle was adjusted,
+			// push to the stack
 			if (adjusted) push();
 			return;
 		}
@@ -100,8 +100,8 @@ https://eugenkiss.github.io/7guis/tasks#circle
 </style>
 
 <div class="controls">
-	<button on:click="{() => travel(-1)}" disabled="{i === 0}">отменить</button>
-	<button on:click="{() => travel(+1)}" disabled="{i === undoStack.length -1}">повторить</button>
+	<button on:click="{() => travel(-1)}" disabled="{i === 0}">undo</button>
+	<button on:click="{() => travel(+1)}" disabled="{i === undoStack.length -1}">redo</button>
 </div>
 
 <svg on:click={handleClick} >
@@ -119,7 +119,7 @@ https://eugenkiss.github.io/7guis/tasks#circle
 
 {#if adjusting}
 	<div class="adjuster">
-		<p>Изменение диаметра {selected.cx}, {selected.cy}</p>
+		<p>adjust diameter of circle at {selected.cx}, {selected.cy}</p>
 		<input type="range" value={selected.r} on:input={adjust}>
 	</div>
 {/if}

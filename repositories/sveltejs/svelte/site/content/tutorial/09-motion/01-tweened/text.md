@@ -2,9 +2,9 @@
 title: Tweened
 ---
 
-Изменить какое-либо значение в состоянии приложения и наблюдать за автоматическим обновлением DOM - это круто. А знаете, что еще круче? Когда значение меняется с начального на конечное не одномоментно, а *рассчитываются промежуточные значения*. В Svelte есть инструменты для создания плавных пользовательских интерфейсов, которые используют анимацию при изменении значений.
+Setting values and watching the DOM update automatically is cool. Know what's even cooler? *Tweening* those values. Svelte includes tools to help you build slick user interfaces that use animation to communicate changes.
 
-Давайте сначала превратим `progress` из `writable` хранилища в `tweened`:
+Let's start by changing the `progress` store to a `tweened` value:
 
 ```html
 <script>
@@ -14,7 +14,7 @@ title: Tweened
 </script>
 ```
 
-Теперь при нажатии кнопок новое значение прогрессбара будет отображено с анимацией. Но выглядит она как-то грубо. Нам нужно добавить функцию плавности:
+Clicking the buttons causes the progress bar to animate to its new value. It's a bit robotic and unsatisfying though. We need to add an easing function:
 
 ```html
 <script>
@@ -28,13 +28,13 @@ title: Tweened
 </script>
 ```
 
-> Модуль `svelte/easing` содержит в себе [уравнения плавности Пеннера](https://web.archive.org/web/20190805215728/http://robertpenner.com/easing/). Но вы можете использовать и собственную функцию `p => t`, где оба значения `p` и `t` должны быть в диапазоне от 0 до 1.
+> The `svelte/easing` module contains the [Penner easing equations](https://web.archive.org/web/20190805215728/http://robertpenner.com/easing/), or you can supply your own `p => t` function where `p` and `t` are both values between 0 and 1.
 
-Полный список параметров для `tweened`:
+The full set of options available to `tweened`:
 
-* `delay` — задержка в миллисекундах перед началом изменения значения
-* `duration` — либо длительность изменения в миллисекундах, либо функция `(from, to) => milliseconds`, позволяющая указывать длительность на основе начального и конечного значений.
-* `easing` — функция вида `p => t`
-* `interpolate` — пользовательская функция `(from, to) => t => value` для интерполяции между произвольными типами значений. По умолчанию Svelte умеет рассчитывать промежуточные значения между числами, датами, массивами одинаковой структуры и объектами (при условии, что они содержат только числа, даты или другие допустимые массивы и объекты). Например, если вы хотите интерполировать строки hex-цветов или матрицы преобразования — понадобится использовать пользовательский интерполятор.
+* `delay` — milliseconds before the tween starts
+* `duration` — either the duration of the tween in milliseconds, or a `(from, to) => milliseconds` function allowing you to (e.g.) specify longer tweens for larger changes in value
+* `easing` — a `p => t` function
+* `interpolate` — a custom `(from, to) => t => value` function for interpolating between arbitrary values. By default, Svelte will interpolate between numbers, dates, and identically-shaped arrays and objects (as long as they only contain numbers and dates or other valid arrays and objects). If you want to interpolate (for example) colour strings or transformation matrices, supply a custom interpolator
 
-Эти параметры можно передать вторым аргументом также и в методы `progress.set` и `progress.update` для переопределения значений по умолчанию. Методы `set` и `update` возвращают промис, который разрешается после завершения анимации.
+You can also pass these options to `progress.set` and `progress.update` as a second argument, in which case they will override the defaults. The `set` and `update` methods both return a promise that resolves when the tween completes.

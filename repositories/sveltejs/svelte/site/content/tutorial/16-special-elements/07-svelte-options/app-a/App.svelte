@@ -2,15 +2,15 @@
 	import Todo from './Todo.svelte';
 
 	let todos = [
-		{ id: 1, done: true, text: 'помыть машину' },
-		{ id: 2, done: false, text: 'выгулять собаку' },
-		{ id: 3, done: false, text: 'покосить газон' }
+		{ id: 1, done: true, text: 'wash the car' },
+		{ id: 2, done: false, text: 'take the dog for a walk' },
+		{ id: 3, done: false, text: 'mow the lawn' }
 	];
 
 	function toggle(toggled) {
 		todos = todos.map(todo => {
 			if (todo === toggled) {
-				// возвращаем новый объект
+				// return a new object
 				return {
 					id: todo.id,
 					text: todo.text,
@@ -18,13 +18,13 @@
 				};
 			}
 
-			// возвращаем тот же объект
+			// return the same object
 			return todo;
 		});
 	}
 </script>
 
-<h2>Задачи</h2>
+<h2>Todos</h2>
 {#each todos as todo}
 	<Todo {todo} on:click={() => toggle(todo)}/>
 {/each}

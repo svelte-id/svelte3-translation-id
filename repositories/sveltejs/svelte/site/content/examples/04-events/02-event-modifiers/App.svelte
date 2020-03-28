@@ -1,9 +1,9 @@
 <script>
 	function handleClick() {
-		alert('только одно оповещение')
+		alert('no more alerts')
 	}
 </script>
 
 <button on:click|once={handleClick}>
-	Нажми меня
+	Click me
 </button>

@@ -2,9 +2,9 @@
 title: Spring
 ---
 
-Функция `spring` является альтернативой `tweened`, которую обычно лучше использовать для часто изменяющихся значений.
+The `spring` function is an alternative to `tweened` that often works better for values that are frequently changing.
 
-В этом примере у нас есть два хранилища — одно содержит координаты круга, а другое — его размер. Давайте заменим их на функции `spring`:
+In this example we have two stores — one representing the circle's coordinates, and one representing its size. Let's convert them to springs:
 
 ```html
 <script>
@@ -15,7 +15,7 @@ title: Spring
 </script>
 ```
 
-Обе функции имеют значения по умолчанию — *жёсткость* `stiffness` и *затухание* `damping`, которые управляют *пружинностью* колебаний. Мы можем указать любые начальные значения:
+Both springs have default `stiffness` and `damping` values, which control the spring's, well... springiness. We can specify our own initial values:
 
 ```js
 let coords = spring({ x: 50, y: 50 }, {
@@ -24,4 +24,4 @@ let coords = spring({ x: 50, y: 50 }, {
 });
 ```
 
-Повозите мышкой и попробуйте подвигать ползунки, чтобы почувствовать, как они влияют на поведение преобразований функции `spring`. Обратите внимание, что вы можете регулировать эти значения даже в процессе анимации.
+Waggle your mouse around, and try dragging the sliders to get a feel for how they affect the spring's behaviour. Notice that you can adjust the values while the spring is still in motion.

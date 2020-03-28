@@ -2,10 +2,10 @@
 	let count = 0;
 
 	function handleClick() {
-		// поместите сюда код обработчика события
+		// event handler code goes here
 	}
 </script>
 
 <button>
-	{count === 0 ? 'Кликни по мне' : `Кликов: ${count}`}
+	Clicked {count} {count === 1 ? 'time' : 'times'}
 </button>

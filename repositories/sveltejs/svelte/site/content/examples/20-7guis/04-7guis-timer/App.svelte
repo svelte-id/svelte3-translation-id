@@ -27,15 +27,15 @@
 </script>
 
 <label>
-	прошло времени:
+	elapsed time:
 	<progress value="{elapsed / duration}"></progress>
 </label>
 
-<div>{(elapsed / 1000).toFixed(1)} сек.</div>
+<div>{(elapsed / 1000).toFixed(1)}s</div>
 
 <label>
-	длительность:
+	duration:
 	<input type="range" bind:value={duration} min="1" max="20000">
 </label>
 
-<button on:click="{() => elapsed = 0}">сброс</button>
+<button on:click="{() => elapsed = 0}">reset</button>

@@ -7,5 +7,5 @@
 </style>
 
 <div on:mousemove="{e => m = { x: e.clientX, y: e.clientY }}">
-	Позиция курсора мыши {m.x} x {m.y}
+	The mouse position is {m.x} x {m.y}
 </div>

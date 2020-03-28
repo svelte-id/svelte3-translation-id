@@ -1,21 +1,21 @@
 ---
-title: Директива use
+title: The use directive
 ---
 
-Действия по сути являются функциями жизненного цикла на уровне элементов. Они полезны для таких вещей, как:
+Actions are essentially element-level lifecycle functions. They're useful for things like:
 
-* взаимодействие со сторонними библиотеками
-* 'ленивая' загрузка изображений
-* всплывающие подсказки
-* добавление пользовательских обработчиков событий
+* interfacing with third-party libraries
+* lazy-loaded images
+* tooltips
+* adding custom event handlers
 
-В этом приложении мы хотим сделать, чтобы оранжевый блок был закреплен на месте, но его можно было 'подёргать' мышкой. У него есть обработчики событий для событий `panstart`,`panmove` и `panend`, но это не события DOM. Мы должны отправить их сами. Для начала, импортируйте функцию `pannable`...
+In this app, we want to make the orange box 'pannable'. It has event handlers for the `panstart`, `panmove` and `panend` events, but these aren't native DOM events. We have to dispatch them ourselves. First, import the `pannable` function...
 
 ```js
 import { pannable } from './pannable.js';
 ```
 
-...и добавьте её к элементу в директиве `use`:
+...then use it with the element:
 
 ```html
 <div class="box"
@@ -29,9 +29,9 @@ import { pannable } from './pannable.js';
 ></div>
 ```
 
-Откройте файл `pannable.js`. Как и функции перехода, функция действия получает элемент `node` и некоторые необязательные параметры и возвращает объект. Этот объект может иметь метод `destroy`, который вызывается, когда элемент убирается из DOM.
+Open the `pannable.js` file. Like transition functions, an action function receives a `node` and some optional parameters, and returns an action object. That object can have a `destroy` function, which is called when the element is unmounted.
 
-Мы хотим запустить событие `panstart`, когда пользователь зажимает кнопку мыши на блоке, события `panmove` (со свойствами `dx` и `dy`, показывающими изменение положения), и событие `panend`, когда кнопка мыши будет отпущена. Одна из возможных реализаций выглядит так:
+We want to fire `panstart` event when the user mouses down on the element, `panmove` events (with `dx` and `dy` properties showing how far the mouse moved) when they drag it, and `panend` events when they mouse up. One possible implementation looks like this:
 
 ```js
 export function pannable(node) {
@@ -83,7 +83,6 @@ export function pannable(node) {
 }
 ```
 
-Допишите функцию `pannable` и попробуйте переместить блок мышью.
+Update the `pannable` function and try moving the box around.
 
-> Эта реализация просто для демонстрации — правильное приложение также обрабатывало бы тач-события.
-
+> This implementation is for demonstration purposes — a more complete one would also consider touch events.

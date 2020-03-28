@@ -8,10 +8,10 @@
 
 {#if user.loggedIn}
 	<button on:click={toggle}>
-		Выйти
+		Log out
 	</button>
 {:else}
 	<button on:click={toggle}>
-		Войти
+		Log in
 	</button>
 {/if}

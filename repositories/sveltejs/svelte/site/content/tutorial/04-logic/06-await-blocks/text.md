@@ -1,26 +1,25 @@
 ---
-title: Блок await
+title: Await blocks
 ---
 
-
-Большинство веб-приложений работают с асинхронными данными. Svelte позволяет прямо в разметке использовать оператор `await`, который в JavaScript *ожидает* ответ от [промисов](https://developer.mozilla.org/ru/docs/Web/JavaScript/Guide/Ispolzovanie_promisov):
+Most web applications have to deal with asynchronous data at some point. Svelte makes it easy to *await* the value of [promises](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises) directly in your markup:
 
 ```html
 {#await promise}
-	<p>...подождите</p>
+	<p>...waiting</p>
 {:then number}
-	<p>Число равно {number}</p>
+	<p>The number is {number}</p>
 {:catch error}
 	<p style="color: red">{error.message}</p>
 {/await}
 ```
 
-> Выводится только один сработавший `promise`, так что вам не нужно беспокоиться о появлении [состояния гонки](https://ru.wikipedia.org/wiki/%D0%A1%D0%BE%D1%81%D1%82%D0%BE%D1%8F%D0%BD%D0%B8%D0%B5_%D0%B3%D0%BE%D0%BD%D0%BA%D0%B8).
+> Only the most recent `promise` is considered, meaning you don't need to worry about race conditions.
 
-Если вы уверены, что ваш промис не вернёт ошибку — можете не использовать блок `catch`. Также можно не писать первый блок, если не нужно ничего показывать пока промис не вернёт значение:
+If you know that your promise can't reject, you can omit the `catch` block. You can also omit the first block if you don't want to show anything until the promise resolves:
 
 ```html
 {#await promise then value}
-	<p>Число равно {value}</p>
+	<p>the value is {value}</p>
 {/await}
 ```

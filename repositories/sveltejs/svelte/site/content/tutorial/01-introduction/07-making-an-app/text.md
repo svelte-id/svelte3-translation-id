@@ -1,21 +1,21 @@
 ---
-title: Создание приложения
+title: Making an app
 ---
 
-Этот учебник разработан, чтобы познакомить вас с процессом написания компонентов. Но в какой-то момент вы захотите начать писать компоненты уже в своём любимом редакторе кода.
+This tutorial is designed to get you familiar with the process of writing components. But at some point, you'll want to start writing components in the comfort of your own text editor.
 
-Во-первых, понадобится интегрировать Svelte в инструменты сборки. Официально поддерживаются плагины для [Rollup](https://rollupjs.org) и [webpack](https://webpack.js.org/)...
+First, you'll need to integrate Svelte with a build tool. There are officially maintained plugins for [Rollup](https://rollupjs.org) and [webpack](https://webpack.js.org/)...
 
 * [rollup-plugin-svelte](https://github.com/sveltejs/rollup-plugin-svelte)
 * [svelte-loader](https://github.com/sveltejs/svelte-loader)
 
-...а так же есть несколько плагинов, [разрабатываемых сообществом](https://github.com/sveltejs/integrations#bundler-plugins).
+...and a variety of [community-maintained ones](https://github.com/sveltejs/integrations#bundler-plugins).
 
-Не беспокойтесь, если вы  новичок в веб-разработке и ранее не пользовались подобными инструментами. Мы подготовили простое пошаговое руководство [Svelte для зелёных разработчиков](blog/svelte-for-new-developers), которое проведёт вас через этот процесс.
+Don't worry if you're relatively new to web development and haven't used these tools before. We've prepared a simple step-by-step guide, [Svelte for new developers](blog/svelte-for-new-developers), which walks you through the process.
 
-Кроме того, потребуется настроить ваш редактор кода, чтобы он подсвечивал синтаксис `.svelte` файлов. Узнать как это сделать можно [прочитав это руководство](blog/setting-up-your-editor).
+You'll also want to configure your text editor to treat `.svelte` files the same as `.html` for the sake of syntax highlighting. [Read this guide to learn how](blog/setting-up-your-editor).
 
-После настройки вашего проекта, использовать компоненты Svelte в коде очень легко. Компилятор превращает каждый компонент в обычный класс JavaScript - просто импортируйте его и создайте экземпляр с помощью ключевого слова `new`:
+Then, once you've got your project set up, using Svelte components is easy. The compiler turns each component into a regular JavaScript class — just import it and instantiate with `new`:
 
 ```js
 import App from './App.svelte';
@@ -23,10 +23,10 @@ import App from './App.svelte';
 const app = new App({
 	target: document.body,
 	props: {
-		// о свойствах мы узнаем позднее
+		// we'll learn about props later
 		answer: 42
 	}
 });
 ```
 
-При необходимости можно взаимодействовать с `app`, используя [API компонента](docs#API_компонента_на_клиенте).
+You can then interact with `app` using the [component API](docs#Client-side_component_API) if you need to.

@@ -39,11 +39,11 @@
 
 <label>
 	<input type="checkbox" bind:checked={visible}>
-	показать
+	visible
 </label>
 
 {#if visible}
 	<div class="centered" in:spin="{{duration: 8000}}" out:fade>
-		<span>переходы!</span>
+		<span>transitions!</span>
 	</div>
 {/if}

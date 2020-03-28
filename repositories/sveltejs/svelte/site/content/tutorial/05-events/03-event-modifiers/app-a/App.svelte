@@ -1,9 +1,9 @@
 <script>
 	function handleClick() {
-		alert('Кнопка нажата')
+		alert('clicked')
 	}
 </script>
 
 <button on:click={handleClick}>
-	Нажми меня
+	Click me
 </button>

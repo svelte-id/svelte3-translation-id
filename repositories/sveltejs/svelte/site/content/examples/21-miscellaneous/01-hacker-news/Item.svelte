@@ -21,7 +21,7 @@
 	}
 </style>
 
-<a href={returnTo}>&laquo; назад</a>
+<a href={returnTo}>&laquo; back</a>
 
 <article>
 	<a href="{item.url}">
@@ -29,7 +29,7 @@
 		<small>{item.domain}</small>
 	</a>
 
-	<p class="meta">опубликовал {item.user} {item.time_ago}
+	<p class="meta">submitted by {item.user} {item.time_ago}
 </article>
 
 <div class="comments">

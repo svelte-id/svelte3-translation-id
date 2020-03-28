@@ -1,45 +1,44 @@
 ---
-title: Легкий способ начать использовать Svelte
-description: Это займет всего лишь 1 минуту.
+title: The easiest way to get started with Svelte
+description: This'll only take a minute.
 author: Rich Harris
 authorURL: https://twitter.com/Rich_Harris
-translator: Alexey Schebelev
 ---
 
-Svelte — это [фреймворк нового типа](/blog/frameworks-without-the-framework). Не нужно помещать на страницу тег `<script src='svelte.js'>` или импортировать его в ваше приложение с помощью `import` или `require`! Svelte — это компилятор, превращающий ваши файлы компонентов в прекрасно оптимизированный ванильный JavaScript.
+Svelte is a [new kind of framework](/blog/frameworks-without-the-framework). Rather than putting a `<script src='svelte.js'>` tag on the page, or bringing it into your app with `import` or `require`, Svelte is a compiler that works behind the scenes to turn your component files into beautifully optimised JavaScript.
 
-Из-за этого, начало работы с ним может сначала немного запутать. Как же таки сделать приложение на Svelte?
+Because of that, getting started with it can be a little bit confusing at first. How, you might reasonably ask, do you make a Svelte app?
 
 
-## 1. С использованием REPL
+## 1. Use the REPL
 
-[Svelte REPL](repl) — самый простой способ начать. Вы можете выбрать из списка один из стартовых примеров, и пытаться изменить его, пока он не начнёт делать то, что вы хотите.
+The [Svelte REPL](repl) is the easiest way to begin. You can choose from a list of examples to get you started, and tweak them until they do what you want.
 
-<aside><p>У вас должна быть установлена <a href="https://nodejs.org/">Node.js</a>  и иметься первоначальные навыки работы с командной строкой</p></aside>
+<aside><p>You'll need to have <a href="https://nodejs.org/">Node.js</a> installed, and know how to use the terminal</p></aside>
 
-В какой-то момент, вы решите, что приложение переросло REPL. Нажмите кнопку **download**, чтобы сохранить файл `svelte-app.zip` на свой компьютер и распакуйте его.
+At some point, your app will outgrow the REPL. Click the **download** button to save a `svelte-app.zip` file to your computer and uncompress it.
 
-Откройте терминал и выполните команды...
+Open a terminal window and set the project up...
 
 ```bash
-cd /путь/до/распакованного/svelte-app
+cd /path/to/svelte-app
 npm install
 ```
 
-...затем запустите сервер для разработки:
+...then start up a development server:
 
 ```bash
 npm run dev
 ```
 
-После этого ваше приложение будет доступно на [localhost:5000](http://localhost:5000) и оно будет пересобираться с помощью [Rollup](https://rollupjs.org) каждый раз, когда вы вносите изменения в файлы в `svelte-app/src`.
+This will serve your app on [localhost:5000](http://localhost:5000) and rebuild it with [Rollup](https://rollupjs.org) every time you make a change to the files in `svelte-app/src`.
 
 
-## 2. С использованием degit
+## 2. Use degit
 
-При загрузке из REPL вы получаете настроенную версию репозитория [sveltejs/template](https://github.com/sveltejs/template). Но есть путь и без всякой возни с zip-файлами, используя [degit](https://github.com/Rich-Harris/degit), инструмент для создания проектов.
+When you download from the REPL, you're getting a customised version of the [sveltejs/template](https://github.com/sveltejs/template) repo. You can skip messing around with zip files by using [degit](https://github.com/Rich-Harris/degit), a project scaffolding tool.
 
-Вы можете создать новый проект прямо из терминала:
+In the terminal, you can instantly create a new project like so:
 
 ```bash
 npx degit sveltejs/template my-svelte-project
@@ -48,14 +47,14 @@ npm install
 npm run dev
 ```
 
-Нужные файлы загрузятся в папку `my-svelte-project`, установятся все зависимости и запустится сервер на http://localhost:5000.
+This will create a new project in the `my-svelte-project` directory, install its dependencies, and start a server on http://localhost:5000.
 
-Когда вы немного поизучаете основы и поймёте как всё работает, можете форкнуть [sveltejs/template](https://github.com/sveltejs/template) и начать делать так:
+Once you've tinkered a bit and understood how everything fits together, you can fork [sveltejs/template](https://github.com/sveltejs/template) and start doing this instead:
 
 ```bash
 npx degit your-name/template my-new-project
 ```
 
-Вот, в принципе, и всё! Выполните `npm run build`, чтобы собрать готовую к продакшену версию своего приложения, и прочтите [README](https://github.com/sveltejs/template/blob/master/README.md) шаблона проекта, чтобы узнать, как легко развернуть своё приложение в Интернете с помощью [Now](https://zeit.co/now) или [Surge](http://surge.sh/).
+And that's it! Do `npm run build` to create a production-ready version of your app, and check the project template's [README](https://github.com/sveltejs/template/blob/master/README.md) for instructions on how to easily deploy your app to the web with [Now](https://zeit.co/now) or [Surge](http://surge.sh/).
 
-Вы не обязаны использовать Rollup — у нас есть интеграции с [webpack](https://github.com/sveltejs/svelte-loader), [Browserify](https://github.com/tehshrike/sveltify) и прочими. Вы можете использовать [Svelte CLI](https://github.com/sveltejs/svelte-cli) (Обновление от 2019 г.: с выходом Svelte 3 инструмент CLI убран, теперь мы используем в нашем шаблоне [sirv-cli](https://www.npmjs.com/package/sirv-cli). Но вы можете использовать любую утилиту по своему выбору!) или [API](https://github.com/sveltejs/svelte/tree/v2#api) напрямую. Если вы сделали шаблон проекта с помощью одного из этих инструментов, расскажите об этом в [чате Svelte Discord](chat) или в Twitter [@sveltejs](https://twitter.com/sveltejs)!
+You're not restricted to using Rollup — there are also integrations for [webpack](https://github.com/sveltejs/svelte-loader), [Browserify](https://github.com/tehshrike/sveltify) and others, or you can use the [Svelte CLI](https://github.com/sveltejs/svelte-cli) (Update from 2019: with Svelte 3 the CLI was deprecated and we now use [sirv-cli](https://www.npmjs.com/package/sirv-cli) in our template. Feel free to use whatever tool you like!) or the [API](https://github.com/sveltejs/svelte/tree/v2#api) directly. If you make a project template using one of these tools, please share it with the [Svelte Discord chatroom](chat), or via [@sveltejs](https://twitter.com/sveltejs) on Twitter!

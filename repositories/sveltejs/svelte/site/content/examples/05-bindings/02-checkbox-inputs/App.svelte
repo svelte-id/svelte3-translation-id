@@ -4,15 +4,15 @@
 
 <label>
 	<input type=checkbox bind:checked={yes}>
-	Да, я хочу получать спам на почту!
+	Yes! Send me regular email spam
 </label>
 
 {#if yes}
-	<p>Спасибо! Мы будем слать вам тонны спама и продадим ваши личные данные.</p>
+	<p>Thank you. We will bombard your inbox and sell your personal details.</p>
 {:else}
-	<p>Пожалуйста, поставьте галочку. Если вы ни за что не платите, то сами являетесь товаром.</p>
+	<p>You must opt in to continue. If you're not paying, you're the product.</p>
 {/if}
 
 <button disabled={!yes}>
-	Подписаться
+	Subscribe
 </button>

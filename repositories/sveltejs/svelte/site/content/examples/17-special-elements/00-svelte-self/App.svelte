@@ -4,18 +4,18 @@
 	let root = [
 		{
 			type: 'folder',
-			name: 'Важные документы по работе',
+			name: 'Important work stuff',
 			files: [
 				{ type: 'file', name: 'quarterly-results.xlsx' }
 			]
 		},
 		{
 			type: 'folder',
-			name: 'Гифки с животными',
+			name: 'Animal GIFs',
 			files: [
 				{
 					type: 'folder',
-					name: 'Собаки',
+					name: 'Dogs',
 					files: [
 						{ type: 'file', name: 'treadmill.gif' },
 						{ type: 'file', name: 'rope-jumping.gif' }
@@ -23,7 +23,7 @@
 				},
 				{
 					type: 'folder',
-					name: 'Козлики',
+					name: 'Goats',
 					files: [
 						{ type: 'file', name: 'parkour.gif' },
 						{ type: 'file', name: 'rampage.gif' }
@@ -38,4 +38,4 @@
 	];
 </script>
 
-<Folder name="Домашняя папка" files={root} expanded/>
+<Folder name="Home" files={root} expanded/>

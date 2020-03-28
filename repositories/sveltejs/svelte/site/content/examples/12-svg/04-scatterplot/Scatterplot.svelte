@@ -36,7 +36,7 @@
 <svelte:window on:resize='{resize}'/>
 
 <svg bind:this={svg}>
-	<!-- ось y -->
+	<!-- y axis -->
 	<g class='axis y-axis'>
 		{#each yTicks as tick}
 			<g class='tick tick-{tick}' transform='translate(0, {yScale(tick)})'>
@@ -46,7 +46,7 @@
 		{/each}
 	</g>
 
-	<!-- ось x -->
+	<!-- x axis -->
 	<g class='axis x-axis'>
 		{#each xTicks as tick}
 			<g class='tick' transform='translate({xScale(tick)},0)'>
@@ -56,7 +56,7 @@
 		{/each}
 	</g>
 
-	<!-- данные -->
+	<!-- data -->
 	{#each points as point}
 		<circle cx='{xScale(point.x)}' cy='{yScale(point.y)}' r='5'/>
 	{/each}

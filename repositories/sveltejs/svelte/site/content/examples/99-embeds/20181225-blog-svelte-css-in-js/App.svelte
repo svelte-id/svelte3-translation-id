@@ -6,5 +6,5 @@
 <Hero/>
 
 <div class={comicSans}>
-	<p>Волновая тень расщепляет наносекундный целевой сегмент рынка. Экситон индуцирует гравитационный атом. Течение среды непрерывно. Осциллятор масштабирует гидродинамический удар. Личность топ менеджера все еще интересна для многих. Бизнес-модель сжимает имидж. <a class={link} href="https://yandex.ru/referats/">Давай ещё бреда</a></p>
+	<p>Did you enjoy your lunch, mom? You drank it fast enough. I know, I just call her Annabelle cause she's shaped like a…she's the belle of the ball! YOU'RE the Chiclet! Not me. Caw ca caw, caw ca caw, caw ca caw! A Colombian cartel that WON'T kidnap and kill you. You go buy a tape recorder and record yourself for a whole day. <a class={link} href="https://bluthipsum.com/">I think you'll be surprised at some of your phrasing.</a></p>
 </div>

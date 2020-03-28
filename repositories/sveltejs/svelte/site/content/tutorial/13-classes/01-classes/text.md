@@ -1,8 +1,8 @@
 ---
-title: Директива class
+title: The class directive
 ---
 
-Как и для любого атрибута, вы можете указать значение атрибута `class` с помощью JavaScript, как показано ниже:
+Like any other attribute, you can specify classes with a JavaScript attribute, seen here:
 
 ```html
 <button
@@ -11,7 +11,7 @@ title: Директива class
 >foo</button>
 ```
 
-Это очень распространенный шаблон при разработке UI, поэтому в Svelte есть специальная директива, чтобы делать это проще:
+This is such a common pattern in UI development that Svelte includes a special directive to simplify it:
 
 ```html
 <button
@@ -20,4 +20,4 @@ title: Директива class
 >foo</button>
 ```
 
-Класс `active` добавляется к элементу всякий раз, когда значение выражения является истинным, и убирается, когда оно ложно.
+The `active` class is added to the element whenever the value of the expression is truthy, and removed when it's falsy.

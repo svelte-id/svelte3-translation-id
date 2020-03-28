@@ -1,5 +1,5 @@
 <style>
-	/* сюда поместите стили */
+	/* styles goes here */
 </style>
 
-<p>Просто строка текста</p>
+<p>This is a paragraph.</p>

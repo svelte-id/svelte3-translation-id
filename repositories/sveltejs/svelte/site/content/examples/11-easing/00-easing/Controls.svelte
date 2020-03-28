@@ -122,7 +122,7 @@
 
 <div class="easing-sidebar">
 		<div class="easing-types">
-			<h3>Функция</h3>
+			<h3>Ease</h3>
 			{#if mobile}
 				<select bind:value={current_ease}>
 					{#each [...eases] as [name]}
@@ -146,7 +146,7 @@
 					{/each}
 				</ul>
 			{/if}
-			<h3>Тип</h3>
+			<h3>Type</h3>
 			{#if mobile }
 				<select bind:value={current_type}>
 					{#each types as [name, type]}
@@ -171,7 +171,7 @@
 			{/if}
 		</div>
 		<h4>
-			Длительность
+			Duration
 		</h4>
 		<div class="duration">
 			<span>

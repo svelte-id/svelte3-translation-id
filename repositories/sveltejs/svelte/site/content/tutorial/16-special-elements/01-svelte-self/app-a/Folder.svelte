@@ -42,7 +42,7 @@
 		{#each files as file}
 			<li>
 				{#if file.type === 'folder'}
-					<!-- показать папку -->
+					<!-- show folder -->
 				{:else}
 					<File {...file}/>
 				{/if}

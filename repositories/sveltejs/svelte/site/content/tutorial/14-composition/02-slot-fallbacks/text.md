@@ -1,21 +1,23 @@
 ---
-title: Содержимое по умолчанию
+title: Slot fallbacks
 ---
 
-В компоненте  для любых слотов можно указать *содержимое по умолчанию*, которое отобразится в случае если для них не будет передано никакого контента. Просто поместите его внутрь элемента `<slot>`:
+A component can specify *fallbacks* for any slots that are left empty, by putting content inside the `<slot>` element:
 
 ```html
 <div class="box">
 	<slot>
-		<em>контент не был передан</em>
+		<em>no content was provided</em>
 	</slot>
 </div>
 ```
-Теперь мы можем создавать экземпляры `<Box>` с вложенным контентом и без:
+
+We can now create instances of `<Box>` without any children:
+
 ```html
 <Box>
-	<h2>Привет!</h2>
-	<p>Это компонент box. Тут можно разместить что угодно.</p>
+	<h2>Hello!</h2>
+	<p>This is a box. It can contain anything.</p>
 </Box>
 
 <Box/>

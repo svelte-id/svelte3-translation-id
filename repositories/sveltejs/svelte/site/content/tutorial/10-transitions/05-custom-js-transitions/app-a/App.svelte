@@ -2,7 +2,7 @@
 	let visible = false;
 
 	function typewriter(node, { speed = 50 }) {
-		// тут должна быть реализация перехода
+		// implementation goes here
 
 		return {
 
@@ -12,11 +12,11 @@
 
 <label>
 	<input type="checkbox" bind:checked={visible}>
-	показать
+	visible
 </label>
 
 {#if visible}
 	<p in:typewriter>
-		Съешь же ещё этих мягких французских булок, да выпей чаю
+		The quick brown fox jumps over the lazy dog
 	</p>
 {/if}

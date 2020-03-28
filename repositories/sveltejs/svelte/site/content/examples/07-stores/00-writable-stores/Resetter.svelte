@@ -7,5 +7,5 @@
 </script>
 
 <button on:click={reset}>
-	сброс
+	reset
 </button>

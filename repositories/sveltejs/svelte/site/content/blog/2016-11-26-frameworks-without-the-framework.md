@@ -1,56 +1,55 @@
 ---
-title: Фреймворки без фреймворка: почему мы не подумали об этом раньше?
-description: Вы не можете писать серьезные приложения на ванильном JavaScript. Но компилятор может сделать это за вас.
+title: Frameworks without the framework: why didn't we think of this sooner?
+description: You can't write serious applications in vanilla JavaScript without hitting a complexity wall. But a compiler can do it for you.
 author: Rich Harris
 authorURL: https://twitter.com/Rich_Harris
-translator: Alexey Schebelev
 ---
 
-> Этот новый фреймворк работает в *рантайме*? Фи. Спасибо, мне не надо.
-> **- фронтендеры 2018 года**
+> Wait, this new framework has a *runtime*? Ugh. Thanks, I'll pass.
+> **– front end developers in 2018**
 
-Мы отправляем слишком много кода нашим пользователям. Как и многие разработчики фронтендеры, я отрицал этот факт, думая, что ничего страшного в лишних 100 КБ JavaScript нет и при загрузке страницы можно просто убрать [один .jpg файлик](https://twitter.com/miketaylr/status/227056824275333120)- ведь в *реальности*, когда ваше приложение уже стало интерактивным, гораздо большее значение имеет производительность.
+We're shipping too much code to our users. Like a lot of front end developers, I've been in denial about that fact, thinking that it was fine to serve 100kb of JavaScript on page load – just use [one less .jpg!](https://twitter.com/miketaylr/status/227056824275333120) – and that what *really* mattered was performance once your app was already interactive.
 
-Но я ошибался. 100 КБ .js не то же самое, что 100 КБ .jpg. Это не только время загрузки из сети, которое убивает производительность первого запуска вашего приложения, но и время, потраченное на анализ и оценку вашего скрипта, в течение которого браузер перестаёт отвечать на запросы. На мобильных устройствах эти миллисекунды копятся ещё быстрее.
+But I was wrong. 100kb of .js isn't equivalent to 100kb of .jpg. It's not just the network time that'll kill your app's startup performance, but the time spent parsing and evaluating your script, during which time the browser becomes completely unresponsive. On mobile, those milliseconds rack up very quickly.
 
-Если вы не уверены в существовании такой проблемы, почитайте Twitter [Алекса Рассела](https://twitter.com/slightlylate). Алекс [не приобрёл друзей в сообществе фреймворков](https://twitter.com/slightlylate/status/728355959022587905), но он прав. Но предложенный [Polymer](https://www.polymer-project.org/1.0/), в качестве альтернативы Angular, React и Ember ещё не завоевал популярность в мире фронтенда и, конечно,не из-за отсутствия маркетинга.
+If you're not convinced that this is a problem, follow [Alex Russell](https://twitter.com/slightlylate) on Twitter. Alex [hasn't been making many friends in the framework community lately](https://twitter.com/slightlylate/status/728355959022587905), but he's not wrong. But the proposed alternative to using frameworks like Angular, React and Ember – [Polymer](https://www.polymer-project.org/1.0/) – hasn't yet gained traction in the front end world, and it's certainly not for a lack of marketing.
 
-Возможно, нам нужно полностью переосмыслить всё это.
-
-
-## Какую  *именно* проблему решают фреймворки?
-
-Общепринятое мнение состоит в том, что фреймворки облегчают управление сложностью вашего кода: фреймворк абстрагирует все скучные детали реализации с помощью таких методов, как, например, нахождение различий в виртуальном DOM. Но это не совсем так. В лучшем случае фреймворки *перемещают сложные штуки* из кода, который вы должны были бы написать, в код, который вы не писали.
-
-Вместо этого причина, по которой такие идеи, как React, настолько заслуженно популярны, заключается в том, что они облегчают управление сложностью ваших *концептов*. Фреймворки — это прежде всего инструмент для структурирования ваших мыслей, а не кода.
-
-Таким образом, что, если бы фреймворк *на самом деле не работал в браузере*? Что если бы вместо этого он преобразовывал ваше приложение в чистый ванильный JavaScript, точно так же, как Babel конвертирует ES2016 + в ES5? Вам не нужно тащить здоровенный рантайм, и ваше приложение будет работать очень быстро, потому что между вашим приложением и браузером не будет слоёв абстракции.
+Perhaps we need to rethink the whole thing.
 
 
-## Представляем Svelte
+## What problem do frameworks *really* solve?
 
-Svelte — это новый фреймворк, который делает именно это. Вы пишете свои компоненты, используя HTML, CSS и JavaScript (плюс несколько дополнительных фишек, которые вы можете [изучить менее чем за 5 минут](https://v2.svelte.dev/guide)), и в процессе сборки Svelte компилирует их в крошечные автономные модули JavaScript. Статически анализируя шаблон компонента, мы можем быть уверены, что браузер будет выполнять необходимый минимум всей работы.
+The common view is that frameworks make it easier to manage the complexity of your code: the framework abstracts away all the fussy implementation details with techniques like virtual DOM diffing. But that's not really true. At best, frameworks *move the complexity around*, away from code that you had to write and into code you didn't.
 
-[Реализация TodoMVC на Svelte](http://svelte-todomvc.surge.sh/) весит 3,6 КБ в сжатом виде. Для сравнения, React + ReactDOM *без кода приложения* весит около 45 КБ в сжатом виде. Для разбора React браузеру требуется примерно в 10 раз больше времени, чем для Svelte, чтобы только запустить интерактивный TodoMVC.
+Instead, the reason that ideas like React are so wildly and deservedly successful is that they make it easier to manage the complexity of your *concepts*. Frameworks are primarily a tool for structuring your thoughts, not your code.
 
-И когда ваше приложение *уже* запущено и запущено, в соответствии с [js-framework-benchmark](https://github.com/krausest/js-framework-benchmark) **Svelte работает быстро, чёрт возьми**. Это быстрее, чем React. Это быстрее, чем Vue. Это быстрее, чем Angular, или Ember, или Ractive, или Preact, или Riot, или Mithril. В настоящее время он конкурирует с Inferno, который, вероятно, является самым быстрым фреймворком в мире, потому что [Доминик Ганнауэй](https://twitter.com/trueadm) — волшебник. (Svelte медленнее удаляет элементы, но мы над этим [работаем](https://github.com/sveltejs/svelte/issues/26).)
-
-По сути он такой же быстрый, как ванильный JS, что имеет смысл, потому что это и *есть* ванильный JS, который вам не нужно было писать.
+Given that, what if the framework *didn't actually run in the browser*? What if, instead, it converted your application into pure vanilla JavaScript, just like Babel converts ES2016+ to ES5? You'd pay no upfront cost of shipping a hefty runtime, and your app would get seriously fast, because there'd be no layers of abstraction between your app and the browser.
 
 
-## Но это не самое главное
+## Introducing Svelte
 
-Конечно, производительность очень важна. Но что действительно впечатляет в этом подходе, так это то, что мы наконец-то можем решить некоторые из самых сложных проблем в веб-разработке.
+Svelte is a new framework that does exactly that. You write your components using HTML, CSS and JavaScript (plus a few extra bits you can [learn in under 5 minutes](https://v2.svelte.dev/guide)), and during your build process Svelte compiles them into tiny standalone JavaScript modules. By statically analysing the component template, we can make sure that the browser does as little work as possible.
 
-Проблемы с совместимостью. Хотите сделать `npm install cool-calendar-widget` и использовать его в своём приложении? Ранее вы могли сделать это только в том случае, если виджет был разработан под уже используемый вами фреймворк — если `cool-calendar-widget` был сделан в React и вы используете Angular, то, конечно, ничего не получится. Но если автор виджета использовал Svelte, приложения, которые его используют, могут быть созданы с использованием любой технологии, которая вам нравится. 
+The [Svelte implementation of TodoMVC](http://svelte-todomvc.surge.sh/) weighs 3.6kb zipped. For comparison, React plus ReactDOM *without any app code* weighs about 45kb zipped. It takes about 10x as long for the browser just to evaluate React as it does for Svelte to be up and running with an interactive TodoMVC.
 
-Или [разделение кода](https://twitter.com/samccone/status/797528710085652480). Это отличная идея (загрузить только тот код, который необходим для конкретной страницы), но есть проблема — даже если вы изначально посылаете только один компонент React вместо сотни, *вам всё равно придётся посылать сам React*. С Svelte разделение кода может быть намного более эффективным, потому что структура встроена в компонент, а сам компонент получается крошечный.
+And once your app *is* up and running, according to [js-framework-benchmark](https://github.com/krausest/js-framework-benchmark) **Svelte is fast as heck**. It's faster than React. It's faster than Vue. It's faster than Angular, or Ember, or Ractive, or Preact, or Riot, or Mithril. It's competitive with Inferno, which is probably the fastest UI framework in the world, for now, because [Dominic Gannaway](https://twitter.com/trueadm) is a wizard. (Svelte is slower at removing elements. We're [working on it](https://github.com/sveltejs/svelte/issues/26).)
 
-И, наконец, кое-что, с чем я боролся как разработчик ПО с открытым исходным кодом: ваши пользователи всегда хотят, чтобы нужные им функции были в приоритете, и им всё равно, что это будет пустой балласт для других людей, которым эти функции не нужны. Автор фреймворка всегда должен сбалансировать долгосрочную работоспособность проекта с желанием удовлетворить потребности своих пользователей. Это невероятно сложно, потому что трудно предвидеть последствия постепенного раздувания фреймворка, и требуются серьёзные социальные навыки, чтобы сказать людям (которые, возможно, с энтузиазмом проповедовали ваш инструмент до этого момента), что интересующая их функциональность мягко говоря никому не нужна. Но с таким подходом, как в Svelte, любые функции могут быть добавлены абсолютно свободно, без ущерба для людей, которые их не используют, потому что код, реализующий эти функции, просто не генерируется компилятором, если он не требуется.
+It's basically as fast as vanilla JS, which makes sense because it *is* vanilla JS – just vanilla JS that you didn't have to write.
 
 
-## И это только начало
+## But that's not the important thing
 
-Svelte ещё очень молод. Ещё предстоит проделать большую работу — создание интеграций для сборщиков, добавление рендеринга на стороне сервера, горячая перезагрузка, переходы, дополнительная документация и примеры, стартовые наборы и так далее.
+Well, it *is* important – performance matters a great deal. What's really exciting about this approach, though, is that we can finally solve some of the thorniest problems in web development.
 
-Но вы уже можете создавать крутые компоненты с его помощью, поэтому мы начали сразу со стабильной версии 1.0.0. [Прочитайте руководство](https://v2.svelte.dev/guide), [попробуйте поиграть в REPL](https://v2.svelte.dev/repl) или перейдите на [GitHub](https://github.com/sveltejs/svelte), чтобы помочь начать новую эру разработки UI.
+Consider interoperability. Want to `npm install cool-calendar-widget` and use it in your app? Previously, you could only do that if you were already using (a correct version of) the framework that the widget was designed for – if `cool-calendar-widget` was built in React and you're using Angular then, well, hard cheese. But if the widget author used Svelte, apps that use it can be built using whatever technology you like. (On the TODO list: a way to convert Svelte components into web components.)
+
+Or [code splitting](https://twitter.com/samccone/status/797528710085652480). It's a great idea (only load the code the user needs for the initial view, then get the rest later), but there's a problem – even if you only initially serve one React component instead of 100, *you still have to serve React itself*. With Svelte, code splitting can be much more effective, because the framework is embedded in the component, and the component is tiny.
+
+Finally, something I've wrestled with a great deal as an open source maintainer: your users always want *their* features prioritised, and underestimate the cost of those features to people who don't need them. A framework author must always balance the long-term health of the project with the desire to meet their users' needs. That's incredibly difficult, because it's hard to anticipate – much less articulate – the consequences of incremental bloat, and it takes serious soft skills to tell people (who may have been enthusiastically evangelising your tool up to that point) that their feature isn't important enough. But with an approach like Svelte's, many features can be added with absolutely no cost to people who don't use them, because the code that implements those features just doesn't get generated by the compiler if it's unnecessary.
+
+
+## We're just getting started
+
+Svelte is very new. There's a lot of work still left to do – creating build tool integrations, adding a server-side renderer, hot reloading, transitions, more documentation and examples, starter kits, and so on.
+
+But you can already build rich components with it, which is why we've gone straight to a stable 1.0.0 release. [Read the guide](https://v2.svelte.dev/guide), [try it out in the REPL](/repl), and head over to [GitHub](https://github.com/sveltejs/svelte) to help kickstart the next era of front end development.

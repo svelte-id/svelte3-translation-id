@@ -2,7 +2,7 @@
 title: This
 ---
 
-Доступная только для чтения привязка `this` применяется к любому HTML-элементу (или компоненту) и позволяет вам получить ссылку на отрендеренный элемент. Например, мы можем получить ссылку на элемент `<canvas>`:
+The readonly `this` binding applies to every element (and component) and allows you to obtain a reference to rendered elements. For example, we can get a reference to a `<canvas>` element:
 
 ```html
 <canvas
@@ -12,4 +12,4 @@ title: This
 ></canvas>
 ```
 
-Обратите внимание, что значение `canvas` будет равно `undefined` до тех пор, пока компонент не будет отрисован, т.е. смонтирован в DOM, поэтому мы поместили всю логику в [функцию жизненного цикла](tutorial/onmount) `onMount`.
+Note that the value of `canvas` will be `undefined` until the component has mounted, so we put the logic inside the `onMount` [lifecycle function](tutorial/onmount).

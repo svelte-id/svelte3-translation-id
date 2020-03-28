@@ -12,5 +12,5 @@
 </style>
 
 <div on:mousemove={handleMousemove}>
-	Позиция курсора мыши {m.x} x {m.y}
+	The mouse position is {m.x} x {m.y}
 </div>

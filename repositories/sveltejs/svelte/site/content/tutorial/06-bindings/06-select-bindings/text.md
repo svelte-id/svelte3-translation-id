@@ -1,13 +1,13 @@
 ---
-title: Выпадающие списки
+title: Select bindings
 ---
 
-Также можно использовать `bind:value` и с элементами `<select>`. Перепишите строку №24:
+We can also use `bind:value` with `<select>` elements. Update line 24:
 
 ```html
 <select bind:value={selected} on:change="{() => answer = ''}">
 ```
 
-Обратите внимание, что значения `<option>` являются объектами, а не строками. Svelte это учитывает.
+Note that the `<option>` values are objects rather than strings. Svelte doesn't mind.
 
-> Поскольку мы не задали начальное значение для `selected`, привязка автоматически установит для него значение по умолчанию (т.е. первое в списке). Будьте внимательны — пока привязка не инициализирована, `selected` остаётся равным undefined, в таком случае мы не можем сразу использовать в шаблоне, например `selected.id`.
+> Because we haven't set an initial value of `selected`, the binding will set it to the default value (the first in the list) automatically. Be careful though — until the binding is initialised, `selected` remains undefined, so we can't blindly reference e.g. `selected.id` in the template.

@@ -1,13 +1,13 @@
 ---
-title: Привязка к компонентам
+title: Component bindings
 ---
 
-Вы можете привязываться к свойствам компонентов, аналогично, как мы привязывались к свойствам DOM элементов. Например, мы можем привязаться к свойству `value` имеющегося у нас компонента клавиатуры `<Keypad>`, как если бы это был просто элемент формы:
+Just as you can bind to properties of DOM elements, you can bind to component props. For example, we can bind to the `value` prop of this `<Keypad>` component as though it were a form element:
 
 ```html
 <Keypad bind:value={pin} on:submit={handleSubmit}/>
 ```
 
-Теперь, когда мы введём что-то на клавиатуре, значение `pin` в родительском компоненте немедленно обновится.
+Now, when the user interacts with the keypad, the value of `pin` in the parent component is immediately updated.
 
-> Используйте привязки к компонентам разумно. Если у вас их слишком много, для Svelte может быть слишком сложно отследить все потоки данных внутри вашего приложения, особенно если привязки начинают пересекаться.
+> Use component bindings sparingly. It can be difficult to track the flow of data around your application if you have too many of them, especially if there is no 'single source of truth'.

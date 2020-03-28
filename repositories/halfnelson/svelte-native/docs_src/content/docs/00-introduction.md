@@ -1,22 +1,21 @@
 ---
-title: Введение
+title: Introduction
 ---
 
-#### Что такое NativeScript?
+#### What is NativeScript?
 
- [NativeScript](https://www.nativescript.org/) — это фреймворк для разработки приложений на платформах Apple iOS и Android. У него открытый исходный код, который можно найти на [GitHub](https://github.com/nativescript/nativescript)
+[NativeScript](https://www.nativescript.org/) is an open-source framework to develop apps on the Apple iOS and Android platforms. It is open source and can be found on [github](https://github.com/nativescript/nativescript).
 
-#### Что такое Svelte?
+#### What is Svelte?
 
-[Svelte](https://svelte.technology) — это совершенно новый подход к созданию web-приложений. В то время как традиционные фреймворки, вроде React и Vue, выполняют основную часть своей работы в браузере, Svelte делает эту работу на этапе компиляции при сборке приложения.
+[Svelte](https://svelte.technology) is a radical new approach to building user interfaces. Whereas traditional frameworks like React and Vue do the bulk of their work in the browser, Svelte shifts that work into a compile step that happens when you build your app.
 
-Вместо того, чтобы использовать прожорливые методы, вроде анализа изменений в Virtual DOM, Svelte создаёт код, который точечно обновляет DOM при изменении состояния приложения.
+Instead of using techniques like virtual DOM diffing, Svelte writes code that surgically updates the DOM when the state of your app changes.
 
-#### Что такое Svelte Native
+#### What is Svelte Native
 
-Svelte Native —  это инструмент для создания мобильных приложений. Он сочетает в себе доступ NativeScript к нативным компонентам платформ с быстрыми и эффективными обновлениями представлений в Svelte, что позволяет создавать собственные мобильные приложения с использованием таких инструментов, как HTML, CSS и Javascript.
+Svelte Native is a tool for building mobile applications. It combines NativeScript's access to the native platform views and Svelte's fast and efficient view updates to allow you to build native mobile experiences using tools such as HTML, CSS and Javascript.
 
-[Прочитайте вводную статью в блоге](/blog/svelte-goes-native).
-
+[Read the introductory blog post](/blog/svelte-goes-native).
 
 ![NativeScript + Svelte = Svelte Native](/logos_combined.svg)

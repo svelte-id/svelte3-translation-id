@@ -1,136 +1,114 @@
 ---
-title: Компоненты
+title: Components
 ---
 
 ### ActivityIndicator
 
+<div class="nsref"><a title="NativeScript Documentation" href="https://docs.nativescript.org/api-reference/classes/_ui_activity_indicator_.activityindicator">Class Docs</a></div>
 
-<div class="nsref"><a title="Документация NativeScript" href="https://docs.nativescript.org/api-reference/classes/_ui_activity_indicator_.activityindicator">Описание класса</a></div>
-
-
-`<activityIndicator>` — UI компонент, показывающий индикатор прогресса, сигнализирующий пользователю об операциях запущенных в фоне.
-
+`<activityIndicator>` is a UI component that shows a progress indicator signaling to the user of an operation running in the background.
 
 ```html
-<activityIndicator busy="{true}" on:busyChange="{{onBusyChanged}}" />
+<activityIndicator busy="{true}" on:busyChange="{onBusyChanged}" />
 ```
 
-#### Свойства
+#### Props
 
-| Имя | Тип | Описание |
-|-----|-----|----------|
-| `busy` | `Boolean` | Возвращает или задаёт находится ли индикатор в активном состоянии. При значении `true`, индикатор отображается.
+| Name | Type | Description |
+|------|------|-------------|
+| `busy` | `Boolean` | Gets or sets whether the indicator is active. When `true`, the indicator is active.
 
-#### События
+#### Events
 
-| Имя | Описание |
-|-----|----------|
-| `busyChange`| Вызывается, когда свойство `busy` изменяется.
+| Name | Description |
+|------|-------------|
+| `busyChange`| Emitted when the `busy` property is changed.
 
-#### Нативный компонент
+#### Native Component Reference
 
 | Android | iOS |
 |---------|-----|
 | [`android.widget.ProgressBar`](https://developer.android.com/reference/android/widget/ProgressBar.html)	| [`UIActivityIndicatorView`](https://developer.apple.com/documentation/uikit/uiactivityindicatorview)
 
-
-
 ### Button
 
-<div class="nsref"><a title="Документация NativeScript" href="https://docs.nativescript.org/api-reference/classes/_ui_button_.button">Описание класса</a></div>
+<div class="nsref"><a title="NativeScript Documentation" href="https://docs.nativescript.org/api-reference/classes/_ui_button_.button">Class Docs</a></div>
 
+`<button>` is a UI component that displays a button which reacts to a user gesture.
 
-`<button>` — UI компонент, который отображает кнопку, которая реагирует на жесты пользователя.
-
-Для дополнительной информации по всем возможным жестам, смотрите [Официальную документацию NativeScript](https://docs.nativescript.org/ui/gestures).
-
-
+For more information about the available gestures, see [Gestures in the official NativeScript documentation](https://docs.nativescript.org/ui/gestures).
 
 ```html
 <button text="Button" on:tap="{onButtonTap}" />
 ```
 
+#### Props
 
+| Name | Type | Description |
+|------|------|-------------|
+| `text` | `String` | Sets the label of the button.
+| `textWrap` | `Boolean` | Gets or sets whether the widget wraps the text of the label. Useful for longer labels. Default value is `false`.
 
-#### Свойства
+#### Events
 
-| Имя | Тип | Описание |
-|-----|-----|----------|
-| `text` | `String` | Задаёт текст на кнопке.
-| `textWrap` | `Boolean` | Возвращает или задаёт нужно ли переносить текст на кнопке. Полезно при длинном тексте. По умолчанию:`false`.
+| Name | Description |
+|------|-------------|
+| `tap` | Emitted when the button is tapped.
 
-#### События
-
-| Имя | Описание |
-|-----|----------|
-| `tap` | Вызывается, когда пользователь тапает по кнопке.
-
-#### Нативный компонент
+#### Native Component Reference
 
 | Android | iOS |
 |---------|-----|
 | [`android.widget.Button`](https://developer.android.com/reference/android/widget/Button.html) | [`UIButton`](https://developer.apple.com/documentation/uikit/uibutton)
 
-
-
 ### DatePicker
 
-<div class="nsref"><a title="Документация NativeScript" href="https://docs.nativescript.org/api-reference/classes/_ui_date_picker_.datepicker">Описание класса</a></div>
+<div class="nsref"><a title="NativeScript Documentation" href="https://docs.nativescript.org/api-reference/classes/_ui_date_picker_.datepicker">Class Docs</a></div>
 
-
-
-
-`<datePicker>` — UI компонент, который позволяет пользователю выбрать дату из заданного диапазона.
-
+`<datePicker>` is a UI component that lets users select a date from a pre-configured range.
 
 ```html
 <datePicker date="{someDate}" />
 ```
 
-`<datePicker>` обеспечивает двухстороннюю привязку данных через директиву `bind`.
+`<datePicker>` provides two-way data binding using `bind`.
 
 ```html
 <datePicker bind:date="{selectedDate}" />
 ```
 
-См. также: [TimePicker](docs#timepicker).
+See also: [TimePicker](docs#timepicker).
 
+#### Props
 
+| Name | Type | Description |
+|------|------|-------------|
+| `date` | `Date` | Gets or sets the complete date.
+| `minDate` | `Date` | Gets or sets the earliest possible date to select.
+| `maxDate` | `Date` | Gets or sets the latest possible date to select.
+| `day` | `Number` | Gets or sets the day.
+| `month` | `Number` | Gets or sets the month.
+| `year` | `Number` | Gets or sets the year.
 
+#### Events
 
-#### Свойства
+| Name | Description |
+|------|-------------|
+| `dateChange` | Emitted when the selected date changes.
 
-| Имя | Тип | Описание |
-|-----|-----|----------|
-| `date` | `Date` | Возвращает или задаёт полную дату.
-| `minDate` | `Date` | Возвращает или задаёт минимальную дату, которую можно выбрать.
-| `maxDate` | `Date` | Возвращает или задаёт максимальную дату, которую можно выбрать.
-| `day` | `Number` | Возвращает или задаёт день.
-| `month` | `Number` | Возвращает или задаёт месяц.
-| `year` | `Number` | Возвращает или задаёт год.
-
-#### События
-
-| Имя | Описание |
-|-----|----------|
-| `dateChange` | Вызывается, когда изменяется выбранная дата.
-
-#### Нативный компонент
+#### Native Component Reference
 
 | Android |	iOS |
 |---------|-----|
 | [`android.widget.DatePicker`](https://developer.android.com/reference/android/widget/DatePicker.html) | [`UIDatePicker`](https://developer.apple.com/documentation/uikit/uidatepicker)
 
-
-
 ### Frame
 
-<div class="nsref"><a title="Документация NativeScript" href="https://docs.nativescript.org/api-reference/classes/_ui_frame_.frame">Описание класса</a></div>
+<div class="nsref"><a title="NativeScript Documentation" href="https://docs.nativescript.org/api-reference/classes/_ui_frame_.frame">Class Docs</a></div>
 
+`<frame>` is a UI component used to display [`<page>`](docs#page) elements. Every app needs at least a single `<frame>`  element, usually set as the root element. Svelte Native creates the root frame for you.
 
-`<frame>` — UI компонент, который используется для отображения элементов [`<page>`](docs#page). Любое приложене должно иметь хотя бы один элемент `<frame>`, обычно играющий роль корневого элемента. Svelte Native создаёт корневой фрейм за вас.
-
-Если вам нужно создать несколько фреймов, вы можете сделать это, поместив их в Макет, например, если нужно, чтобы 2 фрейма были рядом друг с другом.
+If you need to create multiple frames, you can do so by wrapping them in a Layout, for example if you want to have 2 frames side-by-side.
 
 ```html
 <gridLayout columns="*, *">
@@ -139,22 +117,21 @@ title: Компоненты
 </gridLayout>
 ```
 
-
-
-Первый дочерний элемент фрейма становится его страницей по умолчанию. Эта страница отобразится перед какой-либо навигацией во фрейме.
+The first child element of a frame will become its `defaultPage`. This is the page shown before any navigation.
 
 ```html
 <frame>
   <page>
-    <actionBar title="Заголовок страницы по умолчанию" />
+    <actionBar title="Default Page Title" />
     <gridLayout>
-      <label text="Содержимое страницы по умолчанию" />
+      <label text="Default Page Content" />
     </gridLayout>
   </page>
 </frame>
 ```
 
-В качестве страницы по умолчанию, можно использовать компонент Svelte, если его корневым элементом будет `page`.
+You can use a component as the default page for a frame, as long as it defines `page` as its root element.
+
 ```html
 <frame>
   <Home />
@@ -165,845 +142,773 @@ title: Компоненты
 import Home from './Home.svelte'
 ```
 
-#### Нативный компонент
+#### Native Component Reference
 
 | Android | iOS |
 |---------|-----|
 | [`org.nativescript.widgets.ContentLayout`](https://github.com/NativeScript/tns-core-modules-widgets/blob/master/android/widgets/src/main/java/org/nativescript/widgets/ContentLayout.java) | [`UINavigationController`](https://developer.apple.com/documentation/uikit/uinavigationcontroller)
 
-
 ### HtmlView
 
-<div class="nsref"><a title="Документация NativeScript" href="https://docs.nativescript.org/api-reference/classes/_ui_html_view_.htmlview">Описание класса</a></div>
+<div class="nsref"><a title="NativeScript Documentation" href="https://docs.nativescript.org/api-reference/classes/_ui_html_view_.htmlview">Class Docs</a></div>
 
+`<htmlView>` is a UI component that lets you show static HTML content.
 
-
-`<htmlView>` — UI компонент, который отображает статический HTML контент.
-
-См. также: [WebView](docs#webview).
-
+See also: [WebView](docs#webview).
 
 ```html
 <htmlView html="<div><h1>HtmlView</h1></div>" />
 ```
 
+#### Props
 
+| Name | Type | Description |
+|------|------|-------------|
+| `html` | `String` | The HTML content to be shown.
 
-#### Свойства
-
-| Имя | Тип | Описание |
-|-----|-----|----------|
-| `html` | `String` | HTML разметка, которую нужно показать.
-
-#### Нативный компонент
+#### Native Component Reference
 
 | Android | iOS |
 |---------|-----|
 | [`android.widget.TextView`](https://developer.android.com/reference/android/widget/TextView.html) | [`UITextView`](https://developer.apple.com/documentation/uikit/uitextview)
 
-
 ### Image
 
-<div class="nsref"><a title="Документация NativeScript" href="https://docs.nativescript.org/api-reference/classes/_ui_image_.image">Описание класса</a></div>
+<div class="nsref"><a title="NativeScript Documentation" href="https://docs.nativescript.org/api-reference/classes/_ui_image_.image">Class Docs</a></div>
 
+`<image>` is a UI component that shows an image from an [ImageSource](https://docs.nativescript.org/api-reference/modules/_image_source_) or from a URL.
 
-
-`<image>` — UI компонент, который показывает изображение из [ImageSource](https://docs.nativescript.org/api-reference/modules/_image_source_) или по URL.
-
-
-
-В NativeScript символ `~` указывает на директорию где находится приложение.
+NativeScript aliases `~` to the app directory.
 
 ```html
 <image src="~/logo.png" stretch="none" />
 ```
 
-
-
-
-Изображения могут загружаться из сети:
+Images can be loaded from external URLs.
 
 ```html
 <image src="https://svelte-native.technology/media/todoapp/todo-add-item.png" stretch="none" />
 ```
 
-
-
-Изображения также могут извлекаться из директории App_Resources при помощи префикса `res://`.
+Images can also be displayed from the App_Resources folder using the `res://` scheme.
 
 ```html
 <image src="res://icon" stretch="none" />
 ```
 
-
-NativeScript также поддерживает данные, закодированные в base64
+NativeScript also supports data URIs that are base64 encoded.
 
 ```html
 <image src="data:Image/png;base64,iVBORw..." stretch="none" />
 ```
 
+#### Props
 
+| Name | Type | Description |
+|------|------|-------------|
+| `src` | `String` or [`ImageSource`](https://docs.nativescript.org/api-reference/modules/_image_source_) | Gets or sets the source of the image as a URL or an image source.
+|`imageSource` | [`ImageSource`](https://docs.nativescript.org/api-reference/modules/_image_source_) | Gets or sets the image source of the image.
+| `tintColor` | `Color` | (Style property) Sets a color to tint template images.
+| `stretch` | `Stretch` | (Style property) Gets or sets the way the image is resized to fill its allocated space.<br/>Valid values: `none`, `aspectFill`, `aspectFit`, or `fill`.<br/>For more information, see [Stretch](https://docs.nativescript.org/api-reference/modules/_ui_enums_.stretch).
+| `loadMode` | | Gets or sets the loading strategy for the images on the local file system.<br/>Valid values: `sync` or `async`.<br/>Default value: `async`.<br/>For more information, see [loadMode](https://docs.nativescript.org/api-reference/classes/_ui_image_.image#loadmode).
 
-#### Свойства
-
-| Имя | Тип | Описание |
-|-----|-----|----------|
-| `src` | `String` или [`ImageSource`](https://docs.nativescript.org/api-reference/modules/_image_source_) | Возвращает или задаёт источник изображения как URL или ImageSource.
-|`imageSource` | [`ImageSource`](https://docs.nativescript.org/api-reference/modules/_image_source_) | Возвращает или задаёт ImageSource изображения.
-| `tintColor` | `Color` | (свойство стиля) Задаёт цвет заглушки загружаемого изображения.
-| `stretch` | `Stretch` | (свойство стиля) Возвращает или задаёт как изображение должно растягиваться в выделенном пространстве.<br/>Допустимые значения: `none`, `aspectFill`, `aspectFit` или `fill`.<br/>См. подробнее: [Stretch](https://docяs.nativescript.org/api-reference/modules/_ui_enums_.stretch). 
-| `loadMode` | | Возвращает или задаёт метод загрузки изображений из локальной файловой системы.<br/>Допустимые значения: `sync` или `async`.<br/>По умолчанию: `async`.<br/>См. подробнее: [loadMode](https://docs.nativescript.org/api-reference/classes/_ui_image_.image#loadmode).
-
-#### Нативный компонент
+#### Native Component Reference
 
 | Android | iOS |
 |---------|-----|
 | [`android.widget.ImageView`](https://developer.android.com/reference/android/widget/ImageView.html) | [`UIImageView`](https://developer.apple.com/documentation/uikit/uiimageview)
 
-
 ### Label
 
-<div class="nsref"><a title="Документация NativeScript" href="https://docs.nativescript.org/api-reference/classes/_ui_label_.label">Описание класса</a></div>
+<div class="nsref"><a title="NativeScript Documentation" href="https://docs.nativescript.org/api-reference/classes/_ui_label_.label">Class Docs</a></div>
 
+`<label>` is a UI component that displays read-only text.
 
-
-`<label>` — UI компонент, который просто отображает метку с текстом.
-
-> **ВАЖНО**: Компонент `<label>` совершенно **не** то же самое, что HTML тег `<label>`.
-
-
+> **IMPORTANT**: This `<label>` is **not** the same as the HTML `<label>`.
 
 ```html
 <label text="Label" />
 ```
 
+#### Styling the label
 
-
-#### Стилизация текста
-
-Если требуется стилизовать часть текста, можно использовать комбинацию элементтов [`FormattedString`](https://docs.nativescript.org/angular/ui/ng-ui-widgets/formatted-string) и [`Span`](https://docs.nativescript.org/api-reference/classes/_text_span_.span).
+If you need to style parts of the text, you can use a combination of a [`FormattedString`](https://docs.nativescript.org/angular/ui/ng-ui-widgets/formatted-string) and [`Span`](https://docs.nativescript.org/api-reference/classes/_text_span_.span) elements.
 
 ```html
 <label textWrap="{true}">
   <formattedString>
-    <span text="В этом тексте есть " />
-    <span text="красная " style="color: red" />
-    <span text="часть. " />
-    <span text="Также, этот кусок написан курсивом, " fontStyle="italic" />
-    <span text="а этот кусок жирный." fontWeight="bold" />
+    <span text="This text has a " />
+    <span text="red " style="color: red" />
+    <span text="piece of text. " />
+    <span text="Also, this bit is italic, " fontStyle="italic" />
+    <span text="and this bit is bold." fontWeight="bold" />
   </formattedString>
 </label>
 ```
 
-#### Свойства
+#### Props
 
-| Имя | Тип | Описание |
-|-----|-----|----------|
-| `text` | `String` | Возвращает или задаёт текст метки.
-| `textWrap` | `Boolean` | Возвращает или задаёт нужно ли переносить текст.<br/>По умолчанию: `false`.
+| Name | Type | Description |
+|------|------|-------------|
+| `text` | `String` | Gets or sets the text of the label.
+| `textWrap` | `Boolean` | Gets or sets whether the label wraps text.<br/>Default value: `false`.
 
-#### Нативный компонент
+#### Native Component Reference
 
 | Android | iOS |
 |---------|-----|
 | [`android.widget.TextView`](https://developer.android.com/reference/android/widget/TextView.html) | [`UILabel`](https://developer.apple.com/documentation/uikit/uilabel)
 
-
 ### ListPicker
 
-<div class="nsref"><a title="Документация NativeScript" href="https://docs.nativescript.org/api-reference/classes/_ui_list_picker_.listpicker">Описание класса</a></div>
+<div class="nsref"><a title="NativeScript Documentation" href="https://docs.nativescript.org/api-reference/classes/_ui_list_picker_.listpicker">Class Docs</a></div>
 
-
-
-`<listPicker>` — UI компонент, который позволяет пользователю выбрать значение из предустановленного списка.
-
-
+`<listPicker>` is a UI component that lets the user select a value from a pre-configured list.
 
 ```html
 <listPicker items="{listOfItems}" selectedIndex="0"
-    on:selectedIndexChange="{selectedIndexChanged}" />
+            on:selectedIndexChange="{selectedIndexChanged}" />
+
+<script>
+  let listOfItems = ['one', 'two', 'three']
+  const selectedIndexChanged = (e) => console.log(e.index)
+</script>
 ```
 
-`<listPicker>` обеспечивает двухстороннюю привязку данных через директиву `bind`.
+`<listPicker>` provides two-way data binding for selectedIndex.
 
 ```html
-<listPicker items="{listOfItems}" v-model="selectedItem" />
+<listPicker items="{listOfItems}" bind:selectedIndex={selectedItem}" />
 ```
 
+#### Props
 
+| Name | Type | Description |
+|------|------|-------------|
+| `items` | `Array<string>` | Gets or sets the items displayed as options in the list picker.
+| `selectedIndex` | `Number` | Gets or sets the index of the currently selected item.
 
-#### Свойства
+#### Events
 
-| Имя | Тип | Описание |
-|-----|-----|----------|
-| `items` | `Array<string>` | Возвращает или задаёт элементы, которые будут отображены в списке для выбора.
-| `selectedIndex` | `Number` | Возвращает или задаёт индекс выбранного элемента.
+| Name | Description |
+|------|-------------|
+| `selectedIndexChange`| Emitted when the currently selected option (index) changes.
 
-#### События
-
-| Имя | Описание |
-|-----|----------|
-| `selectedIndexChange`| Вызывается, когда выбранное значение (индекс) изменяется.
-
-#### Нативный компонент
+#### Native Component Reference
 
 | Android | iOS |
 |---------|-----|
 | [`android.widget.NumberPicker`](https://developer.android.com/reference/android/widget/NumberPicker.html) | [`UIPickerView`](https://developer.apple.com/documentation/uikit/uipickerview)
 
-
 ### ListView
 
-<div class="nsref"><a title="Документация NativeScript" href="https://docs.nativescript.org/api-reference/classes/_ui_list_view_.listview">Описание класса</a></div>
+<div class="nsref"><a title="NativeScript Documentation" href="https://docs.nativescript.org/api-reference/classes/_ui_list_view_.listview">Class Docs</a></div>
 
-`<listView>` — UI компонент, отображает элементы в списке с вертикальной прокруткой. Для настройки отображения элементов списка можно воспользоваться [компонентом `<Template>`](docs#template-component).
+`<listView>` is a UI component that shows items in a vertically scrolling list. To set how the list shows individual items, you use the [`<Template>` component](docs#template-component).
 
 ```html
 <listView items="{listOfItems}" on:itemTap="{onItemTap}">
   <Template let:item>
     <!-- Shows the list item label in the default color and style. -->
-    <!-- Показывает элемент списка 'label' с цветом и стилями по умолчанию. -->
     <label text="{item}" />
   </Template>
 </listView>
+
 <script>
-    import { Template } from 'svelte-native/components'
-    let listOfItems = ['one','two','three']
-    function onItemTap(e) { console.log(e.item) }
+  import { Template } from 'svelte-native/components'
+  let listOfItems = ['one', 'two', 'three']
 </script>
 ```
 
-`<listView>` не перебирает элементы списка, как обычный блок `each` в Svelte. Вместо этого? `<listView>` создаёт только необходимые представления для отображения на экране видимых в данный момент элементов и повторно использует представления, которые уже находятся вне экрана при прокрутке. Эта концепция называется _view recycling_ и обычно используется в мобильных приложениях для повышения производительности.
+`<listView>` does not loop through list items as you would expect when using a regular svelte `each` block. Instead `<listView>` only creates the necessary views to display the currently visible items on the screen, and reuses the views that are already off-screen when scrolled. This concept is called _view recycling_ and is commonly used in mobile apps to improve performance.
 
-Вы можете использовать событие `itemTap`, которое предоставляет индекс выбранного элемента и сам элемент из списка.
+You can use the `itemTap` event which provides the index of the tapped item.
 
 ```js
-onItemTap(event) {
-  console.log(event.index) //индекс элемента
-  console.log(event.bindingContext) //экземпляр элемента
+function onItemTap(event) {
+  console.log(event.index) //item index
 }
 ```
 
-> **ПРИМЕЧАНИЕ** В отличие от выражений Svelte, компонент `listView` **не будет обновляться** если вы передадите ссылку на тот же объект, что уже есть в компоненте(например: `items.push('four'); list.items = items`). Но он **обновится** если передать ему ссылку на новый объект (например: `items = items.concat('four'); list.items = items`)
+**Multiple Templates Selector Function**
 
-#### Свойства
+Multiple templates can be used for different layouts of list items, which is similar to [NativeScript Multiple Templates Selector Function](https://docs.nativescript.org/ui/components/list-view#multiple-templates-selector-function). `itemTemplateSelector` is used to select template using `key` which is returned based on your logic.
 
-| Имя | Тип | Описание |
-|-----|-----|----------|
-| `items` | `Array<any>` | Массив элементов для отображения в `<listView>`.
-| `separatorColor` | `Color` | Задаёт цвет линии разделителя. Чтобы скрыть разделитель, укажите значение `transparent`.
+> **Note:** Use _multiple templates_ approach instead of `{#if}` block, because the _view recycling_ concept does not work as intended since `<listView>` cannot reuse the same template view if off-screen items require different type of template. [See this article](https://medium.com/@alexander.vakrilov/faster-nativescript-listview-with-multiple-item-templates-8f903a32e48f)
 
-#### События
+```html
+<listView items={items} itemTemplateSelector={selectTemplate}>
+  <Template let:item key="odd">
+      <label text="Odd {item}" />
+  </Template>
+  <Template let:item key="even">
+      <label text="Even {item}" />
+  </Template>
+</listView>
 
-| Имя | Описание |
-|-----|----------|
-| `itemTap`| Вызывается, когда происходит тап по элементу в `<listView>`. Для доступа к выбранному элементу используйте `event.item`.
+<script>
+  import { Template } from 'svelte-native/components'
+  let items = ["item 0", "item 1"]
+  function selectTemplate(item, index, items) {
+    // Your logic here
+    return  (index % 2 == 0) ? "even" : "odd";
+  }
+</script>
+```
 
+> **IMPORTANT NOTE**: unlike Svelte expressions, The `<listView>` will **not** update the item list if you assign the same value to lists (eg `listOfItems.push('four'); listOfItems = listOfItems`). It **will** update if you assign a _new list reference_ (eg `listOfItems = listOfItems.concat('four')` or `listOfItems = [...listOfItems, 'four']`).
 
-#### Нативный компонент
+#### Props
+
+| Name | Type | Description |
+|------|------|-------------|
+| `items` | `Array<any>` | An array of items to be shown in the `<listView>`.
+| `separatorColor` | `Color` | Sets the separator line color. Set to `transparent` to remove it.
+| `itemTemplateSelector` | `(item,index,items) => string` | (optional) returns the key to the template to use for the provided item.
+
+#### Events
+
+| Name | Description |
+|------|-------------|
+| `itemTap`| Emitted when an item in the `<listView>` is tapped. To access the index of the tapped item, use `event.index`.
+
+#### Native Component Reference
 
 | Android | iOS |
 |---------|-----|
 | [`android.widget.ListView`](https://developer.android.com/reference/android/widget/ListView.html) | [`UITableView`](https://developer.apple.com/documentation/uikit/uitableview)
 
-
 ### Page
 
-<div class="nsref"><a title="Документация NativeScript" href="https://docs.nativescript.org/api-reference/classes/_ui_page_.page">Описание класса</a></div>
+<div class="nsref"><a title="NativeScript Documentation" href="https://docs.nativescript.org/api-reference/classes/_ui_page_.page">Class Docs</a></div>
 
-
-
-`<page>` — UI компонент страницы, которая представляет собой экран приложения. Приложения NativeScript обычно состоят из одной или нескольких страниц `<page>`, которые могут содержать в себе [`<actionBar>`](docs#actionbar) и другие UI компоненты.
-
-
+`<page>` is a UI component that represents an application screen. NativeScript apps typically consist of one or more `<page>` elements that wrap content such as an [`<actionBar>`](docs#actionbar) and other UI widgets.
 
 ```html
 <page>
-  <actionBar title="Моё приложение" />
+  <actionBar title="My App" />
   <gridLayout>
-    <label text="Мой контент"/>
+    <label text="My Content"/>
   </gridLayout>
 </page>
 ```
 
-#### Свойства
+#### Props
 
-| Имя | Тип | Описание |
-|-----|-----|----------|
-| `actionBarHidden` | `Boolean` | Показывает или прячет панель действий `<actionBar>`.<br/>По умолчанию: `false`.
-| `backgroundSpanUnderStatusBar` | `Boolean` | Возвращает или задаёт должен ли фон страницы распространяется также и под строку состояния.<br/>По умолчанию: `false`.
-| `androidStatusBarBackground` | `Color` | (только Android) Возвращает или задаёт цвет статусной строки на устройствах Android.
-| `enableSwipeBackNavigation` | `Boolean` | (только iOS) Возвращает или задаёт можно ли со страницы вернуться свайпом возврата на предыдущий экран в iOS.<br/>По умолчанию: `true`.
-| `statusBarStyle` | `String` | Возвращает или задаёт стиль статусной строки.<br/>Допустимые значения:<br/>`light`,<br/>`dark`.
+| Name | Type | Description |
+|------|------|-------------|
+| `actionBarHidden` | `Boolean` | Shows or hides the `<actionBar>` for the page.<br/>Default value: `false`.
+| `backgroundSpanUnderStatusBar` | `Boolean` | Gets or sets whether the background of the page spans under the status bar.<br/>Default value: `false`.
+| `androidStatusBarBackground` | `Color` | (Android-only) Gets or sets the color of the status bar on Android devices.
+| `enableSwipeBackNavigation` | `Boolean` | (iOS-only) Gets or sets whether the page can be swiped back on iOS.<br/>Default value: `true`.
+| `statusBarStyle` | `String` | Gets or sets the style of the status bar.<br/>Valid values:<br/>`light`,<br/>`dark`.
 
-#### События
+#### Events
 
-| Имя | Описание |
-|-----|----------|
-| `navigatedFrom` | Вызывается после того, как пользователь ушёл с текущей страницы.
-| `navigatedTo` | Вызывается после того, как пользователь зашёл на текущую страницу.
-| `navigatingFrom` | Вызывается перед тем, как пользователь уйдёт с текущей страницы.
-| `navigatingTo` | Вызывается перед тем, как пользователь зайдёт на текущую страницу.
+| Name | Description |
+|------|-------------|
+| `navigatedFrom` | Emitted after the app has navigated away from the current page.
+| `navigatedTo` | Emitted after the app has navigated to the current page.
+| `navigatingFrom` | Emitted before the app has navigated away from the current page.
+| `navigatingTo` | Emitted before the app has navigated to the current page.
 
-#### Нативный компонент
+#### Native Component Reference
 
 | Android | iOS |
 |---------|-----|
 | [`org.nativescript.widgets.GridLayout`](https://github.com/NativeScript/tns-core-modules-widgets/blob/master/android/widgets/src/main/java/org/nativescript/widgets/GridLayout.java) | [`UIViewController`](https://developer.apple.com/documentation/uikit/uiviewcontroller)
 
-
 ### Progress
 
-<div class="nsref"><a title="Документация NativeScript" href="https://docs.nativescript.org/api-reference/classes/_ui_progress_.progress">Описание класса</a></div>
+<div class="nsref"><a title="NativeScript Documentation" href="https://docs.nativescript.org/api-reference/classes/_ui_progress_.progress">Class Docs</a></div>
 
+`<progress>` is a UI component that shows a bar to indicate the progress of a task.
 
-
-`<progress>` — UI компонент, отображающий полосу для индикации прогресса какой-либо задачи.
-
-См. также: [ActivityIndicator](docs#activityindicator).
-
+See also: [ActivityIndicator](docs#activityindicator).
 
 ```html
 <progress value="{currentProgress}" />
 ```
 
+#### Props
 
+| Name | Type | Description |
+|------|------|-------------|
+| `value` | `Number` | Gets or sets the current value of the progress bar. Must be within the range of 0 to `maxValue`.
+| `maxValue` | `Number` | Gets or sets the maximum value of the progress bar.<br/>Default value: `100`.
 
-#### Свойства
+#### Events
 
-| Имя | Тип | Описание |
-|-----|-----|----------|
-| `value` | `Number` | Возвращает или задаёт текущее значение прогресса. Должно быть в диапазоне между 0 и `maxValue`.
-| `maxValue` | `Number` | Возвращает или задаёт максимальное значение для индикатора прогресса.<br/>По умолчанию: `100`.
+| Name | Description |
+|------|-------------|
+| `valueChange` | Emitted when the `value` property changes.
 
-#### События
-
-| Имя | Описание |
-|-----|----------|
-| `valueChange` | Вызывается, когда изменяется свойство `value`.
-
-#### Нативный компонент
+#### Native Component Reference
 
 | Android | iOS |
 |---------|-----|
 | [`android.widget.ProgressBar` (indeterminate = false)](https://developer.android.com/reference/android/widget/ProgressBar.html) | [`UIProgressView`](https://developer.apple.com/documentation/uikit/uiprogressview)
 
-
 ### ScrollView
 
-<div class="nsref"><a title="Документация NativeScript" href="https://docs.nativescript.org/api-reference/classes/_ui_scroll_view_.scrollview">Описание класса</a></div>
+<div class="nsref"><a title="NativeScript Documentation" href="https://docs.nativescript.org/api-reference/classes/_ui_scroll_view_.scrollview">Class Docs</a></div>
 
-
-
-`<scrollView>` — UI компонент, отображающий содержимое в области с прокруткой. Контент может прокручиваться как по вертикали, так и по горизонтали.
-
-
+`<scrollView>` is a UI component that shows a scrollable content area. Content can be scrolled vertically or horizontally.
 
 ```html
 <scrollView orientation="horizontal">
   <stackLayout orientation="horizontal">
-    <label text="этот" />
-    <label text="текст" />
-    <label text="при необходимости" />
-    <label text="может прокручиваться" />
-    <label text="по горизонтали" />
+    <label text="this" />
+    <label text="text" />
+    <label text="scrolls" />
+    <label text="horizontally" />
+    <label text="if necessary" />
   </stackLayout>
 </scrollView>
 ```
 
+#### Props
 
+| name | type | description |
+|------|------|-------------|
+| `orientation` | `String` | Gets or sets the direction in which the content can be scrolled: `horizontal` or `vertical`.<br/>Default value: `vertical`.
+| `scrollBarIndicatorVisible` | `Boolean` | Specifies if the scrollbar is visible.<br/>Default value: `true`.
 
-#### Свойства
+#### Events
 
-| Имя | Тип | Описание |
-|-----|-----|----------|
-| `orientation` | `String` | Возвращает или задаёт направление в котором контент может быть прокручен: `horizontal` или `vertical`.<br/>По умолчанию: `vertical`.
-| `scrollBarIndicatorVisible` | `Boolean` | Указывает отображать ли полосу прокрутки.<br/>По умолчанию: `true`.
+| Name | Description |
+|------|-------------|
+| `scroll` | Emitted when a scroll event occurs.
 
-#### События
-
-| Имя | Описание |
-|-----|----------|
-| `scroll` | Вызывается, когда происходит прокрутка.
-
-#### Нативный компонент
+#### Native Component Reference
 
 | Android | iOS |
 |---------|-----|
 | [`android.view`](https://developer.android.com/reference/android/view/View.html) | [`UIScrollView`](https://developer.apple.com/documentation/uikit/uiscrollview)
 
-
 ### SearchBar
 
-<div class="nsref"><a title="Документация NativeScript" href="https://docs.nativescript.org/api-reference/classes/_ui_search_bar_.searchbar">Описание класса</a></div>
+<div class="nsref"><a title="NativeScript Documentation" href="https://docs.nativescript.org/api-reference/classes/_ui_search_bar_.searchbar">Class Docs</a></div>
 
-
-
-`<searchBar>` — UI компонент, для организации пользовательского интерфейса для ввода поисковых запросов и отправки их соответствующим обработчикам.
-
-
+`<searchBar>` is a UI component that provides a user interface for entering search queries and submitting requests to the search provider.
 
 ```html
-<searchBar hint="Найти" text="{searchPhrase}" on:textChange="{onTextChanged}" on:submit="{onSubmit}" />
+<searchBar hint="Search hint" text="{searchQuery}" on:textChange="{onTextChanged}" on:submit="{onSubmit}" />
 ```
 
-`<searchBar>` обеспечивает двухстороннюю привязку данных через директиву `bind`.
+`<searchBar>` provides two-way data binding for `text`.
 
 ```html
-<searchBar v-model="searchQuery" />
+<searchBar bind:text="{searchQuery}" />
 ```
 
+#### Props
 
+| Name | Type | Description |
+|------|------|-------------|
+| `hint` | `String` | Gets or sets placeholder text for the input area.
+| `text` | `String` | Gets or sets the value of the search query.
+| `textFieldBackgroundColor` | `Color` | Gets or sets the background color of the input area.
+| `textFieldHintColor` | `Color` | Gets or sets the color of the placeholder text.
 
-#### Свойства
+#### Events
 
-| Имя | Тип | Описание |
-|-----|-----|----------|
-| `hint` | `String` | Возвращает или задаёт подсказку для пустой строки поиска.
-| `text` | `String` | Возвращает или задаёт значение поискового запроса.
-| `textFieldBackgroundColor` | `Color` | Возвращает или задаёт цвет фона поисковой строки.
-| `textFieldHintColor` | `Color` | Возвращает или задаёт цвет текста подсказки.
+| name | description |
+|------|-------------|
+| `textChange` | Emitted when the text is changed.
+| `submit` | Emitted when the search input is submitted.
+| `clear` | Emitted when the current search input is cleared through the **X** button in the input area.
 
-#### События
-
-| Имя | Описание |
-|-----|----------|
-| `textChange` | Вызывается при изменении текста.
-| `submit` | Вызывается при отправке поискового запроса.
-| `clear` | Вызывается, когда строка ввода очищается кнопкой **X**.
-
-#### Нативный компонент
+#### Native Component Reference
 
 | Android | iOS |
 |---------|-----|
 | [`android.widget.SearchView`](https://developer.android.com/reference/android/widget/SearchView.html)	| [`UISearchBar`](https://developer.apple.com/documentation/uikit/uisearchbar)
 
-
 ### SegmentedBar
 
-<div class="nsref"><a title="Документация NativeScript" href="http://docs.nativescript.org/api-reference/modules/_ui_segmented_bar_.html">Описание класса</a></div>
+<div class="nsref"><a title="NativeScript Documentation" href="http://docs.nativescript.org/api-reference/modules/_ui_segmented_bar_.html">Class Docs</a></div>
 
+`<segmentedBar>` is a UI bar component that displays a set of buttons for discrete selection. It can show text or images.
 
-
-`<segmentedBar>` — UI компонент, который отображает набор кнопок для раздельного выбора. Может отображать текст или изображения.
-
-Отличия от `<tabView>`:
-* Позиция `<segmentedBar>` не является фиксированной. 
-* Вы можете стилизовать и разместить его в нужном месте страницы или любого другого элемента, вроде меню приложения.
-* Необходимо вручную обрабатывать выбор кнопки и отображать запрашиваемое содержимое.
-
+As opposed to `<tabView>`:
+* The position of `<segmentedBar>` is not fixed.
+* You can place and style it as needed on the page or inside additional app elements such as hamburger menus.
+* You need to handle the content shown after selection separately.
 
 ```html
 <segmentedBar>
-  <segmentedBarItem title="Первый" />
-  <segmentedBarItem title="Второй" />
-  <segmentedBarItem title="Третий" />
+  <segmentedBarItem title="First" />
+  <segmentedBarItem title="Second" />
+  <segmentedBarItem title="Third" />
 </segmentedBar>
 ```
 
 ```html
-<segmentedBar items="{listOfItems}" selectedIndex="0"
-    on:selectedIndexChange="{onSelectedIndexChange}" />
+<segmentedBar selectedIndex="0"
+              on:selectedIndexChange="{onSelectedIndexChange}" >
 ```
 
-`<segmentedBar>` обеспечивает двухстороннюю привязку данных через директиву `bind`.
+`<segmentedBar>` can be populated with `{each}` block.
 
 ```html
-<segmentedBar items="{listOfItems}" v-model="selectedItem" />
+<segmentedBar>
+  {#each listOfItems as item}
+    <segmentedBarItem title="{item}" />
+  {/each}
+</segmentedBar>
+
+<script>
+  let listOfItems = [ 'First', 'Second', 'Third' ];
+</script>
 ```
 
+`<segmentedBar>` provides two-way data binding of `selectedIndex`.
 
+```html
+<segmentedBar bind:selectedIndex="{selectedItem}" >
+```
 
-#### Свойства
+#### Props
 
-| Имя | Тип | Описание |
-|-----|-----|----------|
-| `items` | `Array<segmentedBarItem>` | Массив элементов для отображения. Представляет собой текст для кнопок или иконки.<br/>Массив должен быть создан ранее. 
-| `selectedIndex` | `Number` | Возвращает или задаёт выбранного элемента.
-| `selectedBackgroundColor` | `Color` | (свойство стиля) Возвращает или задаёт цвет фона выбранного элемента, для указания цвета фона всего компонента используйте свойство `backgroundColor`.
+| Name | Type | Description |
+|------|------|-------------|
+| `items` | `Array<segmentedBarItem>` | An array of items to be displayed in the segmented bar. Represents the button labels or icons of the segmented bar.<br/>The array must be created in advance.
+| `selectedIndex` | `Number` | Gets or sets the index of the selected item.
+| `selectedBackgroundColor` | `Color` | (Style property) Gets or sets the background color of the selected item. To set the background color of the entire bar, use `backgroundColor`.
 
-#### События
+#### Events
 
-| Имя | Описание |
-|-----|----------|
-| `selectedIndexChange`| Вызывается, когда происходит тап по элементу.
+| Name | Description |
+|------|-------------|
+| `selectedIndexChange`| Emitted when an item on the segmented bar is tapped.
 
-#### Нативный компонент
+#### Native Component Reference
 
 | Android | iOS |
 |---------|-----|
 | [`android.widget.TabHost`](https://developer.android.com/reference/android/widget/TabHost.html) | [`UISegmentedControl`](https://developer.apple.com/documentation/uikit/uisegmentedcontrol)
 
-
 ### Slider
 
-<div class="nsref"><a title="Документация NativeScript" href="https://docs.nativescript.org/api-reference/classes/_ui_slider_.slider">Описание класса</a></div>
+<div class="nsref"><a title="NativeScript Documentation" href="https://docs.nativescript.org/api-reference/classes/_ui_slider_.slider">Class Docs</a></div>
 
-
-
-
-`<slider>` — UI компонент, который представляет собой ползунок для выбора значения из определенного числового диапазона.
-
-
+`<slider>` is a UI component that provides a slider control for picking values within a specified numeric range.
 
 ```html
 <slider value="80" on:valueChange="{onValueChanged}" />
 ```
 
-`<slider>` обеспечивает двухстороннюю привязку данных через директиву `bind`.
+`<slider>` provides two-way data binding of `value`:
 
 ```html
-<slider v-model="value" />
+<slider bind:value="{value}" />
 ```
 
+#### Props
 
+| Name | Type | Description |
+|------|------|-------------|
+| `value` | `Number` | Gets or sets the currently selected value of the slider.<br/>Default value: `0`.
+| `minValue` | `Number` | Gets or sets the minimum value of the slider.<br/>Default value: `0`.
+| `maxValue` | `Number` | Gets or sets the maximum value of the slider.<br/>Default value: `100`.
 
-#### Свойства
+#### Events
 
-| Имя | Тип | Описание |
-|-----|-----|----------|
-| `value` | `Number` | Возвращает или задаёт текущее выбранное значение.<br/>По умолчанию: `0`.
-| `minValue` | `Number` | Возвращает или задаёт минимальное значение ползунка.<br/>По умолчанию: `0`.
-| `maxValue` | `Number` | Возвращает или задаёт максимальное значение ползунка.<br/>По умолчанию: `100`.
+| Name | Description |
+|------|-------------|
+| `valueChange`| Emitted when the value of the slider changes.
 
-#### События
-
-| Имя | Описание |
-|-----|----------|
-| `valueChange`| Вызывается, при изменении значения ползунка
-
-#### Нативный компонент
+#### Native Component Reference
 
 | Android | iOS |
 |---------|-----|
 | [`android.widget.SeekBar`](https://developer.android.com/reference/android/widget/SeekBar.html) | [`UISlider`](https://developer.apple.com/documentation/uikit/uislider)
 
-
 ### Switch
 
-<div class="nsref"><a title="Документация NativeScript" href="https://docs.nativescript.org/api-reference/classes/_ui_switch_.switch">Описание класса</a></div>
+<div class="nsref"><a title="NativeScript Documentation" href="https://docs.nativescript.org/api-reference/classes/_ui_switch_.switch">Class Docs</a></div>
 
+`<switch>` is a UI component that lets users toggle between two states.
 
-
-`<switch>` — UI компонент, который представляет собой переключатель с двумя состояниями.
-
-Состояние по умолчанию равно `false` или ВЫКЛЮЧЕНО.
-
-
+The default state is `false` or OFF.
 
 ```html
-<switch checked="{true}" />
+<switch checked="{true}" on:checkedChange={onCheckedChange} />
 ```
 
-`<switch>` обеспечивает двухстороннюю привязку данных через директиву `bind`.
+`<switch>`provides two-way data binding for `checked`.
 
 ```html
-<switch v-model="itemEnabled" />
+<switch bind:checked="{switchEnabled}" />
 ```
 
+#### Props
 
+| Name | Type | Description |
+|------|------|-------------|
+| `checked` | `Boolean` | Gets or sets the value of the switch selection.<br/>Default value: `false`.
 
-#### Свойства
+#### Events
 
-| Имя | Тип | Описание |
-|-----|-----|----------|
-| `checked` | `Boolean` | Возвращает или задаёт состояние переключателя.<br/>По умолчанию: `false`.
+| Name | Description |
+|------|-------------|
+| `checkedChange`| Emitted when the switch selection changes.
 
-#### События
-
-| Имя | Описание |
-|-----|----------|
-| `checkedChange`| Вызывается при изменении состояния переключателя.
-
-#### Нативный компонент
+#### Native Component Reference
 
 | Android | iOS |
 |---------|-----|
 | [`android.widget.Switch`](https://developer.android.com/reference/android/widget/Switch.html) | [`UISwitch`](https://developer.apple.com/documentation/uikit/uiswitch)
 
-
 ### TabView
 
-<div class="nsref"><a title="Документация NativeScript" href="https://docs.nativescript.org/api-reference/classes/_ui_tab_view_.tabview">Описание класса</a></div>
+<div class="nsref"><a title="NativeScript Documentation" href="https://docs.nativescript.org/api-reference/classes/_ui_tab_view_.tabview">Class Docs</a></div>
 
-> **Внимание:** TabView следует считать устаревшим с версии NS 6.1. Используйте [`BottomNavigation`](docs#bottom-navigation) или [`Tabs`](docs#tabs)
+> **NOTE:** TabView should be considered obsolete as of NS 6.1. Please use [`BottomNavigation`](docs#bottom-navigation) or [`Tabs`](docs#tabs)
 
-
-`<tabView>` компонент навигации, который отображает контент, сгруппированный по вкладкам, и позволяет пользователям переключаться между ними.
-
-
+`<tabView>` is a navigation component that shows content grouped into tabs and lets users switch between tabs.
 
 ```html
 <tabView selectedIndex="{selectedIndex}" on:selectedIndexChange="{indexChange}">
-  <tabViewItem title="Вкладка 1">
-    <label text="Содержимое первой вкладки" />
+
+  <tabViewItem title="Tab 1">
+    <label text="Content for Tab 1" />
   </tabViewItem>
-  <tabViewItem title="Вкладка 2">
-    <label text="Содержимое второй вкладки" />
+
+  <tabViewItem title="Tab 2">
+    <label text="Content for Tab 2" />
   </tabViewItem>
+
 </tabView>
 ```
 
 ```js
-function indexChange(args) {
-    let newIndex = args.value
-    console.log('Индекс выбранной вкладки: ' + newIndex)
+function indexChange(event) {
+  let newIndex = event.value
+  console.log('Current tab index: ' + newIndex)
 }
 ```
 
-> **ПРИМЕЧАНИЕ** В настоящее время, элемент `TabViewItem` ожидает, что у него будет единственный дочерний элемент. В большинстве случаев, контент внутри вкладки оборачивается в один из Макетов.
+> **NOTE:** Currently, `<tabViewItem>` expects a single child element. In most cases, you might want to wrap your content in a _layout_.
 
-
-
-#### Добавление иконок на вкладки
+#### Adding icons to tabs
 
 ```html
 <tabView selectedIndex="{selectedIndex}" iosIconRenderingMode="alwaysOriginal">
-  <tabViewItem title="Вкладка 1" iconSource="~/images/icon.png">
-    <label text="Содержимое первой вкладки" />
+  <tabViewItem title="Tab 1" iconSource="~/images/icon.png">
+    <label text="Content for Tab 1" />
   </tabViewItem>
-  <tabViewItem title="Вкладка 2" iconSource="~/images/icon.png">
-    <label text="Содержимое второй вкладки" />
+  <tabViewItem title="Tab 2" iconSource="~/images/icon.png">
+    <label text="Content for Tab 2" />
   </tabViewItem>
 </tabView>
 ```
 
-> **ПРИМЕЧАНИЕ** В большинстве случаев лучше использовать изображения вместо иконочных шрифтов. Юолее подробно о работе с иконками читайте в [Работа с изображениями из папки ресурсов](https://docs.nativescript.org/ui/image-resources).
+> **NOTE:** You can use images for tab icons instead of icon fonts. For more information about how to control the size of icons, see [Working with image from resource folders](https://docs.nativescript.org/ui/image-resources).
 
+#### Props
 
-#### Свойства
+| Name | Type | Description |
+|------|------|-------------|
+| `selectedIndex` | `Number` | Gets or sets the currently selected tab. Default is `0`.
+| `tabTextColor` | `Color` | (Style property) Gets or sets the text color of the tabs titles.
+| `tabBackgroundColor` | `Color` | (Style property) Gets or sets the background color of the tabs.
+| `selectedTabTextColor` | `Color` | (Style property) Gets or sets the text color of the selected tab title.
+| `androidTabsPosition` | `String` | Sets the position of the TabView in Android platform<br/>Valid values: `top` or `bottom`.
 
-| Имя | Тип | Описание |
-|-----|-----|----------|
-| `selectedIndex` | `Number` | Возвращает или задаёт индекс выбранной вкладки. По умолчанию `0`.
-| `tabTextColor` | `Color` | (свойство стиля) Возвращает или задаёт цвет текста на вкладках.
-| `tabBackgroundColor` | `Color` | (свойство стиля) Возвращает или задаёт цвет фона вкладок.
-| `selectedTabTextColor` | `Color` | (свойство стиля) Возвращает или задаёт цвет текста выбранной вкладки.
-| `androidTabsPosition` | `String` | Устанавливает позицию вкладок на Android устройствах<br/>Допустимые значения: `top` или `bottom`.
+#### Events
 
-#### События
+| Name | Description |
+|------|-------------|
+| `selectedIndexChange` | Emits an event object containing a `value` property with the index of the tapped `<tabViewItem>`.
 
-| Имя | Описание |
-|-----|----------|
-| `selectedIndexChange` | Вызывается при смене текущей вкладки и содержит свойство `value` с индексом выбранного `<tabViewItem>`.
-
-#### Нативный компонент
+#### Native Component Reference
 
 | Android | iOS |
 |---------|-----|
 | [`android.support.v4.view.ViewPager`](https://developer.android.com/reference/android/support/v4/view/ViewPager.html) | [`UITabBarController`](https://developer.apple.com/documentation/uikit/uitabbarcontroller)
 
-
 ### TextField
 
-<div class="nsref"><a title="Документация NativeScript" href="https://docs.nativescript.org/api-reference/modules/_ui_text_field_">Описание класса</a></div>
+<div class="nsref"><a title="NativeScript Documentation" href="https://docs.nativescript.org/api-reference/modules/_ui_text_field_">Class Docs</a></div>
 
+`<textField>` is an input component that creates an editable single-line box.
 
-
-
-`<textField>` компонент для создания однострочного редактируемого текстового поля.
-
-`<textField>` расширяет [`TextBase`](https://docs.nativescript.org/api-reference/classes/_ui_text_base_.textbase) и [`EditableTextBase`](https://docs.nativescript.org/api-reference/classes/_ui_editor_text_base_.editabletextbase), предоставляя дополнительные свойства и события.
-
-
+`<textField>` extends [`TextBase`](https://docs.nativescript.org/api-reference/classes/_ui_text_base_.textbase) and [`EditableTextBase`](https://docs.nativescript.org/api-reference/classes/_ui_editor_text_base_.editabletextbase) which provide additional properties and events.
 
 ```html
-<textField text="{textFieldValue}" hint="Введите текст..." />
+<textField text="{textFieldValue}" hint="Enter text..." />
 ```
 
-`<textField>` обеспечивает двухстороннюю привязку данных через директиву `bind`.
+`<textField>` provides two-way data binding using `bind`.
 
 ```html
 <textField bind:text="{textFieldValue}" />
 ```
 
+#### Props
 
+| Name | Type | Description |
+|------|------|-------------|
+| `text` | `String` | Gets or sets the value of the field.
+| `hint` | `String` | Gets or sets the placeholder text.
+| `editable` | `Boolean` | When `true`, indicates that the user can edit the value of the field.
+| `maxLength` | `Number` | Limits input to the spcified number of characters.
+| `secure` | `Boolean` | Hides the entered text when `true`. Use this property to create password input fields.<br/>Default value: `false`.
+| `keyboardType` | `KeyboardType` | Shows a custom keyboard for easier text input.<br/>Valid values: `datetime`, `phone`, `number`, `url`, or `email`.
+| `returnKeyType` | `ReturnKeyType` | Gets or sets the label of the return key.<br/>Valid values: `done`, `next`, `go`, `search`, or `send`.
+| `autocorrect` | `Boolean` | Enables or disables autocorrect.
 
-#### Свойства
+#### Events
 
-| Имя | Тип | Описание |
-|-----|-----|----------|
-| `text` | `String` | Возвращает или задаёт значение текстового поля.
-| `hint` | `String` | Возвращает или задаёт текст подсказки при пустом поле.
-| `editable` | `Boolean` | Когда равно `true`, пользователь может редактировать текст в поле.
-| `maxLength` | `Number` | Ограничивает количество вводимых символов.
-| `secure` | `Boolean` | При значении `true` прячет за маской вводимый текст. Используйте это свойство при создании полей ввода паролей.<br/>По умолчанию: `false`.
-| `keyboardType` | `KeyboardType` | Указывает, что требуется использовать определённый тип клавиатуры, чтобы облегчить ввод.<br/>Допустимые значения: `datetime`, `phone`, `number`, `url` или `email`.
-| `returnKeyType` | `ReturnKeyType` | Возвращает или задаёт тип клавиши ввода.<br/>Допустимые значения: `done`, `next`, `go`, `search` или `send`.
-| `autocorrect` | `Boolean` | Включает или отключает автокоррекцию.
+| Name | Description |
+|------|-------------|
+| `textChange` | Emitted when the text changes.
+| `returnPress` | Emitted when the return key is pressed.
+| `focus` | Emitted when the field is in focus.
+| `blur` | Emitted when the field loses focus.
 
-#### События
-
-| Имя | Описание |
-|-----|----------|
-| `textChange` | Вызывается при изменении текста.
-| `returnPress` | Вызывается при нажатии клавиши ввода.
-| `focus` | Вызывается, когда поле получает фокус.
-| `blur` | Вызывается, когда поле теряет фокус.
-
-#### Нативный компонент
+#### Native Component Reference
 
 | Android | iOS |
 |---------|-----|
 | [`android.widget.EditText`](https://developer.android.com/reference/android/widget/EditText.html) | [`UITextField`](https://developer.apple.com/documentation/uikit/uitextfield)
 
-
 ### TextView
 
-<div class="nsref"><a title="Документация NativeScript" href="https://docs.nativescript.org/api-reference/classes/_ui_text_view_.textview">Описание класса</a></div>
+<div class="nsref"><a title="NativeScript Documentation" href="https://docs.nativescript.org/api-reference/classes/_ui_text_view_.textview">Class Docs</a></div>
 
+`<textView>` is a UI component that shows an editable or a read-only multi-line text container. You can use it to let users type large text in your app or to show longer, multi-line text on the screen.
 
-
-`<textView>` — UI компонент, который отображает многострочную область текста, доступного для редактирования или только для чтения. Используйте его, когда надо дать пользователю возможность набирать большие тексты в вашем приложении или для показа длинных многострочных текстов на экране.
-
-`<textView>` расширяет [`TextBase`](https://docs.nativescript.org/api-reference/classes/_ui_text_base_.textbase) и [`EditableTextBase`](https://docs.nativescript.org/api-reference/classes/_ui_editor_text_base_.editabletextbase), предоставляя дополнительные свойства и события.
-
-
+`<textView>` extends [`TextBase`](https://docs.nativescript.org/api-reference/classes/_ui_text_base_.textbase) and [`EditableTextBase`](https://docs.nativescript.org/api-reference/classes/_ui_editor_text_base_.editabletextbase) which provide additional properties and events.
 
 ```html
-<textView text="Много...\n...строчный\nТекст" />
+<textView text="Multi\nLine\nText" />
 ```
 
-`<textView>` обеспечивает двухстороннюю привязку данных через директиву `bind`.
+`<textView>` provides two-way data binding using `bind`.
 
 ```html
 <textView bind:text="{textViewValue}" />
 ```
 
+#### Displaying multi-style text
 
-
-#### Отображение текста с различными стилями
-
-Для применения различных стилей в тексте внутри элемента `<textView>` можно использовать элемент `<formattedString>`
+To apply multiple styles to the text in your `<textView>`, you can use `<formattedString>`.
 
 ```html
 <textView editable="{false}">
   <formattedString>
-    <span text="Вы можете использовать различное форматирование: " />
-    <span text="жирный, " fontWeight="Bold" />
-    <span text="курсив " fontStyle="Italic" />
-    <span text="и " />
-    <span text="подчеркивание." textDecoration="Underline" />
+    <span text="You can use text attributes such as " />
+    <span text="bold, " fontWeight="Bold" />
+    <span text="italic " fontStyle="Italic" />
+    <span text="and " />
+    <span text="underline." textDecoration="Underline" />
   </formattedString>
 </textView>
 ```
 
-#### Свойства
+#### Props
 
-| Имя | Тип | Описание |
-|-----|-----|----------|
-| `text` | `String` | Возвращает или задаёт текст для компонента.
-| `hint` | `String` | Возвращает или задаёт подсказку для пустого поля, доступного для редактирования.
-| `editable` | `Boolean` | Когда равно `true`, пользователь может редактировать текст в поле.
-| `maxLength` | `Number` | Ограничивает количество вводимых символов.
-| `keyboardType` | `KeyboardType` | Указывает, что требуется использовать определённый тип клавиатуры, чтобы облегчить ввод.<br/>Допустимые значения: `datetime`, `phone`, `number`, `url` или `email`.
-| `returnKeyType` | `ReturnKeyType` | Возвращает или задаёт тип клавиши ввода. Поддерживается только в iOS<br/>Допустимые значения: `done`, `next`, `go`, `search` или `send`.
-| `autocorrect` | `Boolean` | Включает или отключает автокоррекцию.
+| Name | Type | Description |
+|------|------|-------------|
+| `text` | `String` | Gets or sets the value of the component.
+| `hint` | `String` | Gets or sets the placeholder text when the component is editable.
+| `editable` | `Boolean` | When `true`, indicates that the user can edit the contents of the container.
+| `maxLength` | `Number` | Sets the maximum number of characters that can be entered in the container.
+| `keyboardType` | `KeyboardType` | Shows a custom keyboard for easier text input.<br/>Valid values: `datetime`, `phone`, `number`, `url`, or `email`.
+| `returnKeyType` | Gets or sets the label of the return key. Currently supported only on iOS.<br/>Valid values: `done`, `next`, `go`, `search`, or `send`.
+| `autocorrect` | `Boolean` | Enables or disables autocorrect.
 
-#### События
+#### Events
 
-| Имя | Описание |
-|-----|----------|
-| `textChange` | Вызывается при изменении текста.
-| `returnPress` | Вызывается при нажатии клавиши ввода.
-| `focus` | Вызывается, когда поле получает фокус.
-| `blur` | Вызывается, когда поле теряет фокус.
+| Name | Description |
+|------|-------------|
+| `textChange`| Emitted when the text changes.
+| `returnPress`| Emitted when the return key is pressed.
+| `focus`| Emitted when the container is in focus.
+| `blur`| Emitted when the container loses focus.
 
-#### Нативный компонент
+#### Native Component Reference
 
 | Android | iOS |
 |---------|-----|
 | [`android.widget.EditText`](https://developer.android.com/reference/android/widget/EditText.html) | [`UITextView`](https://developer.apple.com/documentation/uikit/uitextview)
 
-
 ### TimePicker
 
-<div class="nsref"><a title="Документация NativeScript" href="https://docs.nativescript.org/api-reference/classes/_ui_time_picker_.timepicker">Описание класса</a></div>
+<div class="nsref"><a title="NativeScript Documentation" href="https://docs.nativescript.org/api-reference/classes/_ui_time_picker_.timepicker">Class Docs</a></div>
 
+`<timePicker>` is a UI component that lets users select time.
 
-
-`<timePicker>` — UI компонент, который позволяет пользователю выбрать время. 
-
-См. также: [DatePicker](docs#datepicker).
-
-
+See also: [DatePicker](docs#datepicker).
 
 ```html
 <timePicker hour="{selectedHour}" minute="{selectedMinute}" />
 ```
 
-
-`<timePicker>` обеспечивает двухстороннюю привязку данных через директиву `bind`.
+`<timePicker>` provides two-way data binding using `bind`.
 
 ```html
 <timePicker bind:time="{selectedTime}" />
 ```
 
+#### Props
 
+| Name | Type | Description |
+|------|------|-------------|
+| `hour` | `Number` | Gets or sets the selected hour.
+| `minute` | `Number` | Gets or sets the selected minute.
+| `time` | `Date` | Gets or sets the selected time.
+| `minHour` | `Number` | Gets or sets the minimum selectable hour.
+| `maxHour` | `Number` | Gets or sets the maximum selectable hour.
+| `minMinute` | `Number` | Gets or sets the minimum selectable minute.
+| `maxMinute` | `Number` | Gets or sets the maximum selectable minute.
+| `minuteInterval` | `Number` | Gets or sets the selectable minute interval. For example: 5 or 15 minutes.<br/>Default value: `1`.
 
-#### Свойства
+#### Events
 
-| Имя | Тип | Описание |
-|-----|-----|----------|
-| `hour` | `Number` | Возвращает или задаёт час.
-| `minute` | `Number` | Возвращает или задаёт минуту.
-| `time` | `Date` | Возвращает или задаёт выбранное время.
-| `minHour` | `Number` | Возвращает или задаёт минимально возможный час.
-| `maxHour` | `Number` | Возвращает или задаёт максимально возможный час.
-| `minMinute` | `Number` | Возвращает или задаёт минимально возможную минуту.
-| `maxMinute` | `Number` | Возвращает или задаёт максимально возможную минуту.
-| `minuteInterval` | `Number` | Возвращает или задаёт интервал между минутами, которые можно выбрать. Например: 5 или 15 минут.<br/>По умолчанию: `1`.
+| Name | Description |
+|------|-------------|
+| `timeChange` | Emitted when the selected time changes.
 
-#### События
-
-| Имя | Описание |
-|-----|----------|
-| `timeChange` | Вызывается, когда изменяется выбранное время.
-
-#### Нативный компонент
+#### Native Component Reference
 
 | Android | iOS |
 |---------|-----|
 | [`android.widget.TimePicker`](https://developer.android.com/reference/android/widget/TimePicker) | [`UIDatePicker`](https://developer.apple.com/documentation/uikit/uidatepicker)
 
-
 ### WebView
 
-<div class="nsref"><a title="Документация NativeScript" href="https://docs.nativescript.org/api-reference/classes/_ui_web_view_.webview">Описание класса</a></div>
+<div class="nsref"><a title="NativeScript Documentation" href="https://docs.nativescript.org/api-reference/classes/_ui_web_view_.webview">Class Docs</a></div>
 
+`<webView>` is a UI component that lets you show web content in your app. You can pull and show content from a URL or a local HTML file, or you can render static HTML content.
 
-
-`<webView>` — UI компонент, который позволяет отображать web-содержимое в вашем приложении. Вы может получить и показать содержимое по URL адресу или из локального HTML файла. Также можно отобразить просто статический HTML контент.
-
-
-См. также: [HtmlView](docs#htmlview).
-
-
+See also: [HtmlView](docs#htmlview).
 
 ```html
-<webView src="http://svelte-native.technology/" />
+<webView src="http://nativescript-vue.org/" />
 
 <webView src="~/html/index.html" />
 
-<webView src="<div><h1>Немного HTML кода</h1></div>" />
+<webView src="<div><h1>Some static HTML</h1></div>" />
 ```
 
+#### Props
 
+| Name | Type | Description |
+|------|------|-------------|
+| `src` | `String` | Gets or sets the displayed web content.<br/>Valid values: an absolute URL, the path to a local HTML file, or static HTML.
 
-#### Свойства
+#### Events
 
-| Имя | Тип | Описание |
-|-----|-----|----------|
-| `src` | `String` | Возвращает или задаёт отображаемое содержимое.<br/>Допустимые значения: URL адрес, путь к локальному HTML файлу или строка HTML кода.
+| Name | Description |
+|------|-------------|
+| `loadStarted`| Emitted when the page has started loading in the `<webView>`.
+| `loadFinished`| Emitted when the page has finished loading in the `<webView>`.
 
-#### События
-
-| Имя | Описание |
-|-----|----------|
-| `loadStarted`| Вызывается, когда страница начинает загружаться в `<webView>`.
-| `loadFinished`| Вызывается, когда страница полностью загрузилась в `<webView>`.
-
-#### Нативный компонент
+#### Native Component Reference
 
 | Android | iOS |
 |---------|-----|

@@ -1,5 +1,5 @@
 <script>
-	let string = `Здесь есть <strong>HTML!!!</strong>`;
+	let string = `here's some <strong>HTML!!!</strong>`;
 </script>
 
 <p>{@html string}</p>

@@ -1,10 +1,10 @@
 ---
-title: Объявление свойств
+title: Declaring props
 ---
 
-До сих пор мы имели дело исключительно с внутренним состоянием, то есть значения были доступны только внутри отдельно взятого компонента.
+So far, we've dealt exclusively with internal state — that is to say, the values are only accessible within a given component.
 
-В любом реальном приложении нужно будет передавать данные из компонента в его дочерние элементы. Для этого нам нужно объявить *свойства*, иногда также называемые пропсами (от англ. *props*). В Svelte мы делаем это ключевым словом `export`. Отредактируйте компонент `Nested.svelte`:
+In any real application, you'll need to pass data from one component down to its children. To do that, we need to declare *properties*, generally shortened to 'props'. In Svelte, we do that with the `export` keyword. Edit the `Nested.svelte` component:
 
 ```html
 <script>
@@ -12,4 +12,4 @@ title: Объявление свойств
 </script>
 ```
 
-> Как и в случае с `$:`, такой код опять может вас шокировать. Тут `export` имеет смысл совершенно иной нежели в своем обычном использовании в JavaScript модулях! Просто сделайте это сейчас – привыкнете позже.
+> Just like `$:`, this may feel a little weird at first. That's not how `export` normally works in JavaScript modules! Just roll with it for now — it'll soon become second nature.

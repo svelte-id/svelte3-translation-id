@@ -3,8 +3,8 @@
 </script>
 
 <Box>
-	<h2>Привет!</h2>
-	<p>Это компонент box. Тут можно разместить что угодно.</p>
+	<h2>Hello!</h2>
+	<p>This is a box. It can contain anything.</p>
 </Box>
 
 <Box/>

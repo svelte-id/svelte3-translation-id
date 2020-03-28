@@ -2,7 +2,7 @@
 	let w;
 	let h;
 	let size = 42;
-	let text = 'измени меня';
+	let text = 'edit me';
 </script>
 
 <style>
@@ -14,7 +14,7 @@
 <input type=range bind:value={size}>
 <input bind:value={text}>
 
-<p>размер: {w}px x {h}px</p>
+<p>size: {w}px x {h}px</p>
 
 <div>
 	<span style="font-size: {size}px">{text}</span>

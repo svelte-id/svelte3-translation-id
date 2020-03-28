@@ -6,5 +6,5 @@
 <input bind:value={$name}>
 
 <button on:click="{() => $name += '!'}">
-	Добавить восклицательный знак!
+	Add exclamation mark!
 </button>

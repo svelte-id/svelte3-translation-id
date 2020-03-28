@@ -20,12 +20,12 @@
 	});
 
 	let todos = [
-		{ id: 1, done: false, description: 'написать что-нибудь в документацию' },
-		{ id: 2, done: false, description: 'начать писать речь для JSConf' },
-		{ id: 3, done: true, description: 'купить молока' },
-		{ id: 4, done: false, description: 'покосить газон' },
-		{ id: 5, done: false, description: 'покормить черепашку' },
-		{ id: 6, done: false, description: 'пофиксить пару багов' },
+		{ id: 1, done: false, description: 'write some docs' },
+		{ id: 2, done: false, description: 'start writing JSConf talk' },
+		{ id: 3, done: true, description: 'buy some milk' },
+		{ id: 4, done: false, description: 'mow the lawn' },
+		{ id: 5, done: false, description: 'feed the turtle' },
+		{ id: 6, done: false, description: 'fix some bugs' },
 	];
 
 	let uid = todos.length + 1;
@@ -111,13 +111,12 @@
 <div class='board'>
 	<input
 		class="new-todo"
-		placeholder="что нужно сделать?"
+		placeholder="what needs to be done?"
 		on:keydown="{event => event.which === 13 && add(event.target)}"
 	>
 
-
 	<div class='left'>
-		<h2>задачи</h2>
+		<h2>todo</h2>
 		{#each todos.filter(t => !t.done) as todo (todo.id)}
 			<label
 				in:receive="{{key: todo.id}}"
@@ -132,7 +131,7 @@
 	</div>
 
 	<div class='right'>
-		<h2>готово</h2>
+		<h2>done</h2>
 		{#each todos.filter(t => t.done) as todo (todo.id)}
 			<label
 				in:receive="{{key: todo.id}}"

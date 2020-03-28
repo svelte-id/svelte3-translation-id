@@ -1,8 +1,8 @@
 ---
-title: События компонентов
+title: Component events
 ---
 
-Компоненты также могут отправлять события. Для этого они должны создать *диспетчер событий*. Отредактируйте файл `Inner.svelte`:
+Components can also dispatch events. To do so, they must create an event dispatcher. Update `Inner.svelte`:
 
 ```html
 <script>
@@ -12,10 +12,10 @@ title: События компонентов
 
 	function sayHello() {
 		dispatch('message', {
-			text: 'Привет!'
+			text: 'Hello!'
 		});
 	}
 </script>
 ```
 
-> `createEventDispatcher` должен вызываться при инициализации экземпляра компонента — вы не можете сделать это позже, например, внутри функции обратного вызова в `setTimeout`. Эта функция привязывает `dispatch` к конкретному экземпляру компонента.
+> `createEventDispatcher` must be called when the component is first instantiated — you can't do it later inside e.g. a `setTimeout` callback. This links `dispatch` to the component instance.

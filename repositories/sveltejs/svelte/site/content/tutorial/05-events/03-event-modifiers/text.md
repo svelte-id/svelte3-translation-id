@@ -1,28 +1,28 @@
 ---
-title: Модификаторы событий
+title: Event modifiers
 ---
 
-Обработчики событий DOM могут иметь *модификаторы*, которые меняют их поведение. Например, обработчик с модификатором `once` будет запускаться только единожды:
+DOM event handlers can have *modifiers* that alter their behaviour. For example, a handler with a `once` modifier will only run a single time:
 
 ```html
 <script>
 	function handleClick() {
-		alert('только одно оповещение')
+		alert('no more alerts')
 	}
 </script>
 
 <button on:click|once={handleClick}>
-	Нажми меня
+	Click me
 </button>
 ```
 
-Полный список модификаторов:
+The full list of modifiers:
 
-* `preventDefault` — вызывает `event.preventDefault()` перед запуском обработчика. Полезно в т.ч. для обработки форм на клиентской стороне.
-* `stopPropagation` — вызывает `event.stopPropagation()`, предотвращает распространение события до следующих элементов
-* `passive` —  улучшает производительность прокрутки при тач-событиях или при прокрутке колёсиком мышки (Svelte добавит этот модификатор автоматически там, где это безопасно)
-* `capture` — вызывает событие в режиме *перехвата* вместо *всплытия* ([см. документацию MDN](https://developer.mozilla.org/ru/docs/Learn/JavaScript/Building_blocks/События#Всплытие_и_перехват_событий))
-* `once` — удаляет обработчик события после первого вызова
-* `self` — вызывает событие, только если event.target указывает на этот же элемент 
+* `preventDefault` — calls `event.preventDefault()` before running the handler. Useful for client-side form handling, for example.
+* `stopPropagation` — calls `event.stopPropagation()`, preventing the event reaching the next element
+* `passive` — improves scrolling performance on touch/wheel events (Svelte will add it automatically where it's safe to do so)
+* `capture` — fires the handler during the *capture* phase instead of the *bubbling* phase ([MDN docs](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Building_blocks/Events#Event_bubbling_and_capture))
+* `once` — remove the handler after the first time it runs
+* `self` — only trigger handler if event.target is the element itself
 
-Можно использовать сразу несколько модификаторов, например, `on:click|once|capture={...}`.
+You can chain modifiers together, e.g. `on:click|once|capture={...}`.

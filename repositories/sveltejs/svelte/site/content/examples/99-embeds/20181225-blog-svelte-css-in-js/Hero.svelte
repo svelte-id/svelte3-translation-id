@@ -7,9 +7,9 @@
 		<div class={box}>
 			<div class={box}>
 				<div class={box}>CSS</div>
-				в JS
+				in JS
 			</div>
-			в HTML
+			in HTML
 		</div>
 	</h1>
 </div>

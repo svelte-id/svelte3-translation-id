@@ -1,23 +1,23 @@
 ---
-title: Привязки к хранилищам
+title: Store bindings
 ---
 
-Если у вас есть записываемое хранилище — то есть у него есть метод `set` — можно сделать привязку к его значению тем же способом, что и привязку к обычной переменной в компоненте.
+If a store is writable — i.e. it has a `set` method — you can bind to its value, just as you can bind to local component state.
 
-В этом примере у нас есть записываемое хранилище `name` и производное хранилище `greeting`. Допишите в элемент  `<input>` следующее:
+In this example we have a writable store `name` and a derived store `greeting`. Update the `<input>` element:
 
 ```html
 <input bind:value={$name}>
 ```
 
-Изменение значения в текстовом поле теперь будет обновлять хранилище `name` и всё, что от него зависит.
+Changing the input value will now update `name` and all its dependents.
 
-Также мы можем присваивать значения хранилищу внутри компонента. Добавьте элемент `<button>`:
+We can also assign directly to store values inside a component. Add a `<button>` element:
 
 ```html
 <button on:click="{() => $name += '!'}">
-	Добавить восклицательный знак!
+	Add exclamation mark!
 </button>
 ```
 
-Присваивание `$name += '!'` эквивалентно записи `name.set($name + '!')`.
+The `$name += '!'` assignment is equivalent to `name.set($name + '!')`.

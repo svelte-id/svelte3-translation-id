@@ -48,7 +48,7 @@
 	<hr>
 
 	<!-- svelte-ignore a11y-autofocus -->
-	<button autofocus on:click={close}>закрыть окно</button>
+	<button autofocus on:click={close}>close modal</button>
 </div>
 
 <style>
@@ -63,7 +63,8 @@
 
 	.modal {
 		position: absolute;
-		left: 50%; top: 50%;
+		left: 50%;
+		top: 50%;
 		width: calc(100vw - 4em);
 		max-width: 32em;
 		max-height: calc(100vh - 4em);

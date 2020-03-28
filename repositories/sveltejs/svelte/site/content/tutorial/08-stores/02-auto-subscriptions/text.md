@@ -1,10 +1,10 @@
 ---
-title: Автоподписки
+title: Auto-subscriptions
 ---
 
-Приложение из предыдущего урока работает, но есть небольшая ошибка — функция `unsubscribe`, которая *отписывает* нас от слежки за хранилищем, никогда не вызывается. Если компонент будет постоянно создаваться и уничтожаться, это приведет к *утечке памяти*.
+The app in the previous example works, but there's a subtle bug — the `unsubscribe` function never gets called. If the component was instantiated and destroyed many times, this would result in a *memory leak*.
 
-Можно использовать [функцию жизненного цикла](tutorial/ondestroy) `onDestroy`:
+One way to fix it would be to use the `onDestroy` [lifecycle hook](tutorial/ondestroy):
 
 ```html
 <script>
@@ -23,10 +23,10 @@ title: Автоподписки
 	onDestroy(unsubscribe);
 </script>
 
-<h1>Счётчик равен {count_value}</h1>
+<h1>The count is {count_value}</h1>
 ```
 
-Выглядит слегка перегружено, особенно если в компоненте есть подписки сразу на несколько хранилищ. К счастью, у Svelte есть хитрость — можно сразу получить значение из хранилища, используя префикс `$` перед именем этого хранилища:
+It starts to get a bit boilerplatey though, especially if your component subscribes to multiple stores. Instead, Svelte has a trick up its sleeve — you can reference a store value by prefixing the store name with `$`:
 
 ```html
 <script>
@@ -36,11 +36,11 @@ title: Автоподписки
 	import Resetter from './Resetter.svelte';
 </script>
 
-<h1>Счётчик равен {$count}</h1>
+<h1>The count is {$count}</h1>
 ```
 
-> Автоподписка работает только с переменными хранилищ, которые были объявлены (или импортированы) в верхнем уровне кода компонента.
+> Auto-subscription only works with store variables that are declared (or imported) at the top-level scope of a component.
 
-При этом `$count` можно использовать не только внутри разметки, но и в любом месте внутри блока `<script>`, например, в обработчиках событий или реактивных объявлениях.
+You're not limited to using `$count` inside the markup, either — you can use it anywhere in the `<script>` as well, such as in event handlers or reactive declarations.
 
-> Предполагается, что любое имя, начинающееся с `$`, ссылается на значение хранилища. Это зарезервированный символ — Svelte не позволит вам объявлять переменные с префиксом `$`.
+> Any name beginning with `$` is assumed to refer to a store value. It's effectively a reserved character — Svelte will prevent you from declaring your own variables with a `$` prefix.

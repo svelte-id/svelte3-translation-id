@@ -2,18 +2,18 @@
 	import { fly } from 'svelte/transition';
 
 	let visible = true;
-	let status = 'ждём...';
+	let status = 'waiting...';
 </script>
 
-<p>статус: {status}</p>
+<p>status: {status}</p>
 
 <label>
 	<input type="checkbox" bind:checked={visible}>
-	показать
+	visible
 </label>
 
 {#if visible}
 	<p transition:fly="{{ y: 200, duration: 2000 }}">
-		Прилетает и улетает
+		Flies in and out
 	</p>
 {/if}

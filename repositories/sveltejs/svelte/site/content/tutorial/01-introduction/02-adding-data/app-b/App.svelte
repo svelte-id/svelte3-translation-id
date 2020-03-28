@@ -1,5 +1,5 @@
 <script>
-	let name = 'мир';
+	let name = 'world';
 </script>
 
-<h1>Привет, {name.toUpperCase()}!</h1>
+<h1>Hello {name.toUpperCase()}!</h1>

@@ -1,5 +1,5 @@
 <svelte:head>
-	<!-- добавьте сюда содержимое -->
+	<!-- elements go here -->
 </svelte:head>
 
-<h1>Привет, мир!</h1>
+<h1>Hello world!</h1>

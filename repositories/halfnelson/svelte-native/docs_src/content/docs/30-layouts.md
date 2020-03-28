@@ -1,22 +1,22 @@
 ---
-title: Макеты
+title: Layouts
 ---
 
 ### AbsoluteLayout
 
-Контейнер `<absoluteLayout>` является простейшим контейнером макета в NativeScript.
+The `<absoluteLayout>` container is the simplest layout container in NativeScript.
 
-`<absoluteLayout>` имеет следующее поведение:
+`<absoluteLayout>` has the following behavior:
 
-* Использует пару абсолютных left/top координат для позиционирования вложенных элементов.
-* Не применяет никаких ограничений макета для своих дочерних элементов.
-* Изменяет размеры своих потомков во время выполнения, когда его размер изменяется.
+* Uses a pair of absolute left/top coordinates to position its children.
+* Doesn't enforce any layout constraints on its children.
+* Doesn't resize its children at runtime when its size changes.
 
-#### Примеры
+#### Examples
 
-#### Макет сетки
+#### A grid-like layout
 
-В следующем примере создается простая сетка. Для получения дополнительной информации о создании макетов сетки см. [GridLayout](/docs#GridLayout).
+The following example creates a simple grid. For more information about creating grid layouts, see [GridLayout](/docs#GridLayout).
 
 ```html
 <absoluteLayout backgroundColor="#3c495e">
@@ -26,11 +26,12 @@ title: Макеты
   <label text="120,120" left="120" top="120" width="100" height="100" backgroundColor="#4383b8"/>
 </absoluteLayout>
 ```
+
 <img width=320 src="/media/docs/layouts/absolute_layout_grid.svg" />
 
-#### Перекрывающиеся элементы
+#### Overlapping elements
 
-В следующем примере создается группа перекрывающихся элементов.
+The following example creates a group of overlapping items.
 
 ```html
 <absoluteLayout backgroundColor="#3c495e">
@@ -38,32 +39,33 @@ title: Макеты
   <label text="30,40" left="30" top="40" width="100" height="100" backgroundColor="#4383b8"/>
 </absoluteLayout>
 ```
+
 <img width=320 src="/media/docs/layouts/absolute_layout_overlap.svg" />
 
-#### Свойства дочерних элементов
+#### Additional children props
 
-У вложенных напрямую в `<absoluteLayout>` элементов, появляются дополнительные свойства:
+When an element is a direct child of `<absoluteLayout>`, you can work with the following additional properties.
 
-| Имя | Тип | Описание |
-|-----|-----|----------|
-| `top` | `Number` | Получает или задаёт расстояние в пикселях между верхним краем дочернего элемента и верхним краем его родительского элемента.
-| `left` | `Number` | Получает или задаёт расстояние в пикселях между левым краем дочернего элемента и левым краем его родительского элемента.
+| Name | Type | Description |
+|------|------|-------------|
+| `top` | `Number` | Gets or sets the distance, in pixels, between the top edge of the child and the top edge of its parent.
+| `left` | `Number` | Gets or sets the distance, in pixels, between the left edge of the child and the left edge of its parent.
 
 ### DockLayout
 
-`<DockLayout>` — это контейнер макета, который позволяет закреплять дочерние элементы по бокам или по центру макета.
+`<dockLayout>` is a layout container that lets you dock child elements to the sides or the center of the layout.
 
-`<DockLayout>` имеет следующее поведение:
+`<dockLayout>` has the following behavior:
 
-* Использует свойство `dock`, чтобы прикрепить свои дочерние элементы к` left`, `right`,` top`, `bottom` или центру макета. <br/> Чтобы прикрепить дочерний элемент к центру, он должен быть **последним потомком** контейнера, и вы должны установить значение `true` для свойства `stretchLastChild` родительского элемента.
-* Применяет ограничения макета для своих дочерних элементов.
-* Изменяет размеры своих потомков во время выполнения, когда его размер изменяется.
+* Uses the `dock` property to dock its children to the `left`, `right`, `top`, `bottom` or center of the layout.<br/>To dock a child element to the center, it must be the **last child** of the container and you must set the `stretchLastChild` property of the parent to `true`.
+* Enforces layout constraints to its children.
+* Resizes its children at runtime when its size changes.
 
-#### Примеры
+#### Examples
 
-#### Прикрепление ко всем сторонам без растягивания последнего потомка
+#### Dock to every side without stretching the last child
 
-В следующем примере создается рамкообразный макет, состоящий из 4 элементов, расположенных по 4 краям экрана.
+The following example creates a frame-like layout consisting of 4 elements, position at the 4 edges of the screen.
 
 ```html
 <dockLayout stretchLastChild="false" backgroundColor="#3c495e">
@@ -75,9 +77,9 @@ title: Макеты
 ```
 <img width=320 src="/media/docs/layouts/dock_layout_no_stretch.svg" />
 
-#### Прикрепление ко всем сторонам и растягивание последнего потомка
+#### Dock to every side and stretch the last child
 
-В следующем примере показано, как `stretchLastChild` влияет на расположение дочерних элементов в контейнере `DockLayout`. Последний дочерний элемент (`bottom`) растягивается, чтобы занять все оставшееся пространство после размещения первых трех элементов.
+The following example shows how `stretchLastChild` affects the positioning of child elements in a `DockLayout` container. The last child (`bottom`) is stretched to take up all the remaining space after positioning the first three elements.
 
 ```html
 <dockLayout stretchLastChild="true" backgroundColor="#3c495e">
@@ -89,9 +91,9 @@ title: Макеты
 ```
 <img width=320 src="/media/docs/layouts/dock_layout_stretch.svg" />
 
-#### Прикрепление ко всем сторонам и к центру
+#### Dock to every side and the center
 
-В следующем примере создается `<dockLayout>` из 5 элементов. Первые четыре окружают рамкой центральный элемент.
+The following example creates a `<dockLayout>` of 5 elements. The first four wrap the center element in a frame.
 
 ```html
 <dockLayout stretchLastChild="true" backgroundColor="#3c495e">
@@ -104,9 +106,9 @@ title: Макеты
 ```
 <img width=320 src="/media/docs/layouts/dock_layout_all_sides_and_stretch.svg" />
 
-#### Прикрепление нескольких элементов к одной и той же стороне
+#### Dock multiple children to the same side
 
-В следующем примере создается строка из 4 элементов, которые растягиваются по всей высоте и ширине экрана.
+The following example creates a single line of 4 elements that stretch across the entire height and width of the screen.
 
 ```html
 <dockLayout stretchLastChild="true" backgroundColor="#3c495e">
@@ -118,30 +120,30 @@ title: Макеты
 ```
 <img width=320 src="/media/docs/layouts/dock_layout_multiple_on_same_side.svg" />
 
-#### Свойства
+#### Props
 
-| Имя | Тип | Описание |
-|-----|-----|----------|
-| `stretchLastChild` | `Boolean` | Включает или отключает растяжение последнего дочернего элемента до заполнения незанятого пространства.
+| Name | Type | Description |
+|------|------|-------------|
+| `stretchLastChild` | `Boolean` | Enables or disables stretching the last child to fit the remaining space.
 
-#### Свойства дочерних элементов
+#### Additional children props
 
-У вложенных напрямую в `<DockLayout>` элементов, появляются дополнительные свойства:
+When an element is a direct child of `<dockLayout>`, you can work with the following additional properties.
 
-| Имя | Тип | Описание |
-|-----|-----|----------|
-| `dock` | `String` | Указывает, к какой стороне прикрепить элемент. <br/> Допустимые значения: `top`, `right`, `bottom` или `left`.
+| Name | Type | Description |
+|------|------|-------------|
+| `dock` | `String` | Specifies which side to dock the element to.<br/>Valid values: `top`, `right`, `bottom`, or `left`.
 
 ### FlexboxLayout
 
+`<flexboxLayout>` is a layout container that provides a non-exact implementation of the [CSS Flexbox layout](https://developer.mozilla.org/en-US/docs/Learn/CSS/CSS_layout/Flexbox). This layout lets you arrange child components both horizontally and vertically.
 
-`<FlexboxLayout>` является контейнером макета, который обеспечивает примерную реализацию [CSS Flexbox](https://developer.mozilla.org/ru-RU/docs/Learn/CSS/CSS_layout/Flexbox). Этот макет позволяет расположить дочерние компоненты как по горизонтали, так и по вертикали.
+#### Examples
 
-#### Примеры
+#### Default flex layout
 
-#### Flex-макет по умолчанию
+The following example creates a row of three equally-sized elements that span across the entire height of the screen.
 
-В следующем примере создается строка из трех элементов одинакового размера, которые растягиваются на всю высоту экрана.
 ```html
 <flexboxLayout backgroundColor="#3c495e">
   <label text="first" width="70" backgroundColor="#4383b8"/>
@@ -151,9 +153,10 @@ title: Макеты
 ```
 <img width=320 src="/media/docs/layouts/flexbox_layout_row_stretch.svg" />
 
-#### Flex-макет столбцом
+#### Column flex layout
 
-В следующем примере создается столбец из трех элементов одинакового размера, которые растягиваются на всю ширину экрана.
+The following example creates a column of three equally-sized elements that span across the entire width of the screen.
+
 ```html
 <flexboxLayout flexDirection="column" backgroundColor="#3c495e">
   <label text="first" height="70" backgroundColor="#4383b8"/>
@@ -163,9 +166,9 @@ title: Макеты
 ```
 <img width=320 src="/media/docs/layouts/flexbox_layout_column_stretch.svg" />
 
-#### Flex-макет строкой с элементами, выровненными по `flex-start`
+#### Row flex layout with items aligned to `flex-start`
 
-В следующем примере создается строка из трех элементов, размещенных в верхней части экрана. Элементы размещаются в том порядке, в котором они были объявлены.
+The following example creates a row of three items placed at the top of the screen. Items are placed in the order they were declared in.
 
 ```html
 <flexboxLayout alignItems="flex-start" backgroundColor="#3c495e">
@@ -176,9 +179,9 @@ title: Макеты
 ```
 <img width=320 src="/media/docs/layouts/flexbox_layout_row_flex-start.svg" />
 
-#### Flex-макет строкой с заданным порядком
+#### Row flex layout with custom order
 
-В следующем примере создается строка из трех элементов, размещенных в верхней части экрана. Элементы размещаются в указанном порядке.
+The following example creates a row of three items placed at the top of the screen. Items are placed in a customized order.
 
 ```html
 <flexboxLayout alignItems="flex-start" backgroundColor="#3c495e">
@@ -189,9 +192,9 @@ title: Макеты
 ```
 <img width=320 src="/media/docs/layouts/flexbox_layout_row_custom_order.svg" />
 
-#### Flex-макет строкой с переносом
+#### Row flex layout with wrapping
 
-В следующем примере создаются четыре элемента с включенным переносом строк. Когда в строке заканчивается свободное место, контейнер переносит последний элемент на новую строку.
+The following example creates four items with enabled line wrapping. When the row runs out of space, the container wraps the last item on a new line.
 
 ```html
 <flexboxLayout flexWrap="wrap" backgroundColor="#3c495e">
@@ -201,15 +204,16 @@ title: Макеты
   <label text="fourth" width="30%" backgroundColor="#286290"/>
 </flexboxLayout>
 ```
+
 <img width=320 src="/media/docs/layouts/flexbox_layout_wrap.svg" />
 
-#### Flex-макет столбцом с элементами в обратном порядке и разным значением свойства `alignSelf`
+#### Column flex layout with reverse order and items with a different `alignSelf`
 
-В следующем примере показано, как использовать:
+The following example shows how to use:
 
-* `flexDirection` для размещения элементов в столбце, начиная снизу.
-* `justifyContent` для создания равного расстояния между вертикально расположенными элементами.
-* `alignSelf` для изменения положения элементов относительно главной оси.
+* `flexDirection` to place items in a column, starting from the bottom.
+* `justifyContent` to create equal spacing between the vertically placed items.
+* `alignSelf` to modify the position of items across the main axis.
 
 ```html
 <flexboxLayout flexDirection="column-reverse"
@@ -220,50 +224,50 @@ title: Макеты
   <label text="fourth" height="70" backgroundColor="#286290"/>
 </flexboxLayout>
 ```
+
 <img width=320 src="/media/docs/layouts/flexbox_layout_column_reverse_space_around_align_self.svg" />
 
-#### Свойства
+#### Props
 
-| Имя | Тип | Описание |
-|-----|-----|----------|
-`flexDirection` | `String` | Задаёт направление размещения дочерних элементов в flexbox-контейнере .<br/>Допустимые значения:<br/>`row` (горизонтально, слева направо),<br/>`row-reverse` (горизонтально, справа налево),<br/>`column` (вертикально, сверху вниз),<br/>`column-reverse` (вертикально, снизу вверх).<br/>По умолчанию: `row`.
-`flexWrap` | `String` | Устанавливает, должны ли дочерние элементы оставаться в одной строке или могут переносится на несколько строк. Если задано несколько строк, также указывает поперечную ось, по которой будут появляться новые строки.<br/>Допустимые значения:<br/>`nowrap` (единственная строка, которая может выйти за рамки контейнера),<br/>`wrap` (перенос строк, направление по `flexDirection`)<br/>`wrap-reverse` (перенос строк, направление обратное `flexDirection`).<br/>По умолчанию: `nowrap`.
-`justifyContent` | `String` | Задаёт выравнивание дочерних элементов *вдоль* главной оси. Может использоваться для равномерного распределения нерастянутых элементов по оси. Также используется для управления выравниванием элементов, когда они выходят за рамки строки.<br/>Допустимые значения:<br/>`flex-start` (элементы прижимаются к началу контейнера),<br/>`flex-end` (элементы прижимаются к концу контейнера),<br/>`center` (элементы выравниваются по центру контейнера),<br/>`space-between` (элементы равномерно распределены по линии; первый элемент находится в начале контейнера, последний элемент в конце контейнера)<br/>`space-around` (элементы равномерно распределены по линии с равным пространством вокруг них).<br/>По умолчанию: `flex-start`.
-`alignItems` | `String` | (только Android) Задаёт выравнивание дочерних элемент вдоль поперечной оси текущей линии. Работает как `justifyContent`, только для поперечной оси.<br/>Допустимые значения:<br/>`flex-start` (поперечное начало элементов размещается на поперечном начале линии),<br/>`flex-end` (поперечный конец элементов размещается на поперечном конце линии),<br/>`center` (элементы центрируются относительно поперечной оси),<br/>`baseline` (базовая линия всех элементов выравнивается),<br/>`stretch` (элементы растягиваются по всей поперечной оси контейнера с учётом свойств `min-width` и `max-width`).<br/>По умолчанию: `stretch`.
-`alignContent` | `String` | Задаёт выравнивание линий внутри контейнера на поперечной оси, подобно тому, как `justifyContent` выравнивает отдельные элементы в пределах главной оси.<br/> Это свойство не имеет никакого действия, если имеется только одна линия.<br/>Допустимые значения:<br/>`flex-start` (линии прижимаются к началу контейнера),<br/>`flex-end` (линии прижимаются к концу контейнера),<br/>`center` (линии выравниваются по центру контейнера),<br/>`space-between` (линии равномерно распределены; первая линия находится в начале контейнера, последняя линия в конце контейнера),<br/>`space-around` (линии равномерно распределены по линии с равным пространством вокруг них),<br/>`stretch` (линии растягиваются на всё свободное пространство).<br/>По умолчанию: `stretch`.
+| Name | Type | Description |
+|------|------|-------------|
+`flexDirection` | `String` | Sets the direction for placing child elements in the flexbox container.<br/>Valid values:<br/>`row` (horizontal, left to right),<br/>`row-reverse` (horizontal, right to left),<br/>`column` (vertical, top to bottom), and<br/>`column-reverse` (vertical, bottom to top).<br/>Default value: `row`.
+`flexWrap` | `String` | Sets whether child elements are forced in a single line or can flow into multiple lines. If set to multiple lines, also defines the cross axis which determines the direction new lines are stacked in.<br/>Valid values:<br/>`nowrap` (single line which may cause the container to overflow),<br/>`wrap` (multiple lines, direction is defined by `flexDirection`), and<br/>`wrap-reverse` (multiple lines, opposite to the direction defined by `flexDirection`).<br/>Default value: `nowrap`.
+`justifyContent` | `String` |  Sets the alignment of child elements along the main axis. You can use it to distribute leftover space when all the child elements on a line are inflexible or are flexible but have reached their maximum size. You can also use it to control the alignment of items when they overflow the line.<br/>Valid values:<br/>`flex-start` (items are packed toward the start line),<br/>`flex-end` (items are packed toward the end line),<br/>`center` (items are centered along the line),<br/>`space-between` (items are evenly distributed on the line; first item is on the start line, last item on the end line), and<br/>`space-around` (items are evenly distributed on the line with equal space around them).<br/>Default value: `flex-start`.
+`alignItems` | `String` | (Android-only) Sets the alignment of child elements along the cross axis on the current line. Acts as `justifyContent` for the cross axis.<br/>Valid values:<br/>`flex-start` (cross-start margin edge of the items is placed on the cross-start line),<br/>`flex-end` (cross-end margin edge of the items is placed on the cross-end line),<br/>`center` (items are centered оn the cross axis),<br/>`baseline` (the item baselines are aligned), and<br/>`stretch` (items are stretched to fill the container but respect `min-width` and `max-width`).<br/>Default value: `stretch`.
+`alignContent` | `String` | Sets how lines are aligned in the flex container on the cross axis, similar to how `justifyContent` aligns individual items within the main axis.<br/> This property has no effect when the flex container has only one line.<br/>Valid values:<br/>`flex-start` (lines are packed to the start of the container),<br/>`flex-end` (lines are packed to the end of the container),<br/>`center` (lines are packed to the center of the container),<br/>`space-between` (lines are evenly distributed; the first line is at the start of the container while the last one is at the end),<br/>`space-around` (lines are evenly distributed with equal space between them), and<br/>`stretch` (lines are stretched to take up the remaining space).<br/>Default value: `stretch`.
 
-#### Свойства дочерних элементов
+#### Additional children props
 
-У вложенных напрямую в `<FlexboxLayout>` элементов, появляются дополнительные свойства:
+When an element is a direct child of `<flexboxLayout>`, you can work with the following additional properties.
 
-| Имя | Тип | Описание |
-|-----|-----|----------|
-`order` | `Number` | Задаёт порядок отображения элемента относительно других элементов.
-`flexGrow` | `Number` | Указывает, что элемент может увеличиваться. Задаёт коэффициент размера элемента, относительно других элементов. 
-`flexShrink` | `Number` | Указывает, что элемент может сжиматься, когда в линии заканчивается свободное место. Устанавливает, насколько элемент будет уменьшен пропорционально остальным дочерним элементам в контейнере. Если не указано, его значение равно `1`.
-`alignSelf` | `String` | (только Android) Переписывает значение свойства `alignItems` только для этого элемента.<br/>Допустимые значения:<br/>`flex-start` (поперечное начало элемента размещается на поперечном начале линии),<br/>`flex-end` (поперечный конец элемента размещается на поперечном конце линии),<br/>`center` (элемент центрируется относительно поперечной оси),<br/>`baseline` (выравнивается по базовой линии),<br/>`stretch` (элемент растягиваются по всей поперечной оси контейнера с учётом свойств `min-width` и `max-width`).<br/>По умолчанию: `stretch`.
-`flexWrapBefore` | `Boolean` | При значении `true`, заставляет элемент переместится на новую линию. Это свойство не является частю официальной спецификации Flexbox.<br/>По умолчанию: `false`.
+| Name | Type | Description |
+|------|------|-------------|
+`order` | `Number` | Sets the order in which child element appear in relation to one another.
+`flexGrow` | `Number` | Indicates that the child should grow in size, if necessary. Sets how much the child will grow in proportion to the rest of the child elements in the flex container.
+`flexShrink` | `Number` | Indicates that the child should shrink when the row runs out of space. Sets how much the flex item will shrink in proportion to the rest of the child elements in the flex container. When not specified, its value is set to `1`.
+`alignSelf` | `String` | (Android-only) Overrides the `alignItems` value for the child.<br/>Valid values:<br/>`flex-start` (cross-start margin edge of the item is placed on the cross-start line),<br/>`flex-end` (cross-end margin edge of the item is placed on the cross-end line),<br/>`center` (item is centered on the cross axis),<br/>`baseline` (the item baselines are aligned), and<br/>`stretch` (item is stretched to fill the container but respects `min-width` and `max-width`).<br/>Default value: `stretch`.
+`flexWrapBefore` | `Boolean` | When `true`, forces the item to wrap onto a new line. This property is not part of the official Flexbox specification.<br/>Default value: `false`.
 
 ### GridLayout
 
-`<GridLayout>` является контейнером макета, который позволяет упорядочивать дочерние элементы в виде таблицы.
+`<gridLayout>` is a layout container that lets you arrange its child elements in a table-like manner.
 
-Сетка состоит из строк, столбцов и ячеек. Ячейка может занимать одну или несколько строк и один или несколько столбцов. Она может содержать несколько дочерних элементов, которые могут занимать несколько строк и столбцов и даже перекрывать друг друга.
+The grid consists of rows, columns, and cells. A cell can span one or more rows and one or more columns. It can contain multiple child elements which can span over multiple rows and columns, and even overlap each other.
 
-По умолчанию `<GridLayout>` имеет один столбец и одну строку. Вы можете добавлять столбцы и строки, настраивая свойства `columns` и `rows`. В этих свойствах нужно установить количество столбцов и строк, а также их ширину и высоту. Количество столбцов задаётся, перечислением их ширины через запятую. Количество строк задаётся, перечислением их высоты через запятую.
+By default, `<gridLayout>` has one column and one row. You can add columns and rows by configuring the `columns` and the `rows` properties. In these properties, you need to set the number of columns and rows and their width and height. You set the number of columns by listing their widths, separated by a comma. You set the number of rows by listing their heights, separated by a comma.
 
-Вы можете установить фиксированный размер для ширины столбца и высоты строки, либо сделать их 'резиновыми':
+You can set a fixed size for column width and row height or you can create them in a responsive manner:
 
-* **число:** Фиксированный размер.
-* **auto:** Делает столбец таким же по ширине, как его самый широкий дочерний элемент, или делает ряд таким же по высоте, как его самый высокий дочерний элемент.
-* **\*:** Занимает столько места, сколько останется после заполнения всех столбцов или строк с фиксированным или `auto` размером.
+* **An absolute number:** Indicates a fixed size.
+* **auto:** Makes the column as wide as its widest child or makes the row as tall as its tallest child.
+* **\*:** Takes as much space as available after filling all auto and fixed size columns or rows.
 
+#### Examples
 
-#### Примеры
+#### Grid layout with fixed sizing
 
-#### Макет сетки с фиксированным размером
-
-В следующем примере создается простая сетка 2-на-2 с фиксированными шириной столбцов и высотой строк.
+The following example creates a simple 2-by-2 grid with fixed column widths and row heights.
 
 ```html
 <gridLayout columns="115, 115" rows="115, 115">
@@ -273,25 +277,28 @@ title: Макеты
   <label text="1,1" row="1" col="1" backgroundColor="#4383b8"/>
 </gridLayout>
 ```
+
 <img width=320 src="/media/docs/layouts/grid_layout.svg" />
 
-#### Макет сетки с резиновым размером
+#### Grid layout with star sizing
 
-В следующем примере создается сетка с адаптивным дизайном, где пространство распределяется пропорционально значениям со звёздочкой.
+The following example creates a grid with responsive design, where space is alotted proportionally to child elements.
 
 ```html
 <gridLayout columns="*, 2*" rows="2*, 3*" backgroundColor="#3c495e">
-  <Label text="0,0" row="0" col="0" backgroundColor="#4383b8"/>
-  <Label text="0,1" row="0" col="1" backgroundColor="#1c486b"/>
-  <Label text="1,0" row="1" col="0" backgroundColor="#286290"/>
-  <Label text="1,1" row="1" col="1" backgroundColor="#4383b8"/>
+  <label text="0,0" row="0" col="0" backgroundColor="#4383b8"/>
+  <label text="0,1" row="0" col="1" backgroundColor="#1c486b"/>
+  <label text="1,0" row="1" col="0" backgroundColor="#286290"/>
+  <label text="1,1" row="1" col="1" backgroundColor="#4383b8"/>
 </gridLayout>
 ```
+
 <img width=320 src="/media/docs/layouts/grid_layout_star_sizing.svg" />
 
-#### Макет сетки с фиксированным и auto размером
+#### Grid layout with fixed and auto sizing
 
-В следующем примере создается сетка с одним столбцом фиксированной ширины и одним столбцом ширины `auto`. Строки имеют фиксированную высоту.
+The following example create a grid with one auto-sized column and one column with fixed size. Rows have a fixed height.
+
 ```html
 <gridLayout columns="80, auto" rows="80, 80" backgroundColor="#3c495e">
   <label text="0,0" row="0" col="0" backgroundColor="#4383b8"/>
@@ -300,11 +307,12 @@ title: Макеты
   <label text="1,1" row="1" col="1" backgroundColor="#4383b8"/>
 </gridLayout>
 ```
+
 <img width=320 src="/media/docs/layouts/grid_layout_fixed_auto.svg" />
 
-#### Макет сетки со смешанными размерами и объединенными ячейками
+#### Grid layout with mixed sizing and merged cells
 
-В следующем примере создается сложная сетка с адаптивным дизайном, смешанными настройками ширины и высоты и несколькими объединенными ячейками.
+The following example creates a complex grid with responsive design, mixed width and height settings, and some merged cells.
 
 ```html
 <gridLayout columns="40, auto, *" rows="40, auto, *" backgroundColor="#3c495e">
@@ -317,39 +325,36 @@ title: Макеты
   <label text="2,2" row="2" col="2" backgroundColor="#4383b8"/>
 </gridLayout>
 ```
+
 <img width=320 src="/media/docs/layouts/grid_layout_complex.svg" />
 
+#### Props
 
-#### Свойства
+| Name | Type | Description |
+|------|------|-------------|
+`columns` | `String` | A string value representing column widths delimited with commas.<br/>Valid values: an absolute number, `auto`, or `*`.<br/>A number indicates an absolute column width. `auto` makes the column as wide as its widest child. `*` makes the column occupy all available horizontal space. The space is proportionally divided over all star-sized columns. You can set values such as `3*` and `5*` to indicate a ratio of 3:5 in sizes.
+`rows` | `String` | A string value representing row heights delimited with commas.<br/>Valid values: an absolute number, `auto`, or `*`.<br/>A number indicates an absolute row height. `auto` makes the row as tall as its tallest child. `*` makes the row occupy all available vertical space. The space is proportionally divided over all star-sized rows. You can set values such as `3*` and `5*` to indicate a ratio of 3:5 in sizes.
 
-| Имя | Тип | Описание |
-|-----|-----|----------|
-`columns` | `String` | Строковое значение, описывающее ширину столбцов через запятую.<br/>Допустимые значения: число, `auto` или `*`.<br/>Число указывает абсолютную ширину столбца. `auto` задаёт ширину по ширине самого широкого потомка. `*` указывает, что нужно занять всё свободное пространство по горизонтали, которое пропорционально делится между всеми колонками со звёздочкой. Вы можете задать ширину колонок, например так — `3*` и `5*`, чтобы разделить пространство в пропорции 3 к 5.
-`rows` | `String` | Строковое значение, описывающее высоту строк через запятую.<br/>Допустимые значения: число, `auto` или `*`.<br/>Число указывает абсолютную высоту строки. `auto` задаёт высоту по высоте самого высокого потомка. `*` указывает, что нужно занять всё свободное пространство по вертикали, которое пропорционально делится между всеми строками со звёздочкой. Вы можете задать высоту строк, например так — `3*` и `5*`, чтобы разделить пространство в пропорции 3 к 5.
+#### Additional children props
 
+When an element is a direct child of `<gridLayout>`, you can work with the following additional properties.
 
-#### Свойства дочерних элементов
-
-У вложенных напрямую в `<GridLayout>` элементов, появляются дополнительные свойства:
-
-| Имя | Тип | Описание |
-|-----|-----|----------|
-`row` | `Number` | Указывает строку для данного элемента. Вместе со свойством `col`, задаёт координаты ячейки для элемента.<br/>Нумерация строк начинается с `0`.
-`col` | `Number` | Указывает столбец для данного элемента. Вместе со свойством `row` задаёт координаты ячейки для элемента.<br/>Нумерация столбцов начинается с `0`.
-`rowSpan` | `Number` | Определяет количество строк, которые необходимо объединить.
-`colSpan` | `Number` | Определяет количество столбцов, которые необходимо объединить.
-
+| Name | Type | Description |
+|------|------|-------------|
+`row` | `Number` | Specifies the row for this element. Combined with a `col` property, specifies the cell coordinates of the element.<br/>The first row is indicated by `0`.
+`col` | `Number` | Specifies the column for the element. Combined with a `row` property, specifies the cell coordinates of the element.<br/>The first column is indicated by `0`.
+`rowSpan` | `Number` | Specifies the number of rows that this element spans across.
+`colSpan` | `Number` | Specifies the number of columns that this element spans across.
 
 ### StackLayout
 
+`<stackLayout>` is a layout container that lets you stack the child elements vertically (default) or horizontally.
 
-`<stackLayout>` является контейнером макетов, который позволяет укладывать вложенные элементы по вертикали (по умолчанию) или по горизонтали.
+#### Examples
 
-#### Примеры
+#### Default stacking
 
-#### Укладка по умолчанию
-
-В следующем примере создается вертикальная раскладка из 3 элементов одинакового размера. Элементы растягиваются на всю ширину экрана. Элементы размещаются в том порядке, в котором они были объявлены.
+The following example creates a vertical stack of 3 equally-sized elements. Items are stretched to cover the entire width of the screen. Items are placed in the order they were declared in.
 
 ```html
 <stackLayout backgroundColor="#3c495e">
@@ -358,11 +363,12 @@ title: Макеты
   <label text="third" height="70" backgroundColor="#1c486b"/>
 </stackLayout>
 ```
+
 <img width=320 src="/media/docs/layouts/stack_layout_vertical.svg" />
 
-#### Укладка по вертикали
+#### Horizontal stacking
 
-В следующем примере создается горизонтальная раскладка из 3 элементов одинакового размера. Элементы растягиваются на всю высоту экрана. Элементы размещаются в том порядке, в котором они были объявлены.
+The following example creates a horizontal stack of 3 equally-sized elements. Items are stretched to cover the entire height of the screen. Items are placed in the order they were declared in.
 
 ```html
 <stackLayout orientation="horizontal" backgroundColor="#3c495e">
@@ -371,11 +377,13 @@ title: Макеты
   <label text="third" width="70" backgroundColor="#1c486b"/>
 </stackLayout>
 ```
+
 <img width=320 src="/media/docs/layouts/stack_layout_horizontal.svg" />
 
-#### Вертикальная укладка с элементами выровненными по горизонтали
+#### Stack layout with horizontally aligned children
 
-В следующем примере создается диагональная раскладка по вертикали элементов с адаптивными размерами.
+The following example creates a diagonal stack of items with responsive sizes. Items are vertically stacked.
+
 ```html
 <stackLayout backgroundColor="#3c495e">
   <label text="left" horizontalAlignment="left"
@@ -388,11 +396,12 @@ title: Макеты
          height="70" backgroundColor="#4383b8"/>
 </stackLayout>
 ```
+
 <img width=320 src="/media/docs/layouts/stack_layout_vertical_align_children.svg" />
 
-#### Горизонтальная укладка с элементами выровненными по вертикали
+#### Horizontal stack layout with vertically aligned children
 
-В следующем примере создается диагональная раскладка по горизонтали элементов с адаптивными размерами.
+The following example creates a diagonal stack of items with responsive sizes. Items are horizontally stacked.
 
 ```html
 <stackLayout orientation="horizontal" backgroundColor="#3c495e">
@@ -406,23 +415,24 @@ title: Макеты
          width="70" backgroundColor="#4383b8"/>
 </stackLayout>
 ```
+
 <img width=320 src="/media/docs/layouts/stack_layout_horizontal_align_children.svg" />
 
-#### Свойства
+#### Props
 
-| Имя | Тип | Описание |
-|-----|-----|----------|
-`orientation` | `String` | Задаёт направление раскладки<br/>Допустимые значения: `vertical` и `horizontal`.<br/>По умолчанию: `vertical`.
+| Name | Type | Description |
+|------|------|-------------|
+`orientation` | `String` | Specifies the stacking direction.<br/>Valid values: `vertical` and `horizontal`.<br/>Default value: `vertical`.
 
 ### WrapLayout
 
-`<WrapLayout>` - это контейнер макетов, который позволяет позиционировать элементы в строках или столбцах на основе свойства `direction`. Когда пространство заполняется элементами, контейнер автоматически переносит следующие элементы в новую строку или столбец.
+`<wrapLayout>` is a layout container that lets you position items in rows or columns, based on the `orientation` property. When the space is filled, the container automatically wraps items onto a new row or column.
 
-#### Примеры
+#### Examples
 
-#### Размещение по умолчанию
+#### Default wrap layout
 
-В следующем примере создается строка элементов одинакового размера. Когда в строке заканчивается свободное место, контейнер переносит последний элемент в новую строку.
+The following example creates a row of equally-sized items. When the row runs out of space, the container wraps the last item on a new row.
 
 ```html
 <wrapLayout backgroundColor="#3c495e">
@@ -435,9 +445,9 @@ title: Макеты
 
 <img width=320 src="/media/docs/layouts/wrap_layout_horizontal.svg" />
 
-#### Размещение в колонках
+#### Vertical wrap layout
 
-В следующем примере создается столбец элементов одинакового размера. Когда в строке заканчивается свободное место, контейнер переносит последний элемент в новый столбец.
+The following example creates a column of equally-sized items. When the row runs out of space, the container wraps the last item on a new column.
 
 ```html
 <wrapLayout orientation="vertical" backgroundColor="#3c495e">
@@ -450,10 +460,10 @@ title: Макеты
 
 <img width=320 src="/media/docs/layouts/wrap_layout_vertical.svg" />
 
-#### Свойства
+#### Props
 
-| Имя | Тип | Описание |
-|-----|-----|----------|
-`orientation` | `String` | Определяет направление укладки элементов.<br/>Допустимые значения: `horizontal` (упорядочивает элементы в строки) и `vertical` (упорядочивает элементы в колонки).<br/>По умолчанию: `horizontal`.
-`itemWidth` | `Number` | Устанавливает ширину каждого дочернего элемента.<br/>По умолчанию: `Number.NaN`, т.е. ширина не ограничивается
-`itemHeight` | `Number` | Устанавливает высоту каждого дочернего элемента.<br/>По умолчанию: `Number.NaN`, т.е. высота не ограничивается
+| Name | Type | Description |
+|------|------|-------------|
+`orientation` | `String` | Specifies the stacking direction.<br/>Valid values: `horizontal` (arranges items in rows) and `vertical` (arranges items in columns).<br/>Default value: `horizontal`.
+`itemWidth` | `Number` | Sets the width used to measure and layout each child.<br/>Default value: `Number.NaN`, which does not restrict children.
+`itemHeight` | `Number` | Sets the height used to measure and layout each child.<br/>Default value is `Number.NaN`, which does not restrict children.

@@ -1,14 +1,15 @@
 ---
-title: Компиляция
+title: Compile time
 ---
 
-В обычных условиях, вам не нужно напрямую взаимодействовать с компилятором Svelte, достаточно просто интегрировать его в вашу систему сборки используя один из следующих плагинов-бандлеров:
+Typically, you won't interact with the Svelte compiler directly, but will instead integrate it into your build system using a bundler plugin:
 
-* [rollup-plugin-svelte](https://github.com/sveltejs/rollup-plugin-svelte) для пользователей [Rollup](https://rollupjs.org)
-* [svelte-loader](https://github.com/sveltejs/svelte-loader) для пользователей [webpack](https://webpack.js.org)
-* или из [поддерживаемых сообществом](https://github.com/sveltejs/integrations#bundler-plugins)
+* [rollup-plugin-svelte](https://github.com/sveltejs/rollup-plugin-svelte) for users of [Rollup](https://rollupjs.org)
+* [svelte-loader](https://github.com/sveltejs/svelte-loader) for users of [webpack](https://webpack.js.org)
+* or one of the [community-maintained plugins](https://github.com/sveltejs/integrations#bundler-plugins)
 
-Тем не менее, полезно знать, как пользоваться компилятором, так как эти плагины обычно предоставляют возможность настройки его параметров.
+Nonetheless, it's useful to understand how to use the compiler, since bundler plugins generally expose compiler options to you.
+
 
 
 ### `svelte.compile`
@@ -26,17 +27,17 @@ result: {
 
 ---
 
-Тут происходит вся магия. Метод `svelte.compile` берет исходный код вашего компонента и превращает его в JavaScript модуль, который экспортирует класс.
+This is where the magic happens. `svelte.compile` takes your component source code, and turns it into a JavaScript module that exports a class.
 
 ```js
 const svelte = require('svelte/compiler');
 
 const result = svelte.compile(source, {
-	// параметры
+	// options
 });
 ```
 
-Компилятору можно передать следующие параметры. Все они являются необязательными:
+The following options can be passed to the compiler. None are required:
 
 <!-- | option | type | default
 | --- | --- | --- |
@@ -59,31 +60,31 @@ const result = svelte.compile(source, {
 | `cssOutputFilename` | string | `null`
 | `sveltePath` | string | `"svelte"` -->
 
-| параметр | по умолчанию | описание |
+| option | default | description |
 | --- | --- | --- |
-| `filename` | `null` | `string` имя файла для подсказок при отладке и карт исходников. Плагин назначит имя автоматически.
-| `name` | `"Component"` | `string`  имя JavaScript класса на выходе (если в области видимости будет конфликт имён, компилятор переименует класс). Обычно имя берётся из параметра `filename`.
-| `format` | `"esm"` | Значение `"esm"`, создаёт JavaScript модуль  (с `import` и `export`). Значение `"cjs "`, создаёт CommonJS модуль (с `require` и `module.exports`), который обычно полезен при рендеринге на стороне сервера или тестировании.
-| `generate` | `"dom"` | При значении `"dom"`, Svelte создаёт JavaScript класс для встраивания в DOM. При значении `"ssr"`, Svelte создаёт объект с методом `render`, подходящим для рендеринга на стороне сервера. Если указать `false`, JavaScript или CSS возвращаться не будут, только метаданные.
-| `dev` | `false` | При значении `true`, в компоненты будет встраиваться дополнительный код, который будет выполнять различные проверки и предоставлять отладочную информацию во время разработки.
-| `immutable` | `false` | Значение `true`, говорит компилятору, что вы обязуетесь не изменять структуру каких-либо объектов. Это позволяет отслеживать изменения значений более оптимальным путём.
-| `hydratable` | `false` | При значении `true`, позволяет установить параметр `hydrate: true` в среде выполнения, который позволяет компоненту обновлять уже существующий DOM, а не создавать новую структуру DOM с нуля. При компиляции серверного кода добавляет маркеры элементам в `<head>`, необходимые для процесса гитратации.
-| `legacy` | `false` | При значении `true` будет генерироваться код, совместимый с IE9 и IE10, которые не поддерживают некоторые вещи, например` element.dataset`.
-| `accessors` | `false` | Значение `true` заставляет генерировать для свойств компонента геттеры и сеттеры. При значении `false`, они будут создаваться только для экспортируемых значений доступных только для чтения (которые объявлены при помощи `const`, `class` или `function`). Если используется параметр `customElement: true` по умолчанию этот параметр будет равен `true`.
-| `customElement` | `false` | При значении `true` компилятор будет создавать конструктор пользовательского элемента, а не обычного Svelte компонента.
-| `tag` | `null` | имя тега, с которым нужно зарегистрировать пользовательский элемент. Это должна быть строка из маленьких букв и цифр с хотя бы одним дефисом, например `"my-element"`.
-| `css` | `true` | Если значение равно `true`, стили включаются в сам класс JavaScript и будут динамически применены во время выполнения. Рекомендуется установить значение `false` и использовать статически сгенерированный CSS файл, поскольку это приведет к уменьшению JavaScript бандла и повышению производительности.
-| `loopGuardTimeout` | 0 | Указывает Svelte  прервать какой-либо цикл, если он блокирует работу потока более чем на `loopGuardTimeout` миллисекунд. Полезно для предотвращения зависаний в бесконечных циклах. **Доступно только при `dev: true`**
-| `preserveComments` | `false` | При значении `true`, ваши комментарии в HTML разметке будут сохранены при рендере на стороне сервера. По умолчанию они удаляются.
-| `preserveWhitespace` | `false` | При значении `true`, пробелы внутри и между элементами остаются не тронутыми. В ином случае, Svelte удалит лишние пробелы.
-| `outputFilename` | `null` | Имя файла для карты исходников JavaScript.
-| `cssOutputFilename` | `null` | Имя файла для карты исходников CSS.
-| `sveltePath` | `"svelte"` | Расположение пакета `svelte`. Любые импорты из `svelte` или `svelte/[module]` будут соответствующим образом обработаны.
+| `filename` | `null` | `string` used for debugging hints and sourcemaps. Your bundler plugin will set it automatically.
+| `name` | `"Component"` | `string` that sets the name of the resulting JavaScript class (though the compiler will rename it if it would otherwise conflict with other variables in scope). It will normally be inferred from `filename`.
+| `format` | `"esm"` | If `"esm"`, creates a JavaScript module (with `import` and `export`). If `"cjs"`, creates a CommonJS module (with `require` and `module.exports`), which is useful in some server-side rendering situations or for testing.
+| `generate` | `"dom"` | If `"dom"`, Svelte emits a JavaScript class for mounting to the DOM. If `"ssr"`, Svelte emits an object with a `render` method suitable for server-side rendering. If `false`, no JavaScript or CSS is returned; just metadata.
+| `dev` | `false` | If `true`, causes extra code to be added to components that will perform runtime checks and provide debugging information during development.
+| `immutable` | `false` | If `true`, tells the compiler that you promise not to mutate any objects. This allows it to be less conservative about checking whether values have changed.
+| `hydratable` | `false` | If `true` when generating DOM code, enables the `hydrate: true` runtime option, which allows a component to upgrade existing DOM rather than creating new DOM from scratch. When generating SSR code, this adds markers to `<head>` elements so that hydration knows which to replace.
+| `legacy` | `false` | If `true`, generates code that will work in IE9 and IE10, which don't support things like `element.dataset`.
+| `accessors` | `false` | If `true`, getters and setters will be created for the component's props. If `false`, they will only be created for readonly exported values (i.e. those declared with `const`, `class` and `function`). If compiling with `customElement: true` this option defaults to `true`.
+| `customElement` | `false` | If `true`, tells the compiler to generate a custom element constructor instead of a regular Svelte component.
+| `tag` | `null` | A `string` that tells Svelte what tag name to register the custom element with. It must be a lowercase alphanumeric string with at least one hyphen, e.g. `"my-element"`.
+| `css` | `true` | If `true`, styles will be included in the JavaScript class and injected at runtime. It's recommended that you set this to `false` and use the CSS that is statically generated, as it will result in smaller JavaScript bundles and better performance.
+| `loopGuardTimeout` | 0 | A `number` that tells Svelte to break the loop if it blocks the thread for more than `loopGuardTimeout` ms. This is useful to prevent infinite loops. **Only available when `dev: true`**
+| `preserveComments` | `false` | If `true`, your HTML comments will be preserved during server-side rendering. By default, they are stripped out.
+| `preserveWhitespace` | `false` | If `true`, whitespace inside and between elements is kept as you typed it, rather than removed or collapsed to a single space where possible.
+| `outputFilename` | `null` | A `string` used for your JavaScript sourcemap.
+| `cssOutputFilename` | `null` | A `string` used for your CSS sourcemap.
+| `sveltePath` | `"svelte"` | The location of the `svelte` package. Any imports from `svelte` or `svelte/[module]` will be modified accordingly.
 
 
 ---
 
-Возвращаемый объект `result` содержит код вашего компонента и некоторые полезные метаданные.
+The returned `result` object contains the code for your component, along with useful bits of metadata.
 
 ```js
 const {
@@ -96,25 +97,26 @@ const {
 } = svelte.compile(source);
 ```
 
-* `js` и `css` — объекты со следующими свойствами:
-	* `code` — код JavaScript
-	* `map` — карта исходников с дополнительными удобными методами `toString()` и `toUrl()`.
-* `ast` — абстрактное синтаксическое дерево, представляющее структуру компонента.
-* `warnings` — массив объектов предупреждений, которые могли возникнуть при компиляции. У каждый такого объекта есть несколько свойств:
-	* `code` — идентификатор категории ошибки
-	* `message` — описание проблемы в форме, понятной для человека
-	* `start` и `end` — информация о предупреждениях, относящихся к конкретным местам в коде; являются объектами со свойствами `line`, `column` и `character`
-	* `frame` — выделенная часть проблемного кода с номерами строк, если имеется
-* `vars` — массив всех переменных, объявленных в компоненте. Например, используется в [eslint-plugin-svelte3](https://github.com/sveltejs/eslint-plugin-svelte3). У каждого элемента есть несколько свойств:
-	* `name` — имя переменной
-	* `export_name` — имя переменной при экспорте (совпадает с `name`, если экспорт выполнен без использования конструкции `export...as`)
-	* `injected` — равно `true`, если переменная была объявлена самим Svelte, а не в вашем коде
-	* `module` — равно `true`, если переменная объявлена в блоке `<script context="module">`
-	* `mutated` — равно `true`,  переменной назначались свойства внутри компонента
-	* `reassigned` — равно `true`, если переменная переназначалась внутри компонента
-	* `referenced` — `true` если значение используется вне контекста объявления
-	* `writable` — равно `true`, если значение объявлено с помощью `let` или `var` (но не `const`, `class` или `function`)
-* `stats` — объект, используемый командой разработчиков Svelte для диагностики компилятора. Не полагайтесь на него в своём коде!
+* `js` and `css` are objects with the following properties:
+	* `code` is a JavaScript string
+	* `map` is a sourcemap with additional `toString()` and `toUrl()` convenience methods
+* `ast` is an abstract syntax tree representing the structure of your component.
+* `warnings` is an array of warning objects that were generated during compilation. Each warning has several properties:
+	* `code` is a string identifying the category of warning
+	* `message` describes the issue in human-readable terms
+	* `start` and `end`, if the warning relates to a specific location, are objects with `line`, `column` and `character` properties
+	* `frame`, if applicable, is a string highlighting the offending code with line numbers
+* `vars` is an array of the component's declarations, used by [eslint-plugin-svelte3](https://github.com/sveltejs/eslint-plugin-svelte3) for example. Each variable has several properties:
+	* `name` is self-explanatory
+	* `export_name` is the name the value is exported as, if it is exported (will match `name` unless you do `export...as`)
+	* `injected` is `true` if the declaration is injected by Svelte, rather than in the code you wrote
+	* `module` is `true` if the value is declared in a `context="module"` script
+	* `mutated` is `true` if the value's properties are assigned to inside the component
+	* `reassigned` is `true` if the value is reassigned inside the component
+	* `referenced` is `true` if the value is used in the template
+	* `referenced_from_script` is `true` if the value is used in the `<script>` outside the declaration
+	* `writable` is `true` if the value was declared with `let` or `var` (but not `const`, `class` or `function`)
+* `stats` is an object used by the Svelte developer team for diagnosing the compiler. Avoid relying on it to stay the same!
 
 
 <!--
@@ -143,6 +145,7 @@ compiled: {
 		mutated: boolean,
 		reassigned: boolean,
 		referenced: boolean,
+		referenced_from_script: boolean,
 		writable: boolean
 	}>,
 	stats: {
@@ -168,11 +171,12 @@ ast: object = svelte.parse(
 
 ---
 
-Функция `parse` выполняет разбор компонента, возвращая только его абстрактное синтаксическое дерево. В отличие от компиляции с параметром `generate: false`, при этом не будет выполняться никакой проверки или иного анализа компонента, кроме самого разбора.
+The `parse` function parses a component, returning only its abstract syntax tree. Unlike compiling with the `generate: false` option, this will not perform any validation or other analysis of the component beyond parsing it.
 
 
 ```js
 const svelte = require('svelte/compiler');
+
 const ast = svelte.parse(source, { filename: 'App.svelte' });
 ```
 
@@ -207,15 +211,15 @@ result: {
 
 ---
 
-Функция `preprocess` предоставляет удобные хуки для произвольного преобразования исходного кода компонента. Например, его можно использовать для преобразования блока `<style lang="sass">` в ванильный CSS.
+The `preprocess` function provides convenient hooks for arbitrarily transforming component source code. For example, it can be used to convert a `<style lang="sass">` block into vanilla CSS.
 
-Первый аргумент — это исходный код компонента. Второй — это массив *препроцессоров* `preprocessors` (или просто объект `preprocessor`, если нужен только один), где препроцессор — это объект с функциями `markup`,`script` и `style`, каждый из которых не является обязательным.
+The first argument is the component source code. The second is an array of *preprocessors* (or a single preprocessor, if you only have one), where a preprocessor is an object with `markup`, `script` and `style` functions, each of which is optional.
 
-Каждая функция `markup`,`script` или `style` должна возвращать объект (или промис, который при выполнении возвращает объект) со свойством `code`, представляющим преобразованный исходный код, и необязательным массивом зависимостей `dependencies`.
+Each `markup`, `script` or `style` function must return an object (or a Promise that resolves to an object) with a `code` property, representing the transformed source code, and an optional array of `dependencies`.
 
-Функция `markup` получает весь исходный текст компонента вместе с именем файла (`filename`) компонента, если он был указан в третьем аргументе.
+The `markup` function receives the entire component source text, along with the component's `filename` if it was specified in the third argument.
 
-> Функции препроцессоров также могут дополнительно возвращать объект `map` вместе с `code` и `dependencies`, где` map` — это карта исходников для отладки преобразованного кода. В текущих версиях Svelte этот объект игнорируется, но в будущих версиях Svelte сможет обрабатывать карты исходников от препроцессоров.
+> Preprocessor functions may additionally return a `map` object alongside `code` and `dependencies`, where `map` is a sourcemap representing the transformation. In current versions of Svelte it will be ignored, but future versions of Svelte may take account of preprocessor sourcemaps.
 
 ```js
 const svelte = require('svelte/compiler');
@@ -233,9 +237,9 @@ const { code } = await svelte.preprocess(source, {
 
 ---
 
-Функции `script` и `style` получают содержимое блоков `<script>` и `<style>` соответственно. В дополнение к `filename` они получают объект атрибутов блока.
+The `script` and `style` functions receive the contents of `<script>` and `<style>` elements respectively. In addition to `filename`, they get an object of the element's attributes.
 
-Если возвращается массив зависимостей `dependencies`, он будет также включен в результирующий объект. Он используется такими пакетами, как [rollup-plugin-svelte](https://github.com/rollup/rollup-plugin-svelte) для отслеживания изменений  дополнительных файлов, в случае, если, например в теге `<style>` есть `@import`.
+If a `dependencies` array is returned, it will be included in the result object. This is used by packages like [rollup-plugin-svelte](https://github.com/sveltejs/rollup-plugin-svelte) to watch additional files for changes, in the case where your `<style>` tag has an `@import` (for example).
 
 ```js
 const svelte = require('svelte/compiler');
@@ -244,7 +248,7 @@ const { dirname } = require('path');
 
 const { code, dependencies } = await svelte.preprocess(source, {
 	style: async ({ content, attributes, filename }) => {
-		// обрабатываем только <style lang="sass">
+		// only process <style lang="sass">
 		if (attributes.lang !== 'sass') return;
 
 		const { css, stats } = await new Promise((resolve, reject) => sass.render({
@@ -270,7 +274,7 @@ const { code, dependencies } = await svelte.preprocess(source, {
 
 ---
 
-Несколько препроцессоров могут быть использованы вместе. Выход первого становится входом для второго и так далее. Сначала запускаются функции `markup`, затем `script` и `style`.
+Multiple preprocessors can be used together. The output of the first becomes the input to the second. `markup` functions run first, then `script` and `style`.
 
 ```js
 const svelte = require('svelte/compiler');
@@ -278,30 +282,31 @@ const svelte = require('svelte/compiler');
 const { code } = await svelte.preprocess(source, [
 	{
 		markup: () => {
-			console.log('это запустится первым');
+			console.log('this runs first');
 		},
 		script: () => {
-			console.log('это запустится третьим');
+			console.log('this runs third');
 		},
 		style: () => {
-			console.log('это запустится пятым');
+			console.log('this runs fifth');
 		}
 	},
 	{
 		markup: () => {
-			console.log('это запустится вторым');
+			console.log('this runs second');
 		},
 		script: () => {
-			console.log('это запустится четвертым');
+			console.log('this runs fourth');
 		},
 		style: () => {
-			console.log('это запустится шестым');
+			console.log('this runs sixth');
 		}
 	}
 ], {
 	filename: 'App.svelte'
 });
 ```
+
 
 ### `svelte.walk`
 
@@ -314,9 +319,9 @@ walk(ast: Node, {
 
 ---
 
-Функция `walk` обеспечивает способ обхода абстрактных синтаксических деревьев, сгенерированных парсером, используя встроенный в компилятор собственный экземпляр [estree-walker](https://github.com/Rich-Harris/estree-walker) ,
+The `walk` function provides a way to walk the abstract syntax trees generated by the parser, using the compiler's own built-in instance of [estree-walker](https://github.com/Rich-Harris/estree-walker).
 
-Метод `walk` принимает абстрактное синтаксическое дерево для обхода и объект с двумя необязательными методами: `enter` и `exit`. Для каждого узла дерева вызывается `enter` (если есть). Затем, если внутри `enter` не вызывается `this.skip()`, подобным образом обрабатываются дочерние узлы, затем вызывается метод `exit`.
+The walker takes an abstract syntax tree to walk and an object with two optional methods: `enter` and `leave`. For each node, `enter` is called (if present). Then, unless `this.skip()` is called during `enter`, each of the children are traversed, and then `leave` is called on the node.
 
 
 ```js
@@ -334,13 +339,14 @@ svelte.walk(ast, {
 });
 ```
 
+
 ### `svelte.VERSION`
 
 ---
 
-Текущая версия Svelte, которая указана в файле package.json.
+The current version, as set in package.json.
 
 ```js
 const svelte = require('svelte/compiler');
-console.log(`используется Svelte версии ${svelte.VERSION}`);
+console.log(`running svelte version ${svelte.VERSION}`);
 ```

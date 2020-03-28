@@ -1,10 +1,10 @@
 ---
-title: Вложенные компоненты
+title: Nested components
 ---
 
-Весьма нерационально размещать целое приложение в единственном компоненте. Вместо этого мы можем импортировать компоненты из других файлов и вставлять их в разметку как обычные HTML элементы.
+It would be impractical to put your entire app in a single component. Instead, we can import components from other files and include them as though we were including elements.
 
-Добавьте тег `<script>` в котором будет импортироваться файл `Nested.svelte`...
+Add a `<script>` tag that imports `Nested.svelte`...
 
 ```html
 <script>
@@ -12,11 +12,11 @@ title: Вложенные компоненты
 </script>
 ```
 
-...и вставьте его в разметку:
+...then add it to the markup:
 
 ```html
-<p>Просто строка текста</p>
+<p>This is a paragraph.</p>
 <Nested/>
 ```
 
-Обратите внимание, что в файле `Nested.svelte` тоже есть элемент `<p>`, но стили из `App.svelte` никак на него не влияют.
+Notice that even though `Nested.svelte` has a `<p>` element, the styles from `App.svelte` don't leak in.

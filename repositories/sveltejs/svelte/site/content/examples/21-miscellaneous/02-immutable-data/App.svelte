@@ -5,15 +5,15 @@
 	import MutableTodo from './MutableTodo.svelte';
 
 	let todos = [
-		{ id: 1, done: true, text: 'помыть машину' },
-		{ id: 2, done: false, text: 'выгулять собаку' },
-		{ id: 3, done: false, text: 'покосить газон' }
+		{ id: 1, done: true, text: 'wash the car' },
+		{ id: 2, done: false, text: 'take the dog for a walk' },
+		{ id: 3, done: false, text: 'mow the lawn' }
 	];
 
 	function toggle(id) {
 		todos = todos.map(todo => {
 			if (todo.id === id) {
-				// возвращаем новый объект
+				// return a new object
 				return {
 					id,
 					done: !todo.done,
@@ -21,18 +21,18 @@
 				};
 			}
 
-			// возвращаем тот же объект
+			// return the same object
 			return todo;
 		});
 	}
 </script>
 
-<h2>Неизменяемые</h2>
+<h2>Immutable</h2>
 {#each todos as todo}
 	<ImmutableTodo {todo} on:click="{() => toggle(todo.id)}"/>
 {/each}
 
-<h2>Изменяемые</h2>
+<h2>Mutable</h2>
 {#each todos as todo}
 	<MutableTodo {todo} on:click="{() => toggle(todo.id)}"/>
 {/each}

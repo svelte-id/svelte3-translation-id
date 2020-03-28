@@ -1,27 +1,28 @@
 ---
-title: Слоты
+title: Slots
 ---
 
-Как известно, у HTML-элементов могут быть вложенные элементы:
+Just like elements can have children...
 
 ```html
 <div>
-	<p>Это элемент, вложенный в div</p>
+	<p>I'm a child of the div</p>
 </div>
 ```
 
-Для компонентов это тоже работает. Однако, прежде чем вкладывать элементы в компонент, нужно показать, где конкретно их нужно разместить в разметке. Для этого предусмотрен элемент `<slot>`. Поместите следующий код в файле `Box.svelte`:
+...so can components. Before a component can accept children, though, it needs to know where to put them. We do this with the `<slot>` element. Put this inside `Box.svelte`:
+
 ```html
 <div class="box">
 	<slot></slot>
 </div>
 ```
 
-Теперь можно размещать элементы внутри компонента `Box`:
+You can now put things in the box:
 
 ```html
 <Box>
-	<h2>Привет!</h2>
-	<p>Это компонент box. Тут можно разместить что угодно.</p>
+	<h2>Hello!</h2>
+	<p>This is a box. It can contain anything.</p>
 </Box>
 ```

@@ -1,13 +1,13 @@
 ---
-title: Списки с множественным выбором
+title: Select multiple
 ---
 
-Список может иметь атрибут `multiple`, в этом случае он будет возвращать выбранные значения в виде массива.
+A select can have a `multiple` attribute, in which case it will populate an array rather than selecting a single value.
 
-Вернёмся к нашему [примеру с мороженым](tutorial/group-inputs), тут мы можем заменить чекбоксы на элемент `<select multiple>`:
+Returning to our [earlier ice cream example](tutorial/group-inputs), we can replace the checkboxes with a `<select multiple>`:
 
 ```html
-<h2>Вкусы</h2>
+<h2>Flavours</h2>
 
 <select multiple bind:value={flavours}>
 	{#each menu as flavour}

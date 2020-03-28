@@ -2,4 +2,4 @@
 	strong { color: red; }
 </style>
 
-<strong>Красная штука</strong>
+<strong>red thing</strong>

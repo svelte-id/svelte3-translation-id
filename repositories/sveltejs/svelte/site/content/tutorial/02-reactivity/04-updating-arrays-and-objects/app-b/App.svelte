@@ -11,5 +11,5 @@
 <p>{numbers.join(' + ')} = {sum}</p>
 
 <button on:click={addNumber}>
-	Добавить число
+	Add a number
 </button>

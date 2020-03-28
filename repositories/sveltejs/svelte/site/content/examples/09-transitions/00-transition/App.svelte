@@ -5,11 +5,11 @@
 
 <label>
 	<input type="checkbox" bind:checked={visible}>
-	показать
+	visible
 </label>
 
 {#if visible}
 	<p transition:fade>
-		Появляется и исчезает
+		Fades in and out
 	</p>
 {/if}

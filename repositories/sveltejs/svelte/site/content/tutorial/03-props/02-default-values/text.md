@@ -1,16 +1,16 @@
 ---
-title: Значения по умолчанию
+title: Default values
 ---
 
-Мы можем указывать значения свойств по умолчанию:
+We can easily specify default values for props:
 
 ```html
 <script>
-	export let answer = 'неизвестен';
+	export let answer = 'a mystery';
 </script>
 ```
 
-Теперь, если мы добавим второй экземпляр компонента *без* свойства `answer`, он покажет значение по умолчанию:
+If we now add a second component *without* an `answer` prop, it will fall back to the default:
 
 ```html
 <Nested answer={42}/>

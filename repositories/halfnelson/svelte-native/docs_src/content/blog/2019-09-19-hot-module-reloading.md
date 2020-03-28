@@ -1,36 +1,35 @@
 ---
-title: Горячая перезагрузка модулей (HMR)
-description: Эксперементируем с  HMR
+title: Hot Module Reloading
+description: Trying out experimental HMR
 pubdate: 2019-09-19
 author: Halfnelson
 authorURL: https://twitter.com/halfnelson_au/
 ---
 
+An awesome member of the Svelte community [Rixo](https://github.com/rixo) has implemented preliminary support for hot module reloading in Svelte. This is a quick guide on how to set it up in your Svelte Native project
 
-Очень крутой разработчик [Rixo](https://github.com/rixo), из сообщества Svelte, реализовал предварительную поддержку горячей перезагрузки модулей в Svelte. Это краткое руководство о том, как настроить её в своем проекте Svelte Native.
+## Start with a Svelte Native Project
 
-## Начните с создания проекта Svelte Native
+Use an existing one or start a new one by following the [Getting Started Guide](/blog/svelte-native-quick-start)
 
-Используйте существующий или начните новый проект, как описано в статье [Начало работы](/blog/svelte-native-quick-start)
+### Change svelte-loader to use Rixo's Fork
 
-### Замените svelte-loader на форк от Rixo
-
-Отредактируйте `package.json` и замените:
+Edit `package.json` and replace 
 
 ```js
     "svelte-loader": "github:halfnelson/svelte-loader#fix-virtual-purge"
 ```
 
-на
+with
 
 
 ```js
     "svelte-loader": "github:rixo/svelte-loader#hmr"
 ```
 
-### Включите параметр HMR в Webpack
+### Enable the hmr option in webpack
 
-Отредактируйте `webpack.config.js` и замените: 
+Edit `webpack.config.js` and replace 
 
 ```js
    {
@@ -47,7 +46,7 @@ authorURL: https://twitter.com/halfnelson_au/
     }
 ```
 
-на
+with
 
 ```js
    {
@@ -68,16 +67,13 @@ authorURL: https://twitter.com/halfnelson_au/
     }
 ```
 
-### Проверьте работу
+### Take it for a test toast
 
-Теперь все должно работать. Запустите своё приложение командой: 
+That should be it. Fire up your app with 
 
 ```js
 tns run android
 ```
 
-затем сделайте какую-либо правку в исходных файлах и следите за обновлением отображения.
-![HMR в действии](/media/svelte-hmr-2.gif)
-
-
-
+and make a change and watch it update.
+![HMR in action](/media/svelte-hmr-2.gif)

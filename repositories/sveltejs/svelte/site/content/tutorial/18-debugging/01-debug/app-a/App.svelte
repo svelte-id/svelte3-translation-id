@@ -1,7 +1,7 @@
 <script>
 	let user = {
-		firstname: 'Ада',
-		lastname: 'Лавлейс'
+		firstname: 'Ada',
+		lastname: 'Lovelace'
 	};
 </script>
 
@@ -10,4 +10,4 @@
 
 {(console.log(user), '')}
 
-<h1>Привет, {user.firstname}!</h1>
+<h1>Hello {user.firstname}!</h1>

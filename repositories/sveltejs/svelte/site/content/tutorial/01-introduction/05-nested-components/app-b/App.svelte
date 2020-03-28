@@ -10,5 +10,5 @@
 	}
 </style>
 
-<p>Просто строка текста</p>
+<p>This is a paragraph.</p>
 <Nested/>

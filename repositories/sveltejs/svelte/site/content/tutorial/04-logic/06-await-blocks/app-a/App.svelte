@@ -18,8 +18,8 @@
 </script>
 
 <button on:click={handleClick}>
-	получить случайное число
+	generate random number
 </button>
 
-<!-- замените этот элемент-->
+<!-- replace this element -->
 <p>{promise}</p>

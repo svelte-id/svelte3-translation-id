@@ -1,10 +1,10 @@
 ---
-title: Медиа-элементы
+title: Media elements
 ---
 
-Элементы `<audio>` и `<video>` имеют несколько свойств, к которым можно привязаться. Этот пример демонстрирует некоторые из них.
+The `<audio>` and `<video>` elements have several properties that you can bind to. This example demonstrates a few of them.
 
-После строки №116 добавьте привязки к `currentTime={time}`, `duration` и `paused`:
+On line 116, add `currentTime={time}`, `duration` and `paused` bindings:
 
 ```html
 <video
@@ -18,26 +18,26 @@ title: Медиа-элементы
 ></video>
 ```
 
-> Как вы помните, `bind:duration` то же самое, что и `bind:duration={duration}`
+> `bind:duration` is equivalent to `bind:duration={duration}`
 
-Теперь, когда вы запустите видео, `time`, `duration` и `paused` будут постоянно обновляться. Это означает, что мы можем использовать их для создания нестандартных элементов управления.
+Now, when you click on the video, it will update `time`, `duration` and `paused` as appropriate. This means we can use them to build custom controls.
 
-> Обычно для получения значения `currentTime`, используют отслеживание событий `timeupdate`. Но эти события запускаются слишком редко, что приводит к дёрганному интерфейсу. Svelte работает лучше — он проверяет `currentTime`, используя `requestAnimationFrame`.
+> Ordinarily on the web, you would track `currentTime` by listening for `timeupdate` events. But these events fire too infrequently, resulting in choppy UI. Svelte does better — it checks `currentTime` using `requestAnimationFrame`.
 
-Вот все возможные привязки для `<audio>` и `<video>` — шесть *только для чтения*...
+The complete set of bindings for `<audio>` and `<video>` is as follows — six *readonly* bindings...
 
-* `duration` (только для чтения) — общая продолжительность, в секундах
-* `buffered` (только для чтения) — массив объектов `{start, end}`
-* `seekable` (только для чтения) — то же самое
-* `played` (только для чтения) — то же самое
-* `seeking` (только для чтения) — выполняется ли перемотка
-* `ended` (только для чтения) — окончилось ли воспроизведение
+* `duration` (readonly) — the total duration of the video, in seconds
+* `buffered` (readonly) — an array of `{start, end}` objects
+* `seekable` (readonly) — ditto
+* `played` (readonly) — ditto
+* `seeking` (readonly) — boolean
+* `ended` (readonly) — boolean
 
-...и четыре *двусторонние* привязки:
+...and four *two-way* bindings:
 
-* `currentTime` — текущая позиция проигрывания, в секундах
-* `playbackRate` — скорость воспроизведения, где `1` обычная скорость
-* `paused` — остановлено проигрывание или нет
-* `volume` — громкость, значение между 0 и 1
+* `currentTime` — the current point in the video, in seconds
+* `playbackRate` — how fast to play the video, where `1` is 'normal'
+* `paused` — this one should be self-explanatory
+* `volume` — a value between 0 and 1
 
-Для видео также доступны привязки для чтения ширины `videoWidth` и высоты `videoHeight`.
+Videos additionally have readonly `videoWidth` and `videoHeight` bindings.

@@ -1,5 +1,5 @@
 <script>
-	// Эти значения привязаны к свойствам видео
+	// These values are bound to properties of the video
 	let time = 0;
 	let duration;
 	let paused = true;
@@ -8,23 +8,22 @@
 	let showControlsTimeout;
 
 	function handleMousemove(e) {
-		// Делает интерфейс видимым, и скрывает его
-		// через 2.5 секунды бездействия
+		// Make the controls visible, but fade out after
+		// 2.5 seconds of inactivity
 		clearTimeout(showControlsTimeout);
 		showControlsTimeout = setTimeout(() => showControls = false, 2500);
 		showControls = true;
 
-		if (!(e.buttons & 1)) return; // кнопка мыши не нажата
-		if (!duration) return; // видео еще не загрузилось
+		if (!(e.buttons & 1)) return; // mouse not down
+		if (!duration) return; // video not loaded yet
 
 		const { left, right } = this.getBoundingClientRect();
 		time = duration * (e.clientX - left) / (right - left);
 	}
 
 	function handleMousedown(e) {
-		// мы не можем полагаться на встроенное событие click, 
-		// потому что оно срабатывает уже после перетаскивания;
-		// придется самостоятельно отслеживать клики
+		// we can't rely on the built-in click event, because it fires
+		// after a drag — we have to listen for clicks ourselves
 
 		function handleMouseup() {
 			if (paused) e.target.play();
@@ -106,7 +105,7 @@
 </style>
 
 <h1>Caminandes: Llamigos</h1>
-<p>Из <a href="https://cloud.blender.org/open-projects">Blender Open Projects</a>. CC-BY</p>
+<p>From <a href="https://cloud.blender.org/open-projects">Blender Open Projects</a>. CC-BY</p>
 
 <div>
 	<video
@@ -124,7 +123,7 @@
 
 		<div class="info">
 			<span class="time">{format(time)}</span>
-			<span>кликните чтобы {paused ? 'запустить' : 'остановить'} / перетащите для перемотки</span>
+			<span>click anywhere to {paused ? 'play' : 'pause'} / drag to seek</span>
 			<span class="time">{format(duration)}</span>
 		</div>
 	</div>

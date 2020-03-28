@@ -7,5 +7,5 @@
 </script>
 
 <button on:click={handleClick}>
-	{count === 0 ? 'Кликни по мне' : `Кликов: ${count}`}
+	Clicked {count} {count === 1 ? 'time' : 'times'}
 </button>

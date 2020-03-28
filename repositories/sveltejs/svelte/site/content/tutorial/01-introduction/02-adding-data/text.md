@@ -1,23 +1,23 @@
 ---
-title: Добавление данных
+title: Adding data
 ---
 
-Компонент, который просто отображает статический текст, не очень интересен. Давайте добавим сюда немного данных.
+A component that just renders some static markup isn't very interesting. Let's add some data.
 
-Сперва добавьте в компонент тег `<script>`, а потом объявите переменную `name`:
+First, add a script tag to your component and declare a `name` variable:
 
 ```html
 <script>
-	let name = 'мир';
+	let name = 'world';
 </script>
 
-<h1>Привет, мир!</h1>
+<h1>Hello world!</h1>
 ```
 
-После этого, мы можем ссылаться в нашей разметке на переменную `name`:
+Then, we can refer to `name` in the markup:
 
 ```html
-<h1>Привет, {name}!</h1>
+<h1>Hello {name}!</h1>
 ```
 
-Внутри фигурных скобок мы можем поместить любое выражение JavaScript. Попробуйте заменить переменную `name` на `name.toUpperCase()`, чтобы сделать приветствие громогласнее.
+Inside the curly braces, we can put any JavaScript we want. Try changing `name` to `name.toUpperCase()` for a shoutier greeting.

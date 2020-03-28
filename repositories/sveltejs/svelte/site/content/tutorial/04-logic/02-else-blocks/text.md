@@ -1,19 +1,19 @@
 ---
-title: Блок else
+title: Else blocks
 ---
 
-Поскольку два условия — `if user.loggedIn` и `if !User.loggedIn` — взаимоисключающие, мы можем немного упростить этот компонент, используя блок `else`:
+Since the two conditions — `if user.loggedIn` and `if !user.loggedIn` — are mutually exclusive, we can simplify this component slightly by using an `else` block:
 
 ```html
 {#if user.loggedIn}
 	<button on:click={toggle}>
-		Выйти
+		Log out
 	</button>
 {:else}
 	<button on:click={toggle}>
-		Войти
+		Log in
 	</button>
 {/if}
 ```
 
-> Символ `#` всегда обозначает *открывающий* тег. Символ `/` обозначает *закрывающий* тег. Символ `:`, как в `{:else}` — тег *разделения блока*. Не волнуйтесь, вы уже узнали практически весь дополнительный синтаксис, который Svelte добавляет в HTML.
+> A `#` character always indicates a *block opening* tag. A `/` character always indicates a *block closing* tag. A `:` character, as in `{:else}`, indicates a *block continuation* tag. Don't worry — you've already learned almost all the syntax Svelte adds to HTML.

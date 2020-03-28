@@ -1,70 +1,68 @@
 ---
-title: Svelte для новичков
-description: Никогда не использовали Node.js или терминал? Не проблема!
+title: Svelte for new developers
+description: Never used Node.js or the command line? No problem
 author: Rich Harris
 authorURL: https://twitter.com/Rich_Harris
 ---
 
-Это краткое руководство предназначено для тех, кто уже прошёл наш [учебник](/tutorial) и горит идеями новых приложений на Svelte, но при этом не имеет большого опыта работы с инструментами сборки Javascript. 
+This short guide is designed to help you — someone who has looked at the [tutorial](/tutorial) and wants to start creating Svelte apps, but doesn't have a ton of experience using JavaScript build tooling — get up and running.
 
-Если встретите что-то непонятное или вам покажется, что какие-то вещи нужно описать подробнее, [напишите нам об этом](https://github.com/sveltejs/svelte/issues) или самостоятельно [отредактируйте эту страницу](https://github.com/sveltejs/svelte/blob/master/site/content/blog/2019-04-16-svelte-for-new-developers.md) — это поможет другим новичкам.
+If there are things that don't make sense, or that we're glossing over, feel free to [raise an issue](https://github.com/sveltejs/svelte/issues) or [suggest edits to this page](https://github.com/sveltejs/svelte/blob/master/site/content/blog/2019-04-16-svelte-for-new-developers.md) that will help us help more people.
 
-Если у вас возникнут трудности с прохождением этого руководства, лучшее место для где вы можете спросить совета — это русскоязычный канал в Telegram ([@sveltejs](tg://resolve?domain=sveltejs)).
+If you get stuck at any point following this guide, the best place to ask for help is in the [chatroom](https://svelte.dev/chat).
 
 
-## Начнём с азов
+## First things first
 
-Вы будете использовать *командную строку*, также известную как терминал. В Windows вы можете открыть терминал запустив приложение **Командная строка** из меню Пуск. В MacOS нажмите вместе на клавиатуре клавиши `Cmd` и `Пробел` для запуска **Spotlight** и введите в строку поиска `Terminal.app`. На большинстве Linux дистрибутивах достаточно нажать вместе `Ctrl-Alt-T` для открытия терминала. 
+You'll be using the *command line*, also known as the terminal. On Windows, you can access it by running **Command Prompt** from the Start menu; on a Mac, hit `Cmd` and `Space` together to bring up **Spotlight**, then start typing `Terminal.app`. On most Linux systems, `Ctrl-Alt-T` brings up the command line.
 
-Командная строка позволяет взаимодействовать с вашим компьютером(или удалённым компьютером, но об этом в другой раз) с гораздо большими возможностями и контролем, чем предоставляет GUI(графический интерфейс пользователя), который ежедневно используют большинство людей. 
+The command line is a way to interact with your computer (or another computer! but that's a topic for another time) with more power and control than the GUI (graphical user interface) that most people use day-to-day.
 
-Оказавшись в командной строке вы можете перемещаться по файловой системе, используя команду `ls` (`dir` на Windows) для отображения списка файлов в текущей директории и команду `cd` для перемещения в другую директорию. Например, если в вашей домашней папке есть директория `Development`, то нужно напечатать
+Once on the command line, you can navigate the filesystem using `ls` (`dir` on Windows) to list the contents of your current directory, and `cd` to change the current directory. For example, if you had a `Development` directory of your projects inside your home directory, you would type
 
 ```bash
 cd Development
 ```
 
-чтобы войти в нее. Тут вы можете директорию для нового проекта командой `mkdir`:
+to go to it. From there, you could create a new project directory with the `mkdir` command:
 
 ```bash
 mkdir svelte-projects
 cd svelte-projects
 ```
 
-Знакомство с обширным списком всех доступных команд в терминале выходит за рамки этого руководства, но запомните еще несколько полезных команд:
+A full introduction to the command line is out of the scope of this guide, but here are a few more useful commands:
 
-* `cd ..` — перемещает в родителькую директорию
-* `cat my-file.txt` — в Mac/Linux (`type my-file.txt` на Windows), отображает содержимое файла `my-file.txt`
-* `open .` (или `start .` в Windows) — открывает текущую папку в Finder или Проводнике
-
-
-## Установка Node.js
-
-[Node](https://nodejs.org/en/) позволяет запускать JavaScript в терминале. Это приложение используется множеством инструментов, включая Svelte. Если оно еще не установлено на вашем компьютере, то проще всего скачать последнюю версию прямо с [сайта Node](https://nodejs.org/en/).
-
-После установки Node, у вас появится три новые команды:
-
-* `node my-file.js` — запустит выполнение JavaScript в файле `my-file.js`
-* `npm [команда]` — [npm](https://www.npmjs.com/) способ установки 'пакетов', от которых зависит ваше приложение, например [svelte](https://www.npmjs.com/package/svelte).
-* `npx [команда]` — удобный способ запуска приложений, доступных на npm без их непосредственной установке на компьютере
+* `cd ..` — navigates to the parent of the current directory
+* `cat my-file.txt` — on Mac/Linux (`type my-file.txt` on Windows), lists the contents of `my-file.txt`
+* `open .` (or `start .` on Windows) — opens the current directory in Finder or File Explorer
 
 
-## Установка редактора кода
+## Installing Node.js
 
-Чтобы писать код, необходим хороший редактор. Наиболее популярный выбор сейчас — это [Visual Studio Code](https://code.visualstudio.com/) или VSCode, что вполне оправдывается его продуманностью, полнофункциональностью и богатством расширений ([в т.ч. для Svelte](https://marketplace.visualstudio.com/items?itemName=JamesBirtles.svelte-vscode), которое обеспечивает подсветку синтаксиса и проверку ошибок при написании кода компонентов).
+[Node](https://nodejs.org/en/) is a way to run JavaScript on the command line. It's used by many tools, including Svelte. If you don't yet have it installed, the easiest way is to download the latest version straight from the [website](https://nodejs.org/en/).
+
+Once installed, you'll have access to three new commands:
+
+* `node my-file.js` — runs the JavaScript in `my-file.js`
+* `npm [subcommand]` — [npm](https://www.npmjs.com/) is a way to install 'packages' that your application depends on, such as the [svelte](https://www.npmjs.com/) package
+* `npx [subcommand]` — a convenient way to run programs available on npm without permanently installing them
 
 
-## Создание проекта
+## Installing a text editor
 
-Мы последуем инструкциям из второй части статьи [Легкий способ начать использовать Svelte](/blog/the-easiest-way-to-get-started).
+To write code, you need a good editor. The most popular choice is [Visual Studio Code](https://code.visualstudio.com/) or VSCode, and justifiably so — it's well-designed and fully-featured, and has a wealth of extensions ([including one for Svelte](https://marketplace.visualstudio.com/items?itemName=JamesBirtles.svelte-vscode), which provides syntax highlighting and diagnostic messages when you're writing components).
 
 
+## Creating a project
 
-Сначала, воспользуемся npx для запуска приложения [degit](https://github.com/Rich-Harris/degit), которое умеет копировать шаблоны проектов из репозиториев [GitHub](https://github.com) и других подобных сервисов. Вы можете и не использовать готовый шаблон приложения, но он позволяет не делать первоначальную настройку проекта и экономит ваше время.
+We're going to follow the instructions in part two of [The easiest way to get started with Svelte](/blog/the-easiest-way-to-get-started).
 
-(Позднее, вам скорее всего придется познакомится с [git](https://git-scm.com/), который большинство разработчиков используют для управления своими проектами. Но сейчас не беспокойтесь об этом)
+First, we'll use npx to run [degit](https://github.com/Rich-Harris/degit), a program for cloning project templates from [GitHub](https://github.com) and other code storage websites. You don't have to use a project template, but it means you have to do a lot less setup work.
 
-В командной строке перейдите в директорию, где вы хотите создать новый проект, затем напечатайте следуюшие команды(вы, безусловно, можете скопировать все команды срази вставить в терминал, но лучше вручную напишите каждую строчку, чтобы они отложились в вашей мышечной памяти):
+(Eventually you'll probably have to learn [git](https://git-scm.com/), which most programmers use to manage their projects. But you don't need to worry about it just yet.)
+
+On the command line, navigate to where you want to create a new project, then type the following lines (you can paste the whole lot, but you'll develop better muscle memory if you get into the habit of writing each line out one at a time then running it):
 
 ```bash
 npx degit sveltejs/template my-svelte-project
@@ -72,10 +70,9 @@ cd my-svelte-project
 npm install
 ```
 
+This creates a new directory, `my-svelte-project`, adds files from the [sveltejs/template](https://github.com/sveltejs/template) code repository, and installs a number of packages from npm. Open the directory in your text editor and take a look around. The app's 'source code' lives in the `src` directory, while the files your app can load are in `public`.
 
-После этого будет создана новая директория, `my-svelte-project`, произойдёт загрузка в неё файлов шаблона из репозитория [sveltejs/template](https://github.com/sveltejs/template) и установка некоторого количества пакетов из npm. Откройте эту папку в редакторе кода и осмотритесь. 'Исходный код' приложения находится в директории `src`, а ресурсы, которые приложение сможет использовать, в папке `public`.
-
-В файле `package.json` есть раздел `"scripts"`. Это команды для работы с вашим приложением — `dev`, `build` и `start`. Чтобы запустить приложенеи в режиме разработки выполните такую команду:
+In the `package.json` file, there is a section called `"scripts"`. These scripts define shortcuts for working with your application — `dev`, `build` and `start`. To launch your app in development mode, type the following:
 
 > TODO update the template, it needs... some work
 
@@ -83,32 +80,32 @@ npm install
 npm run dev
 ```
 
-Вызов скрипта `dev` приведёт к запуску программы, которая называется [Rollup](https://rollupjs.org/guide/en/). Rollup занимается тем, что берёт исходный код вашего приложения (на данный момент у нас есть только `src/main.js` и `src/App.svelte`), передаёт его в другие программы (в нашем случае Svelte) и на выходе собирает в код, который будет выполняться когда вы откроете своё приложение в браузере.
+Running the `dev` script starts a program called [Rollup](https://rollupjs.org/guide/en/). Rollup's job is to take your application's source files (so far, just `src/main.js` and `src/App.svelte`), pass them to other programs (including Svelte, in our case) and convert them into the code that will actually run when you open the application in a browser.
 
-Раз мы упомянули браузер, то давайте откроем его и прейдем по адресу http://localhost:5000. Это ваше приложение, которое запущено на локальном *web сервере* на порту номер 5000.
+Speaking of which, open a browser and navigate to http://localhost:5000. This is your application running on a local *web server* (hence 'localhost') on port 5000.
 
-Попробуйте отредактировать `src/App.svelte` и сохранить его. Приложение перезагрузится и отобразит ваше изменения. 
+Try changing `src/App.svelte` and saving it. The application will reload with your changes.
 
 
-## Сборка приложения
+## Building your app
 
-Ранее мы запускали приложение в 'режиме разработчика'. В этом режиме Svelte добавляет дополнительный код, который помогает отлаживать приложение. Кроме того Rollup не минимизирует итоговый JavaScript код при помощи плагина [Terser](https://terser.org/).
+In the last step, we were running the app in 'development mode'. In dev mode, Svelte adds extra code that helps with debugging, and Rollup skips the final step where your app's JavaScript is compressed using [Terser](https://terser.org/).
 
-Когда настанет время поделится вашим приложением с миром, нужно собрать его как можно более компактным и эффективным. Для этого используйте команду `build`:
+When you share your app with the world, you want to build it in 'production mode', so that it's as small and efficient as possible for end users. To do that, use the `build` command:
 
 ```bash
 npm run build
 ```
 
-После этого, в директории `public` уже будет минимизированный файл `bundle.js`, содержащий JavaScript код вашего приложения. Вы можете запустить его командой:
+Your `public` directory now contains a compressed `bundle.js` file containing your app's JavaScript. You can run it like so:
 
 ```bash
 npm run start
 ```
 
-Приложение будет запущено по адресу http://localhost:5000.
+This will run the app on http://localhost:5000.
 
 
-## Дальнейшие шаги
+## Next steps
 
-Для распространения вашего приложения, необходимо его где-то разместить. Существует множество вариантов, как это сделать — наиболее популярные описаны в файле `README.md`, который вы найдете в папке вашего проекта.
+To share your app with the world you'll need to *deploy* it. There are many ways to do so — some are listed in the `README.md` file inside your project.

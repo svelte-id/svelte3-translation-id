@@ -29,19 +29,19 @@
 <article class="contact-card">
 	<h2>
 		<slot>
-			<span class="missing">Имя не указано</span>
+			<span class="missing">Unknown name</span>
 		</slot>
 	</h2>
 
 	<div class="address">
 		<slot>
-			<span class="missing">Адрес не указан</span>
+			<span class="missing">Unknown address</span>
 		</slot>
 	</div>
 
 	<div class="email">
 		<slot>
-			<span class="missing">E-Mail не указан</span>
+			<span class="missing">Unknown email</span>
 		</slot>
 	</div>
 </article>

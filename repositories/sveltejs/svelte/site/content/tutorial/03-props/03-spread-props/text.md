@@ -1,11 +1,11 @@
 ---
-title: Развёртка свойств
+title: Spread props
 ---
 
-Если у вас есть объект свойств, вы можете 'развернуть' его на компонент, вместо того, чтобы прописывать каждое свойство отдельно:
+If you have an object of properties, you can 'spread' them on to a component instead of specifying each one:
 
 ```html
 <Info {...pkg}/>
 ```
 
-> И наоборот, если вам нужно получить все свойства, которые были переданы в компонент, включая те, которые не были объявлены с помощью `export`, вы можете обратиться к объекту `$$props` напрямую. Обычно это не рекомендуется, так как Svelte сложно это оптимизировать, но в редких случаях бывает полезно.
+> Conversely, if you need to reference all the props that were passed into a component, including ones that weren't declared with `export`, you can do so by accessing `$$props` directly. It's not generally recommended, as it's difficult for Svelte to optimise, but it's useful in rare cases.

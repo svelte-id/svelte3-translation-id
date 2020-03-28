@@ -1,1 +1,1 @@
-<p>Ещё одна строка текста</p>
+<p>This is another paragraph.</p>

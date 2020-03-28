@@ -2,9 +2,9 @@
 title: <svelte:self>
 ---
 
-В Svelte есть несколько встроенных специальных элементов. Первый из них, `<svelte:self>`, позволяет компоненту рекурсивно включать себя в свою же разметку.
+Svelte provides a variety of built-in elements. The first, `<svelte:self>`, allows a component to contain itself recursively.
 
-Например, он будет полезен в нашем примере отображения дерева папок, где папки могут содержать *другие* папки. В `Folder.svelte` нам нужно было бы сделать так...
+It's useful for things like this folder tree view, where folders can contain *other* folders. In `Folder.svelte` we want to be able to do this...
 
 ```html
 {#if file.type === 'folder'}
@@ -14,7 +14,7 @@ title: <svelte:self>
 {/if}
 ```
 
-...но это невозможно, потому что нельзя импортировать в файл сам в себя. Поэтому, нам пригодится `<svelte:self>`:
+...but that's impossible, because a file can't import itself. Instead, we use `<svelte:self>`:
 
 ```html
 {#if file.type === 'folder'}

@@ -2,29 +2,29 @@
 title: <svelte:options>
 ---
 
-Наконец, `<svelte:options>` позволяет указать параметры для компилятора.
+Lastly, `<svelte:options>` allows you to specify compiler options.
 
-Для примера, познакомимся с параметром `immutable`. В этом приложении компонент `<Todo>` будет мигать всякий раз при получении новых данных. Клик по одному из элементов списка переключает значение свойства `done`, создавая обновленный массив `todos`. Это приводит также к миганию и *других* `<Todo>` элементов, хотя они не вносят никаких изменений в DOM.
+We'll use the `immutable` option as an example. In this app, the `<Todo>` component flashes whenever it receives new data. Clicking on one of the items toggles its `done` state by creating an updated `todos` array. This causes the *other* `<Todo>` items to flash, even though they don't end up making any changes to the DOM.
 
-Мы можем оптимизировать это поведение, указав компоненту `<Todo>` ожидать *неизменные* данные. Это означает, что мы обещаем никогда не *изменять* объект в свойстве `todo`, а вместо этого будем создавать новые объекты `todo`, когда что-то изменится.
+We can optimise this by telling the `<Todo>` component to expect *immutable* data. This means that we're promising never to *mutate* the `todo` prop, but will instead create new todo objects whenever things change.
 
-Добавьте это вверху файла `Todo.svelte`:
+Add this to the top of the `Todo.svelte` file:
 
 ```html
 <svelte:options immutable={true}/>
 ```
 
-> При желании эту запись можно сократить так: `<svelte:options immutable/>`.
+> You can shorten this to `<svelte:options immutable/>` if you prefer.
 
-Теперь, при клике по задачам, будет мигать только обновлённый компонент.
+Now, when you toggle todos by clicking on them, only the updated component flashes.
 
-Параметры, которые можно установить:
+The options that can be set here are:
 
-* `immutable={true}` — установите если вы нигде не используете изменяемые данные, тогда компилятор сможет выполнять более простые проверки равенства объектов для определения их изменения
-* `immutable={false}` — по-умолчанию. Svelte будет проверять изменение объектов обычным способом
-* `accessors={true}` — добавляет сеттеры и геттеры для свойств компонента
-* `accessors={false}` — по-умолчанию, аксессоры не добавляются
-* `namespace="..."` — пространство имен, где компонент будет использован, обычно нужно `"svg"`
-* `tag="..."` — имя, которое используется при компиляции компонента в пользовательский элемент
+* `immutable={true}` — you never use mutable data, so the compiler can do simple referential equality checks to determine if values have changed
+* `immutable={false}` — the default. Svelte will be more conservative about whether or not mutable objects have changed
+* `accessors={true}` — adds getters and setters for the component's props
+* `accessors={false}` — the default
+* `namespace="..."` — the namespace where this component will be used, most commonly `"svg"`
+* `tag="..."` — the name to use when compiling this component as a custom element
 
-Обратитесь к [документации API](docs) для более подробных сведений.
+Consult the [API reference](docs) for more information on these options.

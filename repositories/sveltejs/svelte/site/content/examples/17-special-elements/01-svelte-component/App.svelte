@@ -4,9 +4,9 @@
 	import BlueThing from './BlueThing.svelte';
 
 	const options = [
-		{ color: 'красный',   component: RedThing   },
-		{ color: 'зелёный', component: GreenThing },
-		{ color: 'синий',  component: BlueThing  },
+		{ color: 'red',   component: RedThing   },
+		{ color: 'green', component: GreenThing },
+		{ color: 'blue',  component: BlueThing  },
 	];
 
 	let selected = options[0];

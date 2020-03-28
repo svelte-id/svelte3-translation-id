@@ -1,14 +1,14 @@
 ---
-title: Привязки к <svelte:window>
+title: <svelte:window> bindings
 ---
 
-Мы также можем сделать привязки к определенным свойствам объекта `window`, например, к `scrollY`. Отредактируйте строку №7:
+We can also bind to certain properties of `window`, such as `scrollY`. Update line 7:
 
 ```html
 <svelte:window bind:scrollY={y}/>
 ```
 
-Полный список свойств, к которым можно привязаться:
+The list of properties you can bind to is as follows:
 
 * `innerWidth`
 * `innerHeight`
@@ -16,6 +16,6 @@ title: Привязки к <svelte:window>
 * `outerHeight`
 * `scrollX`
 * `scrollY`
-* `online` — сокращение для `window.navigator.onLine`
+* `online` — an alias for `window.navigator.onLine`
 
-Все свойства, кроме `scrollX` и `scrollY`, доступны только для чтения
+All except `scrollX` and `scrollY` are readonly.

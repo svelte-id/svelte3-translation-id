@@ -4,11 +4,11 @@
 
 <ContactCard>
 	<span slot="name">
-		П. Шерман
+		P. Sherman
 	</span>
 
 	<span slot="address">
-		улица Валаби, д.42<br>
-		Сидней
+		42 Wallaby Way<br>
+		Sydney
 	</span>
 </ContactCard>

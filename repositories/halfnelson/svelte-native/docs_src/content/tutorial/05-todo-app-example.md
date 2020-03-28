@@ -1,39 +1,36 @@
 ---
-title: Первое приложение
+title: Your First App
 ---
 
-### Цель
+### The Goal
 
-Процесс обучения идёт эффективнее, если учиться не на абстрактных вещах, а достигать в процессе обучения какой-то определенной цели. В этом разделе учебника мы создадим Todo-приложение с использованием Svelte Native. Оно будет иметь следующую функциональность:
+Sometimes it can be easier to learn something if you have a goal to work towards. In this section we will build a Todo app with Svelte Native. It will have the following functionality:
 
-* Основной дизайн
-  * Дизайн макета — две вкладки
-  * Первая вкладка показывает активные задачи и позволяет добавить новые задачи
-  * Вторая вкладка содержит список завершённых задач
-* Основная функциональность
-  * Добавление задач: Пользователь может добавить задачу в виде текста
-  * Просмотр задач: недавно добавленные задачи отображаются как активные и по ним можно тапнуть
-  * Завершение задачи: при тапе по активной задаче открывается диалоговое окно с параметрами
-  * Удаление задачи: при нажатии активной или завершённой задачи открывается диалоговое окно с параметрами
-* Дополнительный дизайн
-  * Стилизация элементов input и button при добавлении задачи
-  * Стилизация вкладок
-  * Стилизация активных задач
-  * Стилизация завершённых задач
+* Basic design
+  * Two-tab layout
+  * One tab shows active tasks and lets you add new tasks
+  * Second tab lists completed tasks
+* Basic functionality
+  * Add tasks: Users can add tasks as text
+  * View tasks: Newly added tasks are listed as active and can be tapped
+  * Complete tasks: Tapping an active task shows an action dialog with options
+  * Delete tasks: Tapping an active or completed task shows an action dialog with options
+* Advanced design
+  * Input and button for adding tasks are styled
+  * Completed tasks are styled
 
-![TodoApp](/media/todoapp/nativescript-svelte-todo2.gif)
+![TodoApp](/media/todoapp/nativescript-svelte-todo3.gif)
 
 
-### Подготовка
+### Prerequisites
 
+Before you start, please ensure you have at least followed the [Quick Start Guide](docs#quick-start) and can get an application to run on your mobile device or emulator.
 
-Прежде чем начать, прочитайте [Краткое руководство по началу работы](docs#quick-start) и убедитесь, что можете запустить приложение на своем мобильном устройстве или эмуляторе.
+This guide assumes a existing familiarity with the Svelte framework. Run through [Svelte's excellent tutorial](https://svelte.dev/tutorial/basics) to get up to speed.
 
-Также предполагается, что вы уже знакомы с фреймворком Svelte. Изучите [отличный учебник по Svelte](https://ru.svelte.dev/tutorial/basics), который быстро познакомит вас с основными возможностями этого фреймворка.
+### Basic Design
 
-### Основной дизайн
-
-Давайте начнём с загрузки чистого шаблона приложения:
+We will start our from a fresh app template:
 
 ```bash
 $ npx degit halfnelson/svelte-native-template todoapp
@@ -41,332 +38,259 @@ $ cd todoapp
 $ npm install
 ```
 
-Удалите имеющееся правило для селектора`.btn` из` app.css` и в файле `App.svelte` напишите следующее:
+Remove the default `.btn` rule from `app.css` and set the contents of App.svelte to:
 
 ```html
 <!--{ filename: 'App.svelte' }-->
-<page class="page">
-    <actionBar title="Мои Задачи" class="action-bar" />
-    
-    <tabView androidTabsPosition="bottom">
+<page>
+    <actionBar title="My Tasks" />
 
-      <tabViewItem title="Активные" textWrap="true">
-        <label>
-            Эта панель для списка активных задач и добавления новых задач.
-        </label>
-      </tabViewItem>
-      
-      <tabViewItem title="Завершённые">
-        <label text="Эта панель для списка завершённых задач" textWrap="true" />
-      </tabViewItem>
+    <tabs tabsPosition="bottom">
+        <tabStrip>
+            <tabStripItem title="To Do" />
+            <tabStripItem title="Completed" />
+        </tabStrip>
 
-    </tabView>
+        <tabContentItem>
+            <label textWrap="true">This tab will list active tasks and will let users add new tasks.</label>
+        </tabContentItem>
+        <tabContentItem>
+            <label textWrap="true">This tab will list completed tasks for tracking.</label>
+        </tabContentItem>
+    </tabs>
 </page>
 ```
-> **ПРИМЕЧАНИЕ** Обратите внимание, что все теги начинаются со строчной буквы. Это отличается от других реализаций NativeScript. Строчная буква позволяет компилятору Svelte понять, что это элементы NativeScript, а не компоненты Svelte. Думайте о `<page>` и `<actionBar>` как о дополнительном наборе тегов из ряда `<ul>`, `<div>` и т.д.
+ > **NOTE** Notice that all tags start with a lower case letter. This is different to other NativeScript implementations. The lower case letter lets the Svelte compiler know that these are NativeScript views and not Svelte components. Think of `<page>` and `<actionBar>` as just another set of application building blocks like `<ul>` and `<div>`.
 
-#### Что это означает?
+#### What's all that then?
 
-Тег `<page>` — элемент пользовательского интерфейса верхнего уровня у любого приложения Svelte-Native. Все остальные UI элементы должны быть вложены в него.
+The `<page>` element is the top-level user interface element of every Svelte-Native app. All other user interface elements are nested within.
 
-Элемент `<actionBar>` показывает панель действий для `<page>`. В `<page>` не может содержаться более одного элемента `<actionBar>`.
+The `<actionBar>` element shows an action bar for the `<page>`. A `<page>` cannot contain more than one `<actionBar>`.
 
-Как правило, после `<actionBar>` нужно размещать компоненты навигации (боковое меню, вкладки) или компоненты макета. Эти элементы определяют макет приложения и позволяют определить, как размещать внутри другие элементы пользовательского интерфейса.
+Typically, after the `<actionBar>`, you will have navigation components (such as a drawer or a tab view) or layout components. These elements control the layout of your app and let you determine how to place other user interface elements inside.
 
-Имена классов в `page` и` actionBar` нужны для стилизации, по-умолчанию в таблице стилей используется основная тема NativeScript. Более подробную информацию об основной теме можно найти в [Документации Nativescript](https://docs.nativescript.org/ui/theme).
+The `<label>` tags have been used differently. One has the `text=` attribute, while the other has the text between the opening and closing tags. Plain text between tags will be automatically assigned to the `text` attribute of the tag.
 
-Тег `<label>` мы использовали  немного по-разному. В одном случае мы указали атрибут `text=`, а в другом — поместили текст между открывающим и закрывающим тегами. При компиляции текст между тегами будет автоматически присвоен атрибуту `text`.
-
-#### Прогресс на данный момент
+#### Progress So Far
 
 <img src="/media/todoapp/todo-basic-design-1.png" alt="tab 1" width=300> <img src="/media/todoapp/todo-basic-design-2.png" alt="tab 2" width=300>
 
 
-### Основной дизайн: Добавление задач
+### Basic Functionality: Add Tasks
 
-У нас есть базовый дизайн, теперь дадим пользователю возможность добавления задач.
+We have our basic design, lets allow the user to add some tasks.
 
-Замените содержимое первого `<tabViewItem>` на:
+Replace the contents of the first `<tabContentItem>` with:
 
 ```html
-<gridLayout columns="2*,*" rows="*, 3*">
-    <!-- Настраиваем текстовое поле и делаем, чтобы нажатие клавиши 'Ввод'
-              на клавиатуре давало тот же результат, что и нажатие кнопки. -->
-    <textField col="0" row="0" bind:text="{textFieldValue}" hint="Что нужно сделать..." editable="true"
+<gridLayout columns="*,120" rows="70,*">
+    <!-- Configures the text field and ensures that pressing Return on the keyboard
+        produces the same result as tapping the button. -->
+    <textField col="0" row="0" bind:text="{textFieldValue}" hint="Type new task..." editable="true"
         on:returnPress="{onButtonTap}" />
-    <button col="1" row="0" text="Добавить" on:tap="{onButtonTap}" />
+    <button col="1" row="0" text="Add task" on:tap="{onButtonTap}" />
 
-    <listView class="list-group" items="{todos}" on:itemTap="{onItemTap}" row="1" colSpan="2">
+    <listView items="{todos}" on:itemTap="{onItemTap}" row="1" colSpan="2">
         <Template let:item>
-            <label text="{item.name}" class="list-group-item-heading" textWrap="true" />
+            <label text="{item.name}" textWrap="true" />
         </Template>
     </listView>
 </gridLayout>
 ```
 
-Теперь, в нижней части файла добавьте тег `script`:
+and to the bottom of the file add a script tag:
 ```html
 <script>
     import { Template } from 'svelte-native/components'
-    
+
     let todos = []
     let textFieldValue = ""
 
     function onItemTap(args) {
-      console.log('Нажат пункт с индексом: ' + args.index);
+        console.log(`Item ${todos[args.index].name} at index: ${args.index} was tapped`);
     }
 
     function onButtonTap() {
-      if (textFieldValue === "") return; //Запрещает пользователю вводить пустую строку.
-      console.log("Добавлена задача: " + textFieldValue + "."); // Отображает вновь добавленную задачу в консоли для отладки.
-      todos = [{ name: textFieldValue }, ...todos] // Добавляет задачи в массив todos. Задача сразу отобразится на экране.
-      textFieldValue = ""; // Очищает текстовое поле, чтобы пользователь мог сразу же добавить новые задачи.
+      if (textFieldValue === "") return; // Prevents users from entering an empty string.
+      console.log("New task added: " + textFieldValue + "."); // Logs the newly added task in the console for debugging.
+      todos = [{ name: textFieldValue }, ...todos] // Adds tasks in the ToDo array. Newly added tasks are immediately shown on the screen.
+      textFieldValue = ""; // Clears the text field so that users can start adding new tasks immediately.
     }
 </script>
 ```
 
-#### Что мы сделали?
+#### What did we just do?
 
-Чтобы пользователь мог добавить пункт в список задач, нам нужно дать ему возможность ввести имя задачи. Для этого мы добавили текстовое поле `<textField>`. Кнопка `<button>` нужна ​​для отправки задачи, а `<listView>` для отображения списка задач.
+To allow the user to enter a todo item, we need to capture the name of the task. We did this by adding a `<textField>`. A `<button>` was added to submit the task and a `<listView>` to display the task.
 
-Поскольку нам потребовалось добавить 3 элемента в `<tabViewItem>`, то мы воспользовались элементами макетов, чтобы объяснить NativeScript, где нужно разместить каждый элемент. Элементы в `<stackLayout>` помещаются в один ряд либо вертикально, либо горизонтально. Мы использовали его для размещения нашей формы ввода над `<listView>`. Элементы в `<gridLayout>` используется для размещения элементов в предопределенной сетке. Здесь он используется для размещения кнопки `<button>` справа и делает ее ширину равной половине ширины текстового поля `<textInput>`.
+Since this functionality required adding 3 elements to the tabview, we use layouts to tell NativeScript where to place each item. Here we used a `<gridLayout>` to define 2 columns and 2 rows where the second column is 120dp and the first column takes all remaining space(`*,120`), and the first row is 70dp while the second takes the rest (`70,*`). We place the `<textField>` in the first row and column, the `<button>` in the first row second column (which is fixed at 120x70) and the `<>` in the second row spanning 2 columns (`colSpan=2`).
 
-Элемент `<ListView>` содержит *компонент Svelte* `<Template>`, который используется для визуализации каждого элемента. Компонент `Template` необходимо импортировать также, как и любой компонент Svelte.
+The `<listView>` contains a `<Template>` which is a Svelte component used to render each item. The template component needs to be imported just like all Svelte components.
 
-Когда вызывается обработчик `onButtonTap`, код, который мы добавили в блоке `script`, создаст новый массив `todos`, включающий добавленную задачу, и очистит текстовое поле. Обработчик `onItemTap` просто выводит в консоль индекс выбранного элемента при помощи `console.log`, который отлично работает в NativeScript.
+When `onButtonTap` callback is fired, the code we added to the script element, will build a new `todos` array including the added item, and clear the text field. The `onItemTap` callback will just log which list item and index was tapped using `console.log` (which works fine in NativeScript).
 
-> **ПРИМЕЧАНИЕ** `<listView>` будет искать первый компонент `<Template>` в своих дочерних элементах. Компонент `Template` действует аналогично слотам в Svelte и отображает свое содержимое для каждого элемента, которые передаются директивой `let:item` в элементе `<Template>`.
+> **NOTE** `<listView>` will look for the first `<Template>` component in its children. The template component acts similar to a slot and will render its content for each item. This is exposed to the content as `item` via the `let:item` on the template element.
 
-#### Прогресс на данный момент
+#### Progress So Far
 
-<img alt="Мы можем добавлять пункты" src="/media/todoapp/todo-add-item.png" width=350>
+<img alt="We can add items" src="/media/todoapp/todo-add-item.png" width=350>
 
-Не очень красиво, но работает!
+As you can see, the default styling provided by Nativescript gives you a great starting point
 
-### Основной дизайн: Завершение/Удаление задач
+### Basic functionality: Complete/Delete Tasks
+
+Nobody likes a todo list that only gets longer. We should add the ability to mark a task as complete, or to remove it if we added it by accident.
 
 
-Никто не любит когда список задач лишь становится длиннее. Мы должны добавить возможность пометить задачу как выполненную или удалить её, если она была добавлена случайно:
-
-В самом верху блока `script` добавьте этот импорт:
-
+Near the top of the script tag after the `let todos=[]`, add an array for our completed tasks and some helper functions to help us manage our lists.
 ```js
-  import { action } from "tns-core-modules/ui/dialogs";
+    let dones=[] //completed items go here
+    const removeFromList = (list, item) => list.filter(t => t !== item);
+    const addToList = (list, item) => [item, ...list]
 ```
 
-В верхней части блока `script` после `let todos=[]` добавьте еще одно объявление `let dones=[]`, чтобы куда-то помещать завершенные задачи.
-
-
-Затем замените нашу функцию `onItemTap` новой:
+Then replace our `onItemTap` function with this new one:
 
 ```js
-  function onItemTap(args) {
-    action("Что нужно сделать с этой задачей?", "Отмена", [
-      "Завершить",
-      "Удалить"
-    ]).then(result => {
-      console.log(result); // Выводим выбраный пункт в консоль для отладки
-      let item = todos[args.index];
-      switch (result) {
-        case "Завершить":
-          dones = [item, ...dones]; // Помещаем выбранную задачу наверх списка завершенных задач.
-          todos = todos.filter(t => t != item); // Удаляем выбранную задачу из активных.
-          break;
-        case "Удалить":
-          todos = todos.filter(t => t != item); // Удаляем выбранную задачу.
-          break;
-        case "Отмена" || undefined: // Просто закрываем диалог
-          break;
-      }
-    });
+  async function onItemTap(args) {
+    let result = await action("What do you want to do with this task?", "Cancel", [
+        "Mark completed",
+        "Delete forever"
+    ]);
+
+    console.log(result); // Logs the selected option for debugging.
+    let item = todos[args.index]
+    switch (result) {
+        case "Mark completed":
+            dones = addToList(dones, item) // Places the tapped active task at the top of the completed tasks.
+            todos = removeFromList(todos, item) // Removes the tapped active task.
+            break;
+        case "Delete forever":
+            todos = removeFromList(todos, item) // Removes the tapped active task.
+            break;
+        case "Cancel" || undefined: // Dismisses the dialog
+            break;
+    }
   }
 ```
 
-#### Что тут происходит?
+#### Breaking it down
 
-NativeScript поставляется с модулем `dialogs`, который позволяет нам показывать небольшие модальные окна для получения данных от пользователя. Мы импортировали этот модуль, чтобы использовать метод `action`, который мы добавили в метод `onItemTap`. Когда пользователь выбирает 'Завершено', мы находим элемент с помощью `args.index`, который получаем из события, и удаляем элемент из массива `todos`, затем мы добавляем элемент в наш новый массив `dones`. Команда 'Удалить' просто удаляет элемент из `todos`.
+Native script comes with a global [`dialogs`](https://docs.nativescript.org/ui/dialogs) module that allows us to show small modal windows to obtain data from a user. We use the global `action` method in `onItemTap`. When the user selects "Mark completed" we find the item using the `args.index` we get from the event, and remove the item from the `todos`. We then add the item to our new `dones` array. The "Delete forever" option just removes the item from the `todos`.
 
-> **ПРИМЕЧАНИЕ** Обратите внимание, что мы переприсваиваем переменные `dones` и` todos` во время операций удаления или добавления элементов. Реактивность Svelte работает на верхнем уровне и не может обнаруживать изменения внутри массива. Присваивая новое значение для `dones` и `todos`, мы гарантируем, что места в разметке, где используются эти массивы, будут обновлены вместе с массивами.
+> **NOTE** Notice that we reassign the `dones` and `todos` variables during delete or complete operations. Svelte's reactive variables work at the top level and cannot detect changes in an array. By assigning a new value to `dones` and `todos` we are ensuring that any template that depends on those variables will be updated.
 
-#### Прогресс на данный момент
+#### Progress So Far
 
-<img alt="Всплывающее окошко" src="/media/todoapp/todo-mark-complete.png" width=350>
+<img alt="Popup In Action" src="/media/todoapp/todo-mark-complete.png" width=350>
 
 
 
-### Основной дизайн: Панель завершенных задач
+### Basic functionality: The Completed Tab
 
-Чтобы пользователь мог гордиться собой, хорошо бы иметь возможность показать ему список всех задач, которые он уже завершил. В этом разделе мы добавим элемент `<listView>`, чтобы отобразить список пунктов и сделаем возможность удалять их или восстанавливать обратно в незавершенные.
+To get that sense of satisfaction from completing an item on your todo list, it would be good to be able to see the item on the completed tab. In this section we will add a `listView` to display the items and allow you to delete them or restore them to the todos using an action.
 
-Сначала добавьте `listView` на вторую панель, заменив им `label`:
+First add the `listView` below to the second `tabContentItem` replacing the `label`
 ```html
-<listView class="list-group" items="{dones}" on:itemTap="{onDoneTap}">
+<listView items="{dones}" on:itemTap="{onDoneTap}">
 	<Template let:item>
-		<label text="{item.name}" class="list-group-item-heading" textWrap="true" />
+		<label text="{item.name}" textWrap="true" />
 	</Template>
 </listView>
 ```
 
-Затем добавьте код для `onDoneTap` в блок `script`:
+Then add the code for the onDoneTap to the script block:
 
 ```js
-function onDoneTap(args) {
-  action("Что нужно сделать с этой задачей?", "Отмена", [
-    "Вернуть",
-    "Удалить"
-  ]).then(result => {
-    console.log(result); // Показываем в консоли выбранный вариант для отладки
-    let item = dones[args.index]
-    switch (result) {
-      case "Вернуть":
-        todos = [item, ...todos]; // Помещаем выбранное задание в верхнюю часть невыполненных задач.
-        dones = dones.filter(t => t != item); // Удаляем выбранное задание из списка выполненных.
-        break;
-      case "Удалить":
-        dones = dones.filter(t => t != item); // Удаляем выбранную задачу
-        break;
-      case "Отмена" || undefined: // Просто закрываем диалог
-        break;
-    }
-  });
+async function onDoneTap(args) {
+  let result = await action("What do you want to do with this task?", "Cancel", [
+      "Mark To Do",
+      "Delete forever"
+  ]);
+
+  console.log(result); // Logs the selected option for debugging.
+  let item = dones[args.index]
+  switch (result) {
+      case "Mark To Do":
+          todos = addToList(todos, item) // Places the tapped active task at the top of the completed tasks.
+          dones = removeFromList(dones, item) // Removes the tapped active task.
+          break;
+      case "Delete forever":
+          dones = removeFromList(dones, item) // Removes the tapped active task.
+          break;
+      case "Cancel" || undefined: // Dismisses the dialog
+          break;
+  }
 }
 ```
 
-#### Что мы только что сделали?
+#### What we just did
 
-Чтобы отобразить наши завершённые задачи, мы добавили `listView` в элемент `tabViewItem` (панель 'Завершённые') и связали его с переменной `dones`, которую мы объявили на предыдущем шаге.
+To display our done items we added the `listView` to the "completed" `tabContentItem` and bound it to the `dones` variable we defined in last step.
 
-Мы добавили обработчик событий для обработки нажатий по 'завершённым' пунктам. Этот обработчик очень похож на обработчик, добавленный в предыдущем разделе, за исключением того, что он работает с массивом `dones`, а не с `todos`.
+We added an event handler to handle taps on the "completed" items. This handler is very similar to the handler added in the last section, except that it works on the `dones` array and not the `todos`.
 
-### Дополнительный дизайн: стилизация поля и кнопки 
+### Advanced design: Styled input
 
-С функционирование приложения мы разобрались, но не видать нам призов на конкурсе красоты. Чтобы порадовать наших пользователей, нам понадобится несколько минут, чтобы прописать некоторые стили. В этом разделе мы будем стилизовать текстовое поле и элементы кнопок.
+The basic functionality of the todo app is complete. But it could do with a little more styling. In this section we will style the text box and button elements.
 
-В нижней части `App.svelte` добавьте блок `<style>` со следующим содержимым:
+The [NativeScript core theme](https://www.nativescript.org/blog/an-early-look-at-the-new-nativescript-core-theme) does a great job of default styling our application but we want to increase the importance of our button. We can do this by applying the `-primary` class to the button.
+
+```html
+ <button col="1" row="0" text="Add task" on:tap="{onButtonTap}" class="-primary" />
+```
+
+Our input text should also be more emphasised. At the bottom of `App.svelte` add the following style tag:
 
 ```html
 <style>
-  button { 
-      font-size: 15; 
-      font-weight: bold; 
-      color: white; 
-      background-color: #2847D2; 
-      height: 40;
-      margin-top: 10; 
-      margin-bottom: 10; 
-      margin-right: 10; 
-      margin-left: 10; 
-      border-radius: 20px; 
-  }
-
   textField {
       font-size: 20;
-      color: #2847D2;
-      margin-top: 10;
-      margin-bottom: 10;
-      margin-right: 5;
-      margin-left: 20;
   }
 </style>
 ```
 
-#### Тэг style в нативном приложении!?
+#### A style tag in a native application!?
 
-При разработке на NativeScript и Svelte, можно использовать глобальные CSS стили, изолированные CSS компонентов или инлайновые CSS для стилизации своего приложения. Глобальные CSS стили применяются первыми и находится в файле `app.css` в корне вашего проекта. В этом учебнике мы не будем заострять на нем внимание, подробнее можете почитать здесь: [Стилизация](https://docs.nativescript.org/ui/styling).
+When you work with NativeScript and Svelte, you can use application-wide CSS, scoped CSS, or inline CSS to style your app. Application-wide CSS is applied first and is handled in `app.css` in the root of your project. This tutorial does not explore application-wide CSS. See also: [Styling](https://docs.nativescript.org/ui/styling).
 
-Изолированные CSS стили применяются только к текущему компоненту и находятся в блоке `<style>` каждого компонента. В учебнике мы будем опираться в основном на изолированные и инлайновые CSS стили. Смотрите также: [Изолированные стили](https://v3.svelte.technology/docs#scoped-styles).
+Scoped CSS is applied to the current component only and is handled in each component's `<style>` block. This tutorial relies almost exclusively on scoped CSS and inline CSS. See also: [Scoped Styles](https://v3.svelte.technology/docs#scoped-styles).
 
-С помощью селекторов типов можно выбрать UI компонент и применить к нему стилизацию. В нашем примере мы стилизовали элемент `textField` и `button`.
+With type selectors, you can select a UI component and apply styling to it. To select a type, use the component name as provided in the code. For example, to select the button, use `button {`.
 
-#### Прогресс на данный момент
+#### Progress So Far
 
-<img alt="стилизация кнопки" src="/media/todoapp/todo-styled-button.png" width=350>
+<img alt="style button" src="/media/todoapp/todo-styled-button.png" width=350>
 
 
-### Дополнительный дизайн: Стилизация панелей
+### Advanced design: Styled Lists
 
-Приложение уже выглядит лучше, но нам надо что-то сделать с вкладками внизу.
+Lets make our completed items faded and crossed out.
 
-Добавьте свойство `selectedTabTextColor` и `tabTextFontSize` в `<TabView>`:
-
+To the label in the `listView` for the `dones` add `class="todo-item-completed"`
 ```html
-  <tabView androidTabsPosition="bottom" selectedTabTextColor="#2847D2" tabTextFontSize="15" >
+ <label text="{item.name}" class="todo-item-completed" textWrap="true" />
 ```
 
-Добавьте атрибут `textTransform` к каждой вкладке. Его можно  использовать только на уровне `<TabViewItem>`.
-
-```html
-  <tabViewItem title="Активные" textTransform="uppercase" >
-```
-
-```html
-  <tabViewItem title="Завершённые" textTransform="uppercase">
-```
-
-#### Это же не CSS!
-
-Элемент `<TabView>` может принимать некоторые свойства стилей в качестве атрибутов. Можно применить текстовое преобразование к заголовку каждой вкладки (`textTransform`), изменить размер и цвет шрифта всех вкладок (`tabTextFontSize`, `tabTextColor`, `selectedTabTextColor`). Также можно изменить цвет фона вкладок `tabBackgroundColor`.
-
-> **СОВЕТ** Большинство CSS свойств в NativeScript имеют соответствующие атрибуты, которые могут быть указаны непосредственно на элементе.
-
-#### Прогресс на данный момент
-
-<img alt="стилизация панелей" src="/media/todoapp/todo-styled-tabs.png" width=350>
-
-
-### Дополнительный дизайн: Стилизация списков
-
-Пункты списка слишком плотно прилегают друг к другу. Давайте добавим к ним отступы. Выделим цветом активные задачи, а завершенные перечеркнем.
-
-Отредактируйте оба элемента `<listView>` и добавьте атрибут `separatorColor="transparent"`:
-
-```html
-<listView class="list-group" items="{todos}" on:itemTap="{onItemTap}" separatorColor="transparent">
-```
-и 
-```html
-<listView class="list-group" items="{dones}" on:itemTap="{onDoneTap}" row="1" colSpan="2" separatorColor="transparent">
-```
-
-К тегу `<label>` внутри `listView` для` todos` добавьте `todo-item active` в атрибут класса:
-```html
- <label text="{item.name}" class="list-group-item-heading todo-item active" textWrap="true" />
-```
-Аналогично в `<label>` для завершённых добавьте `todo-item completed`:
-```html
- <label text="{item.name}" class="list-group-item-heading todo-item completed" textWrap="true" />
-```
-
-Добавьте эти CSS правила в блок `style`:
+Add the following CSS rules to the `style` tag
 
 ```css
 
-.todo-item {
-  font-size: 20;
-  margin-left: 20;
-  padding-top: 5;
-  padding-bottom: 10;
-}
-
-.todo-item.active {
-  font-weight: bold;
-  color: #2847D2;
-}
-
-.todo-item.completed {
-  color: #d3d3d3;
+.todo-item-completed {
+  color: #939393;
   text-decoration: line-through;
 }
 
 ```
 
-#### Тут уже всё очевидно
+#### I see what you did there
 
-В NativeScript вы не ограничены просто использованием имен элементов в качестве селекторов CSS. Мы добавили классы к `<label>` и применили правила CSS к этим классам.
-Мы также применили атрибут `separatorColor` непосредственно в `listView`, чтобы удалить разделитель между элементами, чтобы список выглядел лучше.
+In NativeScript you aren't restricted to just using element names as CSS selectors. We added some classes to the labels and applied CSS rules to those classes.
 
-#### Наш законченный продукт
 
-<img alt="активные" src="/media/todoapp/todo-styled-list1.png" width=350>
-<img alt="завершённые" src="/media/todoapp/todo-styled-list2.png" width=350>
+#### Our Finished Product
+
+<img alt="todos" src="/media/todoapp/todo-styled-list1.png" width=350>
+<img alt="dones" src="/media/todoapp/todo-styled-list2.png" width=350>
 

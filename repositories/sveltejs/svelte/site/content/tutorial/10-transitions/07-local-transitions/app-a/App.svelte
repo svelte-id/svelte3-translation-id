@@ -3,7 +3,7 @@
 
 	let showItems = true;
 	let i = 5;
-	let items = ['первый', 'второй', 'третий', 'четвертый', 'пятый', 'шестой', 'седьмой', 'восьмой', 'девятый', 'десятый'];
+	let items = ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten'];
 </script>
 
 <style>
@@ -15,7 +15,7 @@
 
 <label>
 	<input type="checkbox" bind:checked={showItems}>
-	показать список
+	show list
 </label>
 
 <label>
