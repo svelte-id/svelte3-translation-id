@@ -4,7 +4,7 @@
         "strings": [
             {
                 "o": "The next small thing in web development",
-                "t": "Hal kecil berikutnya dalam pengembangan web"
+                "t": "Si kecil sang penerus dalam pengembangan web"
             },
             {
                 "o": "Powered by Svelte",
@@ -16,7 +16,7 @@
             },
             {
                 "o": "Best of both worlds",
-                "t": "Terbaik dari dua dunia"
+                "t": "Yang terbaik dari dua sisi dunia"
             },
             {
                 "o": "All the SEO and progressive enhancement of a server-rendered app, with the slick navigation of an SPA",
@@ -24,31 +24,31 @@
             },
             {
                 "o": "Build fast",
-                "t": "Bangun dengan cepat"
+                "t": "Proses <i>build</i> cepat"
             },
             {
                 "o": "Hit the ground running with advanced routing, server-side rendering, code-splitting, offline support and more",
-                "t": "Mulai berjalan dengan rute lanjutan, rendering sisi server, pemecahan kode, dukungan offline, dan lainnya"
+                "t": "Injak bumi dan berlari dengan kecanggihan rute, rendering pada sisi server, pemisahan kode, dukungan luar jaringan (<i>offline</i>) dan lainnya"
             },
             {
                 "o": ">learn more<",
-                "t": ">pelajari lagi<"
+                "t": ">pelajari lebih lanjut<"
             },
             {
                 "o": "Sapper is a framework for building web applications of all sizes, with a beautiful development experience and flexible filesystem-based routing.",
-                "t": "Sapper adalah framework untuk membangun aplikasi web segala ukuran dengan pengalaman pengembangan yang indah dan rute berbasis filesystem yang fleksibel."
+                "t": "Sapper adalah framework pembangun aplikasi web segala ukuran dengan suatu pengalaman pengembangan yang indah serta rute berbasis sistem file yang fleksibel."
             },
             {
                 "o": "Unlike single-page apps, Sapper doesn't compromise on SEO, progressive enhancement or the initial load experience — but unlike traditional server-rendered apps, navigation is instantaneous for that app-like feel.",
-                "t": "Tidak seperti aplikasi satu halaman, Sapper tidak mengorbankan SEO, peningkatan progresif, atau kecepatan boot, tetapi tidak seperti aplikasi tradisional yang di-render pada server, navigasi melalui halaman lama terjadi secara instan, seperti dalam aplikasi SPA biasa."
+                "t": "Tak seperti aplikasi satu halaman lainnya dan tak seperti aplikasi tradisional yang di-render pada sisi-server, Sapper tidak berkompromi atas kinerja SEO, pemantapan progresif dan kecepatan muat awal. Navigasi seketika serasa bagai aplikasi."
             },
             {
                 "o": "Read the introductory blog post",
-                "t": "Baca artikel blog pengantar"
+                "t": "Bacalah artikel blog pengantar"
             },
             {
                 "o": " to learn more.",
-                "t": " untuk belajar lebih lanjut."
+                "t": " untuk pelajari lebih lanjut."
             },
             {
                 "o": ">Learn Sapper<",
@@ -112,7 +112,7 @@
             },
             {
                 "o": "Please try reloading the page.",
-                "t": "Sila coba memuat kembali halaman."
+                "t": "Silakan coba memuat kembali halaman."
             },
             {
                 "o": "It looks like you're offline",
@@ -120,15 +120,15 @@
             },
             {
                 "o": "Reload the page once you've found the internet",
-                "t": "Muat kembali halaman saat tersambung internet"
+                "t": "Muat kembali halaman kala tersambung internet"
             },
             {
                 "o": "Encountered a {status} error",
-                "t": "Berhadapan dengan kesalahan {status}"
+                "t": "Berhadapan pada sebuah kesalahan {status}"
             },
             {
                 "o": "If the error persists, please drop by <a href=\"chat\">Discord chatroom</a> and let us know, or raise an issue on <a href=\"https://github.com/sveltejs/svelte\">GitHub</a>. Thanks!",
-                "t": "Jika kesalahan berlanjut mohon hubungi <a href=\"https://t.me/svelte_id\">Group Telegram Svelte Indonesia</a>. Terima kasih!"
+                "t": "Apabila kesalahan berlanjut silakan hubungi <a href=\"https://t.me/svelte_id\">Group Telegram Svelte Indonesia</a>. Terima kasih!"
             }
         ]
     }
