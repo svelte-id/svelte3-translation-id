@@ -39,7 +39,7 @@
 	<Nav {segment} {page} logo="svelte-logo-horizontal.svg">
 		<NavItem segment="tutorial">Tutorial</NavItem>
 		<NavItem segment="docs">API</NavItem>
-		<NavItem segment="examples">Examples</NavItem>
+		<NavItem segment="examples">Contoh</NavItem>
 		<NavItem segment="repl">REPL</NavItem>
 		<NavItem segment="blog">Blog</NavItem>
 		<NavItem segment="faq">FAQ</NavItem>
