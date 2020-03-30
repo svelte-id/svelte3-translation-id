@@ -1,5 +1,5 @@
 ---
-title: Slots
+title: Slot
 ---
 
 Just like elements can have children...

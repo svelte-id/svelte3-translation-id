@@ -1,5 +1,5 @@
 ---
-title: Media elements
+title: Elemen Media
 ---
 
 The `<audio>` and `<video>` elements have several properties that you can bind to. This example demonstrates a few of them.

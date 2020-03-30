@@ -1,5 +1,5 @@
 ---
-title: Custom stores
+title: Ubahsuai Store
 ---
 
 As long as an object correctly implements the `subscribe` method, it's a store. Beyond that, anything goes. It's very easy, therefore, to create custom stores with domain-specific logic.

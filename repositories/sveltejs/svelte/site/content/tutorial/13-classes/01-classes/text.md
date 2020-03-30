@@ -1,5 +1,5 @@
 ---
-title: The class directive
+title: Penunjuk Kelas
 ---
 
 Like any other attribute, you can specify classes with a JavaScript attribute, seen here:

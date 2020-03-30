@@ -1,5 +1,5 @@
 ---
-title: Named slots
+title: Slot yang Memiliki Nama
 ---
 
 The previous example contained a *default slot*, which renders the direct children of a component. Sometimes you will need more control over placement, such as with this `<ContactCard>`. In those cases, we can use *named slots*.

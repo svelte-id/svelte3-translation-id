@@ -1,5 +1,5 @@
 ---
-title: Else-if blocks
+title: Blok Else-if
 ---
 
 Multiple conditions can be 'chained' together with `else if`:

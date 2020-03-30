@@ -1,5 +1,5 @@
 ---
-title: Declaring props
+title: Pendeklarasian Properti
 ---
 
 So far, we've dealt exclusively with internal state — that is to say, the values are only accessible within a given component.

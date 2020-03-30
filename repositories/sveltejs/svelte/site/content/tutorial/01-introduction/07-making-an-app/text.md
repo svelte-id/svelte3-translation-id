@@ -1,5 +1,5 @@
 ---
-title: Making an app
+title: Pembuatan Aplikasi
 ---
 
 This tutorial is designed to get you familiar with the process of writing components. But at some point, you'll want to start writing components in the comfort of your own text editor.

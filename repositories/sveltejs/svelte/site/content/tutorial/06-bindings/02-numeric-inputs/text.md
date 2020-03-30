@@ -1,5 +1,5 @@
 ---
-title: Numeric inputs
+title: Input Numerik
 ---
 
 In the DOM, everything is a string. That's unhelpful when you're dealing with numeric inputs — `type="number"` and `type="range"` — as it means you have to remember to coerce `input.value` before using it.

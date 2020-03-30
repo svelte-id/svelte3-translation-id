@@ -1,5 +1,5 @@
 ---
-title: Custom JS transitions
+title: Transisi JS Kustom
 ---
 
 While you should generally use CSS for transitions as much as possible, there are some effects that can't be achieved without JavaScript, such as a typewriter effect:

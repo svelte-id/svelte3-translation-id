@@ -1,5 +1,5 @@
 ---
-title: Component events
+title: Event Komponen
 ---
 
 Components can also dispatch events. To do so, they must create an event dispatcher. Update `Inner.svelte`:

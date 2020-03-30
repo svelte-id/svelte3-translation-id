@@ -1,5 +1,5 @@
 ---
-title: Text inputs
+title: Input Teks
 ---
 
 As a general rule, data flow in Svelte is *top down* — a parent component can set props on a child component, and a component can set attributes on an element, but not the other way around.

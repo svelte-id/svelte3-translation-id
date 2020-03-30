@@ -1,5 +1,5 @@
 ---
-title: Event forwarding
+title: Pengalihan Event
 ---
 
 Unlike DOM events, component events don't *bubble*. If you want to listen to an event on some deeply nested component, the intermediate components must *forward* the event.

@@ -1,5 +1,5 @@
 ---
-title: Updating arrays and objects
+title: Pembaruan Array dan Objek
 ---
 
 Because Svelte's reactivity is triggered by assignments, using array methods like `push` and `splice` won't automatically cause updates. For example, clicking the button doesn't do anything.

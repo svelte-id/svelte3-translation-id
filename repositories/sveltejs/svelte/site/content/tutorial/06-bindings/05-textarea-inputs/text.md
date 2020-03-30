@@ -1,5 +1,5 @@
 ---
-title: Textarea inputs
+title: Input Textarea
 ---
 
 The `<textarea>` element behaves similarly to a text input in Svelte — use `bind:value`:

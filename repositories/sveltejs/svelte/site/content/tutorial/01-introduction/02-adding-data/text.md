@@ -1,5 +1,5 @@
 ---
-title: Adding data
+title: Penambahan Data
 ---
 
 A component that just renders some static markup isn't very interesting. Let's add some data.

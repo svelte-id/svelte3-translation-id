@@ -1,5 +1,5 @@
 ---
-title: Each block bindings
+title: Pengikatan Blok Each
 ---
 
 You can even bind to properties inside an `each` block.

@@ -1,5 +1,5 @@
 ---
-title: This
+title: Pengikatan This
 ---
 
 The readonly `this` binding applies to every element (and component) and allows you to obtain a reference to rendered elements. For example, we can get a reference to a `<canvas>` element:

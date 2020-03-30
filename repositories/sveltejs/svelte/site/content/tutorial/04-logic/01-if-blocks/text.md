@@ -1,5 +1,5 @@
 ---
-title: If blocks
+title: Blok If
 ---
 
 HTML doesn't have a way of expressing *logic*, like conditionals and loops. Svelte does.

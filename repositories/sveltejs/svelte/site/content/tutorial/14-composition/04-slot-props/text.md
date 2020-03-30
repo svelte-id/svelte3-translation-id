@@ -1,5 +1,5 @@
 ---
-title: Slot props
+title: Slot properti
 ---
 
 In this app, we have a `<Hoverable>` component that tracks whether the mouse is currently over it. It needs to pass that data *back* to the parent component, so that we can update the slotted contents.

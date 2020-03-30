@@ -1,5 +1,5 @@
 ---
-title: Each blocks
+title: Blok Each
 ---
 
 If you need to loop over lists of data, use an `each` block:

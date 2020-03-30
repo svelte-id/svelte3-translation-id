@@ -1,5 +1,5 @@
 ---
-title: Statements
+title: Pernyataan
 ---
 
 We're not limited to declaring reactive *values* — we can also run arbitrary *statements* reactively. For example, we can log the value of `count` whenever it changes:

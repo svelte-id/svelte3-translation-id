@@ -1,5 +1,5 @@
 ---
-title: setContext and getContext
+title: setContext dan getContext
 ---
 
 The context API provides a mechanism for components to 'talk' to each other without passing around data and functions as props, or dispatching lots of events. It's an advanced feature, but a useful one.

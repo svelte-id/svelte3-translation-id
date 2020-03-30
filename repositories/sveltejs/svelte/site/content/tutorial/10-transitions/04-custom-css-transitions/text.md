@@ -1,5 +1,5 @@
 ---
-title: Custom CSS transitions
+title: Transisi CSS Kustom
 ---
 
 The `svelte/transition` module has a handful of built-in transitions, but it's very easy to create your own. By way of example, this is the source of the `fade` transition:

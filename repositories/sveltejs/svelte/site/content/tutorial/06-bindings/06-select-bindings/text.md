@@ -1,5 +1,5 @@
 ---
-title: Select bindings
+title: Pengikatan Select
 ---
 
 We can also use `bind:value` with `<select>` elements. Update line 24:

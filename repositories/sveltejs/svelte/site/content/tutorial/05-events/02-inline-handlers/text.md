@@ -1,5 +1,5 @@
 ---
-title: Inline handlers
+title: Penangan Sebaris
 ---
 
 You can also declare event handlers inline:

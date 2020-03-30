@@ -1,5 +1,5 @@
 ---
-title: Sharing code
+title: Berbagi Kode
 ---
 
 In all the examples we've seen so far, the `<script>` block contains code that runs when each component instance is initialised. For the vast majority of components, that's all you'll ever need.

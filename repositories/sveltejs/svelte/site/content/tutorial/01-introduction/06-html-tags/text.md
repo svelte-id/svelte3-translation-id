@@ -1,5 +1,5 @@
 ---
-title: HTML tags
+title: Penanda HTML
 ---
 
 Ordinarily, strings are inserted as plain text, meaning that characters like `<` and `>` have no special meaning.

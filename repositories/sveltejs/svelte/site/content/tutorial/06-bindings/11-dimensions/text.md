@@ -1,5 +1,5 @@
 ---
-title: Dimensions
+title: Dimensi
 ---
 
 Every block-level element has `clientWidth`, `clientHeight`, `offsetWidth` and `offsetHeight` bindings:

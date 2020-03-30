@@ -1,5 +1,5 @@
 ---
-title: Adding parameters
+title: Penambahan Pparameter
 ---
 
 Transition functions can accept parameters. Replace the `fade` transition with `fly`...

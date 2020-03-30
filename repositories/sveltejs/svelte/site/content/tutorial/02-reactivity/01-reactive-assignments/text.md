@@ -1,5 +1,5 @@
 ---
-title: Assignments
+title: Penunjukan
 ---
 
 At the heart of Svelte is a powerful system of *reactivity* for keeping the DOM in sync with your application state — for example, in response to an event.

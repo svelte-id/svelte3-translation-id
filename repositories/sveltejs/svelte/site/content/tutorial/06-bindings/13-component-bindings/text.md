@@ -1,5 +1,5 @@
 ---
-title: Component bindings
+title: Pengikatan Komponen
 ---
 
 Just as you can bind to properties of DOM elements, you can bind to component props. For example, we can bind to the `value` prop of this `<Keypad>` component as though it were a form element:

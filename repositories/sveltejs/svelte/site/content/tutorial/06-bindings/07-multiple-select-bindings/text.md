@@ -1,5 +1,5 @@
 ---
-title: Select multiple
+title: Pengikatan Banyak Select
 ---
 
 A select can have a `multiple` attribute, in which case it will populate an array rather than selecting a single value.

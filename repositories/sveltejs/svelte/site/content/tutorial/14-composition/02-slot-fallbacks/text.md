@@ -1,5 +1,5 @@
 ---
-title: Slot fallbacks
+title: Slot fallback
 ---
 
 A component can specify *fallbacks* for any slots that are left empty, by putting content inside the `<slot>` element:

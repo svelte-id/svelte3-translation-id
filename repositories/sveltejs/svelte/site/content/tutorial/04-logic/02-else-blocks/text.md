@@ -1,5 +1,5 @@
 ---
-title: Else blocks
+title: Blok Else
 ---
 
 Since the two conditions — `if user.loggedIn` and `if !user.loggedIn` — are mutually exclusive, we can simplify this component slightly by using an `else` block:

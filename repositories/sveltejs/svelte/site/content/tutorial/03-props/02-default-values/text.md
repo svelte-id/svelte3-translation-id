@@ -1,5 +1,5 @@
 ---
-title: Default values
+title: Nilai Bawaan
 ---
 
 We can easily specify default values for props:

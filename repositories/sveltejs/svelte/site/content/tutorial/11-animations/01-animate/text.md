@@ -1,5 +1,5 @@
 ---
-title: The animate directive
+title: Penunjuk animate
 ---
 
 In the [previous chapter](tutorial/deferred-transitions), we used deferred transitions to create the illusion of motion as elements move from one todo list to the other.

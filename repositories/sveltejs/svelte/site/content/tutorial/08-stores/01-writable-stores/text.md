@@ -1,5 +1,5 @@
 ---
-title: Writable stores
+title: Store yang Dapat Ditulis
 ---
 
 Not all application state belongs inside your application's component hierarchy. Sometimes, you'll have values that need to be accessed by multiple unrelated components, or by a regular JavaScript module.

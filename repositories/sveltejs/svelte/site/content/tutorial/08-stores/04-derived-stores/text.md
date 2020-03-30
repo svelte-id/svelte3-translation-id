@@ -1,5 +1,5 @@
 ---
-title: Derived stores
+title: Store Turunan
 ---
 
 You can create a store whose value is based on the value of one or more *other* stores with `derived`. Building on our previous example, we can create a store that derives the time the page has been open:

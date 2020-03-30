@@ -1,5 +1,5 @@
 ---
-title: The transition directive
+title: Pengarah Transisi
 ---
 
 We can make more appealing user interfaces by gracefully transitioning elements into and out of the DOM. Svelte makes this very easy with the `transition` directive.

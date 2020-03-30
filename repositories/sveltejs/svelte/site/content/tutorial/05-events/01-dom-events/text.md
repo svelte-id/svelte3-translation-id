@@ -1,5 +1,5 @@
 ---
-title: DOM events
+title: Event DOM
 ---
 
 As we've briefly seen already, you can listen to any event on an element with the `on:` directive:

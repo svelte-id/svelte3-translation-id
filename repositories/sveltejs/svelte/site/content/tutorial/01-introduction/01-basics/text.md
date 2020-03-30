@@ -1,5 +1,5 @@
 ---
-title: Basics
+title: Dasar
 ---
 
 Welcome to the Svelte tutorial. This will teach you everything you need to know to build fast, small web applications easily.

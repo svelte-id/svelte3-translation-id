@@ -1,5 +1,5 @@
 ---
-title: Exports
+title: Proses Ekspor
 ---
 
 Anything exported from a `context="module"` script block becomes an export from the module itself. If we export a `stopAll` function from `AudioPlayer.svelte`...

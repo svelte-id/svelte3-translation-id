@@ -1,5 +1,5 @@
 ---
-title: The @debug tag
+title: Penanda @debug
 ---
 
 Occasionally, it's useful to inspect a piece of data as it flows through your app.

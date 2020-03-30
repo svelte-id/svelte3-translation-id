@@ -1,5 +1,5 @@
 ---
-title: DOM event forwarding
+title: Pengalihan Event DOM
 ---
 
 Event forwarding works for DOM events too.

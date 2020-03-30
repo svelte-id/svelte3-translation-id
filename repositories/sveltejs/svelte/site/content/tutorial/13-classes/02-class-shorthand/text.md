@@ -1,5 +1,5 @@
 ---
-title: Shorthand class directive
+title: Penulisan Cepat Penunjuk Kelas
 ---
 
 Often, the name of the class will be the same as the name of the value it depends on:

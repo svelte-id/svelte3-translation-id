@@ -1,5 +1,5 @@
 ---
-title: Contenteditable bindings
+title: Pengikatan Contenteditable
 ---
 
 Elements with a `contenteditable="true"` attribute support `textContent` and `innerHTML` bindings:

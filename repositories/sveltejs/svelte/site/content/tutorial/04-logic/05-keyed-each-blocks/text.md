@@ -1,5 +1,5 @@
 ---
-title: Keyed each blocks
+title: Blok each yang Memiliki Kunci
 ---
 
 By default, when you modify the value of an `each` block, it will add and remove items at the *end* of the block, and update any values that have changed. That might not be what you want.

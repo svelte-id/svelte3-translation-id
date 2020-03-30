@@ -1,5 +1,5 @@
 ---
-title: In and out
+title: In (masuk) dan out (keluar)
 ---
 
 Instead of the `transition` directive, an element can have an `in` or an `out` directive, or both together. Import `fade` alongside `fly`...
