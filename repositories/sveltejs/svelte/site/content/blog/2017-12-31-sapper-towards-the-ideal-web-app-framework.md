@@ -1,11 +1,11 @@
 ---
-title: Sapper: Towards the ideal web app framework
-description: Taking the next-plus-one step
+title: Sapper: Menuju Kerangka Kerja Aplikasi Web yang Ideal
+description: Mengambil dua langkah ke depan
 author: Rich Harris
 authorURL: https://twitter.com/Rich_Harris
 ---
 
-> Quickstart for the impatient: [the Sapper docs](https://sapper.svelte.technology), and the [starter template](https://github.com/sveltejs/sapper-template)
+> Bagi yang tidak sabar: [the Sapper docs](https://sapper.svelte.technology), dan [template starter](https://github.com/sveltejs/sapper-template)
 
 If you had to list the characteristics of the perfect Node.js web application framework, you'd probably come up with something like this:
 

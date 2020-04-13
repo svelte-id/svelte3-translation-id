@@ -43,30 +43,30 @@
 
 <Blurb>
 	<a href="blog/write-less-code" slot="one">
-		<h2> Tulis lebih sedikit kode </h2>
-		<p> Buat komponen bebas-boilerplate menggunakan bahasa yang sudah Anda ketahui - HTML, CSS, dan JavaScript </p>
+		<h2> Lebih sedikit kode </h2>
+		<p> Buat komponen yang bebas dari <i>boilerplate</i> menggunakan bahasa yang sudah Anda kenal - HTML, CSS, dan JavaScript </p>
 
-		<span class="learn-more">learn more</span>
+		<span class="learn-more">pelajari lebih lanjut</span>
 	</a>
 
 	<a href="blog/virtual-dom-is-pure-overhead" slot="two">
-		<h2> Tidak ada DOM virtual </h2>
-		<p> Svelte mengkompilasi kode Anda menjadi vanilla JS yang kecil tanpa kerangka - aplikasi Anda mulai dengan cepat dan tetap cepat </p>
+		<h2> Tanpa DOM virtual </h2>
+		<p> Svelte mengkompilasi kode Anda menjadi vanilla JS yang kecil tak berkerangka - aplikasi Anda mulai dengan cepat dan tetap cepat </p>
 
-		<span class="learn-more">learn more</span>
+		<span class="learn-more">pelajari lebih lanjut</span>
 	</a>
 
 	<a href="blog/svelte-3-rethinking-reactivity" slot="three">
-		<h2> Benar-benar reaktif </h2>
-		<p> Tidak ada lagi pustaka manajemen <i>state</i> yang rumit - Svelte menghadirkan reaktivitas ke dalam JavaScript itu sendiri </p>
+		<h2> Reaktif Sesungguhnya </h2>
+		<p> Tak ada lagi pustaka pengelolaan <i>state</i> yang rumit - Svelte menghadirkan reaktivitas pada JavaScript</p>
 
-		<span class="learn-more">learn more</span>
+		<span class="learn-more">pelajari lebih lanjut</span>
 	</a>
 
 	<div class="description" slot="what">
-		<p> Svelte adalah pendekatan baru yang radikal untuk membangun antarmuka pengguna. Sementara kerangka kerja tradisional seperti React dan Vue melakukan sebagian besar pekerjaan mereka di <em> browser </em>, Svelte menggeser pekerjaan itu ke dalam <em> langkah kompilasi </em> yang terjadi ketika Anda membangun aplikasi Anda. </p>
+		<p> Svelte adalah pendekatan radikal baru dalam membangun antarmuka pengguna. Sementara kerangka kerja tradisional seperti React dan Vue melakukan sebagian besar tugasnya pada <em> browser </em>, Svelte menggeser pekerjaan itu pada <em> langkah kompilasi </em> yang terjadi saat Anda membangun aplikasi. </p>
 
-		<p> Alih-alih menggunakan teknik seperti DOM virtual, Svelte menulis kode yang memperbarui DOM dengan presisi yang tinggi ketika keadaan aplikasi Anda berubah.</p>
+		<p> Alih-alih menggunakan teknik seperti DOM virtual, Svelte menulis kode yang memperbarui DOM dengan presisi yang tinggi ketika status aplikasi Anda berubah.</p>
 
 		<p> <a href="blog/svelte-3-rethinking-reactivity"> Baca posting blog pengantar </a> untuk mempelajari lebih lanjut. </p>
 	</div>

@@ -1,6 +1,6 @@
 ---
-title: The easiest way to get started with Svelte
-description: This'll only take a minute.
+title: Cara Termudah Memulai Svelte
+description: Hanya perlu satu menit saja.
 author: Rich Harris
 authorURL: https://twitter.com/Rich_Harris
 ---

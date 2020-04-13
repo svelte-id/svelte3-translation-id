@@ -1,6 +1,6 @@
 ---
-title: The zen of Just Writing CSS
-description: I would say this is the future, but we're already doing it.
+title: Zen Penulisan CSS
+description: Saya akan bilang ini masa depan tetapi kita sudah mulai.
 author: Rich Harris
 authorURL: https://twitter.com/Rich_Harris
 ---

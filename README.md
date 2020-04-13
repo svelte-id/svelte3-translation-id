@@ -26,11 +26,11 @@ Situs resmi berbahasa Indonesia berikut ini akan diluncurkan apabila projek pene
 * Konten situs [svelte-native.technology](https://svelte-native.technology) ([GitHub](https://github.com/halfnelson/svelte-native/tree/master/docs_src/content))
 
 
-## Bagaimana Cara Berkontribusi pada Penerjemahan
+## Cara Berkontribusi pada Penerjemahan
 * [Terjemahkanlah](https://github.com/svelteid/svelte3-translation-id/issues) bagian dari sumber daya apa saja di atas yang belum diterjemahkan.
 * Tingkatkanlah kualitas terjemahan yang sudah ada: perbaikilah kesalahan pengejaan, tanda baca atau semantik, revisilah kalimat yang disusun dengan buruk, hilangkanlah inkonsistensi terjemahan dengan rekomendasi, dll. Cara melakukannya hanya melalui sistem _pull request_ dalam repositori github ini.
 
-## Rekomendasi Terjemahan
+## Rekomendasi Penerjemahan
 
 * Desain terjemahan harus sesuai dengan desain aslinya. 
 * Lebih baik untuk membangun kalimat dalam bentuk anonim (tanpa `kami` dan tanpa ` Anda`), walaupun tidak wajib, agar Dokumentasi jangan menjadi terlalu formal.
@@ -80,6 +80,6 @@ npm run dev-sapper
 npm run dev-svelte-native
 ```
 
-Kini kamu bisa buka situsnya _running_ di [http://localhost:3000]() dan lihatlah semua perubahan yang tampak padanya saat ini.
+Kini kamu bisa buka situsnya yang _running_ di [http://localhost:3000]() dan lihatlah semua perubahan yang tampak padanya saat ini.
 
 Ketika mengubah _file_ terjemahan, _refresh_ jendela peramban (_browser_) dan kamu akan lihat perubahannya.

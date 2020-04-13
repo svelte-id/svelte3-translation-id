@@ -1,23 +1,23 @@
 ---
-title: Frameworks without the framework: why didn't we think of this sooner?
-description: You can't write serious applications in vanilla JavaScript without hitting a complexity wall. But a compiler can do it for you.
+title: Kerangka Tak Berkerangka: Mengapa Tak Terpikirkan Sejak Dahulu?
+description: Kamu tak bisa menulis aplikasi serius dengan vanilla JavaScript tanpa menabrak tembok kerumitan. Namun sebuah compiler dapat melakukannya untukmu.
 author: Rich Harris
 authorURL: https://twitter.com/Rich_Harris
 ---
 
-> Wait, this new framework has a *runtime*? Ugh. Thanks, I'll pass.
-> **– front end developers in 2018**
+> Tunggu, kerangka kerja baru ini punya *runtime*? Ugh. Terima kasih, saya akan lewatkan.
+> **– pengembang front end di tahun 2018**
 
-We're shipping too much code to our users. Like a lot of front end developers, I've been in denial about that fact, thinking that it was fine to serve 100kb of JavaScript on page load – just use [one less .jpg!](https://twitter.com/miketaylr/status/227056824275333120) – and that what *really* mattered was performance once your app was already interactive.
+Kita mengirimkan terlalu banyak kode kepada para pengguna kita. Sebagaimana banyak para pengembang front end, saya telah berada dalam penyangkalan mengenai fakta tersebut, dengan berpikir bahwa baik-baik saja untuk melayankan 100kb JavaScript saat halaman dimuat – hanya memakai [one less .jpg!](https://twitter.com/miketaylr/status/227056824275333120) – dan bahwa hal yang paling **penting** adalah kinerja saat aplikasi Anda sudah interaktif.
 
-But I was wrong. 100kb of .js isn't equivalent to 100kb of .jpg. It's not just the network time that'll kill your app's startup performance, but the time spent parsing and evaluating your script, during which time the browser becomes completely unresponsive. On mobile, those milliseconds rack up very quickly.
+Tetapi saya salah. 100kb .js tidaklah setara dengan 100kb .jpg. Bukan hanya waktu dalam jaringan yang membantai kinerja _startup_ aplikasi Anda, tetapi juga waktu yang dihabiskan melakukan _parsing_ dan mengevaluasi _script_ Anda, yang seketika itu membuat _browser_ menjadi tidak responsif. Apalagi di ponsel, milidetik terakumulasi dengan sangat cepat.
 
-If you're not convinced that this is a problem, follow [Alex Russell](https://twitter.com/slightlylate) on Twitter. Alex [hasn't been making many friends in the framework community lately](https://twitter.com/slightlylate/status/728355959022587905), but he's not wrong. But the proposed alternative to using frameworks like Angular, React and Ember – [Polymer](https://www.polymer-project.org/1.0/) – hasn't yet gained traction in the front end world, and it's certainly not for a lack of marketing.
+Apabila Anda tidak yakin bahwa hal ini adalah masalah, coba follow [Alex Russell](https://twitter.com/slightlylate) pada Twitter. Alex [tidak banyak kawan dalam komunitas framework akhir-akhir ini](https://twitter.com/slightlylate/status/728355959022587905), tapi dia tidak salah. Namun alternatif yang diajukan untuk menggunakan kerangka kerja seperti Angular, React dan Ember – [Polymer](https://www.polymer-project.org/1.0/) – masih saja tidak banyak yang mendukungnya di dunia front end meskipun hal tersebut bukan karena kurangnya pemasaran.
 
-Perhaps we need to rethink the whole thing.
+Barangkali kita perlu memikirkan kembali semuanya.
 
 
-## What problem do frameworks *really* solve?
+## Permasalahan apakah yang _sesungguhnya_ diselesaikan oleh framework?
 
 The common view is that frameworks make it easier to manage the complexity of your code: the framework abstracts away all the fussy implementation details with techniques like virtual DOM diffing. But that's not really true. At best, frameworks *move the complexity around*, away from code that you had to write and into code you didn't.
 

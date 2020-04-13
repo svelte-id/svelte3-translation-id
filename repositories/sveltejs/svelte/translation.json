@@ -133,7 +133,7 @@
             },
             {
                 "o": "Discord Chat",
-                "t": "Chat Discord"
+                "t": "Telegram Chat"
             },
             {
                 "o": "https://sapper.svelte.dev",
@@ -154,7 +154,7 @@
             },
             {
                 "o": "'Reset' : 'Show me'",
-                "t": "'Reset' : 'Lihatkan saya'"
+                "t": "'Reset' : 'Tunjukkan saya'"
             },
             {
                 "o": "Edit this chapter",
@@ -175,7 +175,7 @@
         "strings": [
             {
                 "o": "<Docs {sections}/>",
-                "t": "<Docs owner=\"AlexxNB\" project=\"svelte3-translation-ru\" path=\"/repositories/sveltejs/svelte/site/content\" edit_title=\"редактировать эту главу\" {sections}/>"
+                "t": "<Docs {sections}/>"
             }
         ]
     },
@@ -214,7 +214,7 @@
         "strings": [
             {
                 "o": "Loading...",
-                "t": "Loading..."
+                "t": "Memuat..."
             }
         ]
     },
@@ -231,11 +231,11 @@
             },
             {
                 "o": "Next page...",
-                "t": "Next page..."
+                "t": "Halaman berikutnya..."
             },
             {
                 "o": "Please <a on:click|preventDefault={login} href=\"auth/login\">log in</a> to see your saved apps.",
-                "t": "Sila <a on:click|preventDefault={login} href=\"auth/login\">log in</a> untuk lihat aplikasi tersimpan."
+                "t": "Silakan <a on:click|preventDefault={login} href=\"auth/login\">log in</a> untuk lihat aplikasi tersimpan."
             },
             {
                 "o": "log out",

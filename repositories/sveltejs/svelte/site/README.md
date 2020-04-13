@@ -3,16 +3,10 @@
 Set up the project:
 
 ```bash
-git clone https://github.com/sveltejs/svelte.git
-cd svelte
-npm ci
-PUBLISH=1 npm run build
-cd site
-npm ci
-npm run update
+git clone https://github.com/svelte-id/svelte3-translation-id
 ```
 
-Start the server with `npm run dev`, and navigate to [localhost:3000](http://localhost:3000).
+Start the server with `npm run dev-svelte`, and navigate to [localhost:3000](http://localhost:3000).
 
 ## Using a local copy of Svelte
 
